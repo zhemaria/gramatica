@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 7.1 — El párrafo y la técnica de la hamburguesa
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #oracion-principal · #partes · #intrusa
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 7.1: El párrafo y la técnica de la hamburguesa</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 7 · El párrafo</div>
+    <h1>Lección 7.1 · El párrafo y la técnica de la hamburguesa</h1>
+    <p>Práctica para reconocer las tres partes del párrafo y la oración que rompe la unidad. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_7-1.html">← Volver a la Lección 7.1</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#oracion-principal">Encuentra la oración principal</a></li>
+      <li><a href="#partes">Las tres partes del párrafo</a></li>
+      <li><a href="#intrusa">La oración que no encaja</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #oracion-principal ============ -->
+  <details class="modulo" id="oracion-principal" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>Encuentra la oración principal</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>La <strong>oración principal</strong> es la más general: anuncia el tema y abarca a todas las demás. En tus párrafos va al principio; en los ajenos, a veces está al final.</p></div>
+
+      <h3>¿Cuál es la oración principal?</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #partes ============ -->
+  <details class="modulo" id="partes">
+    <summary><span class="num" aria-hidden="true">2</span><h2>Las tres partes del párrafo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>🍞 <strong>Pan de arriba:</strong> la oración principal. 🥩 <strong>Relleno:</strong> las oraciones de apoyo, con detalles y ejemplos. 🍞 <strong>Pan de abajo:</strong> la oración de cierre.</p></div>
+
+      <h3>¿Qué parte es?</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 3 · #intrusa ============ -->
+  <details class="modulo" id="intrusa">
+    <summary><span class="num" aria-hidden="true">3</span><h2>La oración que no encaja</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Un párrafo tiene <strong>unidad</strong> cuando todas sus oraciones hablan del mismo tema. Una oración que se sale del tema rompe la unidad y hay que quitarla.</p></div>
+
+      <h3>Encuentra la intrusa</h3>
+      <div class="practica" id="p3">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1: Iniciación a la Lectura y la Escritura · Tema 7 · Lección 7.1 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_7-1.html">← Volver a la Lección 7.1</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Mi barrio tiene todo lo que necesito. A dos cuadras hay un supermercado grande. La clínica queda frente al parque. El autobús pasa por la esquina cada diez minutos. Por eso no pienso mudarme de aquí.</span>", "o": ["Mi barrio tiene todo lo que necesito.", "La clínica queda frente al parque.", "A dos cuadras hay un supermercado grande."], "c": 0, "e": "«Mi barrio tiene todo lo que necesito.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Los domingos en mi casa son muy especiales. Toda la familia almuerza junta. Mi madre prepara arroz con pollo. Por la tarde jugamos dominó en el patio. Sin duda, es el mejor día de la semana.</span>", "o": ["Los domingos en mi casa son muy especiales.", "Por la tarde jugamos dominó en el patio.", "Toda la familia almuerza junta."], "c": 0, "e": "«Los domingos en mi casa son muy especiales.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Aprender inglés me ha abierto muchas puertas. Ahora puedo hablar con el médico sin intérprete. En el trabajo me dieron un puesto mejor. También ayudo a mis hijos con la tarea. Por todo eso, sigo estudiando cada noche.</span>", "o": ["Aprender inglés me ha abierto muchas puertas.", "En el trabajo me dieron un puesto mejor.", "También ayudo a mis hijos con la tarea."], "c": 0, "e": "«Aprender inglés me ha abierto muchas puertas.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">El invierno en Chicago exige preparación. Hay que tener un abrigo grueso, guantes y gorro. Conviene revisar la calefacción antes de noviembre. Los carros necesitan llantas en buen estado. Quien se prepara, pasa el invierno sin problemas.</span>", "o": ["El invierno en Chicago exige preparación.", "Hay que tener un abrigo grueso, guantes y gorro.", "Los carros necesitan llantas en buen estado."], "c": 0, "e": "«El invierno en Chicago exige preparación.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Mi trabajo en el restaurante es duro, pero me gusta. Entro a las seis de la mañana a preparar los ingredientes. A la hora del almuerzo no hay un minuto de descanso. Mis compañeros son alegres y trabajadores. Al final del día, me voy cansado pero contento.</span>", "o": ["Mi trabajo en el restaurante es duro, pero me gusta.", "Mis compañeros son alegres y trabajadores.", "Entro a las seis de la mañana a preparar los ingredientes."], "c": 0, "e": "«Mi trabajo en el restaurante es duro, pero me gusta.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">La biblioteca pública ofrece mucho más que libros. Tiene computadoras con internet gratis. Da clases de inglés y de ciudadanía. Los niños pueden ir a la hora del cuento. Es un lugar valioso para toda la comunidad.</span>", "o": ["La biblioteca pública ofrece mucho más que libros.", "Los niños pueden ir a la hora del cuento.", "Tiene computadoras con internet gratis."], "c": 0, "e": "«La biblioteca pública ofrece mucho más que libros.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Ahorrar dinero requiere pequeños hábitos. Puedes llevar el almuerzo al trabajo. Conviene comparar precios antes de comprar. Guardar un poco cada semana suma mucho al año. Con paciencia, cualquiera puede ahorrar.</span>", "o": ["Ahorrar dinero requiere pequeños hábitos.", "Guardar un poco cada semana suma mucho al año.", "Puedes llevar el almuerzo al trabajo."], "c": 0, "e": "«Ahorrar dinero requiere pequeños hábitos.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">El mercado de mi barrio es mi lugar favorito para comprar. Las frutas y las verduras son frescas. Los precios son más bajos que en el supermercado. Los vendedores me conocen por mi nombre. Por eso hago allí casi todas mis compras.</span>", "o": ["El mercado de mi barrio es mi lugar favorito para comprar.", "Las frutas y las verduras son frescas.", "Los vendedores me conocen por mi nombre."], "c": 0, "e": "«El mercado de mi barrio es mi lugar favorito para comprar.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Hacer ejercicio trae muchos beneficios. Fortalece el corazón. Ayuda a dormir mejor. Reduce el estrés del día. Por estas razones, camino media hora cada mañana.</span>", "o": ["Hacer ejercicio trae muchos beneficios.", "Ayuda a dormir mejor.", "Reduce el estrés del día."], "c": 0, "e": "«Hacer ejercicio trae muchos beneficios.» es la más general: las demás la explican o dan ejemplos."}, {"t": "¿Cuál es la oración principal? <span class=\"frase\" style=\"text-align:left\">Mi abuela es la persona que más admiro. Crió a seis hijos ella sola. Aprendió a leer a los cincuenta años. Siempre tiene una palabra amable para todos. Quiero parecerme a ella cuando sea mayor.</span>", "o": ["Mi abuela es la persona que más admiro.", "Aprendió a leer a los cincuenta años.", "Crió a seis hijos ella sola."], "c": 0, "e": "«Mi abuela es la persona que más admiro.» es la más general: las demás la explican o dan ejemplos."}]}, "p2": {"tipo": "mc", "items": [{"t": "En este párrafo, ¿qué parte es <em>«Mi barrio tiene todo lo que necesito.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi barrio tiene todo lo que necesito. <strong>(2)</strong> A dos cuadras hay un supermercado grande. <strong>(3)</strong> La clínica queda frente al parque. <strong>(4)</strong> El autobús pasa por la esquina cada diez minutos. <strong>(5)</strong> Por eso no pienso mudarme de aquí.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Por eso no pienso mudarme de aquí.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi barrio tiene todo lo que necesito. <strong>(2)</strong> A dos cuadras hay un supermercado grande. <strong>(3)</strong> La clínica queda frente al parque. <strong>(4)</strong> El autobús pasa por la esquina cada diez minutos. <strong>(5)</strong> Por eso no pienso mudarme de aquí.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 2, "e": "Redondea la idea al final: es el <strong>pan de abajo</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Los domingos en mi casa son muy especiales.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Los domingos en mi casa son muy especiales. <strong>(2)</strong> Toda la familia almuerza junta. <strong>(3)</strong> Mi madre prepara arroz con pollo. <strong>(4)</strong> Por la tarde jugamos dominó en el patio. <strong>(5)</strong> Sin duda, es el mejor día de la semana.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Mi madre prepara arroz con pollo.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Los domingos en mi casa son muy especiales. <strong>(2)</strong> Toda la familia almuerza junta. <strong>(3)</strong> Mi madre prepara arroz con pollo. <strong>(4)</strong> Por la tarde jugamos dominó en el patio. <strong>(5)</strong> Sin duda, es el mejor día de la semana.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Aprender inglés me ha abierto muchas puertas.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Aprender inglés me ha abierto muchas puertas. <strong>(2)</strong> Ahora puedo hablar con el médico sin intérprete. <strong>(3)</strong> En el trabajo me dieron un puesto mejor. <strong>(4)</strong> También ayudo a mis hijos con la tarea. <strong>(5)</strong> Por todo eso, sigo estudiando cada noche.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Ahora puedo hablar con el médico sin intérprete.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Aprender inglés me ha abierto muchas puertas. <strong>(2)</strong> Ahora puedo hablar con el médico sin intérprete. <strong>(3)</strong> En el trabajo me dieron un puesto mejor. <strong>(4)</strong> También ayudo a mis hijos con la tarea. <strong>(5)</strong> Por todo eso, sigo estudiando cada noche.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«El invierno en Chicago exige preparación.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> El invierno en Chicago exige preparación. <strong>(2)</strong> Hay que tener un abrigo grueso, guantes y gorro. <strong>(3)</strong> Conviene revisar la calefacción antes de noviembre. <strong>(4)</strong> Los carros necesitan llantas en buen estado. <strong>(5)</strong> Quien se prepara, pasa el invierno sin problemas.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Hay que tener un abrigo grueso, guantes y gorro.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> El invierno en Chicago exige preparación. <strong>(2)</strong> Hay que tener un abrigo grueso, guantes y gorro. <strong>(3)</strong> Conviene revisar la calefacción antes de noviembre. <strong>(4)</strong> Los carros necesitan llantas en buen estado. <strong>(5)</strong> Quien se prepara, pasa el invierno sin problemas.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Mis compañeros son alegres y trabajadores.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi trabajo en el restaurante es duro, pero me gusta. <strong>(2)</strong> Entro a las seis de la mañana a preparar los ingredientes. <strong>(3)</strong> A la hora del almuerzo no hay un minuto de descanso. <strong>(4)</strong> Mis compañeros son alegres y trabajadores. <strong>(5)</strong> Al final del día, me voy cansado pero contento.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Mi trabajo en el restaurante es duro, pero me gusta.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi trabajo en el restaurante es duro, pero me gusta. <strong>(2)</strong> Entro a las seis de la mañana a preparar los ingredientes. <strong>(3)</strong> A la hora del almuerzo no hay un minuto de descanso. <strong>(4)</strong> Mis compañeros son alegres y trabajadores. <strong>(5)</strong> Al final del día, me voy cansado pero contento.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Da clases de inglés y de ciudadanía.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> La biblioteca pública ofrece mucho más que libros. <strong>(2)</strong> Tiene computadoras con internet gratis. <strong>(3)</strong> Da clases de inglés y de ciudadanía. <strong>(4)</strong> Los niños pueden ir a la hora del cuento. <strong>(5)</strong> Es un lugar valioso para toda la comunidad.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«La biblioteca pública ofrece mucho más que libros.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> La biblioteca pública ofrece mucho más que libros. <strong>(2)</strong> Tiene computadoras con internet gratis. <strong>(3)</strong> Da clases de inglés y de ciudadanía. <strong>(4)</strong> Los niños pueden ir a la hora del cuento. <strong>(5)</strong> Es un lugar valioso para toda la comunidad.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Con paciencia, cualquiera puede ahorrar.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Ahorrar dinero requiere pequeños hábitos. <strong>(2)</strong> Puedes llevar el almuerzo al trabajo. <strong>(3)</strong> Conviene comparar precios antes de comprar. <strong>(4)</strong> Guardar un poco cada semana suma mucho al año. <strong>(5)</strong> Con paciencia, cualquiera puede ahorrar.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 2, "e": "Redondea la idea al final: es el <strong>pan de abajo</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Puedes llevar el almuerzo al trabajo.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Ahorrar dinero requiere pequeños hábitos. <strong>(2)</strong> Puedes llevar el almuerzo al trabajo. <strong>(3)</strong> Conviene comparar precios antes de comprar. <strong>(4)</strong> Guardar un poco cada semana suma mucho al año. <strong>(5)</strong> Con paciencia, cualquiera puede ahorrar.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Las frutas y las verduras son frescas.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> El mercado de mi barrio es mi lugar favorito para comprar. <strong>(2)</strong> Las frutas y las verduras son frescas. <strong>(3)</strong> Los precios son más bajos que en el supermercado. <strong>(4)</strong> Los vendedores me conocen por mi nombre. <strong>(5)</strong> Por eso hago allí casi todas mis compras.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«El mercado de mi barrio es mi lugar favorito para comprar.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> El mercado de mi barrio es mi lugar favorito para comprar. <strong>(2)</strong> Las frutas y las verduras son frescas. <strong>(3)</strong> Los precios son más bajos que en el supermercado. <strong>(4)</strong> Los vendedores me conocen por mi nombre. <strong>(5)</strong> Por eso hago allí casi todas mis compras.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 0, "e": "Anuncia el tema: es el <strong>pan de arriba</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Por estas razones, camino media hora cada mañana.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Hacer ejercicio trae muchos beneficios. <strong>(2)</strong> Fortalece el corazón. <strong>(3)</strong> Ayuda a dormir mejor. <strong>(4)</strong> Reduce el estrés del día. <strong>(5)</strong> Por estas razones, camino media hora cada mañana.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 2, "e": "Redondea la idea al final: es el <strong>pan de abajo</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Fortalece el corazón.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Hacer ejercicio trae muchos beneficios. <strong>(2)</strong> Fortalece el corazón. <strong>(3)</strong> Ayuda a dormir mejor. <strong>(4)</strong> Reduce el estrés del día. <strong>(5)</strong> Por estas razones, camino media hora cada mañana.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Crió a seis hijos ella sola.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi abuela es la persona que más admiro. <strong>(2)</strong> Crió a seis hijos ella sola. <strong>(3)</strong> Aprendió a leer a los cincuenta años. <strong>(4)</strong> Siempre tiene una palabra amable para todos. <strong>(5)</strong> Quiero parecerme a ella cuando sea mayor.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 1, "e": "Da un detalle o ejemplo: es parte del <strong>relleno</strong>."}, {"t": "En este párrafo, ¿qué parte es <em>«Quiero parecerme a ella cuando sea mayor.»</em>? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi abuela es la persona que más admiro. <strong>(2)</strong> Crió a seis hijos ella sola. <strong>(3)</strong> Aprendió a leer a los cincuenta años. <strong>(4)</strong> Siempre tiene una palabra amable para todos. <strong>(5)</strong> Quiero parecerme a ella cuando sea mayor.</span>", "o": ["Oración principal", "Oración de apoyo", "Oración de cierre"], "c": 2, "e": "Redondea la idea al final: es el <strong>pan de abajo</strong>."}]}, "p3": {"tipo": "mc", "items": [{"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Mi barrio tiene todo lo que necesito. A dos cuadras hay un supermercado grande. Mi hermano vive en Houston desde 2015. La clínica queda frente al parque. El autobús pasa por la esquina cada diez minutos. Por eso no pienso mudarme de aquí.</span>", "o": ["Mi hermano vive en Houston desde 2015.", "La clínica queda frente al parque.", "A dos cuadras hay un supermercado grande."], "c": 0, "e": "«Mi hermano vive en Houston desde 2015.» no habla del tema del párrafo (<em>mi barrio tiene todo lo que necesito</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Los domingos en mi casa son muy especiales. El lunes tengo cita con el dentista. Toda la familia almuerza junta. Mi madre prepara arroz con pollo. Por la tarde jugamos dominó en el patio. Sin duda, es el mejor día de la semana.</span>", "o": ["El lunes tengo cita con el dentista.", "Toda la familia almuerza junta.", "Mi madre prepara arroz con pollo."], "c": 0, "e": "«El lunes tengo cita con el dentista.» no habla del tema del párrafo (<em>los domingos en mi casa son muy especiales</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Aprender inglés me ha abierto muchas puertas. Ahora puedo hablar con el médico sin intérprete. En el trabajo me dieron un puesto mejor. Mi color favorito es el azul. También ayudo a mis hijos con la tarea. Por todo eso, sigo estudiando cada noche.</span>", "o": ["Mi color favorito es el azul.", "En el trabajo me dieron un puesto mejor.", "Ahora puedo hablar con el médico sin intérprete."], "c": 0, "e": "«Mi color favorito es el azul.» no habla del tema del párrafo (<em>aprender inglés me ha abierto muchas puertas</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">El invierno en Chicago exige preparación. Hay que tener un abrigo grueso, guantes y gorro. Conviene revisar la calefacción antes de noviembre. En Puerto Rico hace calor todo el año. Los carros necesitan llantas en buen estado. Quien se prepara, pasa el invierno sin problemas.</span>", "o": ["En Puerto Rico hace calor todo el año.", "Los carros necesitan llantas en buen estado.", "Hay que tener un abrigo grueso, guantes y gorro."], "c": 0, "e": "«En Puerto Rico hace calor todo el año.» no habla del tema del párrafo (<em>el invierno en chicago exige preparación</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Mi trabajo en el restaurante es duro, pero me gusta. Ayer vi una película de acción. Entro a las seis de la mañana a preparar los ingredientes. A la hora del almuerzo no hay un minuto de descanso. Mis compañeros son alegres y trabajadores. Al final del día, me voy cansado pero contento.</span>", "o": ["Ayer vi una película de acción.", "Mis compañeros son alegres y trabajadores.", "A la hora del almuerzo no hay un minuto de descanso."], "c": 0, "e": "«Ayer vi una película de acción.» no habla del tema del párrafo (<em>mi trabajo en el restaurante es duro, pero me gusta</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">La biblioteca pública ofrece mucho más que libros. Tiene computadoras con internet gratis. Mi vecina tiene tres gatos. Da clases de inglés y de ciudadanía. Los niños pueden ir a la hora del cuento. Es un lugar valioso para toda la comunidad.</span>", "o": ["Mi vecina tiene tres gatos.", "Los niños pueden ir a la hora del cuento.", "Tiene computadoras con internet gratis."], "c": 0, "e": "«Mi vecina tiene tres gatos.» no habla del tema del párrafo (<em>la biblioteca pública ofrece mucho más que libros</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Ahorrar dinero requiere pequeños hábitos. Puedes llevar el almuerzo al trabajo. El banco abre a las nueve de la mañana. Conviene comparar precios antes de comprar. Guardar un poco cada semana suma mucho al año. Con paciencia, cualquiera puede ahorrar.</span>", "o": ["El banco abre a las nueve de la mañana.", "Guardar un poco cada semana suma mucho al año.", "Puedes llevar el almuerzo al trabajo."], "c": 0, "e": "«El banco abre a las nueve de la mañana.» no habla del tema del párrafo (<em>ahorrar dinero requiere pequeños hábitos</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">El mercado de mi barrio es mi lugar favorito para comprar. Las frutas y las verduras son frescas. Los precios son más bajos que en el supermercado. Mi primo juega al béisbol los sábados. Los vendedores me conocen por mi nombre. Por eso hago allí casi todas mis compras.</span>", "o": ["Mi primo juega al béisbol los sábados.", "Los precios son más bajos que en el supermercado.", "Los vendedores me conocen por mi nombre."], "c": 0, "e": "«Mi primo juega al béisbol los sábados.» no habla del tema del párrafo (<em>el mercado de mi barrio es mi lugar favorito para comprar</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Hacer ejercicio trae muchos beneficios. Fortalece el corazón. Ayuda a dormir mejor. Mi teléfono nuevo tiene una cámara muy buena. Reduce el estrés del día. Por estas razones, camino media hora cada mañana.</span>", "o": ["Mi teléfono nuevo tiene una cámara muy buena.", "Reduce el estrés del día.", "Fortalece el corazón."], "c": 0, "e": "«Mi teléfono nuevo tiene una cámara muy buena.» no habla del tema del párrafo (<em>hacer ejercicio trae muchos beneficios</em>): rompe la <strong>unidad</strong>."}, {"t": "¿Qué oración <strong>no encaja</strong> en el párrafo? <span class=\"frase\" style=\"text-align:left\">Mi abuela es la persona que más admiro. Crió a seis hijos ella sola. La tienda de la esquina cierra a las diez. Aprendió a leer a los cincuenta años. Siempre tiene una palabra amable para todos. Quiero parecerme a ella cuando sea mayor.</span>", "o": ["La tienda de la esquina cierra a las diez.", "Siempre tiene una palabra amable para todos.", "Crió a seis hijos ella sola."], "c": 0, "e": "«La tienda de la esquina cierra a las diez.» no habla del tema del párrafo (<em>mi abuela es la persona que más admiro</em>): rompe la <strong>unidad</strong>."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+Practica('p3', DATOS['p3']);
+</script>
+</body>
+</html>
