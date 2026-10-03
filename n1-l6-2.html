@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 6.2 — Las características del texto informativo visual
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #partes · #buscar
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 6.2: Las características del texto informativo visual</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 6 · Información visual</div>
+    <h1>Lección 6.2 · Las características del texto informativo visual</h1>
+    <p>Práctica para reconocer las pistas visuales de un artículo y usarlas para encontrar información. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_6-2.html">← Volver a la Lección 6.2</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#partes">¿Título, subtítulo, rótulo o pie de foto?</a></li>
+      <li><a href="#buscar">Busca sin leer todo</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #partes ============ -->
+  <details class="modulo" id="partes" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>¿Título, subtítulo, rótulo o pie de foto?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>El <strong>título</strong> va arriba y anuncia el tema. Los <strong>subtítulos</strong> dividen el texto en partes. Los <strong>rótulos</strong> son palabras cortas dentro de la imagen. El <strong>pie de foto</strong> va debajo de la imagen y la explica.</p></div>
+
+      <h3>¿Qué pista es?</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #buscar ============ -->
+  <details class="modulo" id="buscar">
+    <summary><span class="num" aria-hidden="true">2</span><h2>Busca sin leer todo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Para encontrar un dato rápido, lee primero las pistas: el título, los subtítulos, los rótulos y el pie de foto. Muchas veces la respuesta está ahí.</p></div>
+
+      <h3>Encuentra el dato</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1: Iniciación a la Lectura y la Escritura · Tema 6 · Lección 6.2 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_6-2.html">← Volver a la Lección 6.2</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">Está arriba de todo, en letra grande, y anuncia el tema del artículo.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 0, "e": "El <strong>título</strong> va arriba de todo y anuncia el tema general."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«Los volcanes de Centroamérica», en letra grande al comienzo de la página.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 0, "e": "El <strong>título</strong> va arriba de todo y anuncia el tema general."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«La salud de tus dientes», arriba del artículo, en letras grandes y de color.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 0, "e": "El <strong>título</strong> va arriba de todo y anuncia el tema general."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">Divide el artículo en partes y dice de qué trata cada una.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 1, "e": "Los <strong>subtítulos</strong> dividen el artículo en partes."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«1. Cómo se forman los volcanes», en negrita, en medio del artículo.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 1, "e": "Los <strong>subtítulos</strong> dividen el artículo en partes."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«Qué comer para cuidar tus dientes», en negrita antes de un párrafo.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 1, "e": "Los <strong>subtítulos</strong> dividen el artículo en partes."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">Son palabras cortas dentro de la imagen, con una flecha que señala una parte.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 2, "e": "Los <strong>rótulos</strong> son palabras cortas dentro de la imagen que nombran lo que se ve."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">Dentro de un dibujo de un diente, la palabra «esmalte» con una línea que señala la capa de afuera.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 2, "e": "Los <strong>rótulos</strong> son palabras cortas dentro de la imagen que nombran lo que se ve."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">En el dibujo de un volcán, la palabra «cráter» escrita en la punta.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 2, "e": "Los <strong>rótulos</strong> son palabras cortas dentro de la imagen que nombran lo que se ve."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">En un diagrama del corazón, las palabras «aurícula» y «ventrículo» junto a cada parte.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 2, "e": "Los <strong>rótulos</strong> son palabras cortas dentro de la imagen que nombran lo que se ve."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">Está debajo de la foto y explica qué se ve, dónde y cuándo.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 3, "e": "El <strong>pie de foto</strong> va debajo de la imagen y la explica."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«Figura 2: El volcán de Fuego, en Guatemala, durante la erupción de 2018.» Debajo de una foto.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 3, "e": "El <strong>pie de foto</strong> va debajo de la imagen y la explica."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«Una dentista revisa a un niño en la clínica del barrio.» En letra pequeña debajo de la imagen.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 3, "e": "El <strong>pie de foto</strong> va debajo de la imagen y la explica."}, {"t": "¿Qué pista visual es? <span class=\"frase\" style=\"text-align:left\">«Voluntarios plantan árboles en el parque el 22 de abril.» En cursiva, debajo de la foto.</span>", "o": ["El título", "Un subtítulo", "Un rótulo", "El pie de foto"], "c": 3, "e": "El <strong>pie de foto</strong> va debajo de la imagen y la explica."}]}, "p2": {"tipo": "mc", "items": [{"t": "Lee solo las pistas visuales del artículo. ¿Cuál es el tema general del artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">Los árboles de la ciudad</strong><br><em>Por qué refrescan las calles en verano</em><br>Secciones: 1. La sombra · 2. El agua de las hojas<br>[Imagen: Una calle con árboles; rótulos: «sombra», «hojas», «raíces»]<br><small>Figura 1: Una calle con árboles puede estar varios grados más fresca que una calle sin ellos.</small></span>", "o": ["Los árboles de la ciudad", "Por qué refrescan las calles en verano", "La sombra"], "c": 0, "e": "Lo dice el <strong>título</strong>."}, {"t": "Lee solo las pistas visuales del artículo. ¿En qué se enfoca el artículo? Mira el subtítulo de arriba. <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">Los árboles de la ciudad</strong><br><em>Por qué refrescan las calles en verano</em><br>Secciones: 1. La sombra · 2. El agua de las hojas<br>[Imagen: Una calle con árboles; rótulos: «sombra», «hojas», «raíces»]<br><small>Figura 1: Una calle con árboles puede estar varios grados más fresca que una calle sin ellos.</small></span>", "o": ["Por qué refrescan las calles en verano", "Los árboles de la ciudad", "El agua de las hojas"], "c": 0, "e": "Lo precisa el <strong>subtítulo</strong> que va debajo del título."}, {"t": "Lee solo las pistas visuales del artículo. ¿Cuántas secciones tiene el artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">Los árboles de la ciudad</strong><br><em>Por qué refrescan las calles en verano</em><br>Secciones: 1. La sombra · 2. El agua de las hojas<br>[Imagen: Una calle con árboles; rótulos: «sombra», «hojas», «raíces»]<br><small>Figura 1: Una calle con árboles puede estar varios grados más fresca que una calle sin ellos.</small></span>", "o": ["Dos", "Una", "Cuatro"], "c": 0, "e": "Hay dos subtítulos numerados."}, {"t": "Lee solo las pistas visuales del artículo. Según el pie de la Figura 1, ¿qué se ve en la imagen? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">Los árboles de la ciudad</strong><br><em>Por qué refrescan las calles en verano</em><br>Secciones: 1. La sombra · 2. El agua de las hojas<br>[Imagen: Una calle con árboles; rótulos: «sombra», «hojas», «raíces»]<br><small>Figura 1: Una calle con árboles puede estar varios grados más fresca que una calle sin ellos.</small></span>", "o": ["Una calle con árboles puede estar varios grados más fresca que una calle sin ellos", "Por qué refrescan las calles en verano", "Los árboles de la ciudad"], "c": 0, "e": "Lo explica el <strong>pie de foto</strong>."}, {"t": "Lee solo las pistas visuales del artículo. ¿Cuál es el tema general del artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">El huerto de la escuela</strong><br><em>Cómo los niños aprenden a sembrar</em><br>Secciones: 1. Preparar la tierra · 2. Regar y cuidar<br>[Imagen: Un huerto con rótulos: «tomates», «lechugas», «manguera»]<br><small>Figura 1: Niños de tercer grado siembran tomates en el huerto, en abril.</small></span>", "o": ["El huerto de la escuela", "Cómo los niños aprenden a sembrar", "Preparar la tierra"], "c": 0, "e": "Lo dice el <strong>título</strong>."}, {"t": "Lee solo las pistas visuales del artículo. ¿En qué se enfoca el artículo? Mira el subtítulo de arriba. <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">El huerto de la escuela</strong><br><em>Cómo los niños aprenden a sembrar</em><br>Secciones: 1. Preparar la tierra · 2. Regar y cuidar<br>[Imagen: Un huerto con rótulos: «tomates», «lechugas», «manguera»]<br><small>Figura 1: Niños de tercer grado siembran tomates en el huerto, en abril.</small></span>", "o": ["Cómo los niños aprenden a sembrar", "El huerto de la escuela", "Regar y cuidar"], "c": 0, "e": "Lo precisa el <strong>subtítulo</strong> que va debajo del título."}, {"t": "Lee solo las pistas visuales del artículo. ¿Cuántas secciones tiene el artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">El huerto de la escuela</strong><br><em>Cómo los niños aprenden a sembrar</em><br>Secciones: 1. Preparar la tierra · 2. Regar y cuidar<br>[Imagen: Un huerto con rótulos: «tomates», «lechugas», «manguera»]<br><small>Figura 1: Niños de tercer grado siembran tomates en el huerto, en abril.</small></span>", "o": ["Dos", "Una", "Cuatro"], "c": 0, "e": "Hay dos subtítulos numerados."}, {"t": "Lee solo las pistas visuales del artículo. Según el pie de la Figura 1, ¿qué se ve en la imagen? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">El huerto de la escuela</strong><br><em>Cómo los niños aprenden a sembrar</em><br>Secciones: 1. Preparar la tierra · 2. Regar y cuidar<br>[Imagen: Un huerto con rótulos: «tomates», «lechugas», «manguera»]<br><small>Figura 1: Niños de tercer grado siembran tomates en el huerto, en abril.</small></span>", "o": ["Niños de tercer grado siembran tomates en el huerto, en abril", "Cómo los niños aprenden a sembrar", "El huerto de la escuela"], "c": 0, "e": "Lo explica el <strong>pie de foto</strong>."}, {"t": "Lee solo las pistas visuales del artículo. ¿Cuál es el tema general del artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">La vacuna contra la gripe</strong><br><em>Quién debe ponérsela y cuándo</em><br>Secciones: 1. Por qué cambia cada año · 2. Dónde conseguirla<br>[Imagen: Un brazo con una curita; rótulo: «hombro»]<br><small>Figura 1: Una enfermera aplica la vacuna en la clínica comunitaria.</small></span>", "o": ["La vacuna contra la gripe", "Quién debe ponérsela y cuándo", "Por qué cambia cada año"], "c": 0, "e": "Lo dice el <strong>título</strong>."}, {"t": "Lee solo las pistas visuales del artículo. ¿En qué se enfoca el artículo? Mira el subtítulo de arriba. <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">La vacuna contra la gripe</strong><br><em>Quién debe ponérsela y cuándo</em><br>Secciones: 1. Por qué cambia cada año · 2. Dónde conseguirla<br>[Imagen: Un brazo con una curita; rótulo: «hombro»]<br><small>Figura 1: Una enfermera aplica la vacuna en la clínica comunitaria.</small></span>", "o": ["Quién debe ponérsela y cuándo", "La vacuna contra la gripe", "Dónde conseguirla"], "c": 0, "e": "Lo precisa el <strong>subtítulo</strong> que va debajo del título."}, {"t": "Lee solo las pistas visuales del artículo. ¿Cuántas secciones tiene el artículo? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">La vacuna contra la gripe</strong><br><em>Quién debe ponérsela y cuándo</em><br>Secciones: 1. Por qué cambia cada año · 2. Dónde conseguirla<br>[Imagen: Un brazo con una curita; rótulo: «hombro»]<br><small>Figura 1: Una enfermera aplica la vacuna en la clínica comunitaria.</small></span>", "o": ["Dos", "Una", "Cuatro"], "c": 0, "e": "Hay dos subtítulos numerados."}, {"t": "Lee solo las pistas visuales del artículo. Según el pie de la Figura 1, ¿qué se ve en la imagen? <span class=\"frase\" style=\"text-align:left;font-size:1rem\"><strong style=\"font-size:1.15rem\">La vacuna contra la gripe</strong><br><em>Quién debe ponérsela y cuándo</em><br>Secciones: 1. Por qué cambia cada año · 2. Dónde conseguirla<br>[Imagen: Un brazo con una curita; rótulo: «hombro»]<br><small>Figura 1: Una enfermera aplica la vacuna en la clínica comunitaria.</small></span>", "o": ["Una enfermera aplica la vacuna en la clínica comunitaria", "Quién debe ponérsela y cuándo", "La vacuna contra la gripe"], "c": 0, "e": "Lo explica el <strong>pie de foto</strong>."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+</script>
+</body>
+</html>

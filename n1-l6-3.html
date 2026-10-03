@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 6.3 — La anatomía de los mapas
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #direcciones · #elementos
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 6.3: La anatomía de los mapas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 6 · Información visual</div>
+    <h1>Lección 6.3 · La anatomía de los mapas</h1>
+    <p>Práctica para orientarte en un mapa con los puntos cardinales y usar sus cuatro elementos. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_6-3.html">← Volver a la Lección 6.3</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#direcciones">¿Hacia dónde queda?</a></li>
+      <li><a href="#elementos">Los elementos del mapa</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #direcciones ============ -->
+  <details class="modulo" id="direcciones" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>¿Hacia dónde queda?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>En este mapa el <strong>norte</strong> está arriba. Entre los puntos cardinales hay puntos intermedios: <strong>noreste</strong> (arriba a la derecha), <strong>noroeste</strong> (arriba a la izquierda), <strong>sureste</strong> (abajo a la derecha) y <strong>suroeste</strong> (abajo a la izquierda).</p><div style="max-width:600px;margin:10px auto;border:2px solid #1a2332;border-radius:6px;overflow:hidden"><svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="barrio-t barrio-d">
+  <title id="barrio-t">Mapa del barrio Las Flores</title>
+  <desc id="barrio-d">Mapa visto desde arriba, con el Norte arriba. Dos calles cruzan de oeste a este: Calle Roble, más al norte, y Calle Pino, más al sur. Dos avenidas van de norte a sur: Avenida Sol, al oeste, y Avenida Luna, al este. Quedan nueve cuadras. Fila de arriba, de oeste a este: la escuela, una cuadra vacía y la tienda. Fila del medio: una cuadra vacía, la biblioteca y el hospital. Fila de abajo: mi casa, el parque y una cuadra vacía. Hay tres paradas de autobús: dos en la Calle Roble y una en la Calle Pino. A la derecha están la rosa de los vientos y la leyenda; abajo a la izquierda, la escala: la barra mide 100 metros.</desc>
+  <rect width="600" height="380" fill="#fafafa"/>
+  <rect x="0" y="0" width="600" height="38" fill="#1a2332"/>
+  <text x="300" y="25" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">Mapa del barrio Las Flores</text>
+  <!-- cuadras -->
+  <rect x="20" y="50" width="410" height="310" fill="#eceff1"/>
+  <!-- calles horizontales -->
+  <rect x="20" y="138" width="410" height="18" fill="#b0bec5"/>
+  <rect x="20" y="250" width="410" height="18" fill="#b0bec5"/>
+  <text x="26" y="151" font-size="11" font-weight="bold" fill="#1a2332">Calle Roble</text>
+  <text x="26" y="263" font-size="11" font-weight="bold" fill="#1a2332">Calle Pino</text>
+  <!-- avenidas -->
+  <rect x="150" y="50" width="18" height="310" fill="#b0bec5"/>
+  <rect x="290" y="50" width="18" height="310" fill="#b0bec5"/>
+  <text x="159" y="64" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2332" transform="rotate(90 159 64)">Av. Sol</text>
+  <text x="299" y="64" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2332" transform="rotate(90 299 64)">Av. Luna</text>
+<g><rect x="67" y="88" width="36" height="26" fill="#fff59d" stroke="#f57f17" stroke-width="2"/><polygon points="63,88 85,74 107,88" fill="#f9a825"/><rect x="80" y="102" width="10" height="12" fill="#f57f17"/></g><g><rect x="211" y="189" width="36" height="30" fill="#e1bee7" stroke="#6a1b9a" stroke-width="2"/><rect x="218" y="196" width="9" height="16" fill="#6a1b9a"/><rect x="231" y="196" width="9" height="16" fill="#8e24aa"/></g><g><rect x="351" y="189" width="36" height="32" fill="#fff" stroke="#c62828" stroke-width="2"/><rect x="365" y="194" width="8" height="22" fill="#c62828"/><rect x="358" y="201" width="22" height="8" fill="#c62828"/></g><g><rect x="199" y="290" width="60" height="40" rx="6" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/><circle cx="215" cy="306" r="6" fill="#2e7d32"/><circle cx="231" cy="316" r="6" fill="#2e7d32"/><circle cx="245" cy="304" r="6" fill="#2e7d32"/></g><g><rect x="351" y="88" width="36" height="26" fill="#ffe0b2" stroke="#e65100" stroke-width="2"/><polygon points="349,88 389,88 385,80 353,80" fill="#ef6c00"/><circle cx="369" cy="101" r="5" fill="#e65100"/></g><g><rect x="69" y="299" width="32" height="24" fill="#ffccbc" stroke="#bf360c" stroke-width="2"/><polygon points="65,299 85,283 105,299" fill="#d84315"/><rect x="81" y="309" width="8" height="14" fill="#6d4c41"/></g>
+  <text x="85" y="345" text-anchor="middle" font-size="11" font-weight="bold" fill="#bf360c">Mi casa</text>
+<g><circle cx="229" cy="147" r="9" fill="#1565c0" stroke="#fff" stroke-width="2"/><text x="229" y="151" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">B</text></g><g><circle cx="400" cy="147" r="9" fill="#1565c0" stroke="#fff" stroke-width="2"/><text x="400" y="151" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">B</text></g><g><circle cx="369" cy="259" r="9" fill="#1565c0" stroke="#fff" stroke-width="2"/><text x="369" y="263" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">B</text></g>
+  <!-- escala -->
+  <g>
+    <rect x="30" y="364" width="34" height="7" fill="#1a2332"/><rect x="64" y="364" width="33" height="7" fill="#fff" stroke="#1a2332" stroke-width="1"/>
+    <text x="30" y="362" font-size="9" fill="#1a2332">0</text><text x="97" y="362" text-anchor="middle" font-size="9" fill="#1a2332">100 m</text>
+  </g>
+  <!-- rosa -->
+<g aria-hidden="true">
+  <circle cx="517" cy="95" r="30" fill="#fff" stroke="#1a2332" stroke-width="2"/>
+  <polygon points="517,69 511.6,95 522.4,95" fill="#c62828"/>
+  <polygon points="517,121 511.6,95 522.4,95" fill="#455a64"/>
+  <polygon points="543,95 517,89.6 517,100.4" fill="#90a4ae"/>
+  <polygon points="491,95 517,89.6 517,100.4" fill="#90a4ae"/>
+  <circle cx="517" cy="95" r="2.4" fill="#1a2332"/>
+  <text x="517" y="57.849999999999994" text-anchor="middle" font-size="13" font-weight="bold" fill="#c62828">N</text>
+  <text x="517" y="141.25" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2332">S</text>
+  <text x="558.7" y="99.55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2332">E</text>
+  <text x="475.3" y="99.55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2332">O</text>
+</g>
+  <!-- leyenda -->
+  <rect x="445" y="150" width="145" height="215" fill="#fff" stroke="#1a2332" stroke-width="1.5" rx="4"/>
+  <text x="517" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2332">Leyenda</text>
+<g><rect x="457.2" y="187.8" width="21.599999999999998" height="15.6" fill="#fff59d" stroke="#f57f17" stroke-width="2"/><polygon points="454.8,187.8 468,179.4 481.2,187.8" fill="#f9a825"/><rect x="465.0" y="196.2" width="6.0" height="7.199999999999999" fill="#f57f17"/></g><text x="490" y="199" font-size="11" fill="#1a2332">Escuela</text><g><rect x="457.2" y="212.4" width="21.599999999999998" height="18.0" fill="#e1bee7" stroke="#6a1b9a" stroke-width="2"/><rect x="461.4" y="216.6" width="5.3999999999999995" height="9.6" fill="#6a1b9a"/><rect x="469.2" y="216.6" width="5.3999999999999995" height="9.6" fill="#8e24aa"/></g><text x="490" y="226" font-size="11" fill="#1a2332">Biblioteca</text><g><rect x="457.2" y="239.4" width="21.599999999999998" height="19.2" fill="#fff" stroke="#c62828" stroke-width="2"/><rect x="465.6" y="242.4" width="4.8" height="13.2" fill="#c62828"/><rect x="461.4" y="246.6" width="13.2" height="4.8" fill="#c62828"/></g><text x="490" y="253" font-size="11" fill="#1a2332">Hospital</text><g><rect x="454.5" y="267.0" width="27.0" height="18.0" rx="6" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/><circle cx="461.7" cy="274.2" r="2.7" fill="#2e7d32"/><circle cx="468.9" cy="278.7" r="2.7" fill="#2e7d32"/><circle cx="475.2" cy="273.3" r="2.7" fill="#2e7d32"/></g><text x="490" y="280" font-size="11" fill="#1a2332">Parque</text><g><rect x="457.2" y="295.8" width="21.599999999999998" height="15.6" fill="#ffe0b2" stroke="#e65100" stroke-width="2"/><polygon points="456.0,295.8 480.0,295.8 477.6,291.0 458.4,291.0" fill="#ef6c00"/><circle cx="468" cy="303.6" r="3.0" fill="#e65100"/></g><text x="490" y="307" font-size="11" fill="#1a2332">Tienda</text><g><circle cx="468" cy="330" r="7.2" fill="#1565c0" stroke="#fff" stroke-width="2"/><text x="468" y="333.2" text-anchor="middle" font-size="8.8" font-weight="bold" fill="#fff">B</text></g><text x="490" y="334" font-size="11" fill="#1a2332">Parada de</text><text x="490" y="347" font-size="11" fill="#1a2332">autobús</text>
+</svg></div></div>
+
+      <h3>Usa el mapa y la rosa</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #elementos ============ -->
+  <details class="modulo" id="elementos">
+    <summary><span class="num" aria-hidden="true">2</span><h2>Los elementos del mapa</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Todo mapa tiene cuatro elementos: el <strong>título</strong> (de qué lugar es), la <strong>rosa de los vientos</strong> (dónde está el norte), la <strong>leyenda</strong> (qué significa cada símbolo) y la <strong>escala</strong> (cuánto mide en la realidad). Las preguntas sobre el barrio usan el mapa del primer módulo.</p></div>
+
+      <h3>¿Qué elemento es?</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1: Iniciación a la Lectura y la Escritura · Tema 6 · Lección 6.3 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_6-3.html">← Volver a la Lección 6.3</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "Mira el mapa. ¿Hacia dónde queda <strong>la escuela</strong> con respecto a <strong>la tienda</strong>?", "o": ["Al oeste", "Al norte", "Al sur", "Al suroeste"], "c": 0, "e": "La escuela está al <strong>oeste</strong> de la tienda. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la escuela</strong> con respecto a <strong>la biblioteca</strong>?", "o": ["Al noroeste", "Al sureste", "Al suroeste", "Al este"], "c": 0, "e": "La escuela está al <strong>noroeste</strong> de la biblioteca. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la escuela</strong> con respecto a <strong>el hospital</strong>?", "o": ["Al noroeste", "Al suroeste", "Al noreste", "Al oeste"], "c": 0, "e": "La escuela está al <strong>noroeste</strong> de el hospital. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la escuela</strong> con respecto a <strong>Mi casa</strong>?", "o": ["Al norte", "Al sur", "Al este", "Al noroeste"], "c": 0, "e": "La escuela está al <strong>norte</strong> de Mi casa. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la escuela</strong> con respecto a <strong>el parque</strong>?", "o": ["Al noroeste", "Al suroeste", "Al noreste", "Al este"], "c": 0, "e": "La escuela está al <strong>noroeste</strong> de el parque. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la tienda</strong> con respecto a <strong>la escuela</strong>?", "o": ["Al este", "Al oeste", "Al norte", "Al suroeste"], "c": 0, "e": "La tienda está al <strong>este</strong> de la escuela. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la tienda</strong> con respecto a <strong>la biblioteca</strong>?", "o": ["Al noreste", "Al sureste", "Al noroeste", "Al norte"], "c": 0, "e": "La tienda está al <strong>noreste</strong> de la biblioteca. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la tienda</strong> con respecto a <strong>el hospital</strong>?", "o": ["Al norte", "Al este", "Al sur", "Al sureste"], "c": 0, "e": "La tienda está al <strong>norte</strong> de el hospital. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la biblioteca</strong> con respecto a <strong>el hospital</strong>?", "o": ["Al oeste", "Al este", "Al norte", "Al sureste"], "c": 0, "e": "La biblioteca está al <strong>oeste</strong> de el hospital. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la biblioteca</strong> con respecto a <strong>Mi casa</strong>?", "o": ["Al noreste", "Al sureste", "Al noroeste", "Al este"], "c": 0, "e": "La biblioteca está al <strong>noreste</strong> de Mi casa. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>la biblioteca</strong> con respecto a <strong>el parque</strong>?", "o": ["Al norte", "Al sur", "Al oeste", "Al sureste"], "c": 0, "e": "La biblioteca está al <strong>norte</strong> de el parque. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el hospital</strong> con respecto a <strong>la escuela</strong>?", "o": ["Al sureste", "Al noroeste", "Al suroeste", "Al norte"], "c": 0, "e": "El hospital está al <strong>sureste</strong> de la escuela. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el hospital</strong> con respecto a <strong>la tienda</strong>?", "o": ["Al sur", "Al este", "Al norte", "Al suroeste"], "c": 0, "e": "El hospital está al <strong>sur</strong> de la tienda. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el hospital</strong> con respecto a <strong>la biblioteca</strong>?", "o": ["Al este", "Al sur", "Al norte", "Al noreste"], "c": 0, "e": "El hospital está al <strong>este</strong> de la biblioteca. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el hospital</strong> con respecto a <strong>el parque</strong>?", "o": ["Al noreste", "Al noroeste", "Al sureste", "Al norte"], "c": 0, "e": "El hospital está al <strong>noreste</strong> de el parque. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda. Si está arriba y a la derecha, es el <strong>noreste</strong>; arriba y a la izquierda, el <strong>noroeste</strong>; abajo y a la derecha, el <strong>sureste</strong>; abajo y a la izquierda, el <strong>suroeste</strong>."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>Mi casa</strong> con respecto a <strong>la escuela</strong>?", "o": ["Al sur", "Al oeste", "Al este", "Al sureste"], "c": 0, "e": "Mi casa está al <strong>sur</strong> de la escuela. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>Mi casa</strong> con respecto a <strong>el parque</strong>?", "o": ["Al oeste", "Al este", "Al norte", "Al noroeste"], "c": 0, "e": "Mi casa está al <strong>oeste</strong> de el parque. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el parque</strong> con respecto a <strong>la biblioteca</strong>?", "o": ["Al sur", "Al este", "Al norte", "Al sureste"], "c": 0, "e": "El parque está al <strong>sur</strong> de la biblioteca. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}, {"t": "Mira el mapa. ¿Hacia dónde queda <strong>el parque</strong> con respecto a <strong>Mi casa</strong>?", "o": ["Al este", "Al sur", "Al oeste", "Al sureste"], "c": 0, "e": "El parque está al <strong>este</strong> de Mi casa. Recuerda: norte arriba, sur abajo, este a la derecha y oeste a la izquierda."}]}, "p2": {"tipo": "mc", "items": [{"t": "¿Qué elemento del mapa te dice qué significa la cruz roja?", "o": ["La leyenda", "La escala", "El título"], "c": 0, "e": "La respuesta es <strong>La leyenda</strong>."}, {"t": "¿Qué elemento te dice hacia dónde queda el norte?", "o": ["La rosa de los vientos", "La leyenda", "La escala"], "c": 0, "e": "La respuesta es <strong>La rosa de los vientos</strong>."}, {"t": "¿Qué elemento te ayuda a saber cuántos metros hay entre dos lugares?", "o": ["La escala", "La rosa de los vientos", "El título"], "c": 0, "e": "La respuesta es <strong>La escala</strong>."}, {"t": "¿Qué elemento te dice de qué lugar es el mapa?", "o": ["El título", "La escala", "La leyenda"], "c": 0, "e": "La respuesta es <strong>El título</strong>."}, {"t": "En el mapa, la barra que dice «100 m» es…", "o": ["la escala", "la leyenda", "la rosa de los vientos"], "c": 0, "e": "La respuesta es <strong>la escala</strong>."}, {"t": "El cuadro que muestra cada símbolo con su nombre es…", "o": ["la leyenda", "el título", "la escala"], "c": 0, "e": "La respuesta es <strong>la leyenda</strong>."}, {"t": "Según la leyenda, ¿qué es el círculo azul con una B?", "o": ["Una parada de autobús", "Un banco", "Una biblioteca"], "c": 0, "e": "La respuesta es <strong>Una parada de autobús</strong>."}, {"t": "Según la leyenda, ¿qué es el edificio morado?", "o": ["La biblioteca", "La escuela", "El hospital"], "c": 0, "e": "La respuesta es <strong>La biblioteca</strong>."}, {"t": "Según la leyenda, ¿qué es el edificio naranja con techo plano?", "o": ["La tienda", "Mi casa", "La escuela"], "c": 0, "e": "La respuesta es <strong>La tienda</strong>."}, {"t": "¿Cuántas paradas de autobús hay en la Calle Roble?", "o": ["Dos", "Una", "Tres"], "c": 0, "e": "La respuesta es <strong>Dos</strong>."}, {"t": "¿Qué calle está más al sur?", "o": ["La Calle Pino", "La Calle Roble", "La Avenida Sol"], "c": 0, "e": "La respuesta es <strong>La Calle Pino</strong>."}, {"t": "¿Qué avenida está más al este?", "o": ["La Avenida Luna", "La Avenida Sol", "La Calle Roble"], "c": 0, "e": "La respuesta es <strong>La Avenida Luna</strong>."}, {"t": "Un mapa que muestra montañas y ríos es un mapa…", "o": ["físico", "político", "de calles"], "c": 0, "e": "La respuesta es <strong>físico</strong>."}, {"t": "Un mapa que muestra las fronteras entre países es un mapa…", "o": ["político", "físico", "histórico"], "c": 0, "e": "La respuesta es <strong>político</strong>."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+</script>
+</body>
+</html>
