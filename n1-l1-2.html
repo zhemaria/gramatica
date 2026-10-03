@@ -393,7 +393,8 @@
       <button type="button" id="btn-menos" aria-label="Disminuir el tamaño del texto">A&#8722;</button>
       <button type="button" id="btn-mas" aria-label="Aumentar el tamaño del texto">A&#43;</button>
       <button type="button" id="btn-pista">Mostrar pista</button>
-      <button type="button" id="btn-audio">&#9654; Escuchar el párrafo</button>
+      <button type="button" id="btn-audio" disabled aria-describedby="nota-audio">&#9654; Escuchar el párrafo</button>
+      <span class="etiqueta" id="nota-audio">(se activa después de tu primera revisión)</span>
     </div>
 
     <h3 class="sr-solo">Progreso de la práctica</h3>
@@ -612,6 +613,18 @@ function cargarParrafo(i){
   document.getElementById("btn-anterior").disabled = (i === 0);
   document.getElementById("btn-siguiente").disabled = (i === PARRAFOS.length - 1);
   pintarProgreso();
+  activarAudio();
+}
+
+/* El audio lee la versión correcta: se activa solo después de que el
+   estudiante revisa ese párrafo por primera vez, para que no le dé la respuesta. */
+var revisados = {};
+function activarAudio(){
+  var b = document.getElementById("btn-audio"), nota = document.getElementById("nota-audio");
+  if (!b || !("speechSynthesis" in window)) return;
+  var listo = !!revisados[indiceActual];
+  b.disabled = !listo;
+  nota.textContent = listo ? "(escucha dónde termina cada oración y compara con lo que hiciste)" : "(se activa después de tu primera revisión)";
 }
 
 /* =========================================================
@@ -627,6 +640,7 @@ function ordinal(n){
 }
 
 function revisar(){
+  revisados[indiceActual] = true; activarAudio();
   var modelo = modelos[indiceActual];
   var alumno = agrupar(elEditor.value).palabras;
 
@@ -836,12 +850,17 @@ var btnAudio = document.getElementById("btn-audio");
 if (!("speechSynthesis" in window)){
   btnAudio.disabled = true;
   btnAudio.textContent = "Audio no disponible";
+  document.getElementById("nota-audio").textContent = "";
 } else {
   btnAudio.addEventListener("click", function(){
     window.speechSynthesis.cancel();
     var v = new SpeechSynthesisUtterance(PARRAFOS[indiceActual].correcto);
-    v.lang = "es-ES";
+    v.lang = "es-US";
     v.rate = 0.85;
+    /* Se prefiere una voz latinoamericana */
+    var vs = window.speechSynthesis.getVoices().filter(function(x){ return /^es/i.test(x.lang); });
+    var voz = vs.filter(function(x){ return /es[-_](US|MX|419)/i.test(x.lang); })[0] || vs.filter(function(x){ return !/es[-_]ES/i.test(x.lang); })[0] || vs[0];
+    if (voz) v.voice = voz;
     window.speechSynthesis.speak(v);
   });
 }
