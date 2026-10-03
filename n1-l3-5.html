@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 3.5 — Oración completa frente a fragmento
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #completa-o-fragmento · #que-falta · #repara · #en-el-texto
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 3.5: Oración completa frente a fragmento</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 3 · La oración</div>
+    <h1>Lección 3.5 · Oración completa frente a fragmento</h1>
+    <p>Práctica para reconocer y reparar fragmentos, una destreza clave para la escritura del GED. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_3-5.html">← Volver a la Lección 3.5</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#completa-o-fragmento">¿Oración completa o fragmento?</a></li>
+      <li><a href="#que-falta">¿Qué le falta al fragmento?</a></li>
+      <li><a href="#repara">Repara el fragmento</a></li>
+      <li><a href="#en-el-texto">Busca los fragmentos en un texto</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #completa-o-fragmento ============ -->
+  <details class="modulo" id="completa-o-fragmento" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>¿Oración completa o fragmento?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Una <strong>oración completa</strong> tiene un verbo conjugado y expresa una idea cerrada. El sujeto puede estar escrito (<em>Mi mamá cocina</em>) o sobreentendido (<em>Cocino</em> → yo).</p><p>Un <strong>fragmento</strong> es un grupo de palabras al que le falta algo: el verbo, el sujeto y el verbo, o el final de la idea (<em>Cuando llegó la maestra…</em>).</p></div>
+
+      <h3>Decide en cada caso</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #que-falta ============ -->
+  <details class="modulo" id="que-falta">
+    <summary><span class="num" aria-hidden="true">2</span><h2>¿Qué le falta al fragmento?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Hay tres tipos de fragmento: los que <strong>no tienen verbo</strong> (<em>El carro nuevo de mi tío.</em>), los que <strong>no tienen ni sujeto ni verbo</strong> (<em>En el parque.</em>) y los que <strong>empiezan una idea y no la terminan</strong> (<em>Porque estaba cansado.</em>).</p></div>
+
+      <h3>¿Qué le falta?</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 3 · #repara ============ -->
+  <details class="modulo" id="repara">
+    <summary><span class="num" aria-hidden="true">3</span><h2>Repara el fragmento</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Para reparar un fragmento, agrégale lo que le falta, o únelo con la oración de al lado. Agregar más detalles no basta: <em>El gato negro y grande de la vecina</em> sigue sin verbo.</p></div>
+
+      <h3>Elige la versión completa</h3>
+      <div class="practica" id="p3">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 4 · #en-el-texto ============ -->
+  <details class="modulo" id="en-el-texto">
+    <summary><span class="num" aria-hidden="true">4</span><h2>Busca los fragmentos en un texto</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>En el ensayo del GED, los fragmentos se cuelan sin darnos cuenta. Lee cada texto y marca los grupos de palabras que no forman oración.</p></div>
+
+      <h3>Toca los fragmentos</h3>
+      <div class="practica" id="p4">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        <p class="leyenda-marcar">Toca las oraciones para marcarlas (toca otra vez para desmarcar) y después pulsa «Revisar».</p>
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1 · Tema 3 · Lección 3.5 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_3-5.html">← Volver a la Lección 3.5</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Los estudiantes leen el libro.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (los estudiantes) y verbo (leen), y la idea queda cerrada."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Mi hermana es enfermera.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (mi hermana) y verbo (es)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Yo trabajo todos los días.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (yo) y verbo (trabajo)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Mañana cocinaré para la familia.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "El sujeto no está escrito, pero se entiende: <em>yo</em> cocinaré. Es un sujeto tácito, y la oración está completa."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Llueve mucho en abril.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene verbo (llueve). Con los verbos del tiempo, como llover o nevar, no hace falta sujeto."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Compró pan en la tienda.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "El sujeto se entiende por el verbo (<em>él</em> o <em>ella</em> compró). Es una oración completa."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">El autobús llegó tarde.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (el autobús) y verbo (llegó)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Cuando llegó mi mamá, cenamos juntos.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "La parte «cuando llegó mi mamá» se completa con «cenamos juntos». Ahora la idea está cerrada."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Mis hijos juegan en el parque.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (mis hijos) y verbo (juegan)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">El café está caliente.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (el café) y verbo (está)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Estudiamos para el GED por la noche.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "El sujeto tácito es <em>nosotros</em> y el verbo es <em>estudiamos</em>."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">La tienda abre a las nueve.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (la tienda) y verbo (abre)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Mi vecino arregla carros.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene sujeto (mi vecino) y verbo (arregla)."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Hace frío esta mañana.</span>", "o": ["Oración completa", "Fragmento"], "c": 0, "e": "Tiene verbo (hace). Con «hace frío» o «hace calor» no hace falta sujeto."}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Caminando por la calle.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "No tiene un verbo conjugado. «Caminando» no dice quién ni cuándo. Por ejemplo: <em>Voy caminando por la calle.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Cuando llegó la maestra.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Empieza una idea pero no la termina. ¿Qué pasó cuando llegó? Por ejemplo: <em>Cuando llegó la maestra, empezamos la clase.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">El gato negro de la vecina.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Nombra algo, pero no dice qué hace ni cómo es: falta el verbo. Por ejemplo: <em>El gato negro de la vecina duerme en el sofá.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">En el parque del barrio.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Solo dice dónde. No tiene sujeto ni verbo. Por ejemplo: <em>Los niños juegan en el parque del barrio.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">El carro nuevo de mi tío.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Falta el verbo. Por ejemplo: <em>El carro nuevo de mi tío es rojo.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Mi hermana y yo.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Dice quiénes, pero no qué hacen: falta el verbo. Por ejemplo: <em>Mi hermana y yo cocinamos juntas.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Con mucho cuidado.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Dice cómo, pero no quién ni qué hace. Por ejemplo: <em>Mi papá maneja con mucho cuidado.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Porque estaba cansado.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Da una razón, pero falta la idea principal. Por ejemplo: <em>Me acosté temprano porque estaba cansado.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Si termino el trabajo temprano.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Plantea una condición, pero no dice qué pasará. Por ejemplo: <em>Si termino el trabajo temprano, iré al parque.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Comiendo juntos en la cocina.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "«Comiendo» no es un verbo conjugado. Por ejemplo: <em>Comemos juntos en la cocina.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Una casa grande con jardín.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Nombra algo, pero falta el verbo. Por ejemplo: <em>Vivimos en una casa grande con jardín.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Después de la cena.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Dice cuándo, pero no quién ni qué hace. Por ejemplo: <em>Después de la cena, vemos las noticias.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Aunque llovía mucho.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Empieza una idea pero no la termina. Por ejemplo: <em>Aunque llovía mucho, fui al trabajo.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Los zapatos rojos de mi hija.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Falta el verbo. Por ejemplo: <em>Los zapatos rojos de mi hija están en la caja.</em>"}, {"t": "¿Es una oración completa o un fragmento? <span class=\"frase\">Para el examen del GED.</span>", "o": ["Oración completa", "Fragmento"], "c": 1, "e": "Dice para qué, pero no quién ni qué hace. Por ejemplo: <em>Estudio mucho para el examen del GED.</em>"}]}, "p2": {"tipo": "mc", "items": [{"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Caminando por la calle.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "No tiene un verbo conjugado. «Caminando» no dice quién ni cuándo. Por ejemplo: <em>Voy caminando por la calle.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Cuando llegó la maestra.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 2, "e": "Empieza una idea pero no la termina. ¿Qué pasó cuando llegó? Por ejemplo: <em>Cuando llegó la maestra, empezamos la clase.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">El gato negro de la vecina.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "Nombra algo, pero no dice qué hace ni cómo es: falta el verbo. Por ejemplo: <em>El gato negro de la vecina duerme en el sofá.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">En el parque del barrio.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 1, "e": "Solo dice dónde. No tiene sujeto ni verbo. Por ejemplo: <em>Los niños juegan en el parque del barrio.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">El carro nuevo de mi tío.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "Falta el verbo. Por ejemplo: <em>El carro nuevo de mi tío es rojo.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Mi hermana y yo.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "Dice quiénes, pero no qué hacen: falta el verbo. Por ejemplo: <em>Mi hermana y yo cocinamos juntas.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Con mucho cuidado.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 1, "e": "Dice cómo, pero no quién ni qué hace. Por ejemplo: <em>Mi papá maneja con mucho cuidado.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Porque estaba cansado.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 2, "e": "Da una razón, pero falta la idea principal. Por ejemplo: <em>Me acosté temprano porque estaba cansado.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Si termino el trabajo temprano.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 2, "e": "Plantea una condición, pero no dice qué pasará. Por ejemplo: <em>Si termino el trabajo temprano, iré al parque.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Comiendo juntos en la cocina.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "«Comiendo» no es un verbo conjugado. Por ejemplo: <em>Comemos juntos en la cocina.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Una casa grande con jardín.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "Nombra algo, pero falta el verbo. Por ejemplo: <em>Vivimos en una casa grande con jardín.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Después de la cena.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 1, "e": "Dice cuándo, pero no quién ni qué hace. Por ejemplo: <em>Después de la cena, vemos las noticias.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Aunque llovía mucho.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 2, "e": "Empieza una idea pero no la termina. Por ejemplo: <em>Aunque llovía mucho, fui al trabajo.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Los zapatos rojos de mi hija.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 0, "e": "Falta el verbo. Por ejemplo: <em>Los zapatos rojos de mi hija están en la caja.</em>"}, {"t": "Este fragmento está incompleto. ¿Qué le falta? <span class=\"frase\">Para el examen del GED.</span>", "o": ["Le falta el verbo", "Le faltan el sujeto y el verbo", "Le falta terminar la idea"], "c": 1, "e": "Dice para qué, pero no quién ni qué hace. Por ejemplo: <em>Estudio mucho para el examen del GED.</em>"}]}, "p3": {"tipo": "mc", "items": [{"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Caminando hacia el trabajo.</span>", "o": ["Camino hacia el trabajo.", "Caminando hacia el trabajo por la mañana.", "Hacia el trabajo caminando."], "c": 0, "e": "<strong>Camino hacia el trabajo.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Cuando llegó la maestra.</span>", "o": ["Cuando llegó la maestra, empezamos la clase.", "Cuando llegó la maestra al salón.", "Cuando la maestra llegó temprano."], "c": 0, "e": "<strong>Cuando llegó la maestra, empezamos la clase.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">El gato negro de la vecina.</span>", "o": ["El gato negro de la vecina duerme en el sofá.", "El gato negro y grande de la vecina.", "El gato negro de la vecina del tercer piso."], "c": 0, "e": "<strong>El gato negro de la vecina duerme en el sofá.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">En la cocina con mi mamá.</span>", "o": ["Cocino en la cocina con mi mamá.", "En la cocina grande con mi mamá.", "Con mi mamá en la cocina."], "c": 0, "e": "<strong>Cocino en la cocina con mi mamá.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Porque estaba cansado.</span>", "o": ["Me acosté temprano porque estaba cansado.", "Porque estaba muy cansado.", "Porque ayer estaba cansado."], "c": 0, "e": "<strong>Me acosté temprano porque estaba cansado.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Mi hermana y yo.</span>", "o": ["Mi hermana y yo vamos al mercado.", "Mi hermana mayor y yo.", "Mi hermana, mi primo y yo."], "c": 0, "e": "<strong>Mi hermana y yo vamos al mercado.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Si termino el trabajo temprano.</span>", "o": ["Si termino el trabajo temprano, iré al parque.", "Si termino todo el trabajo temprano.", "Si mañana termino el trabajo temprano."], "c": 0, "e": "<strong>Si termino el trabajo temprano, iré al parque.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Después de la cena.</span>", "o": ["Después de la cena, lavamos los platos.", "Después de la cena con la familia.", "Después de la cena del domingo."], "c": 0, "e": "<strong>Después de la cena, lavamos los platos.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Los zapatos rojos de mi hija.</span>", "o": ["Los zapatos rojos de mi hija son nuevos.", "Los zapatos rojos y nuevos de mi hija.", "Los zapatos rojos de mi hija menor."], "c": 0, "e": "<strong>Los zapatos rojos de mi hija son nuevos.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}, {"t": "¿Cuál de estas opciones <strong>repara</strong> el fragmento y forma una oración completa? <span class=\"frase\">Comiendo pan con queso.</span>", "o": ["Mis hijos comen pan con queso.", "Comiendo pan con queso y café.", "Pan con queso comiendo."], "c": 0, "e": "<strong>Mis hijos comen pan con queso.</strong> tiene sujeto y verbo, y la idea queda cerrada. Las otras opciones siguen siendo fragmentos."}]}, "p4": {"tipo": "oraciones", "items": [{"t": "Lee el texto y <strong>toca los fragmentos</strong> (los grupos de palabras que no forman una oración completa).", "oraciones": [["Mi familia vive en Chicago.", 0], ["Una casa grande con jardín.", 1], ["Mi papá trabaja en una fábrica.", 0], ["Cuando llega del trabajo.", 1], ["Mi mamá lo recibe con café caliente.", 0], ["Comiendo juntos en la cocina.", 1]], "e": "Para cada fragmento, pregúntate: ¿quién?, ¿qué hace?, ¿la idea queda cerrada? Si algo falta, es un fragmento."}, {"t": "Lee el texto y <strong>toca los fragmentos</strong> (los grupos de palabras que no forman una oración completa).", "oraciones": [["El lunes empecé un trabajo nuevo.", 0], ["En una tienda del centro.", 1], ["Mi jefa es muy amable.", 0], ["Me explicó todo con paciencia.", 0], ["Porque era mi primer día.", 1]], "e": "Para cada fragmento, pregúntate: ¿quién?, ¿qué hace?, ¿la idea queda cerrada? Si algo falta, es un fragmento."}, {"t": "Lee el texto y <strong>toca los fragmentos</strong> (los grupos de palabras que no forman una oración completa).", "oraciones": [["Los domingos vamos al parque.", 0], ["Mis hijos juegan con la pelota.", 0], ["Mi esposo y yo.", 1], ["Llevamos comida para todos.", 0], ["Si no llueve.", 1]], "e": "Para cada fragmento, pregúntate: ¿quién?, ¿qué hace?, ¿la idea queda cerrada? Si algo falta, es un fragmento."}, {"t": "Lee el texto y <strong>toca los fragmentos</strong> (los grupos de palabras que no forman una oración completa).", "oraciones": [["Estudio para el GED por la noche.", 0], ["Después de acostar a los niños.", 1], ["Leo un rato en la cocina.", 0], ["Con una taza de té.", 1], ["Poco a poco aprendo más.", 0]], "e": "Para cada fragmento, pregúntate: ¿quién?, ¿qué hace?, ¿la idea queda cerrada? Si algo falta, es un fragmento."}, {"t": "Lee el texto y <strong>toca los fragmentos</strong> (los grupos de palabras que no forman una oración completa).", "oraciones": [["Ayer fui al médico.", 0], ["Me dolía la espalda.", 0], ["Esperando en la sala por una hora.", 1], ["El doctor me dio una receta.", 0], ["Para el dolor de espalda.", 1]], "e": "Para cada fragmento, pregúntate: ¿quién?, ¿qué hace?, ¿la idea queda cerrada? Si algo falta, es un fragmento."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+Practica('p3', DATOS['p3']);
+Practica('p4', DATOS['p4']);
+</script>
+</body>
+</html>

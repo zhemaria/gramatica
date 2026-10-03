@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 3.4 — Los tiempos verbales: presente, pasado y futuro
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #identificar-tiempo · #elige-forma · #escribe-verbo · #mismo-tiempo
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 3.4: Los tiempos verbales: presente, pasado y futuro</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 3 · La oración</div>
+    <h1>Lección 3.4 · Los tiempos verbales: presente, pasado y futuro</h1>
+    <p>Práctica de los tres tiempos básicos del verbo con verbos regulares terminados en -ar, -er e -ir. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_3-4.html">← Volver a la Lección 3.4</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#identificar-tiempo">¿Pasado, presente o futuro?</a></li>
+      <li><a href="#elige-forma">Elige la forma del verbo</a></li>
+      <li><a href="#escribe-verbo">Escribe el verbo</a></li>
+      <li><a href="#mismo-tiempo">Un relato, un mismo tiempo</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #identificar-tiempo ============ -->
+  <details class="modulo" id="identificar-tiempo" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>¿Pasado, presente o futuro?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>El verbo dice <strong>cuándo</strong> pasa algo: <em>ayer camin<strong>é</strong></em> (pasado), <em>hoy camin<strong>o</strong></em> (presente), <em>mañana camin<strong>aré</strong></em> (futuro).</p><p>Las palabras pista te ayudan: <em>ayer, anoche, la semana pasada</em> → pasado; <em>hoy, ahora, siempre</em> → presente; <em>mañana, el año próximo, más tarde</em> → futuro.</p></div>
+
+      <h3>Identifica el tiempo</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #elige-forma ============ -->
+  <details class="modulo" id="elige-forma">
+    <summary><span class="num" aria-hidden="true">2</span><h2>Elige la forma del verbo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Para elegir la forma, mira dos cosas: la <strong>pista de tiempo</strong> y el <strong>sujeto</strong> (yo, tú, ella, nosotros, ellos). La terminación tiene que ir de acuerdo con los dos.</p></div>
+
+      <h3>Completa la oración</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 3 · #escribe-verbo ============ -->
+  <details class="modulo" id="escribe-verbo">
+    <summary><span class="num" aria-hidden="true">3</span><h2>Escribe el verbo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Ahora escribe tú el verbo conjugado. Muchas formas del pasado y del futuro llevan tilde: <em>caminó, comí, viviré, hablarás</em>. Si te equivocas solo en la tilde, la página te avisa.</p></div>
+
+      <h3>Conjuga el verbo</h3>
+      <div class="practica" id="p3">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Comprobar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 4 · #mismo-tiempo ============ -->
+  <details class="modulo" id="mismo-tiempo">
+    <summary><span class="num" aria-hidden="true">4</span><h2>Un relato, un mismo tiempo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Cuando cuentas algo, mantén el mismo tiempo de principio a fin. Si empiezas con «Ayer…», los verbos van en pasado. Busca el verbo que se salió del tiempo.</p></div>
+
+      <h3>Encuentra el verbo que no va</h3>
+      <div class="practica" id="p4">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1 · Tema 3 · Lección 3.4 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_3-4.html">← Volver a la Lección 3.4</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Hace dos días mi mamá habló con mi hermana.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>habló</strong> (de <em>hablar</em>), y la pista «Hace dos días» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Hoy mis hijos hablan con mi hermana.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>hablan</strong> (de <em>hablar</em>), y la pista «Hoy» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">La semana que viene nosotros hablaremos con mi hermana.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>hablaremos</strong> (de <em>hablar</em>), y la pista «La semana que viene» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ayer yo caminé al trabajo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>caminé</strong> (de <em>caminar</em>), y la pista «Ayer» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ahora mi mamá camina al trabajo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>camina</strong> (de <em>caminar</em>), y la pista «Ahora» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">El año próximo nosotros caminaremos al trabajo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>caminaremos</strong> (de <em>caminar</em>), y la pista «El año próximo» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">La semana pasada mi mamá trabajó en el restaurante.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>trabajó</strong> (de <em>trabajar</em>), y la pista «La semana pasada» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Yo siempre trabajo en el restaurante.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>trabajo</strong> (de <em>trabajar</em>), y la pista «Siempre» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Más tarde nosotros trabajaremos en el restaurante.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>trabajaremos</strong> (de <em>trabajar</em>), y la pista «Más tarde» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Anoche yo cociné arroz con pollo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>cociné</strong> (de <em>cocinar</em>), y la pista «Anoche» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ahora tú cocinas arroz con pollo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>cocinas</strong> (de <em>cocinar</em>), y la pista «Ahora» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">El año próximo yo cocinaré arroz con pollo.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>cocinaré</strong> (de <em>cocinar</em>), y la pista «El año próximo» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">El año pasado mis hijos estudiaron para el GED.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>estudiaron</strong> (de <em>estudiar</em>), y la pista «El año pasado» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Los lunes tú estudias para el GED.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>estudias</strong> (de <em>estudiar</em>), y la pista «Los lunes» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Más tarde mis hijos estudiarán para el GED.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>estudiarán</strong> (de <em>estudiar</em>), y la pista «Más tarde» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Anoche mi mamá limpió la cocina.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>limpió</strong> (de <em>limpiar</em>), y la pista «Anoche» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Los lunes mis hijos limpian la cocina.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>limpian</strong> (de <em>limpiar</em>), y la pista «Los lunes» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Mañana tú limpiarás la cocina.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>limpiarás</strong> (de <em>limpiar</em>), y la pista «Mañana» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ayer yo comí en casa.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>comí</strong> (de <em>comer</em>), y la pista «Ayer» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ahora mis hijos comen en casa.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>comen</strong> (de <em>comer</em>), y la pista «Ahora» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">El año próximo nosotros comeremos en casa.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>comeremos</strong> (de <em>comer</em>), y la pista «El año próximo» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ayer tú vendiste frutas en el mercado.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>vendiste</strong> (de <em>vender</em>), y la pista «Ayer» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ahora mi mamá vende frutas en el mercado.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>vende</strong> (de <em>vender</em>), y la pista «Ahora» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Dentro de un mes mi mamá venderá frutas en el mercado.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>venderá</strong> (de <em>vender</em>), y la pista «Dentro de un mes» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Hace dos días tú aprendiste palabras nuevas.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>aprendiste</strong> (de <em>aprender</em>), y la pista «Hace dos días» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Todos los días mi mamá aprende palabras nuevas.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>aprende</strong> (de <em>aprender</em>), y la pista «Todos los días» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Más tarde mis hijos aprenderán palabras nuevas.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>aprenderán</strong> (de <em>aprender</em>), y la pista «Más tarde» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ayer tú bebiste café con leche.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>bebiste</strong> (de <em>beber</em>), y la pista «Ayer» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Mi mamá siempre bebe café con leche.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>bebe</strong> (de <em>beber</em>), y la pista «Siempre» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Dentro de un mes mis hijos beberán café con leche.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>beberán</strong> (de <em>beber</em>), y la pista «Dentro de un mes» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Hace dos días mi mamá subió al autobús.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>subió</strong> (de <em>subir</em>), y la pista «Hace dos días» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Los lunes tú subes al autobús.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>subes</strong> (de <em>subir</em>), y la pista «Los lunes» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Dentro de un mes tú subirás al autobús.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>subirás</strong> (de <em>subir</em>), y la pista «Dentro de un mes» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ayer mis hijos escribieron una carta.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>escribieron</strong> (de <em>escribir</em>), y la pista «Ayer» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Ahora mi mamá escribe una carta.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>escribe</strong> (de <em>escribir</em>), y la pista «Ahora» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Mañana mis hijos escribirán una carta.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>escribirán</strong> (de <em>escribir</em>), y la pista «Mañana» indica futuro."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Anoche tú abriste la tienda temprano.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 0, "e": "El verbo es <strong>abriste</strong> (de <em>abrir</em>), y la pista «Anoche» indica pasado."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Tú siempre abres la tienda temprano.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 1, "e": "El verbo es <strong>abres</strong> (de <em>abrir</em>), y la pista «Siempre» indica presente."}, {"t": "¿En qué tiempo está el verbo? <span class=\"frase\">Mañana mis hijos abrirán la tienda temprano.</span>", "o": ["Pasado", "Presente", "Futuro"], "c": 2, "e": "El verbo es <strong>abrirán</strong> (de <em>abrir</em>), y la pista «Mañana» indica futuro."}]}, "p2": {"tipo": "mc", "items": [{"t": "<em>(hablar)</em> Completa la oración: <span class=\"frase\">Ayer mis hijos ___ con mi hermana.</span>", "o": ["hablaron", "hablan", "hablarán", "hablaste"], "c": 0, "e": "Con «Ayer» y el sujeto «mis hijos», se dice <strong>hablaron</strong> (pasado)."}, {"t": "<em>(hablar)</em> Completa la oración: <span class=\"frase\">Los lunes mi mamá ___ con mi hermana.</span>", "o": ["habló", "habla", "hablará", "hablan"], "c": 1, "e": "Con «Los lunes» y el sujeto «mi mamá», se dice <strong>habla</strong> (presente)."}, {"t": "<em>(hablar)</em> Completa la oración: <span class=\"frase\">Dentro de un mes mis hijos ___ con mi hermana.</span>", "o": ["hablaron", "hablan", "hablarán", "hablarás"], "c": 2, "e": "Con «Dentro de un mes» y el sujeto «mis hijos», se dice <strong>hablarán</strong> (futuro)."}, {"t": "<em>(caminar)</em> Completa la oración: <span class=\"frase\">Ayer yo ___ al trabajo.</span>", "o": ["caminé", "camino", "caminaré", "caminó"], "c": 0, "e": "Con «Ayer» y el sujeto «yo», se dice <strong>caminé</strong> (pasado)."}, {"t": "<em>(caminar)</em> Completa la oración: <span class=\"frase\">Hoy mis hijos ___ al trabajo.</span>", "o": ["caminaron", "caminan", "caminarán", "caminas"], "c": 1, "e": "Con «Hoy» y el sujeto «mis hijos», se dice <strong>caminan</strong> (presente)."}, {"t": "<em>(caminar)</em> Completa la oración: <span class=\"frase\">El año próximo tú ___ al trabajo.</span>", "o": ["caminaste", "caminas", "caminarás", "caminaremos"], "c": 2, "e": "Con «El año próximo» y el sujeto «tú», se dice <strong>caminarás</strong> (futuro)."}, {"t": "<em>(trabajar)</em> Completa la oración: <span class=\"frase\">Ayer mi mamá ___ en el restaurante.</span>", "o": ["trabajó", "trabaja", "trabajará", "trabajaron"], "c": 0, "e": "Con «Ayer» y el sujeto «mi mamá», se dice <strong>trabajó</strong> (pasado)."}, {"t": "<em>(trabajar)</em> Completa la oración: <span class=\"frase\">Los lunes yo ___ en el restaurante.</span>", "o": ["trabajé", "trabajo", "trabajaré", "trabaja"], "c": 1, "e": "Con «Los lunes» y el sujeto «yo», se dice <strong>trabajo</strong> (presente)."}, {"t": "<em>(trabajar)</em> Completa la oración: <span class=\"frase\">Dentro de un mes yo ___ en el restaurante.</span>", "o": ["trabajé", "trabajo", "trabajaré", "trabajará"], "c": 2, "e": "Con «Dentro de un mes» y el sujeto «yo», se dice <strong>trabajaré</strong> (futuro)."}, {"t": "<em>(cocinar)</em> Completa la oración: <span class=\"frase\">Ayer yo ___ arroz con pollo.</span>", "o": ["cociné", "cocino", "cocinaré", "cocinó"], "c": 0, "e": "Con «Ayer» y el sujeto «yo», se dice <strong>cociné</strong> (pasado)."}, {"t": "<em>(cocinar)</em> Completa la oración: <span class=\"frase\">Todos los días yo ___ arroz con pollo.</span>", "o": ["cociné", "cocino", "cocinaré", "cocina"], "c": 1, "e": "Con «Todos los días» y el sujeto «yo», se dice <strong>cocino</strong> (presente)."}, {"t": "<em>(cocinar)</em> Completa la oración: <span class=\"frase\">Dentro de un mes mis hijos ___ arroz con pollo.</span>", "o": ["cocinaron", "cocinan", "cocinarán", "cocinarás"], "c": 2, "e": "Con «Dentro de un mes» y el sujeto «mis hijos», se dice <strong>cocinarán</strong> (futuro)."}, {"t": "<em>(estudiar)</em> Completa la oración: <span class=\"frase\">Hace dos días mis hijos ___ para el GED.</span>", "o": ["estudiaron", "estudian", "estudiarán", "estudiaste"], "c": 0, "e": "Con «Hace dos días» y el sujeto «mis hijos», se dice <strong>estudiaron</strong> (pasado)."}, {"t": "<em>(estudiar)</em> Completa la oración: <span class=\"frase\">Todos los días tú ___ para el GED.</span>", "o": ["estudiaste", "estudias", "estudiarás", "estudiamos"], "c": 1, "e": "Con «Todos los días» y el sujeto «tú», se dice <strong>estudias</strong> (presente)."}, {"t": "<em>(estudiar)</em> Completa la oración: <span class=\"frase\">Dentro de un mes yo ___ para el GED.</span>", "o": ["estudié", "estudio", "estudiaré", "estudiará"], "c": 2, "e": "Con «Dentro de un mes» y el sujeto «yo», se dice <strong>estudiaré</strong> (futuro)."}, {"t": "<em>(limpiar)</em> Completa la oración: <span class=\"frase\">El año pasado mis hijos ___ la cocina.</span>", "o": ["limpiaron", "limpian", "limpiarán", "limpiaste"], "c": 0, "e": "Con «El año pasado» y el sujeto «mis hijos», se dice <strong>limpiaron</strong> (pasado)."}, {"t": "<em>(limpiar)</em> Completa la oración: <span class=\"frase\">Ahora mis hijos ___ la cocina.</span>", "o": ["limpiaron", "limpian", "limpiarán", "limpias"], "c": 1, "e": "Con «Ahora» y el sujeto «mis hijos», se dice <strong>limpian</strong> (presente)."}, {"t": "<em>(limpiar)</em> Completa la oración: <span class=\"frase\">La semana que viene mis hijos ___ la cocina.</span>", "o": ["limpiaron", "limpian", "limpiarán", "limpiarás"], "c": 2, "e": "Con «La semana que viene» y el sujeto «mis hijos», se dice <strong>limpiarán</strong> (futuro)."}, {"t": "<em>(comer)</em> Completa la oración: <span class=\"frase\">Anoche mis hijos ___ en casa.</span>", "o": ["comieron", "comen", "comerán", "comiste"], "c": 0, "e": "Con «Anoche» y el sujeto «mis hijos», se dice <strong>comieron</strong> (pasado)."}, {"t": "<em>(comer)</em> Completa la oración: <span class=\"frase\">Ahora nosotros ___ en casa.</span>", "o": ["comimos", "comemos", "comeremos", "como"], "c": 1, "e": "Con «Ahora» y el sujeto «nosotros», se dice <strong>comemos</strong> (presente)."}, {"t": "<em>(comer)</em> Completa la oración: <span class=\"frase\">Mañana nosotros ___ en casa.</span>", "o": ["comimos", "comemos", "comeremos", "comeré"], "c": 2, "e": "Con «Mañana» y el sujeto «nosotros», se dice <strong>comeremos</strong> (futuro)."}, {"t": "<em>(vender)</em> Completa la oración: <span class=\"frase\">El año pasado nosotros ___ frutas en el mercado.</span>", "o": ["vendimos", "vendemos", "venderemos", "vendí"], "c": 0, "e": "Con «El año pasado» y el sujeto «nosotros», se dice <strong>vendimos</strong> (pasado)."}, {"t": "<em>(vender)</em> Completa la oración: <span class=\"frase\">Hoy mi mamá ___ frutas en el mercado.</span>", "o": ["vendió", "vende", "venderá", "venden"], "c": 1, "e": "Con «Hoy» y el sujeto «mi mamá», se dice <strong>vende</strong> (presente)."}, {"t": "<em>(vender)</em> Completa la oración: <span class=\"frase\">Más tarde tú ___ frutas en el mercado.</span>", "o": ["vendiste", "vendes", "venderás", "venderemos"], "c": 2, "e": "Con «Más tarde» y el sujeto «tú», se dice <strong>venderás</strong> (futuro)."}, {"t": "<em>(aprender)</em> Completa la oración: <span class=\"frase\">Anoche yo ___ palabras nuevas.</span>", "o": ["aprendí", "aprendo", "aprenderé", "aprendió"], "c": 0, "e": "Con «Anoche» y el sujeto «yo», se dice <strong>aprendí</strong> (pasado)."}, {"t": "<em>(aprender)</em> Completa la oración: <span class=\"frase\">Hoy mi mamá ___ palabras nuevas.</span>", "o": ["aprendió", "aprende", "aprenderá", "aprenden"], "c": 1, "e": "Con «Hoy» y el sujeto «mi mamá», se dice <strong>aprende</strong> (presente)."}, {"t": "<em>(aprender)</em> Completa la oración: <span class=\"frase\">La semana que viene tú ___ palabras nuevas.</span>", "o": ["aprendiste", "aprendes", "aprenderás", "aprenderemos"], "c": 2, "e": "Con «La semana que viene» y el sujeto «tú», se dice <strong>aprenderás</strong> (futuro)."}, {"t": "<em>(beber)</em> Completa la oración: <span class=\"frase\">La semana pasada tú ___ café con leche.</span>", "o": ["bebiste", "bebes", "beberás", "bebimos"], "c": 0, "e": "Con «La semana pasada» y el sujeto «tú», se dice <strong>bebiste</strong> (pasado)."}, {"t": "<em>(beber)</em> Completa la oración: <span class=\"frase\">Tú siempre ___ café con leche.</span>", "o": ["bebiste", "bebes", "beberás", "bebemos"], "c": 1, "e": "Con «Siempre» y el sujeto «tú», se dice <strong>bebes</strong> (presente)."}, {"t": "<em>(beber)</em> Completa la oración: <span class=\"frase\">Mañana tú ___ café con leche.</span>", "o": ["bebiste", "bebes", "beberás", "beberemos"], "c": 2, "e": "Con «Mañana» y el sujeto «tú», se dice <strong>beberás</strong> (futuro)."}, {"t": "<em>(subir)</em> Completa la oración: <span class=\"frase\">El año pasado yo ___ al autobús.</span>", "o": ["subí", "subo", "subiré", "subió"], "c": 0, "e": "Con «El año pasado» y el sujeto «yo», se dice <strong>subí</strong> (pasado)."}, {"t": "<em>(subir)</em> Completa la oración: <span class=\"frase\">Ahora tú ___ al autobús.</span>", "o": ["subiste", "subes", "subirás", "subimos"], "c": 1, "e": "Con «Ahora» y el sujeto «tú», se dice <strong>subes</strong> (presente)."}, {"t": "<em>(subir)</em> Completa la oración: <span class=\"frase\">Más tarde tú ___ al autobús.</span>", "o": ["subiste", "subes", "subirás", "subiremos"], "c": 2, "e": "Con «Más tarde» y el sujeto «tú», se dice <strong>subirás</strong> (futuro)."}, {"t": "<em>(escribir)</em> Completa la oración: <span class=\"frase\">El año pasado mis hijos ___ una carta.</span>", "o": ["escribieron", "escriben", "escribirán", "escribiste"], "c": 0, "e": "Con «El año pasado» y el sujeto «mis hijos», se dice <strong>escribieron</strong> (pasado)."}, {"t": "<em>(escribir)</em> Completa la oración: <span class=\"frase\">Mi mamá siempre ___ una carta.</span>", "o": ["escribió", "escribe", "escribirá", "escriben"], "c": 1, "e": "Con «Siempre» y el sujeto «mi mamá», se dice <strong>escribe</strong> (presente)."}, {"t": "<em>(escribir)</em> Completa la oración: <span class=\"frase\">La semana que viene tú ___ una carta.</span>", "o": ["escribiste", "escribes", "escribirás", "escribiremos"], "c": 2, "e": "Con «La semana que viene» y el sujeto «tú», se dice <strong>escribirás</strong> (futuro)."}, {"t": "<em>(abrir)</em> Completa la oración: <span class=\"frase\">Ayer mi mamá ___ la tienda temprano.</span>", "o": ["abrió", "abre", "abrirá", "abrieron"], "c": 0, "e": "Con «Ayer» y el sujeto «mi mamá», se dice <strong>abrió</strong> (pasado)."}, {"t": "<em>(abrir)</em> Completa la oración: <span class=\"frase\">Hoy mi mamá ___ la tienda temprano.</span>", "o": ["abrió", "abre", "abrirá", "abren"], "c": 1, "e": "Con «Hoy» y el sujeto «mi mamá», se dice <strong>abre</strong> (presente)."}, {"t": "<em>(abrir)</em> Completa la oración: <span class=\"frase\">Dentro de un mes mi mamá ___ la tienda temprano.</span>", "o": ["abrió", "abre", "abrirá", "abrirán"], "c": 2, "e": "Con «Dentro de un mes» y el sujeto «mi mamá», se dice <strong>abrirá</strong> (futuro)."}]}, "p3": {"tipo": "escribir", "items": [{"t": "Escribe el verbo <strong>«hablar»</strong> en pasado: <span class=\"frase\">El año pasado mis hijos ___ con mi hermana.</span>", "r": ["hablaron"], "e": "<strong>El año pasado mis hijos hablaron con mi hermana.</strong>"}, {"t": "Escribe el verbo <strong>«hablar»</strong> en presente: <span class=\"frase\">Yo siempre ___ con mi hermana.</span>", "r": ["hablo"], "e": "<strong>Yo siempre hablo con mi hermana.</strong>"}, {"t": "Escribe el verbo <strong>«hablar»</strong> en futuro: <span class=\"frase\">Dentro de un mes mi mamá ___ con mi hermana.</span>", "r": ["hablará"], "e": "<strong>Dentro de un mes mi mamá hablará con mi hermana.</strong>"}, {"t": "Escribe el verbo <strong>«caminar»</strong> en pasado: <span class=\"frase\">Hace dos días mi mamá ___ al trabajo.</span>", "r": ["caminó"], "e": "<strong>Hace dos días mi mamá caminó al trabajo.</strong>"}, {"t": "Escribe el verbo <strong>«caminar»</strong> en presente: <span class=\"frase\">Hoy yo ___ al trabajo.</span>", "r": ["camino"], "e": "<strong>Hoy yo camino al trabajo.</strong>"}, {"t": "Escribe el verbo <strong>«caminar»</strong> en futuro: <span class=\"frase\">Mañana tú ___ al trabajo.</span>", "r": ["caminarás"], "e": "<strong>Mañana tú caminarás al trabajo.</strong>"}, {"t": "Escribe el verbo <strong>«trabajar»</strong> en pasado: <span class=\"frase\">La semana pasada yo ___ en el restaurante.</span>", "r": ["trabajé"], "e": "<strong>La semana pasada yo trabajé en el restaurante.</strong>"}, {"t": "Escribe el verbo <strong>«trabajar»</strong> en presente: <span class=\"frase\">Hoy mi mamá ___ en el restaurante.</span>", "r": ["trabaja"], "e": "<strong>Hoy mi mamá trabaja en el restaurante.</strong>"}, {"t": "Escribe el verbo <strong>«trabajar»</strong> en futuro: <span class=\"frase\">La semana que viene tú ___ en el restaurante.</span>", "r": ["trabajarás"], "e": "<strong>La semana que viene tú trabajarás en el restaurante.</strong>"}, {"t": "Escribe el verbo <strong>«cocinar»</strong> en pasado: <span class=\"frase\">El año pasado tú ___ arroz con pollo.</span>", "r": ["cocinaste"], "e": "<strong>El año pasado tú cocinaste arroz con pollo.</strong>"}, {"t": "Escribe el verbo <strong>«cocinar»</strong> en presente: <span class=\"frase\">Mi mamá siempre ___ arroz con pollo.</span>", "r": ["cocina"], "e": "<strong>Mi mamá siempre cocina arroz con pollo.</strong>"}, {"t": "Escribe el verbo <strong>«cocinar»</strong> en futuro: <span class=\"frase\">Dentro de un mes tú ___ arroz con pollo.</span>", "r": ["cocinarás"], "e": "<strong>Dentro de un mes tú cocinarás arroz con pollo.</strong>"}, {"t": "Escribe el verbo <strong>«estudiar»</strong> en pasado: <span class=\"frase\">La semana pasada mis hijos ___ para el GED.</span>", "r": ["estudiaron"], "e": "<strong>La semana pasada mis hijos estudiaron para el GED.</strong>"}, {"t": "Escribe el verbo <strong>«estudiar»</strong> en presente: <span class=\"frase\">Todos los días yo ___ para el GED.</span>", "r": ["estudio"], "e": "<strong>Todos los días yo estudio para el GED.</strong>"}, {"t": "Escribe el verbo <strong>«estudiar»</strong> en futuro: <span class=\"frase\">El año próximo yo ___ para el GED.</span>", "r": ["estudiaré"], "e": "<strong>El año próximo yo estudiaré para el GED.</strong>"}, {"t": "Escribe el verbo <strong>«limpiar»</strong> en pasado: <span class=\"frase\">Ayer mis hijos ___ la cocina.</span>", "r": ["limpiaron"], "e": "<strong>Ayer mis hijos limpiaron la cocina.</strong>"}, {"t": "Escribe el verbo <strong>«limpiar»</strong> en presente: <span class=\"frase\">Hoy mi mamá ___ la cocina.</span>", "r": ["limpia"], "e": "<strong>Hoy mi mamá limpia la cocina.</strong>"}, {"t": "Escribe el verbo <strong>«limpiar»</strong> en futuro: <span class=\"frase\">La semana que viene yo ___ la cocina.</span>", "r": ["limpiaré"], "e": "<strong>La semana que viene yo limpiaré la cocina.</strong>"}, {"t": "Escribe el verbo <strong>«comer»</strong> en pasado: <span class=\"frase\">Hace dos días yo ___ en casa.</span>", "r": ["comí"], "e": "<strong>Hace dos días yo comí en casa.</strong>"}, {"t": "Escribe el verbo <strong>«comer»</strong> en presente: <span class=\"frase\">Hoy tú ___ en casa.</span>", "r": ["comes"], "e": "<strong>Hoy tú comes en casa.</strong>"}, {"t": "Escribe el verbo <strong>«comer»</strong> en futuro: <span class=\"frase\">Mañana mi mamá ___ en casa.</span>", "r": ["comerá"], "e": "<strong>Mañana mi mamá comerá en casa.</strong>"}, {"t": "Escribe el verbo <strong>«vender»</strong> en pasado: <span class=\"frase\">Ayer mis hijos ___ frutas en el mercado.</span>", "r": ["vendieron"], "e": "<strong>Ayer mis hijos vendieron frutas en el mercado.</strong>"}, {"t": "Escribe el verbo <strong>«vender»</strong> en presente: <span class=\"frase\">Los lunes mi mamá ___ frutas en el mercado.</span>", "r": ["vende"], "e": "<strong>Los lunes mi mamá vende frutas en el mercado.</strong>"}, {"t": "Escribe el verbo <strong>«vender»</strong> en futuro: <span class=\"frase\">La semana que viene mis hijos ___ frutas en el mercado.</span>", "r": ["venderán"], "e": "<strong>La semana que viene mis hijos venderán frutas en el mercado.</strong>"}, {"t": "Escribe el verbo <strong>«aprender»</strong> en pasado: <span class=\"frase\">Ayer tú ___ palabras nuevas.</span>", "r": ["aprendiste"], "e": "<strong>Ayer tú aprendiste palabras nuevas.</strong>"}, {"t": "Escribe el verbo <strong>«aprender»</strong> en presente: <span class=\"frase\">Hoy tú ___ palabras nuevas.</span>", "r": ["aprendes"], "e": "<strong>Hoy tú aprendes palabras nuevas.</strong>"}, {"t": "Escribe el verbo <strong>«aprender»</strong> en futuro: <span class=\"frase\">La semana que viene tú ___ palabras nuevas.</span>", "r": ["aprenderás"], "e": "<strong>La semana que viene tú aprenderás palabras nuevas.</strong>"}, {"t": "Escribe el verbo <strong>«beber»</strong> en pasado: <span class=\"frase\">Anoche yo ___ café con leche.</span>", "r": ["bebí"], "e": "<strong>Anoche yo bebí café con leche.</strong>"}, {"t": "Escribe el verbo <strong>«beber»</strong> en presente: <span class=\"frase\">Todos los días tú ___ café con leche.</span>", "r": ["bebes"], "e": "<strong>Todos los días tú bebes café con leche.</strong>"}, {"t": "Escribe el verbo <strong>«beber»</strong> en futuro: <span class=\"frase\">Dentro de un mes mi mamá ___ café con leche.</span>", "r": ["beberá"], "e": "<strong>Dentro de un mes mi mamá beberá café con leche.</strong>"}, {"t": "Escribe el verbo <strong>«subir»</strong> en pasado: <span class=\"frase\">La semana pasada tú ___ al autobús.</span>", "r": ["subiste"], "e": "<strong>La semana pasada tú subiste al autobús.</strong>"}, {"t": "Escribe el verbo <strong>«subir»</strong> en presente: <span class=\"frase\">Los lunes mis hijos ___ al autobús.</span>", "r": ["suben"], "e": "<strong>Los lunes mis hijos suben al autobús.</strong>"}, {"t": "Escribe el verbo <strong>«subir»</strong> en futuro: <span class=\"frase\">La semana que viene tú ___ al autobús.</span>", "r": ["subirás"], "e": "<strong>La semana que viene tú subirás al autobús.</strong>"}, {"t": "Escribe el verbo <strong>«escribir»</strong> en pasado: <span class=\"frase\">Ayer mi mamá ___ una carta.</span>", "r": ["escribió"], "e": "<strong>Ayer mi mamá escribió una carta.</strong>"}, {"t": "Escribe el verbo <strong>«escribir»</strong> en presente: <span class=\"frase\">Hoy mi mamá ___ una carta.</span>", "r": ["escribe"], "e": "<strong>Hoy mi mamá escribe una carta.</strong>"}, {"t": "Escribe el verbo <strong>«escribir»</strong> en futuro: <span class=\"frase\">Mañana yo ___ una carta.</span>", "r": ["escribiré"], "e": "<strong>Mañana yo escribiré una carta.</strong>"}, {"t": "Escribe el verbo <strong>«abrir»</strong> en pasado: <span class=\"frase\">Hace dos días tú ___ la tienda temprano.</span>", "r": ["abriste"], "e": "<strong>Hace dos días tú abriste la tienda temprano.</strong>"}, {"t": "Escribe el verbo <strong>«abrir»</strong> en presente: <span class=\"frase\">Ahora mis hijos ___ la tienda temprano.</span>", "r": ["abren"], "e": "<strong>Ahora mis hijos abren la tienda temprano.</strong>"}, {"t": "Escribe el verbo <strong>«abrir»</strong> en futuro: <span class=\"frase\">Mañana mis hijos ___ la tienda temprano.</span>", "r": ["abrirán"], "e": "<strong>Mañana mis hijos abrirán la tienda temprano.</strong>"}]}, "p4": {"tipo": "mc", "items": [{"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">La semana que viene mis hijos venderán frutas en el mercado, aprenderán palabras nuevas y comen en casa.</span>", "o": ["venderán", "aprenderán", "comen"], "c": 2, "e": "«La semana que viene» marca el futuro, pero <strong>comen</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>comerán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Más tarde Marta limpió la cocina, cocinará arroz con pollo y subirá al autobús.</span>", "o": ["limpió", "cocinará", "subirá"], "c": 0, "e": "«Más tarde» marca el futuro, pero <strong>limpió</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>limpiará</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Todos los días Marta habla con mi hermana, camina al trabajo y subió al autobús.</span>", "o": ["habla", "camina", "subió"], "c": 2, "e": "«Todos los días» marca el presente, pero <strong>subió</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>sube</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Todos los días Marta camina al trabajo, sube al autobús y comió en casa.</span>", "o": ["camina", "sube", "comió"], "c": 2, "e": "«Todos los días» marca el presente, pero <strong>comió</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>come</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">El año próximo mis hijos estudiaron para el GED, hablarán con mi hermana y venderán frutas en el mercado.</span>", "o": ["estudiaron", "hablarán", "venderán"], "c": 0, "e": "«El año próximo» marca el futuro, pero <strong>estudiaron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>estudiarán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Todos los días Marta estudia para el GED, limpia la cocina y escribirá una carta.</span>", "o": ["estudia", "limpia", "escribirá"], "c": 2, "e": "«Todos los días» marca el presente, pero <strong>escribirá</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>escribe</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">La semana pasada yo cocino arroz con pollo, limpié la cocina y trabajé en el restaurante.</span>", "o": ["cocino", "limpié", "trabajé"], "c": 0, "e": "«La semana pasada» marca el pasado, pero <strong>cocino</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>cociné</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Ahora yo estudié para el GED, aprendo palabras nuevas y subo al autobús.</span>", "o": ["estudié", "aprendo", "subo"], "c": 0, "e": "«Ahora» marca el presente, pero <strong>estudié</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>estudio</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Dentro de un mes Marta estudiará para el GED, caminó al trabajo y trabajará en el restaurante.</span>", "o": ["estudiará", "caminó", "trabajará"], "c": 1, "e": "«Dentro de un mes» marca el futuro, pero <strong>caminó</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>caminará</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Ayer Marta estudiará para el GED, abrió la tienda temprano y subió al autobús.</span>", "o": ["estudiará", "abrió", "subió"], "c": 0, "e": "«Ayer» marca el pasado, pero <strong>estudiará</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>estudió</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Más tarde mis hijos escribirán una carta, bebieron café con leche y comerán en casa.</span>", "o": ["escribirán", "bebieron", "comerán"], "c": 1, "e": "«Más tarde» marca el futuro, pero <strong>bebieron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>beberán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Hace dos días mis hijos beberán café con leche, subieron al autobús y trabajaron en el restaurante.</span>", "o": ["beberán", "subieron", "trabajaron"], "c": 0, "e": "«Hace dos días» marca el pasado, pero <strong>beberán</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>bebieron</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Dentro de un mes mis hijos escribirán una carta, aprenderán palabras nuevas y trabajan en el restaurante.</span>", "o": ["escribirán", "aprenderán", "trabajan"], "c": 2, "e": "«Dentro de un mes» marca el futuro, pero <strong>trabajan</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>trabajarán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">El año próximo mis hijos beberán café con leche, escribirán una carta y subieron al autobús.</span>", "o": ["beberán", "escribirán", "subieron"], "c": 2, "e": "«El año próximo» marca el futuro, pero <strong>subieron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>subirán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">El año pasado Marta trabaja en el restaurante, subió al autobús y limpió la cocina.</span>", "o": ["trabaja", "subió", "limpió"], "c": 0, "e": "«El año pasado» marca el pasado, pero <strong>trabaja</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>trabajó</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Ahora mis hijos hablan con mi hermana, suben al autobús y aprendieron palabras nuevas.</span>", "o": ["hablan", "suben", "aprendieron"], "c": 2, "e": "«Ahora» marca el presente, pero <strong>aprendieron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>aprenden</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Hoy Marta vende frutas en el mercado, camina al trabajo y aprenderá palabras nuevas.</span>", "o": ["vende", "camina", "aprenderá"], "c": 2, "e": "«Hoy» marca el presente, pero <strong>aprenderá</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>aprende</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">La semana que viene mis hijos escribieron una carta, venderán frutas en el mercado y estudiarán para el GED.</span>", "o": ["escribieron", "venderán", "estudiarán"], "c": 0, "e": "«La semana que viene» marca el futuro, pero <strong>escribieron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>escribirán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">El año pasado Marta escribió una carta, sube al autobús y vendió frutas en el mercado.</span>", "o": ["escribió", "sube", "vendió"], "c": 1, "e": "«El año pasado» marca el pasado, pero <strong>sube</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>subió</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Anoche mis hijos estudiaron para el GED, hablaron con mi hermana y beberán café con leche.</span>", "o": ["estudiaron", "hablaron", "beberán"], "c": 2, "e": "«Anoche» marca el pasado, pero <strong>beberán</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>bebieron</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Hace dos días yo estudié para el GED, subí al autobús y abro la tienda temprano.</span>", "o": ["estudié", "subí", "abro"], "c": 2, "e": "«Hace dos días» marca el pasado, pero <strong>abro</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>abrí</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Ayer yo hablé con mi hermana, vendí frutas en el mercado y estudio para el GED.</span>", "o": ["hablé", "vendí", "estudio"], "c": 2, "e": "«Ayer» marca el pasado, pero <strong>estudio</strong> está en presente. En el mismo relato, conviene mantener el mismo tiempo: <em>estudié</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Más tarde mis hijos venderán frutas en el mercado, estudiaron para el GED y aprenderán palabras nuevas.</span>", "o": ["venderán", "estudiaron", "aprenderán"], "c": 1, "e": "«Más tarde» marca el futuro, pero <strong>estudiaron</strong> está en pasado. En el mismo relato, conviene mantener el mismo tiempo: <em>estudiarán</em>."}, {"t": "Lee el relato. ¿Qué verbo <strong>no</strong> va en el mismo tiempo que los demás? <span class=\"frase\">Siempre Marta aprenderá palabras nuevas, cocina arroz con pollo y estudia para el GED.</span>", "o": ["aprenderá", "cocina", "estudia"], "c": 0, "e": "«Siempre» marca el presente, pero <strong>aprenderá</strong> está en futuro. En el mismo relato, conviene mantener el mismo tiempo: <em>aprende</em>."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+Practica('p3', DATOS['p3']);
+Practica('p4', DATOS['p4']);
+</script>
+</body>
+</html>
