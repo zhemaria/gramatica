@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+  Interactivo · Lección 4.3 — La idea principal y los detalles de apoyo
+  Artes del Lenguaje · Nivel 1 · GEDparaHispanos
+  Autor: José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+  Licencia: Creative Commons CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+  Anclas internas: #elige-idea · #donde-esta · #tipo-de-detalle · #intruso
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactivo · Lección 4.3: La idea principal y los detalles de apoyo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{
+    --tinta:#1f2937; --suave:#555; --tema:#0f766e; --tema-d:#134e4a; --tema-bg:#ccfbf1; --tema-bg2:#99f6e4;
+    --fondo:#f8fafc; --ok:#1b5e20; --ok-bg:#e8f5e9; --mal:#b71c1c; --mal-bg:#ffebee; --avi:#5c3900; --avi-bg:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;margin:0;background:var(--fondo);color:var(--tinta);line-height:1.6;font-size:17px}
+  .contenedor{max-width:900px;margin:0 auto;padding:22px 16px}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  header.principal{background:var(--tema);color:#fff;padding:24px 24px;border-radius:14px;margin-bottom:18px}
+  header.principal .ruta{font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+  header.principal h1{margin:8px 0 6px;font-size:1.5rem;line-height:1.3}
+  header.principal p{margin:6px 0 0}
+  header.principal a{color:#fff;font-weight:700}
+  nav.indice{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;padding:16px 20px;margin-bottom:18px}
+  nav.indice h2{margin:0 0 10px;font-size:1.05rem;color:var(--tema-d)}
+  nav.indice ol{margin:0;padding-left:22px}
+  nav.indice li{margin:6px 0}
+  nav.indice a{color:var(--tema-d);font-weight:600}
+  .controles-todo{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:1rem;cursor:pointer}
+  .btn{background:var(--tema);color:#fff;border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn:hover{background:var(--tema-d);border-color:var(--tema-d)}
+  .btn-sec{background:#fff;color:var(--tema-d);border:2px solid var(--tema);border-radius:8px;padding:8px 18px;font-weight:700}
+  .btn-sec:hover{background:var(--tema-bg)}
+  button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  details.modulo{background:#fff;border:2px solid var(--tema-bg2);border-radius:12px;margin-bottom:18px;overflow:hidden}
+  details.modulo>summary{list-style:none;cursor:pointer;padding:14px 20px;background:var(--tema-bg);display:flex;align-items:center;gap:14px}
+  details.modulo>summary::-webkit-details-marker{display:none}
+  details.modulo>summary h2{margin:0;font-size:1.12rem;color:var(--tema-d);flex:1}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--tema);color:#fff;font-weight:700;flex:none}
+  .chev{font-size:1.6rem;color:var(--tema-d);transition:transform .2s}
+  details[open]>summary .chev{transform:rotate(90deg)}
+  .cuerpo{padding:16px 20px 18px}
+  .explica{background:#f0fdfa;border-left:5px solid var(--tema);border-radius:6px;padding:10px 16px;margin:0 0 16px}
+  .explica p{margin:6px 0}
+  .practica{border:2px dashed var(--tema-bg2);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .enun{font-weight:600;margin:0 0 12px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-weight:400;font-size:1.2rem;text-align:center;margin:10px 0 4px}
+  .opciones{display:flex;flex-direction:column;gap:8px}
+  .opcion{text-align:left;background:#fff;border:2px solid #9aa5b1;border-radius:8px;padding:10px 14px;color:var(--tinta)}
+  .opcion:hover:not(:disabled){border-color:var(--tema)}
+  .opcion.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opcion.bien::before{content:'✓ '}
+  .opcion.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal)}
+  .opcion.mal::before{content:'✗ '}
+  .opcion:disabled{cursor:default}
+  .campo-escribir{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .campo-escribir input{font-size:1.1rem;padding:8px 10px;border:2px solid #767676;border-radius:8px;min-width:220px;font-family:inherit}
+  .texto-marcar{font-family:Georgia,serif;font-size:1.2rem;line-height:2.3;background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:12px 16px}
+  .pal{font:inherit;background:none;border:2px solid transparent;border-radius:6px;padding:0 3px;color:var(--tinta)}
+  .pal:hover{border-color:var(--tema-bg2)}
+  .texto-marcar .punt{margin-left:-4px}
+  .pal[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .pal.bien{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .pal.mal{background:var(--mal-bg);border-color:var(--mal);color:var(--mal);text-decoration:line-through}
+  .pal.falto{border-color:#b35316;border-style:dashed}
+  .ora{display:block;width:100%;text-align:left;font:inherit;font-family:Georgia,serif;font-size:1.1rem;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:8px 12px;margin:6px 0;color:var(--tinta)}
+  .ora[aria-pressed="true"]{background:var(--tema-bg);border-color:var(--tema)}
+  .ora.bien{background:var(--ok-bg);border-color:var(--ok)}
+  .ora.mal{background:var(--mal-bg);border-color:var(--mal)}
+  .ora.falto{border-color:#b35316;border-style:dashed}
+  .fb{margin:12px 0 0;padding:0;border-radius:8px}
+  .fb:not(:empty){padding:10px 14px}
+  .fb.ok{background:var(--ok-bg);color:var(--ok)}
+  .fb.no{background:var(--mal-bg);color:var(--mal)}
+  .fb.casi{background:var(--avi-bg);color:var(--avi)}
+  .fila-btn{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .marcador{font-size:.95rem;color:var(--suave);margin:10px 0 0}
+  .volver{display:inline-block;margin-top:10px;color:var(--tema-d);font-weight:600}
+  .leyenda-marcar{font-size:.9rem;color:var(--suave);margin:8px 0 0}
+  footer.pie{margin-top:26px;padding-top:14px;border-top:2px solid #e2e8f0;text-align:center;color:var(--suave);font-size:.9rem}
+  footer.pie a{color:var(--tema-d)}
+  @media (max-width:600px){header.principal h1{font-size:1.25rem} .cuerpo{padding:14px} .campo-escribir input{min-width:0;width:100%}}
+  @media print{nav.indice,.fila-btn,.controles-todo{display:none}}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header class="principal">
+    <div class="ruta">Artes del Lenguaje · Nivel 1 · Tema 4 · Comprensión</div>
+    <h1>Lección 4.3 · La idea principal y los detalles de apoyo</h1>
+    <p>Práctica para encontrar la idea principal de un párrafo, saber dónde está y separarla de los detalles. Los ejercicios salen al azar: puedes repetirlos todas las veces que quieras.</p>
+    <p><a href="https://zhemaria.github.io/clases_leng1/clase_4-3.html">← Volver a la Lección 4.3</a></p>
+  </header>
+
+  <nav class="indice" aria-labelledby="titulo-indice">
+    <h2 id="titulo-indice">Contenido de esta página</h2>
+    <ol>
+      <li><a href="#elige-idea">¿Cuál es la idea principal?</a></li>
+      <li><a href="#donde-esta">¿Dónde está la idea principal?</a></li>
+      <li><a href="#tipo-de-detalle">Tipos de detalles de apoyo</a></li>
+      <li><a href="#intruso">El detalle intruso</a></li>
+    </ol>
+    <div class="controles-todo">
+      <button type="button" class="btn-sec" id="abrir-todo">Abrir todo</button>
+      <button type="button" class="btn-sec" id="cerrar-todo">Cerrar todo</button>
+    </div>
+  </nav>
+
+  <!-- ============ MÓDULO 1 · #elige-idea ============ -->
+  <details class="modulo" id="elige-idea" open>
+    <summary><span class="num" aria-hidden="true">1</span><h2>¿Cuál es la idea principal?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>La <strong>idea principal</strong> es el mensaje central del párrafo: las demás oraciones la explican o la prueban. Una buena idea principal no es <strong>demasiado amplia</strong> («la comida es importante») ni <strong>demasiado estrecha</strong>, como un solo detalle («tienen hierro»).</p></div>
+
+      <h3>Elige la idea principal</h3>
+      <div class="practica" id="p1">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 2 · #donde-esta ============ -->
+  <details class="modulo" id="donde-esta">
+    <summary><span class="num" aria-hidden="true">2</span><h2>¿Dónde está la idea principal?</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>La idea principal puede estar <strong>al inicio</strong> (lo más común), <strong>en el medio</strong> (después de una introducción o de un «pero») o <strong>al final</strong>, como conclusión («Por todo eso…»).</p></div>
+
+      <h3>Ubica la idea principal</h3>
+      <div class="practica" id="p2">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 3 · #tipo-de-detalle ============ -->
+  <details class="modulo" id="tipo-de-detalle">
+    <summary><span class="num" aria-hidden="true">3</span><h2>Tipos de detalles de apoyo</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>Los detalles de apoyo pueden ser <strong>ejemplos</strong> (casos concretos), <strong>datos</strong> (números, fechas, cantidades) o <strong>descripciones</strong> (cómo se ve, huele o suena algo).</p></div>
+
+      <h3>¿Ejemplo, dato o descripción?</h3>
+      <div class="practica" id="p3">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <!-- ============ MÓDULO 4 · #intruso ============ -->
+  <details class="modulo" id="intruso">
+    <summary><span class="num" aria-hidden="true">4</span><h2>El detalle intruso</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="cuerpo">
+      <div class="explica"><p>A veces una oración habla de otra cosa y no apoya la idea principal. Pregúntate en cada oración: <em>«¿Esto me ayuda a entender o probar la idea principal?»</em> Si la respuesta es no, es una intrusa.</p></div>
+
+      <h3>Encuentra la oración intrusa</h3>
+      <div class="practica" id="p4">
+        <div class="enun" aria-live="polite"></div>
+        <div class="area"></div>
+        
+        <div class="fb" role="status"></div>
+        <div class="fila-btn">
+          <button type="button" class="btn revisar">Revisar</button>
+          <button type="button" class="btn-sec otro">Otro ejercicio</button>
+        </div>
+        <p class="marcador">Aciertos: 0 de 0</p>
+      </div>
+
+      <a class="volver" href="#titulo-indice">↑ Volver al contenido</a>
+    </div>
+  </details>
+
+  <footer class="pie">
+    <p><strong>Artes del Lenguaje · Nivel 1 · Tema 4 · Lección 4.3 · GEDparaHispanos</strong><br>
+    <a href="https://zhemaria.github.io/clases_leng1/clase_4-3.html">← Volver a la Lección 4.3</a></p>
+    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.<br>
+    Esta obra se distribuye bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="license noopener noreferrer">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+  </footer>
+</div>
+<script>
+var DATOS={"p1": {"tipo": "mc", "items": [{"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Los frijoles negros son un alimento muy nutritivo. Tienen mucha proteína vegetal. También son ricos en fibra. Además, contienen hierro y vitaminas.</span>", "o": ["Los frijoles negros son un alimento muy nutritivo.", "Hay muchos alimentos en el mundo.", "Tienen mucha proteína vegetal."], "c": 0, "e": "La idea principal es <strong>«Los frijoles negros son un alimento muy nutritivo.»</strong>: las demás oraciones la explican. «Hay muchos alimentos en el mundo.» es demasiado amplia, y «Tienen mucha proteína vegetal.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Mi abuela tenía un jardín lleno de plantas medicinales. Usaba la sábila para las quemaduras. Con la manzanilla preparaba té para el dolor de estómago. Para cada problema, mi abuela tenía una planta.</span>", "o": ["Para cada problema, mi abuela tenía una planta.", "Las plantas son seres vivos.", "Usaba la sábila para las quemaduras."], "c": 0, "e": "La idea principal es <strong>«Para cada problema, mi abuela tenía una planta.»</strong>: las demás oraciones la explican. «Las plantas son seres vivos.» es demasiado amplia, y «Usaba la sábila para las quemaduras.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Aprender otro idioma abre puertas en el trabajo. También ayuda a viajar y a conocer otras culturas. Además, ejercita la memoria. Hay muchas buenas razones para estudiar un idioma.</span>", "o": ["Hay muchas buenas razones para estudiar un idioma.", "La gente habla.", "También ayuda a viajar y a conocer otras culturas."], "c": 0, "e": "La idea principal es <strong>«Hay muchas buenas razones para estudiar un idioma.»</strong>: las demás oraciones la explican. «La gente habla.» es demasiado amplia, y «También ayuda a viajar y a conocer otras culturas.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Muchas personas creen que no tienen tiempo para hacer ejercicio. Pero bastan veinte minutos al día para mejorar la salud. Caminar, subir escaleras o bailar ya cuentan. No hace falta ir al gimnasio.</span>", "o": ["Pero bastan veinte minutos al día para mejorar la salud.", "El ejercicio existe desde hace siglos.", "Caminar, subir escaleras o bailar ya cuentan."], "c": 0, "e": "La idea principal es <strong>«Pero bastan veinte minutos al día para mejorar la salud.»</strong>: las demás oraciones la explican. «El ejercicio existe desde hace siglos.» es demasiado amplia, y «Caminar, subir escaleras o bailar ya cuentan.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">La biblioteca pública es un gran recurso para la comunidad. Presta libros y películas sin costo. Tiene computadoras con internet para todos. También ofrece clases de inglés y de computación.</span>", "o": ["La biblioteca pública es un gran recurso para la comunidad.", "Hay edificios en todas las ciudades.", "Presta libros y películas sin costo."], "c": 0, "e": "La idea principal es <strong>«La biblioteca pública es un gran recurso para la comunidad.»</strong>: las demás oraciones la explican. «Hay edificios en todas las ciudades.» es demasiado amplia, y «Presta libros y películas sin costo.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">El celular nos despierta por la mañana. Con él pagamos cuentas, buscamos direcciones y hablamos con la familia. También lo usamos para estudiar. El celular se ha vuelto parte de casi todo lo que hacemos.</span>", "o": ["El celular se ha vuelto parte de casi todo lo que hacemos.", "La tecnología es un tema.", "Con él pagamos cuentas, buscamos direcciones y hablamos con la familia."], "c": 0, "e": "La idea principal es <strong>«El celular se ha vuelto parte de casi todo lo que hacemos.»</strong>: las demás oraciones la explican. «La tecnología es un tema.» es demasiado amplia, y «Con él pagamos cuentas, buscamos direcciones y hablamos con la familia.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Ahorrar dinero no es tan difícil como parece. Puedes empezar guardando un poco cada semana. Comparar precios antes de comprar también ayuda. Llevar la comida al trabajo ahorra mucho al mes.</span>", "o": ["Ahorrar dinero no es tan difícil como parece.", "El dinero es importante.", "Puedes empezar guardando un poco cada semana."], "c": 0, "e": "La idea principal es <strong>«Ahorrar dinero no es tan difícil como parece.»</strong>: las demás oraciones la explican. «El dinero es importante.» es demasiado amplia, y «Puedes empezar guardando un poco cada semana.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Dormir bien es necesario para la salud. Mientras dormimos, el cuerpo descansa y se repara. El cerebro guarda lo que aprendimos durante el día. Quien duerme poco se enferma con más facilidad.</span>", "o": ["Dormir bien es necesario para la salud.", "Todas las personas duermen.", "Mientras dormimos, el cuerpo descansa y se repara."], "c": 0, "e": "La idea principal es <strong>«Dormir bien es necesario para la salud.»</strong>: las demás oraciones la explican. «Todas las personas duermen.» es demasiado amplia, y «Mientras dormimos, el cuerpo descansa y se repara.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Los mercados al aire libre tienen mucho encanto. Hay frutas y verduras frescas de la temporada. Los vendedores conversan con los clientes. Además, los precios suelen ser más bajos.</span>", "o": ["Los mercados al aire libre tienen mucho encanto.", "Las personas compran cosas.", "Hay frutas y verduras frescas de la temporada."], "c": 0, "e": "La idea principal es <strong>«Los mercados al aire libre tienen mucho encanto.»</strong>: las demás oraciones la explican. «Las personas compran cosas.» es demasiado amplia, y «Hay frutas y verduras frescas de la temporada.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Mi vecina siempre llega temprano al trabajo. Nunca falta a una reunión. Termina sus tareas a tiempo. Por todo eso, en su oficina la consideran muy responsable.</span>", "o": ["Por todo eso, en su oficina la consideran muy responsable.", "Hay muchas personas en las oficinas.", "Nunca falta a una reunión."], "c": 0, "e": "La idea principal es <strong>«Por todo eso, en su oficina la consideran muy responsable.»</strong>: las demás oraciones la explican. «Hay muchas personas en las oficinas.» es demasiado amplia, y «Nunca falta a una reunión.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Aunque llueva mucho, Carlos nunca falta a su clase de inglés. Ese hombre es muy dedicado a sus estudios. Hace la tarea todas las noches. Los sábados repasa con un amigo.</span>", "o": ["Ese hombre es muy dedicado a sus estudios.", "Los hombres estudian.", "Hace la tarea todas las noches."], "c": 0, "e": "La idea principal es <strong>«Ese hombre es muy dedicado a sus estudios.»</strong>: las demás oraciones la explican. «Los hombres estudian.» es demasiado amplia, y «Hace la tarea todas las noches.» es solo un detalle."}, {"t": "Lee el párrafo. ¿Cuál es la <strong>idea principal</strong>? <span class=\"frase\" style=\"text-align:left\">Leerles a los niños pequeños trae muchos beneficios. Aprenden palabras nuevas. Desarrollan la imaginación. Además, se crea un momento especial en familia.</span>", "o": ["Leerles a los niños pequeños trae muchos beneficios.", "Los niños existen en todas las familias.", "Aprenden palabras nuevas."], "c": 0, "e": "La idea principal es <strong>«Leerles a los niños pequeños trae muchos beneficios.»</strong>: las demás oraciones la explican. «Los niños existen en todas las familias.» es demasiado amplia, y «Aprenden palabras nuevas.» es solo un detalle."}]}, "p2": {"tipo": "mc", "items": [{"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Los frijoles negros son un alimento muy nutritivo. <strong>(2)</strong> Tienen mucha proteína vegetal. <strong>(3)</strong> También son ricos en fibra. <strong>(4)</strong> Además, contienen hierro y vitaminas.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«Los frijoles negros son un alimento muy nutritivo.»</em>, que está al inicio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi abuela tenía un jardín lleno de plantas medicinales. <strong>(2)</strong> Usaba la sábila para las quemaduras. <strong>(3)</strong> Con la manzanilla preparaba té para el dolor de estómago. <strong>(4)</strong> Para cada problema, mi abuela tenía una planta.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 2, "e": "La idea principal es la oración 4, <em>«Para cada problema, mi abuela tenía una planta.»</em>, que está al final del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Aprender otro idioma abre puertas en el trabajo. <strong>(2)</strong> También ayuda a viajar y a conocer otras culturas. <strong>(3)</strong> Además, ejercita la memoria. <strong>(4)</strong> Hay muchas buenas razones para estudiar un idioma.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 2, "e": "La idea principal es la oración 4, <em>«Hay muchas buenas razones para estudiar un idioma.»</em>, que está al final del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Muchas personas creen que no tienen tiempo para hacer ejercicio. <strong>(2)</strong> Pero bastan veinte minutos al día para mejorar la salud. <strong>(3)</strong> Caminar, subir escaleras o bailar ya cuentan. <strong>(4)</strong> No hace falta ir al gimnasio.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 1, "e": "La idea principal es la oración 2, <em>«Pero bastan veinte minutos al día para mejorar la salud.»</em>, que está en el medio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> La biblioteca pública es un gran recurso para la comunidad. <strong>(2)</strong> Presta libros y películas sin costo. <strong>(3)</strong> Tiene computadoras con internet para todos. <strong>(4)</strong> También ofrece clases de inglés y de computación.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«La biblioteca pública es un gran recurso para la comunidad.»</em>, que está al inicio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> El celular nos despierta por la mañana. <strong>(2)</strong> Con él pagamos cuentas, buscamos direcciones y hablamos con la familia. <strong>(3)</strong> También lo usamos para estudiar. <strong>(4)</strong> El celular se ha vuelto parte de casi todo lo que hacemos.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 2, "e": "La idea principal es la oración 4, <em>«El celular se ha vuelto parte de casi todo lo que hacemos.»</em>, que está al final del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Ahorrar dinero no es tan difícil como parece. <strong>(2)</strong> Puedes empezar guardando un poco cada semana. <strong>(3)</strong> Comparar precios antes de comprar también ayuda. <strong>(4)</strong> Llevar la comida al trabajo ahorra mucho al mes.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«Ahorrar dinero no es tan difícil como parece.»</em>, que está al inicio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Dormir bien es necesario para la salud. <strong>(2)</strong> Mientras dormimos, el cuerpo descansa y se repara. <strong>(3)</strong> El cerebro guarda lo que aprendimos durante el día. <strong>(4)</strong> Quien duerme poco se enferma con más facilidad.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«Dormir bien es necesario para la salud.»</em>, que está al inicio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Los mercados al aire libre tienen mucho encanto. <strong>(2)</strong> Hay frutas y verduras frescas de la temporada. <strong>(3)</strong> Los vendedores conversan con los clientes. <strong>(4)</strong> Además, los precios suelen ser más bajos.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«Los mercados al aire libre tienen mucho encanto.»</em>, que está al inicio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Mi vecina siempre llega temprano al trabajo. <strong>(2)</strong> Nunca falta a una reunión. <strong>(3)</strong> Termina sus tareas a tiempo. <strong>(4)</strong> Por todo eso, en su oficina la consideran muy responsable.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 2, "e": "La idea principal es la oración 4, <em>«Por todo eso, en su oficina la consideran muy responsable.»</em>, que está al final del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Aunque llueva mucho, Carlos nunca falta a su clase de inglés. <strong>(2)</strong> Ese hombre es muy dedicado a sus estudios. <strong>(3)</strong> Hace la tarea todas las noches. <strong>(4)</strong> Los sábados repasa con un amigo.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 1, "e": "La idea principal es la oración 2, <em>«Ese hombre es muy dedicado a sus estudios.»</em>, que está en el medio del párrafo."}, {"t": "¿Dónde está la idea principal? <span class=\"frase\" style=\"text-align:left\"><strong>(1)</strong> Leerles a los niños pequeños trae muchos beneficios. <strong>(2)</strong> Aprenden palabras nuevas. <strong>(3)</strong> Desarrollan la imaginación. <strong>(4)</strong> Además, se crea un momento especial en familia.</span>", "o": ["Al inicio", "En el medio", "Al final"], "c": 0, "e": "La idea principal es la oración 1, <em>«Leerles a los niños pequeños trae muchos beneficios.»</em>, que está al inicio del párrafo."}]}, "p3": {"tipo": "mc", "items": [{"t": "¿Qué tipo de detalle es? <span class=\"frase\">Por ejemplo, el huracán María dejó a Puerto Rico sin electricidad durante meses.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 0, "e": "Un <strong>ejemplo</strong>: un caso concreto que ilustra la idea. Fíjate en «por ejemplo» o «como»."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Mi vecina Rosa, por ejemplo, terminó el GED a los 65 años.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 0, "e": "Un <strong>ejemplo</strong>: un caso concreto que ilustra la idea. Fíjate en «por ejemplo» o «como»."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">En mi barrio, por ejemplo, abrieron tres panaderías nuevas este año.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 0, "e": "Un <strong>ejemplo</strong>: un caso concreto que ilustra la idea. Fíjate en «por ejemplo» o «como»."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Mi tío, por ejemplo, aprendió a usar el correo electrónico a los 70 años.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 0, "e": "Un <strong>ejemplo</strong>: un caso concreto que ilustra la idea. Fíjate en «por ejemplo» o «como»."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Algunas frutas, como el mango y la papaya, tienen mucha vitamina C.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 0, "e": "Un <strong>ejemplo</strong>: un caso concreto que ilustra la idea. Fíjate en «por ejemplo» o «como»."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Más de un tercio de los adultos en Estados Unidos duerme menos de siete horas.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 1, "e": "Un <strong>dato</strong>: números, fechas o cantidades precisas."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">El huracán María llegó a Puerto Rico el 20 de septiembre de 2017.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 1, "e": "Un <strong>dato</strong>: números, fechas o cantidades precisas."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">La clase dura 50 minutos y empieza a las seis de la tarde.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 1, "e": "Un <strong>dato</strong>: números, fechas o cantidades precisas."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Un año tiene 365 días, y cada cuatro años tiene 366.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 1, "e": "Un <strong>dato</strong>: números, fechas o cantidades precisas."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">El 60 % del cuerpo humano es agua, más o menos.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 1, "e": "Un <strong>dato</strong>: números, fechas o cantidades precisas."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Las hojas amarillas y rojas del otoño cubrían todo el parque.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 2, "e": "Una <strong>descripción</strong>: dice cómo se ve, huele, suena o se siente algo, para que lo imagines."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">Los frijoles olían a comino y a ajo recién picado.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 2, "e": "Una <strong>descripción</strong>: dice cómo se ve, huele, suena o se siente algo, para que lo imagines."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">El cielo estaba gris oscuro y el viento doblaba las palmeras.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 2, "e": "Una <strong>descripción</strong>: dice cómo se ve, huele, suena o se siente algo, para que lo imagines."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">La cocina era pequeña, con paredes blancas y una ventana llena de sol.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 2, "e": "Una <strong>descripción</strong>: dice cómo se ve, huele, suena o se siente algo, para que lo imagines."}, {"t": "¿Qué tipo de detalle es? <span class=\"frase\">El pan salía del horno caliente, dorado y crujiente.</span>", "o": ["Ejemplo", "Dato", "Descripción"], "c": 2, "e": "Una <strong>descripción</strong>: dice cómo se ve, huele, suena o se siente algo, para que lo imagines."}]}, "p4": {"tipo": "mc", "items": [{"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Los frijoles negros son un alimento muy nutritivo. Tienen mucha proteína vegetal. También son ricos en fibra. Además, contienen hierro y vitaminas. Mi vecino prefiere comer pasta los domingos.</span>", "o": ["Mi vecino prefiere comer pasta los domingos.", "Además, contienen hierro y vitaminas.", "También son ricos en fibra."], "c": 0, "e": "<strong>«Mi vecino prefiere comer pasta los domingos.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Los frijoles negros son un alimento muy nutritivo.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Mi abuela tenía un jardín lleno de plantas medicinales. Usaba la sábila para las quemaduras. Con la manzanilla preparaba té para el dolor de estómago. Para cada problema, mi abuela tenía una planta. El jardín de mi casa es pequeño.</span>", "o": ["El jardín de mi casa es pequeño.", "Con la manzanilla preparaba té para el dolor de estómago.", "Mi abuela tenía un jardín lleno de plantas medicinales."], "c": 0, "e": "<strong>«El jardín de mi casa es pequeño.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Para cada problema, mi abuela tenía una planta.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Aprender otro idioma abre puertas en el trabajo. También ayuda a viajar y a conocer otras culturas. El inglés tiene muchas palabras cortas. Además, ejercita la memoria. Hay muchas buenas razones para estudiar un idioma.</span>", "o": ["El inglés tiene muchas palabras cortas.", "Además, ejercita la memoria.", "También ayuda a viajar y a conocer otras culturas."], "c": 0, "e": "<strong>«El inglés tiene muchas palabras cortas.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Hay muchas buenas razones para estudiar un idioma.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Muchas personas creen que no tienen tiempo para hacer ejercicio. Pero bastan veinte minutos al día para mejorar la salud. Mi primo trabaja en una tienda de ropa deportiva. Caminar, subir escaleras o bailar ya cuentan. No hace falta ir al gimnasio.</span>", "o": ["Mi primo trabaja en una tienda de ropa deportiva.", "Muchas personas creen que no tienen tiempo para hacer ejercicio.", "Caminar, subir escaleras o bailar ya cuentan."], "c": 0, "e": "<strong>«Mi primo trabaja en una tienda de ropa deportiva.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Pero bastan veinte minutos al día para mejorar la salud.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">La biblioteca pública es un gran recurso para la comunidad. Presta libros y películas sin costo. Tiene computadoras con internet para todos. Mi hermana tiene muchos libros en su casa. También ofrece clases de inglés y de computación.</span>", "o": ["Mi hermana tiene muchos libros en su casa.", "Presta libros y películas sin costo.", "También ofrece clases de inglés y de computación."], "c": 0, "e": "<strong>«Mi hermana tiene muchos libros en su casa.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«La biblioteca pública es un gran recurso para la comunidad.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">El celular nos despierta por la mañana. Algunos celulares son muy caros. Con él pagamos cuentas, buscamos direcciones y hablamos con la familia. También lo usamos para estudiar. El celular se ha vuelto parte de casi todo lo que hacemos.</span>", "o": ["Algunos celulares son muy caros.", "También lo usamos para estudiar.", "Con él pagamos cuentas, buscamos direcciones y hablamos con la familia."], "c": 0, "e": "<strong>«Algunos celulares son muy caros.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«El celular se ha vuelto parte de casi todo lo que hacemos.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Ahorrar dinero no es tan difícil como parece. Puedes empezar guardando un poco cada semana. Comparar precios antes de comprar también ayuda. Llevar la comida al trabajo ahorra mucho al mes. Los bancos abren a las nueve de la mañana.</span>", "o": ["Los bancos abren a las nueve de la mañana.", "Llevar la comida al trabajo ahorra mucho al mes.", "Puedes empezar guardando un poco cada semana."], "c": 0, "e": "<strong>«Los bancos abren a las nueve de la mañana.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Ahorrar dinero no es tan difícil como parece.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Dormir bien es necesario para la salud. Mi almohada nueva es azul. Mientras dormimos, el cuerpo descansa y se repara. El cerebro guarda lo que aprendimos durante el día. Quien duerme poco se enferma con más facilidad.</span>", "o": ["Mi almohada nueva es azul.", "Quien duerme poco se enferma con más facilidad.", "Mientras dormimos, el cuerpo descansa y se repara."], "c": 0, "e": "<strong>«Mi almohada nueva es azul.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Dormir bien es necesario para la salud.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Los mercados al aire libre tienen mucho encanto. El supermercado de mi barrio cierra a las diez. Hay frutas y verduras frescas de la temporada. Los vendedores conversan con los clientes. Además, los precios suelen ser más bajos.</span>", "o": ["El supermercado de mi barrio cierra a las diez.", "Hay frutas y verduras frescas de la temporada.", "Además, los precios suelen ser más bajos."], "c": 0, "e": "<strong>«El supermercado de mi barrio cierra a las diez.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Los mercados al aire libre tienen mucho encanto.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Mi vecina siempre llega temprano al trabajo. Nunca falta a una reunión. Su oficina queda en el centro de la ciudad. Termina sus tareas a tiempo. Por todo eso, en su oficina la consideran muy responsable.</span>", "o": ["Su oficina queda en el centro de la ciudad.", "Termina sus tareas a tiempo.", "Mi vecina siempre llega temprano al trabajo."], "c": 0, "e": "<strong>«Su oficina queda en el centro de la ciudad.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Por todo eso, en su oficina la consideran muy responsable.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Aunque llueva mucho, Carlos nunca falta a su clase de inglés. Ese hombre es muy dedicado a sus estudios. Hace la tarea todas las noches. Los sábados repasa con un amigo. A Carlos le gusta el béisbol.</span>", "o": ["A Carlos le gusta el béisbol.", "Hace la tarea todas las noches.", "Los sábados repasa con un amigo."], "c": 0, "e": "<strong>«A Carlos le gusta el béisbol.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Ese hombre es muy dedicado a sus estudios.»</em>). Es una oración intrusa."}, {"t": "¿Qué oración <strong>no apoya</strong> la idea principal? <span class=\"frase\" style=\"text-align:left\">Leerles a los niños pequeños trae muchos beneficios. Aprenden palabras nuevas. Algunos libros tienen tapas duras. Desarrollan la imaginación. Además, se crea un momento especial en familia.</span>", "o": ["Algunos libros tienen tapas duras.", "Además, se crea un momento especial en familia.", "Aprenden palabras nuevas."], "c": 0, "e": "<strong>«Algunos libros tienen tapas duras.»</strong> no ayuda a explicar ni a probar la idea principal (<em>«Leerles a los niños pequeños trae muchos beneficios.»</em>). Es una oración intrusa."}]}};
+
+function $(id){ return document.getElementById(id); }
+function baraja(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function sinTildes(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function normal(s){ return s.trim().replace(/\s+/g,' ').replace(/[.。]+$/,'').toLowerCase(); }
+
+/* Cada práctica saca sus ejercicios de un banco barajado; cuando se acaba, se vuelve a barajar. */
+function Practica(id, cfg){
+  var caja=$(id), pila=[], actual=null, bien=0, total=0, contestada=false;
+  var enun=caja.querySelector('.enun'), area=caja.querySelector('.area'), fb=caja.querySelector('.fb'),
+      marc=caja.querySelector('.marcador'), btnOtro=caja.querySelector('.otro'), btnRev=caja.querySelector('.revisar');
+  function pintarMarcador(){ marc.textContent='Aciertos: '+bien+' de '+total; }
+  function siguiente(){
+    if(!pila.length) pila=baraja(cfg.items);
+    actual=pila.pop(); contestada=false; fb.textContent=''; fb.className='fb';
+    enun.innerHTML=actual.t;
+    area.innerHTML='';
+    if(cfg.tipo==='mc'){
+      btnRev.hidden=true;
+      var orden=baraja(actual.o.map(function(_,j){return j;}));
+      var g=document.createElement('div'); g.className='opciones'; g.setAttribute('role','group'); g.setAttribute('aria-label','Opciones');
+      orden.forEach(function(j){
+        var b=document.createElement('button'); b.type='button'; b.className='opcion'; b.innerHTML=actual.o[j]; b.dataset.j=j;
+        b.addEventListener('click',function(){ responderMC(+b.dataset.j); }); g.appendChild(b);
+      });
+      area.appendChild(g);
+    } else if(cfg.tipo==='escribir'){
+      btnRev.hidden=false; btnRev.textContent='Comprobar';
+      var d=document.createElement('div'); d.className='campo-escribir';
+      d.innerHTML='<label class="sr-solo" for="'+id+'-in">Tu respuesta</label><input type="text" id="'+id+'-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">';
+      area.appendChild(d);
+      d.querySelector('input').addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); revisar(); } });
+    } else if(cfg.tipo==='marcar'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      var p=document.createElement('div'); p.className='texto-marcar';
+      /* Cada palabra es un botón; los signos de puntuación quedan fuera del botón. */
+      actual.texto.split(/\s+/).forEach(function(tok,k){
+        var m=tok.match(/^([¿¡«(]*)(\[?)([^\]\s.,;:!?»)]+)(\]?)([.,;:!?»)]*)$/);
+        if(k) p.appendChild(document.createTextNode(' '));
+        if(!m){ p.appendChild(document.createTextNode(tok)); return; }
+        if(m[1]) p.appendChild(document.createTextNode(m[1]));
+        var b=document.createElement('button'); b.type='button'; b.className='pal'; b.textContent=m[3];
+        b.setAttribute('aria-pressed','false'); if(m[2]==='[') b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        p.appendChild(b);
+        if(m[5]){ var sg=document.createElement('span'); sg.className='punt'; sg.textContent=m[5]; p.appendChild(sg); }
+      });
+      area.appendChild(p);
+    } else if(cfg.tipo==='oraciones'){
+      btnRev.hidden=false; btnRev.textContent='Revisar';
+      actual.oraciones.forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='ora'; b.textContent=o[0];
+        b.setAttribute('aria-pressed','false'); if(o[1]) b.dataset.ok='1';
+        b.addEventListener('click',function(){ if(contestada) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true'); });
+        area.appendChild(b);
+      });
+    }
+    pintarMarcador();
+  }
+  function cerrar(ok, texto, clase){
+    contestada=true; total++; if(ok) bien++;
+    fb.className='fb '+(clase||(ok?'ok':'no')); fb.innerHTML=texto; pintarMarcador();
+    btnRev.hidden=true; btnOtro.focus();
+  }
+  function responderMC(j){
+    if(contestada) return;
+    area.querySelectorAll('.opcion').forEach(function(b){
+      b.disabled=true; var k=+b.dataset.j;
+      if(k===actual.c) b.classList.add('bien'); else if(k===j) b.classList.add('mal');
+    });
+    var ok=(j===actual.c);
+    cerrar(ok,(ok?'✅ <strong>¡Bien!</strong> ':'❌ <strong>No es esa.</strong> ')+actual.e);
+  }
+  function revisar(){
+    if(contestada) return;
+    if(cfg.tipo==='escribir'){
+      var inp=area.querySelector('input'), v=normal(inp.value);
+      if(!v){ fb.className='fb casi'; fb.textContent='Escribe tu respuesta y pulsa «Comprobar».'; inp.focus(); return; }
+      inp.disabled=true;
+      var rs=actual.r.map(normal);
+      if(rs.indexOf(v)!==-1){ cerrar(true,'✅ <strong>¡Bien!</strong> '+actual.e); return; }
+      var casi=rs.some(function(r){ return sinTildes(r)===sinTildes(v); });
+      if(casi) cerrar(false,'🟡 <strong>Casi:</strong> fíjate en la tilde. Se escribe <strong>'+actual.r[0]+'</strong>. '+actual.e,'casi');
+      else cerrar(false,'❌ <strong>No es esa.</strong> La respuesta es <strong>'+actual.r[0]+'</strong>. '+actual.e);
+      return;
+    }
+    var sel=cfg.tipo==='marcar'?'.pal':'.ora', aciertos=0, errores=0, faltan=0;
+    area.querySelectorAll(sel).forEach(function(b){
+      var marcada=b.getAttribute('aria-pressed')==='true', obj=b.dataset.ok==='1';
+      b.disabled=true;
+      if(marcada&&obj){ b.classList.add('bien'); aciertos++; }
+      else if(marcada&&!obj){ b.classList.add('mal'); errores++; }
+      else if(!marcada&&obj){ b.classList.add('falto'); faltan++; }
+    });
+    var ok=(errores===0&&faltan===0);
+    var resumen=ok?'✅ <strong>¡Perfecto!</strong> ':'❌ <strong>Revisa:</strong> acertaste '+aciertos+(errores?', marcaste '+errores+' de más':'')+(faltan?', te faltaron '+faltan+' (con borde naranja)':'')+'. ';
+    cerrar(ok,resumen+actual.e);
+  }
+  btnOtro.addEventListener('click',siguiente);
+  btnRev.addEventListener('click',revisar);
+  siguiente();
+}
+
+/* Anclas: la dirección #modulo abre ese módulo; el índice y los botones abren o cierran todo. */
+(function(){
+  function abrir(id){ var el=id&&document.getElementById(id); if(!el) return; var d=el.tagName==='DETAILS'?el:el.closest('details'); if(d){ d.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(){ abrir(a.getAttribute('href').slice(1)); }); });
+  $('abrir-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=true;}); });
+  $('cerrar-todo').addEventListener('click',function(){ document.querySelectorAll('details.modulo').forEach(function(d){d.open=false;}); });
+  window.addEventListener('hashchange',function(){ abrir(decodeURIComponent(location.hash.slice(1))); });
+  abrir(decodeURIComponent(location.hash.slice(1)));
+})();
+
+Practica('p1', DATOS['p1']);
+Practica('p2', DATOS['p2']);
+Practica('p3', DATOS['p3']);
+Practica('p4', DATOS['p4']);
+</script>
+</body>
+</html>
