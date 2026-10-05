@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- Interactivo n1-repaso · Índice de todas las prácticas del Nivel 1 · Artes del Lenguaje Nivel 1 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso del Nivel 1 · Todas las prácticas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#0089cd;--cp-claro:#e3f2fd;--cp-oscuro:#005a8a;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .buscador{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+  .buscador input{font:inherit;padding:8px 12px;border:2px solid #9aa9b7;border-radius:8px;flex:1;min-width:200px}
+  .tema{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:10px 16px;margin:12px 0}
+  .tema h2{font-size:1.1rem;margin:4px 0 6px}
+  .tema ul{list-style:none;margin:0;padding:0}
+  .tema li{margin:10px 0;padding-bottom:8px;border-bottom:1px dashed #d6dde4}
+  .tema li:last-child{border-bottom:none}
+  a.int{font-weight:700;color:#005a8a}
+  a.lec{font-size:.88rem;color:#005a8a}
+  .mods{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  a.mod{display:inline-block;background:#e3f2fd;color:#005a8a;border:1px solid #0089cd;border-radius:14px;padding:3px 10px;font-size:.9rem;text-decoration:none}
+  a.mod:hover,a.mod:focus{background:#005a8a;color:#fff}
+  .mod-txt{font-size:.9rem;color:#333}
+  .sin{font-weight:700;color:#8a3d0c}
+</style>
+</head>
+<body>
+<h1>Repaso del Nivel 1 · Todas las prácticas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 1: Iniciación a la Lectura y la Escritura · GEDparaHispanos</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng1/index.html">← Índice de las lecciones</a>
+<p>Cada práctica tiene varios módulos. Pulsa el nombre de un módulo para ir directamente a él, o escribe un tema en el buscador (por ejemplo, <em>concordancia</em>, <em>mapas</em> o <em>conectores</em>).</p>
+<div class="buscador"><label for="buscar"><strong>Buscar:</strong></label><input type="search" id="buscar" placeholder="Escribe una palabra…"></div>
+<p class="sin" id="sin" role="status" aria-live="polite"></p>
+<section class="tema" aria-labelledby="t1"><h2 id="t1">Tema 1 · El alfabeto y la dirección de la lectura</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l1-2.html">Mayúscula al inicio, punto al final: Práctica de oraciones</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_1-2.html">(lección 1.2)</a><div class="mods"><span class="mod-txt">Práctica de una sola parte</span></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t2"><h2 id="t2">Tema 2 · Conciencia fonológica y fluidez</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l2-3.html">Entrenador de lectura: palabras de uso frecuente</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_2-3.html">(lección 2.3)</a><div class="mods"><span class="mod-txt">Práctica de una sola parte</span></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t3"><h2 id="t3">Tema 3 · La oración: sustantivo, adjetivo, verbo y puntuación</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l3-2.html">Práctica 3.2 · La regla de oro: la concordancia</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_3-2.html">(lección 3.2)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-2.html#genero-numero">¿Masculino o femenino? ¿Singular o plural?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-2.html#elige-adjetivo">Elige el adjetivo que concuerda</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-2.html#escribe-adjetivo">Escribe el adjetivo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-2.html#detecta-error">Detecta el error</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l3-4.html">Práctica 3.4 · Los tiempos verbales: presente, pasado y futuro</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_3-4.html">(lección 3.4)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-4.html#identificar-tiempo">¿Pasado, presente o futuro?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-4.html#elige-forma">Elige la forma del verbo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-4.html#escribe-verbo">Escribe el verbo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-4.html#mismo-tiempo">Un relato, un mismo tiempo</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l3-5.html">Práctica 3.5 · Oración completa frente a fragmento</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_3-5.html">(lección 3.5)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-5.html#completa-o-fragmento">¿Oración completa o fragmento?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-5.html#que-falta">¿Qué le falta al fragmento?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-5.html#repara">Repara el fragmento</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-5.html#en-el-texto">Busca los fragmentos en un texto</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l3-6.html">Práctica 3.6 · Puntuación básica y uso de mayúsculas</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_3-6.html">(lección 3.6)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-6.html#mayusculas">¿Dónde va la mayúscula?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-6.html#signos">Signos de pregunta y exclamación</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l3-6.html#comas">La coma y el punto</a></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t4"><h2 id="t4">Tema 4 · Estrategias de comprensión y vocabulario</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l4-3.html">Práctica 4.3 · La idea principal y los detalles de apoyo</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_4-3.html">(lección 4.3)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-3.html#elige-idea">¿Cuál es la idea principal?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-3.html#donde-esta">¿Dónde está la idea principal?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-3.html#tipo-de-detalle">Tipos de detalles de apoyo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-3.html#intruso">El detalle intruso</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l4-5.html">Práctica 4.5 · Descubrir significados con claves de contexto</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_4-5.html">(lección 4.5)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-5.html#tipo-de-clave">¿Qué tipo de clave es?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-5.html#significado">¿Qué significa la palabra?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-5.html#palabras-senal">Las palabras que avisan</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l4-6.html">Práctica 4.6 · La anatomía de las palabras: raíces y afijos</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_4-6.html">(lección 4.6)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-6.html#partes">Prefijo, raíz o sufijo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-6.html#prefijos">El significado de los prefijos</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-6.html#sufijos">El significado de los sufijos</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-6.html#familias">Familias de palabras</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l4-6.html#construye">Construye la palabra</a></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t5"><h2 id="t5">Tema 5 · El texto narrativo y las relaciones entre ideas</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-1.html">Práctica 5.1 · Los personajes y sus conflictos</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-1.html">(lección 5.1)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-1.html#roles">El papel de los personajes</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-1.html#rasgos">Los rasgos del personaje</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-1.html#conflicto">Conflicto interno o externo</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-2.html">Práctica 5.2 · El escenario y su impacto en la historia</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-2.html">(lección 5.2)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-2.html#sentidos">Los cinco sentidos</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-2.html#atmosfera">La atmósfera del escenario</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-3.html">Práctica 5.3 · El orden de los eventos: palabras de secuencia</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-3.html">(lección 5.3)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-3.html#conectores">¿Qué conector va?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-3.html#marcar-conectores">Encuentra los conectores</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-3.html#orden">Descubre el orden de los hechos</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-4.html">Práctica 5.4 · Seguir instrucciones paso a paso</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-4.html">(lección 5.4)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-4.html#verbos-orden">Encuentra las órdenes</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-4.html#cuantas-acciones">¿Cuántas acciones pide?</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-5.html">Práctica 5.5 · La relación de causa y efecto</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-5.html">(lección 5.5)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-5.html#causa-efecto">¿Cuál es la causa? ¿Cuál es el efecto?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-5.html#conectores-causales">¿El conector introduce la causa o el efecto?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-5.html#completar">Completa con el conector</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l5-6.html">Práctica 5.6 · Comparar y contrastar información</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_5-6.html">(lección 5.6)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-6.html#comparar-contrastar">¿Comparar o contrastar?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l5-6.html#venn">El diagrama de Venn</a></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t6"><h2 id="t6">Tema 6 · Información visual: imágenes, mapas, tablas y gráficas</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l6-2.html">Práctica 6.2 · Las características del texto informativo visual</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_6-2.html">(lección 6.2)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-2.html#partes">¿Título, subtítulo, rótulo o pie de foto?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-2.html#buscar">Busca sin leer todo</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l6-3.html">Práctica 6.3 · La anatomía de los mapas</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_6-3.html">(lección 6.3)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-3.html#direcciones">¿Hacia dónde queda?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-3.html#elementos">Los elementos del mapa</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l6-4.html">Práctica 6.4 · Organización de datos en tablas</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_6-4.html">(lección 6.4)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-4.html#cruzar">Cruza filas y columnas</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-4.html#comparar">Compara dos datos</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l6-5.html">Práctica 6.5 · El duelo de las gráficas: barras y pastel</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_6-5.html">(lección 6.5)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-5.html#leer-barras">Lee la gráfica de barras</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-5.html#cual-grafica">¿Barras o pastel?</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l6-6.html">Práctica 6.6 · Vocabulario de dominio y aplicación</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_6-6.html">(lección 6.6)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-6.html#vocabulario">¿Qué significa?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-6.html#en-contexto">Las palabras en contexto</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l6-6.html#describir">Describe la gráfica</a></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t7"><h2 id="t7">Tema 7 · El párrafo y los tipos de texto</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l7-1.html">Práctica 7.1 · El párrafo y la técnica de la hamburguesa</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_7-1.html">(lección 7.1)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-1.html#oracion-principal">Encuentra la oración principal</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-1.html#partes">Las tres partes del párrafo</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-1.html#intrusa">La oración que no encaja</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l7-2.html">Práctica 7.2 · Cualidades del párrafo y conectores básicos</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_7-2.html">(lección 7.2)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-2.html#conectores">¿Y, pero, porque o entonces?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-2.html#cualidades">Las tres cualidades</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l7-4.html">Práctica 7.4 · Los tres tipos de texto</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_7-4.html">(lección 7.4)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-4.html#tipo-de-texto">¿Narrativo, informativo o de opinión?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-4.html#hecho-opinion">¿Hecho u opinión?</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l7-6.html">Práctica 7.6 · El proceso de revisión</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_7-6.html">(lección 7.6)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-6.html#errores">¿Qué error tiene?</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l7-6.html#corregir">Elige la versión corregida</a></div></li>
+</ul></section>
+<section class="tema" aria-labelledby="t8"><h2 id="t8">Tema 8 · Comunicación, tecnología y proyecto final</h2><ul>
+<li><a class="int" href="https://zhemaria.github.io/gramatica/n1-l8-3.html">Práctica 8.3 · Alfabetización tecnológica y vocabulario digital</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_8-3.html">(lección 8.3)</a><div class="mods"><a class="mod" href="https://zhemaria.github.io/gramatica/n1-l8-3.html#vocabulario-digital">Vocabulario digital</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l8-3.html#en-contexto">Las palabras en uso</a> <a class="mod" href="https://zhemaria.github.io/gramatica/n1-l8-3.html#atajos">Atajos de teclado</a></div></li>
+<li><a class="int" href="https://zhemaria.github.io/clases_leng1/examen_nivel1.html">Evaluación final del nivel</a> <a class="lec" href="https://zhemaria.github.io/clases_leng1/clase_8-6.html">(lección 8.6)</a><div class="mods"><span class="mod-txt">Con resumen para repasar</span></div></li>
+</ul></section>
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 1: Iniciación a la Lectura y la Escritura · Repaso</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+(function(){
+  function norm(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  var inp=document.getElementById('buscar'), sin=document.getElementById('sin');
+  inp.addEventListener('input',function(){
+    var q=norm(inp.value.trim()), vistos=0;
+    document.querySelectorAll('.tema').forEach(function(sec){
+      var algun=false;
+      sec.querySelectorAll('li').forEach(function(li){var ok=!q||norm(li.textContent).indexOf(q)>=0||norm(sec.querySelector('h2').textContent).indexOf(q)>=0; li.hidden=!ok; if(ok){algun=true;vistos++;}});
+      sec.hidden=!algun;
+    });
+    sin.textContent=q&&!vistos?'No encontré prácticas con esa palabra. Prueba con otra.':'';
+  });
+})();
+</script>
+</body>
+</html>
