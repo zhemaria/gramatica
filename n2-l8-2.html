@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l8-2 · Escuchar para entender, hecho u opinión, causa y efecto · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.2 · Comprensión auditiva</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .instr{display:block;text-align:center;color:#004d44;font-weight:700;margin-bottom:6px}
+  .preg{font-weight:700;text-align:center;display:block;margin:6px 0}
+  .transc{margin:6px 0 0;font-size:.95rem}
+  .transc summary{padding:6px 12px;font-size:.92rem}
+  .transc p{font-family:Georgia,serif;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:6px 0 0}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila .op{text-align:center;min-width:150px}
+  .oir{font-size:1.1rem}
+</style>
+</head>
+<body>
+<h1>Práctica 8.2 · Comprensión auditiva</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 8 · Acompaña a la Lección 8.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_8-2.html">← Volver a la Lección 8.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="escucha">1 · Escucha y responde</button>
+  <button type="button" class="pest" data-mod="hecho-opinion">2 · ¿Hecho u opinión?</button>
+  <button type="button" class="pest" data-mod="causa-efecto">3 · Causa y efecto</button>
+</nav>
+
+<section class="modulo" id="escucha" aria-labelledby="t-esc">
+  <h2 id="t-esc">1 · Escucha y responde</h2>
+  <p class="consejo">Lee la pregunta, escucha el audio (puedes repetirlo) y responde. La transcripción está disponible si la necesitas, pero intenta primero solo con el oído.</p>
+  <div class="enun" id="es-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="es-oir">🔊 Escuchar el audio</button></div>
+  <div class="opciones" id="es-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="es-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="es-otra">Otro audio</button></div>
+  <div class="marcador" id="es-marcador"></div>
+</section>
+
+<section class="modulo" id="hecho-opinion" aria-labelledby="t-ho" hidden>
+  <h2 id="t-ho">2 · ¿Hecho u opinión?</h2>
+  <p class="consejo">Escucha la frase. Un hecho se puede comprobar. Una opinión lleva señales como <em>creo que, me parece, lo mejor, debería</em>.</p>
+  <div class="enun" id="ho-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="ho-oir">🔊 Escuchar la frase</button></div>
+  <div class="opciones fila" id="ho-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ho-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ho-otra">Otra frase</button></div>
+  <div class="marcador" id="ho-marcador"></div>
+</section>
+
+<section class="modulo" id="causa-efecto" aria-labelledby="t-ce" hidden>
+  <h2 id="t-ce">3 · Causa y efecto</h2>
+  <p class="consejo"><strong>Causa</strong> = por qué pasa (porque, debido a, a causa de, como). <strong>Efecto</strong> = lo que pasa (por eso, como resultado, así que).</p>
+  <div class="enun" id="ce-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="ce-oir">🔊 Escuchar la frase</button></div>
+  <div class="opciones" id="ce-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ce-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ce-otra">Otra frase</button></div>
+  <div class="marcador" id="ce-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 8.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+function A(audio,q,ops,n,instr){
+  return {e:'<span class="instr">'+(instr||'🎧 Escucha el audio')+'</span><span class="preg">'+q+'</span><details class="transc"><summary>📄 Ver la transcripción</summary><p>'+audio+'</p></details>',ops:ops,c:0,n:n,a:audio};
+}
+unaAUna('es',[
+  A('Atención, pasajeros. Debido a obras en la vía, el tren de la línea azul no se detendrá en la estación Damen este fin de semana. Los pasajeros pueden usar el autobús gratuito que sale cada diez minutos desde la estación anterior.','¿Qué cambia este fin de semana?',['El tren no se detiene en una estación','El tren será gratis para todos','El tren pasará cada diez minutos'],'«…no se detendrá en la estación Damen».'),
+  A('Hola, habla Patricia, del consultorio de la doctora Ríos. Le llamo para recordarle su cita del jueves a las tres y media. Por favor, llegue quince minutos antes y traiga su tarjeta del seguro. Si no puede venir, llámenos al menos un día antes.','¿A qué hora es la cita?',['A las tres y media','A las tres y cuarto','A las cuatro y media'],'Las tres y cuarto es la hora de llegada, no la de la cita.'),
+  A('Hola, habla Patricia, del consultorio de la doctora Ríos. Le llamo para recordarle su cita del jueves a las tres y media. Por favor, llegue quince minutos antes y traiga su tarjeta del seguro. Si no puede venir, llámenos al menos un día antes.','¿Qué debe llevar a la cita?',['La tarjeta del seguro','Una receta médica','Los resultados de laboratorio'],'«…traiga su tarjeta del seguro».'),
+  A('El pronóstico para mañana en Chicago: por la mañana, cielo nublado y temperaturas cerca de los cuarenta grados. Por la tarde llegará la lluvia, que podría convertirse en nieve durante la noche. Se recomienda manejar con precaución.','¿Qué tiempo hará por la tarde?',['Lluvia','Nieve','Sol'],'La nieve llegaría por la noche.'),
+  A('Buenas noches. La biblioteca del barrio ofrecerá clases gratuitas de computación para adultos a partir del primero de marzo. Las clases serán los martes y jueves de seis a ocho. Los cupos son limitados, así que conviene inscribirse pronto en el mostrador principal.','¿Por qué conviene inscribirse pronto?',['Porque los cupos son limitados','Porque las clases son caras','Porque empiezan mañana'],'«…los cupos son limitados, así que…».'),
+  A('Buenas noches. La biblioteca del barrio ofrecerá clases gratuitas de computación para adultos a partir del primero de marzo. Las clases serán los martes y jueves de seis a ocho. Los cupos son limitados, así que conviene inscribirse pronto en el mostrador principal.','¿Cuál es la idea principal del aviso?',['Habrá clases gratis de computación en la biblioteca','La biblioteca cerrará los martes y jueves','La biblioteca necesita computadoras nuevas'],'Es el tema de todo el aviso.'),
+  A('Señores clientes: les recordamos que la tienda cerrará hoy a las nueve de la noche por inventario. Mañana abriremos en nuestro horario normal, a las siete de la mañana. Gracias por su comprensión.','¿Por qué cierra la tienda a las nueve hoy?',['Por inventario','Por un día festivo','Por obras en el local'],'«…cerrará hoy a las nueve de la noche por inventario».'),
+  A('Hola, mamá. Soy Daniel. Salí tarde del trabajo porque hubo una reunión, así que no voy a llegar a cenar. Guárdame un plato, por favor. Llego como a las diez.','¿Por qué Daniel no llega a cenar?',['Porque salió tarde por una reunión','Porque perdió el autobús','Porque fue a cenar con amigos'],'Causa: la reunión.'),
+  A('En la reunión de hoy, el comité de vecinos decidió pintar el salón comunitario el próximo sábado. Se necesitan diez voluntarios. Quien quiera ayudar puede anotarse en la lista de la entrada. La pintura la donó la ferretería de la esquina.','¿Quién donó la pintura?',['La ferretería de la esquina','El comité de vecinos del barrio','Los diez voluntarios del sábado'],'Último detalle del aviso.')
+],{pista:'Todavía no. Vuelve a escuchar el audio con esa pregunta en mente.'});
+
+var HO=['Hecho','Opinión'];
+function H(t,c,n){return {e:'<span class="instr">🎧 Escucha la frase</span><details class="transc"><summary>📄 Ver la frase</summary><p>'+t+'</p></details>',ops:HO,c:c,n:n,a:t,fijo:true};}
+unaAUna('ho',[
+  H('El autobús número nueve pasa cada quince minutos.',0,'Se comprueba con el horario.'),
+  H('Me parece que el autobús es la forma más cómoda de viajar.',1,'«Me parece» y «la más cómoda».'),
+  H('La clínica atendió a ciento veinte pacientes el primer día.',0,'Es un número que se puede verificar.'),
+  H('Esa clínica es la mejor de toda la ciudad.',1,'«La mejor» es una valoración.'),
+  H('El lago Míchigan se congela en parte durante los inviernos fríos.',0,'Se puede observar y comprobar.'),
+  H('El invierno en Chicago es insoportable.',1,'«Insoportable» expresa un sentimiento.'),
+  H('Creo que la ciudad debería poner más bancas en los parques.',1,'«Creo que» y «debería».'),
+  H('El parque Grant está junto al lago.',0,'Se comprueba en un mapa.'),
+  H('Las clases de inglés son gratuitas en la biblioteca.',0,'Se puede preguntar y comprobar.'),
+  H('Las clases de la biblioteca son increíbles.',1,'«Increíbles» es una opinión.'),
+  H('Según el informe, el desempleo bajó el año pasado.',0,'Cita un dato de un informe.'),
+  H('Todo el mundo debería aprender a cocinar.',1,'«Debería» señala una opinión.')
+],{fijo:true,pista:'Todavía no. ¿Se puede comprobar, o es lo que alguien piensa o siente?'});
+
+function C(t,q,ops,n){return {e:'<span class="instr">🎧 Escucha la frase</span><details class="transc"><summary>📄 Ver la frase</summary><p>'+t+'</p></details><span class="preg">'+q+'</span>',ops:ops,c:0,n:n,a:t};}
+unaAUna('ce',[
+  C('Debido a la tormenta de nieve, las escuelas cerraron el lunes.','¿Cuál es la causa?',['La tormenta de nieve','El cierre de las escuelas','El lunes'],'«Debido a» marca la causa.'),
+  C('Debido a la tormenta de nieve, las escuelas cerraron el lunes.','¿Cuál es el efecto?',['Las escuelas cerraron','Hubo una tormenta','Nevó toda la noche'],'Lo que pasó como resultado.'),
+  C('Ana estudió todas las noches; por eso aprobó el examen.','¿Cuál es el efecto?',['Aprobó el examen','Estudió todas las noches','Tenía un examen'],'«Por eso» introduce el efecto.'),
+  C('Como subió el precio de la gasolina, más personas usan el tren.','¿Cuál es la causa?',['Subió el precio de la gasolina','Más personas usan el tren','El tren es más rápido'],'«Como» al inicio marca la causa.'),
+  C('La fábrica cerró, así que muchas familias se mudaron.','¿Cuál es el efecto?',['Muchas familias se mudaron','La fábrica cerró','Las familias buscaron casa'],'«Así que» introduce el efecto.'),
+  C('Las plantas se secaron porque no llovió en todo el mes.','¿Cuál es la causa?',['No llovió en todo el mes','Las plantas se secaron','Hacía frío'],'«Porque» introduce la causa.'),
+  C('El puente estaba en reparación; como resultado, el tráfico se desvió por la avenida.','¿Cuál es el efecto?',['El tráfico se desvió','El puente estaba en reparación','La avenida es ancha'],'«Como resultado» introduce el efecto.'),
+  C('A causa de una falla eléctrica, el tren llegó con media hora de retraso.','¿Cuál es la causa?',['Una falla eléctrica','El retraso del tren','La media hora'],'«A causa de» marca la causa.'),
+  C('Los vecinos limpiaron el terreno y sembraron un huerto. Ahora los niños juegan allí todas las tardes.','¿Qué causó que los niños jueguen allí?',['Que los vecinos limpiaron el terreno','Que los niños salen de la escuela','Que las tardes son largas'],'Antes había basura; el cambio lo hizo posible.'),
+  C('Luis se quedó dormido, así que perdió el autobús y llegó tarde al trabajo.','¿Qué causó que Luis llegara tarde?',['Se quedó dormido y perdió el autobús','El autobús se descompuso en el camino','Había mucho tráfico en la avenida'],'Una cadena: dormirse → perder el autobús → llegar tarde.')
+],{pista:'Todavía no. Busca la palabra señal: «porque, debido a, como» marcan la causa; «por eso, así que, como resultado», el efecto.'});
+</script>
+</body>
+</html>

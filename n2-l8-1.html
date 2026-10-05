@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l8-1 · Turnos, enlazar y aclarar en situaciones cotidianas · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.1 · Conversar con respeto</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .escena{display:block;background:#eef7f6;border-left:5px solid #004d44;border-radius:6px;padding:10px 14px;margin:0 0 8px}
+  .escena .lugar{display:block;font-weight:700;color:#004d44;font-size:.9rem;margin-bottom:2px}
+  .dice{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 8.1 · Conversar con respeto</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 8 · Acompaña a la Lección 8.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_8-1.html">← Volver a la Lección 8.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="turnos">1 · Los turnos</button>
+  <button type="button" class="pest" data-mod="enlazar">2 · Enlazar</button>
+  <button type="button" class="pest" data-mod="aclarar">3 · Aclarar</button>
+</nav>
+
+<section class="modulo" id="turnos" aria-labelledby="t-tur">
+  <h2 id="t-tur">1 · Pedir la palabra y respetar el turno</h2>
+  <p class="consejo">Escucha hasta el final, pide la palabra con cortesía y da paso a quien no ha hablado.</p>
+  <div class="enun" id="tu-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="tu-oir">🔊 Escuchar la escena</button></div>
+  <div class="opciones" id="tu-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="tu-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="tu-otra">Otra situación</button></div>
+  <div class="marcador" id="tu-marcador"></div>
+</section>
+
+<section class="modulo" id="enlazar" aria-labelledby="t-enl" hidden>
+  <h2 id="t-enl">2 · Enlazar con lo que dijo otro</h2>
+  <p class="consejo">«Estoy de acuerdo con… y añado…» · «Entiendo tu punto, pero…» · «Retomando lo que dijo…» · «Para resumir…»</p>
+  <div class="enun" id="en-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="en-oir">🔊 Escuchar la escena</button></div>
+  <div class="opciones" id="en-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="en-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="en-otra">Otra situación</button></div>
+  <div class="marcador" id="en-marcador"></div>
+</section>
+
+<section class="modulo" id="aclarar" aria-labelledby="t-acl" hidden>
+  <h2 id="t-acl">3 · Pedir y dar aclaraciones</h2>
+  <p class="consejo">«¿Me puede repetir…?» · «¿Quiere decir que…?» · «Entonces, si entiendo bien…» · «Lo que quiero decir es…»</p>
+  <div class="enun" id="ac-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="ac-oir">🔊 Escuchar la escena</button></div>
+  <div class="opciones" id="ac-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ac-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ac-otra">Otra situación</button></div>
+  <div class="marcador" id="ac-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 8.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* lugar, situación, lo que dice alguien (opcional), pregunta, opciones (la 1.ª es la correcta), explicación */
+function E(lugar,sit,dice,q,ops,n){
+  var e='<span class="escena"><span class="lugar">'+lugar+'</span>'+sit+'</span>'+(dice?'<span class="dice">'+dice+'</span>':'')+'<span class="preg">'+q+'</span>';
+  return {e:e,ops:ops,c:0,n:n,a:sit+' '+(dice?dice.replace(/<[^>]+>/g,''):'')};
+}
+var Q1='¿Qué es lo más respetuoso?';
+unaAUna('tu',[
+  E('🏫 Reunión de padres','La directora explica el nuevo horario. Tú tienes una pregunta.','',Q1,['Esperar a que termine y decir: «Si me permite, tengo una pregunta».','Levantar la voz para preguntar mientras ella sigue explicando el horario.','Comentar la pregunta en voz baja con el padre que está sentado al lado.'],'Esperas y pides la palabra con cortesía.'),
+  E('💻 Clase por Zoom','El profesor explica un ejercicio y quieres opinar.','',Q1,['Usar la mano virtual y esperar a que te den la palabra.','Activar el micrófono y empezar a hablar enseguida.','Escribir tu opinión en el chat con letras mayúsculas.'],'La mano virtual es la forma de pedir la palabra en línea.'),
+  E('👷 Reunión de trabajo','Hace diez minutos que habla la misma persona y la reunión casi termina.','',Q1,['«Perdón que interrumpa; nos quedan cinco minutos. ¿Podemos decidir?»','«Ya basta, llevas demasiado tiempo hablando tú solo y nadie te escucha.»','Levantarse y salir de la reunión sin decir nada a nadie, para que se note.'],'Interrumpes con disculpa y una razón.'),
+  E('🏫 Círculo de ideas','Tres compañeros han hablado varias veces. Rosa no ha dicho nada.','',Q1,['«Rosa, no te hemos escuchado todavía. ¿Qué piensas?»','Seguir hablando para que no haya silencios incómodos.','«Rosa nunca dice nada; mejor sigamos sin ella.»'],'Das paso a quien no ha hablado.'),
+  E('🩺 Cita médica','La doctora te está explicando un tratamiento. Te suena el teléfono.','',Q1,['Silenciar el teléfono y seguir escuchando a la doctora.','Contestar la llamada mientras la doctora sigue hablando.','Mirar los mensajes mientras ella termina de explicar.'],'Escuchar con atención es parte del respeto.'),
+  E('🏢 Asamblea de vecinos','Un vecino dice algo con lo que no estás de acuerdo.','',Q1,['Esperar tu turno y decir: «Entiendo su punto, pero yo pienso…».','Decirle en voz alta, delante de todos, que está diciendo tonterías.','Reírte de lo que dijo y comentarlo con el vecino que está a tu lado.'],'Se critican las ideas, no a las personas.'),
+  E('💼 Entrevista de trabajo','La entrevistadora todavía está formulando la pregunta.','',Q1,['Esperar a que termine la pregunta antes de responder.','Empezar a responder antes de que termine de preguntar.','Interrumpirla para hablar de tu experiencia anterior.'],'Escuchar la pregunta completa evita malentendidos.'),
+  E('🏫 Clase presencial','Quieres añadir un ejemplo a lo que acaba de decir un compañero.','',Q1,['Levantar la mano y decir: «¿Puedo añadir un ejemplo?».','Hablar al mismo tiempo que tu compañero para no olvidarlo.','Esperar al final de la clase y no decir nada nunca.'],'Pides permiso y participas.')
+],{leerAlAcertar:false,pista:'Todavía no. ¿Esa forma respeta el turno y a las personas?'});
+
+var Q2='¿Qué respuesta enlaza mejor con lo que se dijo?';
+unaAUna('en',[
+  E('🏫 Reunión de padres','Están hablando de la seguridad a la salida de la escuela.','Una madre: «Hace falta un guardia en el cruce de la esquina».',Q2,['«Estoy de acuerdo, y añado que también faltan señales de alto».','«¿Alguien sabe a qué hora es el partido del sábado?»','«Yo prefiero hablar de la comida de la cafetería».'],'Retoma la idea y suma otra relacionada.'),
+  E('👷 Reunión de trabajo','El grupo decide cuándo hacer la capacitación.','Un compañero: «La capacitación debería ser el sábado».',Q2,['«Entiendo tu punto, pero muchos tenemos a los niños el sábado».','«No, el sábado no, y punto; eso no se discute más en esta reunión».','«Hablando de otra cosa, ¿quién trajo el café que está en la mesa?»'],'Discrepa con respeto y da una razón.'),
+  E('🏫 Círculo de ideas','Hablan sobre un texto de opinión acerca del reciclaje.','Luis: «El autor da dos razones con datos».',Q2,['«Como dijo Luis, hay dos razones; a mí me convenció la de la energía».','«A mí, la verdad, no me gusta nada leer textos tan largos como este».','«Perdón, ¿alguien sabe cuándo es el examen del GED este año?»'],'Nombra a Luis y continúa su idea.'),
+  E('🏢 Asamblea de vecinos','Se habló de la basura, de las luces y del ruido. Ya casi termina.','',Q2,['«Para resumir: pediremos más contenedores, luces nuevas y horario de silencio».','«Bueno, yo me tengo que ir ya, que es tarde y mañana trabajo temprano».','«Lo del ruido de los sábados por la noche me molesta muchísimo, la verdad».'],'Resume lo que se dijo.'),
+  E('🏫 Clase','La maestra preguntó qué es un texto informativo. Ana respondió primero.','Ana: «Es un texto que explica un tema».',Q2,['«Sí, y añado que no lleva opiniones, solo datos».','«Yo creo que la clase de hoy fue muy larga».','«¿Puedo ir al baño un momento?»'],'Completa la respuesta de Ana.'),
+  E('👪 Familia','Deciden adónde ir el domingo.','Tu hijo: «Podemos ir al parque, porque va a hacer sol».',Q2,['«Retomando lo del sol, podríamos llevar comida y hacer un pícnic».','«El lunes tengo que madrugar mucho para ir a trabajar a la fábrica».','«No sé, haz lo que quieras; a mí, la verdad, me da completamente igual».'],'Retoma la idea del sol y la desarrolla.'),
+  E('💻 Foro del curso','Una compañera publicó su texto de opinión sobre el transporte.','Su texto: «El autobús es más barato que el carro».',Q2,['«Estoy de acuerdo contigo, y añado que tampoco hay que buscar estacionamiento».','«Mi texto es mucho mejor que el tuyo, porque tiene más razones y datos».','«No leí tu texto completo, pero seguramente está bien, como siempre».'],'Enlaza con su idea y suma un argumento.')
+],{pista:'Todavía no. ¿Esa respuesta se conecta con lo que acaban de decir?'});
+
+var Q3='¿Qué dirías?';
+unaAUna('ac',[
+  E('🩺 Cita médica','El médico te explica cómo tomar una medicina nueva. Quieres asegurarte de que entendiste.','Médico: «Tómela cada ocho horas durante diez días».',Q3,['«Entonces, si entiendo bien, una pastilla cada ocho horas por diez días, ¿verdad?»','Asentir con la cabeza y preguntarle después a un vecino o a un familiar.','Decir que sí a todo para no hacerle perder tiempo al médico en la consulta.'],'Repites lo que entendiste para comprobarlo.'),
+  E('💊 Farmacia','La farmacéutica habla muy rápido.','',Q3,['«Disculpe, ¿me lo puede repetir más despacio, por favor?»','Irte sin preguntar y leer la etiqueta al llegar a casa.','Pedirle que hable en inglés, aunque no lo entiendas bien.'],'Pedir que repita es tu derecho.'),
+  E('🏫 Reunión de padres','La maestra dice que tu hijo necesita «refuerzo en lectura». No sabes qué significa.','',Q3,['«¿Podría explicarme qué quiere decir con refuerzo en lectura?»','«Sí, claro, lo que usted diga, maestra; muchas gracias por todo».','Quedarte con la duda y no volver a preguntar nada en la reunión.'],'Pides que te explique el término.'),
+  E('💼 Entrevista de trabajo','Te preguntan si tienes disponibilidad para un «turno rotativo».','',Q3,['«¿Quiere decir que el horario cambia cada semana?»','«Sí, sí, no hay ningún problema con eso».','«No entiendo, así que mejor no me interesa el puesto».'],'Compruebas lo que significa antes de responder.'),
+  E('👷 Trabajo','Tu supervisor dice: «Cambia el pedido». Hay dos pedidos abiertos.','',Q3,['«¿Se refiere al pedido de la mañana o al de la tarde?»','Cambiar los dos pedidos para no equivocarte.','No cambiar ninguno hasta que vuelva a pedirlo.'],'Precisas a qué se refiere.'),
+  E('🏫 Círculo de ideas','Dijiste que el texto era «parcial» y nadie entendió.','Compañero: «¿Qué quieres decir con parcial?»',Q3,['«Lo que quiero decir es que solo muestra un punto de vista; por ejemplo…»','«Parcial es parcial; si no lo sabes, búscalo tú mismo en el diccionario».','«Olvídalo, no importa lo que dije antes; sigamos con otra cosa».'],'Aclaras con otras palabras y un ejemplo.'),
+  E('🏦 Banco','El empleado menciona un «cargo por mantenimiento». No sabes cuánto es.','',Q3,['«¿Cuánto es ese cargo y cada cuánto se cobra?»','Firmar todo para no hacer esperar a la fila.','«Ah, sí, el cargo, claro, ya lo sabía».'],'Preguntas el dato concreto que necesitas.'),
+  E('🏥 Hospital','La enfermera te da instrucciones para el día de la operación.','Enfermera: «Ayuno desde la medianoche».',Q3,['«¿Quiere decir que no puedo comer ni beber nada después de las doce?»','«Bueno, pero un café con leche en la mañana no hace ningún daño».','Preguntarle a un amigo, al llegar a casa, qué significa «ayuno».'],'Compruebas lo que entendiste con la misma persona.')
+],{pista:'Todavía no. ¿Esa respuesta te ayuda a entender mejor, o te deja con la duda?'});
+</script>
+</body>
+</html>
