@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l7-2 · Categorías, dato u opinión y conclusión · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.2 · Texto informativo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .tema-c{display:block;background:var(--cp-oscuro);color:#fff;border-radius:8px;padding:6px 12px;text-align:center;font-weight:700;margin-bottom:8px}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila .op{text-align:center;min-width:150px}
+</style>
+</head>
+<body>
+<h1>Práctica 7.2 · Texto informativo</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 7 · Acompaña a la Lección 7.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_7-2.html">← Volver a la Lección 7.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="categorias">1 · Categorías</button>
+  <button type="button" class="pest" data-mod="dato-opinion">2 · ¿Dato u opinión?</button>
+  <button type="button" class="pest" data-mod="conclusion">3 · La conclusión</button>
+</nav>
+
+<section class="modulo" id="categorias" aria-labelledby="t-cat">
+  <h2 id="t-cat">1 · Agrupar en categorías</h2>
+  <p class="consejo">Lee el tema y el dato. Pregúntate: «¿De qué trata este dato?». Elige la categoría donde va.</p>
+  <div class="enun" id="ca-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="ca-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ca-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ca-otra">Otro dato</button></div>
+  <div class="marcador" id="ca-marcador"></div>
+</section>
+
+<section class="modulo" id="dato-opinion" aria-labelledby="t-do" hidden>
+  <h2 id="t-do">2 · ¿Dato u opinión?</h2>
+  <p class="consejo">Un dato se puede comprobar. Una opinión dice lo que alguien piensa o siente. Palabras que delatan una opinión: <em>mejor, peor, bonito, increíble, terrible, debería, creo</em>.</p>
+  <div class="enun" id="do-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="do-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="do-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="do-otra">Otra oración</button></div>
+  <div class="marcador" id="do-marcador"></div>
+</section>
+
+<section class="modulo" id="conclusion" aria-labelledby="t-con" hidden>
+  <h2 id="t-con">3 · La conclusión</h2>
+  <p class="consejo">La mejor conclusión vuelve al tema y resume, sin datos nuevos y sin opiniones.</p>
+  <div class="enun" id="cn-enun" aria-live="polite"></div>
+  <div class="opciones" id="cn-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cn-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cn-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cn-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 7.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+var TEMAS={
+  agua:['El ciclo del agua',['Evaporación','Condensación','Precipitación']],
+  gob:['Los tres poderes del gobierno',['Legislativo','Ejecutivo','Judicial']],
+  salud:['Una vida saludable',['Alimentación','Ejercicio','Descanso']],
+  seres:['Los seres vivos',['Plantas','Animales','Hongos']],
+  colon:['La vida en las trece colonias',['Trabajo','Religión','Gobierno']]
+};
+function K(t,dato,c,n){var T=TEMAS[t];return {e:'<span class="tema-c">Tema: '+T[0]+'</span><span class="pasaje">'+dato+'</span>',ops:T[1],c:c,n:n,fijo:true};}
+unaAUna('ca',[
+  K('agua','El calor del sol convierte el agua de los lagos en vapor.',0,'Líquido que pasa a vapor: evaporación.'),
+  K('agua','El vapor se enfría en el aire y forma las nubes.',1,'Vapor que se vuelve gotas: condensación.'),
+  K('agua','El agua cae de las nubes en forma de lluvia, nieve o granizo.',2,'La caída del agua: precipitación.'),
+  K('agua','En los días calurosos, los charcos desaparecen rápidamente.',0,'El agua se evapora con el calor.'),
+  K('gob','El Senado tiene dos senadores por cada estado.',0,'El Senado es parte del Congreso.'),
+  K('gob','El presidente puede firmar o vetar una ley.',1,'Lo hace el poder ejecutivo.'),
+  K('gob','Los jueces de la Corte Suprema tienen cargos vitalicios, es decir, para toda la vida.',2,'Los jueces son el poder judicial.'),
+  K('gob','La Cámara de Representantes tiene 435 miembros.',0,'Otra parte del Congreso.'),
+  K('salud','Las verduras de hoja verde tienen hierro y vitaminas.',0,'Habla de comida.'),
+  K('salud','Caminar media hora al día fortalece el corazón.',1,'Habla de actividad física.'),
+  K('salud','Los adultos necesitan dormir entre siete y nueve horas.',2,'Habla del sueño.'),
+  K('salud','Beber agua en lugar de refrescos reduce el azúcar en la dieta.',0,'Habla de lo que comemos y bebemos.'),
+  K('seres','Fabrican su propio alimento por medio de la fotosíntesis.',0,'Solo las plantas hacen fotosíntesis.'),
+  K('seres','Los champiñones y el moho que crece en el pan pertenecen a este grupo.',2,'Son hongos.'),
+  K('seres','Se mueven de un lugar a otro para buscar alimento.',1,'Los animales se desplazan.'),
+  K('colon','En las colonias del sur, grandes plantaciones cultivaban tabaco y arroz.',0,'Habla del trabajo y la economía.'),
+  K('colon','Muchos colonos de Nueva Inglaterra llegaron buscando libertad para practicar su fe.',1,'Habla de religión.'),
+  K('colon','Algunas colonias elegían asambleas que aprobaban leyes locales.',2,'Habla de gobierno.')
+],{fijo:true,pista:'Todavía no. ¿De qué trata el dato? Busca la categoría que responde a esa pregunta.'});
+
+var DO=['Dato','Opinión'];
+function D(t,c,n){return {e:'<span class="pasaje">'+t+'</span>',ops:DO,c:c,n:n,fijo:true};}
+unaAUna('do',[
+  D('«El corazón humano tiene cuatro cavidades.»',0,'Se comprueba en cualquier libro de biología.'),
+  D('«Las ciencias son la materia más aburrida de la escuela.»',1,'«Más aburrida» es un gusto personal.'),
+  D('«Abraham Lincoln fue el decimosexto presidente de los Estados Unidos.»',0,'Se comprueba en los registros históricos.'),
+  D('«Lincoln dio el discurso más emocionante de la historia.»',1,'«Más emocionante» depende de quien lo escuche.'),
+  D('«El agua se congela a 32 grados Fahrenheit.»',0,'Se comprueba con un termómetro.'),
+  D('«Los días de nieve son terribles.»',1,'«Terribles» es una opinión.'),
+  D('«México se independizó de España en el siglo XIX.»',0,'Es un hecho histórico.'),
+  D('«La comida mexicana es la más sabrosa del mundo.»',1,'«La más sabrosa» depende del gusto.'),
+  D('«El Sol es una estrella.»',0,'Es un dato de la ciencia.'),
+  D('«Todos deberían aprender astronomía.»',1,'«Deberían» expresa una opinión.'),
+  D('«La biblioteca presta libros sin costo a los residentes.»',0,'Se comprueba preguntando en la biblioteca.'),
+  D('«La biblioteca de mi barrio es increíble.»',1,'«Increíble» expresa un sentimiento.'),
+  D('«Las abejas ayudan a polinizar muchos cultivos.»',0,'Se ha estudiado y comprobado.'),
+  D('«Creo que las abejas son los insectos más interesantes.»',1,'«Creo que» anuncia una opinión.'),
+  D('«La Declaración de Independencia se firmó en 1776.»',0,'Lo dicen los documentos.'),
+  D('«Chicago tiene el mejor transporte público del país.»',1,'«El mejor» se puede discutir.')
+],{fijo:true,pista:'Todavía no. ¿Se puede comprobar, o depende de lo que alguien piensa o siente?'});
+
+function C(tema,ops,c,n){return {e:'<span class="tema-c">Texto sobre: '+tema+'</span><span class="preg">¿Cuál es la mejor conclusión?</span>',ops:ops,c:c,n:n};}
+unaAUna('cn',[
+  C('los tres estados de la materia',['En conclusión, la materia puede ser sólida, líquida o gaseosa, y cambia de estado con la temperatura.','En conclusión, el hielo es mucho más divertido que el vapor para los niños pequeños y para los grandes.','En conclusión, el mercurio es un metal muy curioso, porque es líquido a temperatura ambiente.'],0,'Resume las categorías. Las otras opinan o traen un dato nuevo.'),
+  C('los beneficios del ejercicio',['En resumen, el gimnasio de mi barrio es el más moderno y el más barato.','En resumen, hacer ejercicio fortalece el corazón, mejora el ánimo y ayuda a dormir mejor.','En resumen, los Juegos Olímpicos modernos empezaron en Atenas en el año 1896.'],1,'Vuelve al tema y resume.'),
+  C('las causas de la Revolución estadounidense',['En síntesis, los colonos no tenían razón en quejarse de los impuestos.','En síntesis, George Washington más tarde fue el primer presidente del país.','En síntesis, los impuestos y la falta de representación llevaron a los colonos a rebelarse.'],2,'Resume las causas sin opinar ni añadir datos nuevos.'),
+  C('cómo ahorrar en el supermercado',['En resumen, hacer una lista, comparar precios y comprar en temporada ayuda a gastar menos.','En resumen, ir al supermercado es la tarea más aburrida de toda la semana.','En resumen, el primer supermercado de autoservicio abrió en Tennessee en 1916.'],0,'Recoge las tres estrategias del texto.'),
+  C('los servicios de la clínica comunitaria',['En conclusión, la clínica abrió en 2005 y tiene un estacionamiento amplio.','En conclusión, con sus consultas, sus vacunas y su farmacia, la clínica cuida la salud del barrio.','En conclusión, todos deberían ir a la clínica en lugar de ir al hospital.'],1,'Recuerda las categorías y el tema.'),
+  C('el ciclo de vida de la mariposa',['En síntesis, las mariposas monarca viajan miles de millas hasta México cada año.','En síntesis, las mariposas son los insectos más bonitos del jardín.','En síntesis, la mariposa pasa por cuatro etapas: huevo, oruga, crisálida y adulta.'],2,'Resume las etapas del tema.')
+],{pista:'Todavía no. ¿Esa conclusión trae un dato nuevo o una opinión? La buena solo vuelve al tema y resume.'});
+</script>
+</body>
+</html>

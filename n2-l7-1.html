@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l7-1 · Postura, razones con apoyo y conectores · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.1 · Texto de opinión</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{font-weight:700;text-align:center;display:block}
+  .hueco{display:inline-block;min-width:4em;border-bottom:2px solid var(--cp-oscuro)}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila .op{text-align:center;min-width:150px}
+</style>
+</head>
+<body>
+<h1>Práctica 7.1 · Texto de opinión</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 7 · Acompaña a la Lección 7.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_7-1.html">← Volver a la Lección 7.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="postura">1 · La postura</button>
+  <button type="button" class="pest" data-mod="razones">2 · Razones con apoyo</button>
+  <button type="button" class="pest" data-mod="conectores">3 · Conectores</button>
+</nav>
+
+<section class="modulo" id="postura" aria-labelledby="t-pos">
+  <h2 id="t-pos">1 · La postura</h2>
+  <p class="consejo">La postura dice con claridad lo que piensa el autor. No es un dato ni una razón: es la idea que todo el texto defiende.</p>
+  <div class="enun" id="po-enun" aria-live="polite"></div>
+  <div class="opciones" id="po-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="po-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="po-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="po-marcador"></div>
+</section>
+
+<section class="modulo" id="razones" aria-labelledby="t-raz" hidden>
+  <h2 id="t-raz">2 · Razones con apoyo</h2>
+  <p class="consejo">Pregúntate: «¿Y cómo lo sé?». Si la oración da un hecho, un dato, un ejemplo o lo que dice un experto, tiene apoyo. «Todo el mundo sabe», «es obvio» o «y punto» no prueban nada.</p>
+  <div class="enun" id="ra-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="ra-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ra-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ra-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ra-marcador"></div>
+</section>
+
+<section class="modulo" id="conectores" aria-labelledby="t-con" hidden>
+  <h2 id="t-con">3 · Conectores</h2>
+  <p class="consejo"><strong>Causa:</strong> porque, ya que · <strong>Añadir:</strong> además, también · <strong>Consecuencia:</strong> por lo tanto, por eso · <strong>Objeción:</strong> sin embargo, aunque · <strong>Concluir:</strong> en conclusión, en resumen</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 7.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+function P(t,ops,n){return {e:'<span class="pasaje">'+t+'</span><span class="preg">¿Cuál es la postura del autor?</span>',ops:ops,c:0,n:n};}
+function Q(ops,n){return {e:'<span class="preg">¿Cuál de estas oraciones es una postura clara?</span>',ops:ops,c:0,n:n};}
+unaAUna('po',[
+  P('Muchos trabajadores pasan más de una hora al día en el tráfico. Si las empresas permitieran trabajar desde casa dos días por semana, esas horas se usarían en la familia o en el descanso. Además, habría menos carros en las calles. Por eso, las empresas deberían ofrecer esa opción siempre que sea posible.',
+    ['Las empresas deberían permitir trabajar desde casa','Hay demasiado tráfico en las calles de la ciudad','Los trabajadores necesitan más horas de descanso'],'La última oración lo resume: «las empresas deberían ofrecer esa opción».'),
+  P('En mi opinión, el desayuno escolar gratuito debería ofrecerse a todos los niños. Un niño con hambre no puede concentrarse en clase. Además, cuando el desayuno es para todos, nadie se siente señalado por pedirlo.',
+    ['El desayuno escolar gratis debería ser para todos','Los niños con hambre no se concentran en clase','Algunos niños se sienten mal al pedir comida'],'«En mi opinión…» presenta la postura; lo demás son razones.'),
+  P('Los teléfonos celulares no deberían estar permitidos en el salón de clase. Distraen a los estudiantes y facilitan copiar en los exámenes. Por supuesto, los padres necesitan comunicarse en una emergencia; sin embargo, pueden llamar a la oficina de la escuela.',
+    ['Los celulares no deberían estar permitidos en clase','Los padres necesitan comunicarse en emergencias','Los estudiantes copian en los exámenes'],'La primera oración da la postura.'),
+  P('Aunque los libros electrónicos son prácticos, creo que los niños pequeños deberían leer en papel. Pasar páginas, señalar dibujos y volver atrás es más fácil con un libro en la mano. Por otra parte, el papel no tiene notificaciones que distraigan.',
+    ['Los niños pequeños deberían leer en papel','Los libros electrónicos son muy prácticos','El papel no tiene notificaciones'],'«Creo que…» marca la postura; «aunque son prácticos» es una concesión.'),
+  P('Cada verano, la piscina del parque cierra a las seis de la tarde, justo cuando muchos padres salen del trabajo. Las familias que trabajan no pueden aprovecharla. Por todo esto, pido que la piscina abra hasta las nueve de la noche.',
+    ['La piscina debería abrir hasta las nueve','Los padres salen del trabajo a las seis','En verano hace calor en el parque'],'La petición final es la postura.'),
+  Q(['La ciudad debería poner más paradas de autobús en el barrio.','En el barrio hay tres paradas de autobús en la calle principal.','Algunos vecinos usan el autobús todos los días y otros no.'],'Dice qué piensa el autor y qué debería hacerse.'),
+  Q(['Aprender un oficio es tan valioso como ir a la universidad.','Hay muchos oficios, como la plomería y la electricidad.','Muchas personas estudian en la universidad y otras trabajan.'],'Toma partido de forma clara.'),
+  Q(['Los supermercados deberían cobrar las bolsas de plástico.','Las bolsas de plástico tienen ventajas y desventajas.','En el supermercado venden bolsas de plástico.'],'«Ventajas y desventajas» no toma partido.'),
+  Q(['Todos los adultos deberían aprender primeros auxilios.','Los primeros auxilios se enseñan en algunos cursos.','La Cruz Roja es una organización internacional.'],'Es una afirmación que se puede defender con razones.'),
+  Q(['La biblioteca debería abrir los domingos.','La biblioteca está en la calle principal.','No sé si la biblioteca debería abrir más días.'],'Las dudas no son una postura.')
+],{pista:'Todavía no. La postura es lo que el autor quiere que pienses, no un dato ni una razón.'});
+
+var AS=['Con apoyo','Sin apoyo'];
+function R(t,c,n){return {e:'<span class="pasaje">'+t+'</span>',ops:AS,c:c,n:n,fijo:true};}
+unaAUna('ra',[
+  R('«Es obvio que los perros son mejores mascotas que los gatos.»',1,'«Es obvio» no prueba nada.'),
+  R('«Los perros ayudan a hacer ejercicio, porque hay que sacarlos a caminar todos los días.»',0,'Da un hecho comprobable.'),
+  R('«Las bicicletas son el mejor transporte del mundo y punto.»',1,'«Y punto» cierra sin explicar.'),
+  R('«La bicicleta ahorra dinero: no necesita gasolina, seguro ni estacionamiento.»',0,'Enumera hechos concretos.'),
+  R('«Todo el mundo sabe que el café es malo.»',1,'«Todo el mundo sabe» es una señal vacía.'),
+  R('«Beber agua en lugar de refrescos reduce el azúcar que consumimos, porque una lata de refresco tiene varias cucharadas de azúcar.»',0,'Explica con un dato.'),
+  R('«Las clases en línea son malísimas.»',1,'Solo repite la opinión con más fuerza.'),
+  R('«Las clases en línea permiten estudiar a quienes trabajan, ya que pueden conectarse por la noche.»',0,'Da una razón comprobable.'),
+  R('«Los médicos recomiendan dormir entre siete y nueve horas para que el cuerpo se recupere.»',0,'Cita lo que dicen los expertos.'),
+  R('«Dormir es lo más importante, sin ninguna duda.»',1,'«Sin ninguna duda» no es un apoyo.'),
+  R('«Un huerto en casa ahorra dinero: un sobre de semillas cuesta menos que un kilo de tomates.»',0,'Compara precios.'),
+  R('«Los huertos son bonitos y a todos les encantan.»',1,'«A todos les encantan» no se puede comprobar.'),
+  R('«Leer el periódico nos mantiene informados sobre las decisiones del gobierno local.»',0,'Explica qué se gana.'),
+  R('«Cualquier persona inteligente estaría de acuerdo conmigo.»',1,'Ataca a quien no piensa igual, pero no da razones.')
+],{fijo:true,pista:'Todavía no. Pregúntate: «¿Y cómo lo sé?». ¿La oración responde a esa pregunta?'});
+
+function C(t,ops,n){return {e:'<span class="pasaje">'+t.replace('___','<span class="hueco" aria-label="espacio en blanco">&nbsp;</span>')+'</span><span class="preg">¿Qué conector completa mejor la oración?</span>',ops:ops,c:0,n:n};}
+unaAUna('co',[
+  C('«Prefiero cocinar en casa ___ es más barato y más sano.»',['porque','sin embargo','en conclusión'],'Explica la causa.'),
+  C('«El parque es grande. ___, tiene canchas de fútbol y de básquetbol.»',['Además','Por lo tanto','Aunque'],'Añade información.'),
+  C('«La tienda cerró temprano; ___, no pude comprar la leche.»',['por eso','además','en primer lugar'],'Muestra la consecuencia.'),
+  C('«Es cierto que el curso es difícil; ___, vale la pena.»',['sin embargo','por lo tanto','también'],'Responde a una objeción.'),
+  C('«___, el transporte público mejora la vida de toda la ciudad.»',['En conclusión','Porque','Por ejemplo'],'Cierra el texto.'),
+  C('«___, hacer ejercicio mejora la salud. En segundo lugar, reduce el estrés.»',['En primer lugar','Sin embargo','Por lo tanto'],'Ordena la primera razón.'),
+  C('«No fui a la fiesta ___ tenía que trabajar al día siguiente.»',['ya que','además','sin embargo'],'Da la causa.'),
+  C('«Los precios suben cada mes. ___, muchas familias buscan un segundo empleo.»',['Por lo tanto','En primer lugar','Aunque'],'Consecuencia.'),
+  C('«___ la casa es pequeña, tiene mucha luz.»',['Aunque','Porque','Por lo tanto'],'Contrasta dos ideas.'),
+  C('«Las frutas tienen vitaminas. ___, tienen fibra.»',['También','Sin embargo','Por eso'],'Añade otra ventaja.'),
+  C('«Hay muchos parques en Chicago, ___ el parque Lincoln y el parque Grant.»',['por ejemplo','por lo tanto','sin embargo'],'Presenta ejemplos.'),
+  C('«Las aceras están rotas y varios vecinos se han caído. ___, la ciudad debe arreglarlas cuanto antes.»',['Por lo tanto','Sin embargo','Por ejemplo'],'La segunda idea es la consecuencia de la primera.'),
+  C('«Estudié mucho; ___, aprobé el examen.»',['por lo tanto','aunque','en primer lugar'],'Consecuencia.'),
+  C('«Me gusta el invierno. ___, el frío de enero es difícil de soportar.»',['Sin embargo','Además','Por lo tanto'],'Objeción o contraste.')
+],{pista:'Todavía no. ¿Qué relación hay entre las dos ideas: causa, suma, consecuencia, contraste o cierre?'});
+</script>
+</body>
+</html>

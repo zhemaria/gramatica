@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l7-3 · Ordenar eventos, puntuar el diálogo y revisar borradores · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.3 · Narración y revisión</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .pasaje.b{background:#eef7f6;border-left-color:#004d44}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.serif .op{font-family:Georgia,serif;font-size:1.06rem}
+  .orden-titulo{font-weight:700;color:var(--cp-oscuro);margin:6px 0}
+  ol.orden{background:#fff;border:2px dashed var(--cp);border-radius:10px;min-height:48px;padding:10px 14px 10px 36px;margin:8px 0 14px}
+  ol.orden li{margin:4px 0;font-family:Georgia,serif}
+  .sueltos{display:flex;flex-direction:column;gap:8px}
+  .sueltos .op{text-align:left;font-family:Georgia,serif;font-size:1.02rem}
+</style>
+</head>
+<body>
+<h1>Práctica 7.3 · Narración y revisión</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 7 · Acompaña a la Lección 7.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_7-3.html">← Volver a la Lección 7.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="ordena">1 · Ordena la historia</button>
+  <button type="button" class="pest" data-mod="dialogo">2 · El diálogo</button>
+  <button type="button" class="pest" data-mod="revision">3 · La revisión</button>
+</nav>
+
+<section class="modulo" id="ordena" aria-labelledby="t-ord">
+  <h2 id="t-ord">1 · Ordena la historia</h2>
+  <p class="consejo">Pulsa los eventos en el orden en que ocurrieron. Los conectores de tiempo (<em>primero, luego, de repente, al final</em>) son tus pistas.</p>
+  <p class="orden-titulo" id="or-titulo"></p>
+  <ol class="orden" id="or-lista" aria-label="Eventos ya ordenados"></ol>
+  <div class="sueltos" id="or-sueltos" role="group" aria-label="Eventos por ordenar"></div>
+  <div class="fb" id="or-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="or-otra">Otra historia</button></div>
+  <div class="marcador" id="or-marcador"></div>
+</section>
+
+<section class="modulo" id="dialogo" aria-labelledby="t-dia" hidden>
+  <h2 id="t-dia">2 · El diálogo bien puntuado</h2>
+  <p class="consejo">Raya pegada a la primera palabra · narrador entre rayas · verbo de decir en minúscula · el punto va después de la segunda raya: <em>—Ya voy —dijo Ana—. Espérame.</em></p>
+  <div class="enun" id="di-enun" aria-live="polite"></div>
+  <div class="opciones serif" id="di-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="di-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="di-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="di-marcador"></div>
+</section>
+
+<section class="modulo" id="revision" aria-labelledby="t-rev" hidden>
+  <h2 id="t-rev">3 · La revisión</h2>
+  <p class="consejo">Compara los borradores o elige el comentario más útil: amable, concreto y que ayude a mejorar.</p>
+  <div class="enun" id="re-enun" aria-live="polite"></div>
+  <div class="opciones" id="re-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="re-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="re-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="re-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 7.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: historias con sus eventos en orden */
+(function(){
+  var H=[
+    ['La mudanza',['Aquella mañana de junio, la familia Ortiz despertó antes del amanecer.','Primero desarmaron las camas y guardaron la ropa en cajas.','Luego llegó el camión que habían alquilado.','Mientras los adultos cargaban los muebles, los niños se despidieron de los vecinos.','Esa noche durmieron por primera vez en su nuevo apartamento.']],
+    ['El apagón',['Era una noche de agosto y hacía mucho calor.','De repente, se apagaron todas las luces del edificio.','Don Ramón bajó con una linterna para ver qué pasaba.','Al rato, los vecinos sacaron sillas a la acera y se pusieron a conversar.','Cuando volvió la luz, nadie quería volver a entrar.']],
+    ['La entrevista de trabajo',['Hace dos años, Carmen vio un anuncio de empleo en la biblioteca.','Esa misma tarde preparó su currículum con ayuda de la bibliotecaria.','Una semana después, la llamaron para una entrevista.','El día de la entrevista respondió a todas las preguntas con calma.','Desde entonces trabaja en esa empresa.']],
+    ['La tormenta de nieve',['El lunes por la mañana empezó a nevar con fuerza.','Al mediodía, la escuela mandó a los niños a casa.','Por la tarde, la nieve ya cubría los carros.','Por la noche, los vecinos salieron con palas a limpiar la acera.','Al día siguiente, el barrio amaneció blanco y en silencio.']],
+    ['La carta del abuelo',['Al principio, Daniel no entendía por qué su madre lloraba.','Entonces ella le mostró una carta vieja que había encontrado en un cajón.','Era del abuelo, escrita el día que llegó a este país.','Juntos la leyeron en voz alta, despacio.','Por fin, Daniel entendió de dónde venía su familia.']],
+    ['El partido final',['Faltaban cinco minutos y el equipo del barrio perdía por un gol.','En ese momento, Julio robó el balón en el centro del campo.','Corrió hacia la portería y disparó con todas sus fuerzas.','El balón pegó en el poste y entró.','Al final del partido, todos lo levantaron en hombros.']]
+  ];
+  var tit=document.getElementById('or-titulo'), lista=document.getElementById('or-lista'), sueltos=document.getElementById('or-sueltos'), fb=document.getElementById('or-fb'), marc=document.getElementById('or-marcador');
+  var cola=[], actual, sig, errores, hechas=0, perfectas=0;
+  function contar(){marc.textContent='Historias ordenadas sin errores: '+perfectas+' de '+hechas;}
+  function nueva(){
+    if(!cola.length)cola=barajar(H);
+    actual=cola.pop(); sig=0; errores=0;
+    tit.textContent='«'+actual[0]+'»'; lista.innerHTML=''; sueltos.innerHTML=''; fb.textContent=''; fb.className='fb';
+    barajar(actual[1].map(function(_,i){return i;})).forEach(function(i){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.textContent=actual[1][i];
+      b.addEventListener('click',function(){
+        if(i===sig){
+          var li=document.createElement('li'); li.textContent=actual[1][i]; lista.appendChild(li); b.remove(); sig++;
+          fb.textContent='✓ Bien.'; fb.className='fb bien';
+          if(sig===actual[1].length){hechas++; if(!errores)perfectas++; contar(); fb.textContent=errores?'🎉 Historia completa. Tuviste '+errores+(errores===1?' error':' errores')+': fíjate en los conectores de tiempo.':'🎉 ¡Perfecto! Ordenaste la historia sin errores.';}
+        }else{
+          errores++; fb.textContent='Ese evento todavía no ocurre. Busca el conector de tiempo: ¿qué tiene que pasar antes?'; fb.className='fb mal';
+        }
+      });
+      sueltos.appendChild(b);
+    });
+  }
+  document.getElementById('or-otra').addEventListener('click',nueva);
+  contar(); nueva();
+})();
+
+/* Módulo 2: diálogo */
+function D(ops,n){return {e:'<span class="preg">¿Cuál está bien puntuado?</span>',ops:ops,c:0,n:n};}
+unaAUna('di',[
+  D(['—¿Dónde está la parada? —preguntó la señora.','—¿Dónde está la parada? —Preguntó la señora.','"¿Dónde está la parada?", preguntó la señora.'],'Raya, y el verbo de decir en minúscula.'),
+  D(['—Aquí cerca —respondió el chofer—. Dos cuadras a la derecha.','—Aquí cerca —respondió el chofer. —Dos cuadras a la derecha.','—Aquí cerca, respondió el chofer, dos cuadras a la derecha.'],'El punto va después de la segunda raya.'),
+  D(['—Gracias —dijo ella.','— Gracias — dijo ella.','-Gracias -dijo ella.'],'La raya va pegada a la palabra y es más larga que el guion.'),
+  D(['—Mamá, ya llegué —gritó Tomás desde la puerta.','—Mamá, ya llegué —Gritó Tomás desde la puerta.','Mamá, ya llegué —gritó Tomás desde la puerta.'],'Raya al inicio y verbo en minúscula.'),
+  D(['—No sé —contestó Luis—. Tal vez mañana.','—No sé —contestó Luis—, Tal vez mañana.','—No sé —contestó Luis— tal vez mañana.'],'Después de la segunda raya va el punto y luego mayúscula.'),
+  D(['—¡Qué sorpresa! —exclamó la abuela.','—¡Qué sorpresa!, —exclamó la abuela.','—¡Qué sorpresa! —Exclamó la abuela.'],'Tras «!» no va coma; el verbo, en minúscula.'),
+  D(['—Tengo hambre —dijo el niño, y se sentó a la mesa.','—Tengo hambre —dijo el niño y se sentó a la mesa—.','—Tengo hambre. —dijo el niño, y se sentó a la mesa.'],'Si el narrador cierra la oración, no hace falta la segunda raya.'),
+  D(['—¿Vienes? —le pregunté.<br>—Sí, espérame —respondió Ana.','—¿Vienes? —le pregunté. —Sí, espérame —respondió Ana.','—¿Vienes? —le pregunté. Sí, espérame, respondió Ana.'],'Cada personaje empieza en una línea nueva.'),
+  D(['—Mira —susurró Elena—, ahí viene el maestro.','—Mira —susurró Elena— ahí viene el maestro.','—Mira, susurró Elena, —ahí viene el maestro.'],'Si la oración sigue, la coma va después de la segunda raya.'),
+  D(['—Buenos días —saludó la doctora—. ¿Cómo se siente hoy?','—Buenos días —saludó la doctora. ¿Cómo se siente hoy?','—Buenos días —saludó la doctora—, ¿Cómo se siente hoy?'],'La segunda raya cierra al narrador; después, punto y la pregunta.')
+],{pista:'Todavía no. Revisa: ¿la raya está pegada?, ¿el verbo de decir está en minúscula?, ¿el signo va después de la segunda raya?'});
+
+/* Módulo 3: revisión */
+function B(a,b,ops,n){return {e:'<span class="pasaje"><strong>Borrador:</strong> '+a+'</span><span class="pasaje b"><strong>Revisado:</strong> '+b+'</span><span class="preg">¿Qué mejoró principalmente?</span>',ops:ops,c:0,n:n};}
+function S(t,ops,n){return {e:'<span class="pasaje">'+t+'</span><span class="preg">¿Cuál es el comentario más útil?</span>',ops:ops,c:0,n:n};}
+var MEJ=['El escenario: cuándo y dónde','Los detalles concretos','El diálogo con raya','Los conectores de tiempo'];
+function M(i){var o=MEJ.slice(); var c=o.splice(i,1)[0]; return [c].concat(o.slice(0,2));}
+unaAUna('re',[
+  B('Fui a la fiesta. Bailamos mucho.','El viernes por la noche, en el salón de la iglesia, fui a la fiesta de mi prima. Bailamos mucho.',M(0),'Ahora sabemos cuándo y dónde.'),
+  B('Compré comida para la cena.','Compré pollo, arroz, aguacates y tortillas para la cena.',M(1),'«Comida» se volvió algo que se puede imaginar.'),
+  B('Mi hermano dijo que no podía venir.','—No puedo ir —me dijo mi hermano—. Tengo turno doble.',M(2),'Las palabras del hermano ahora son diálogo.'),
+  B('Me levanté. Desayuné. Salí. Perdí el autobús.','Primero me levanté y desayuné. Luego salí corriendo, pero al final perdí el autobús.',M(3),'Los conectores ordenan y unen las acciones.'),
+  B('El parque estaba bonito.','El parque estaba lleno de flores amarillas y olía a hierba recién cortada.',M(1),'«Bonito» se cambió por lo que se ve y se huele.'),
+  B('La maestra nos saludó.','—Bienvenidos a la clase de los martes —nos saludó la maestra.',M(2),'Se oye la voz de la maestra.'),
+  S('Narración de Pedro sobre su primer día en la fábrica. No dice qué hacía allí.',['Me gustó cuando conoces a tu supervisor. ¿Podrías añadir qué tarea hacías?','Está bien, pero creo que le falta algo, aunque no sé bien qué cosa es.','Las historias de fábrica son siempre aburridas para todos los lectores.'],'Señala algo bueno y pide un detalle concreto.'),
+  S('Narración de Lucía sobre una tormenta. Todo el diálogo está entre comillas.',['¿Podrías escribir el diálogo con raya? Así se ve más claro quién habla.','Tu historia está mal hecha; hay que repetirla entera desde el principio.','Está perfecta así como está; no cambies nada de nada, ni una coma.'],'Amable, concreto y útil.'),
+  S('Narración de Óscar sobre su boda. Los hechos están desordenados.',['Me encantó el baile. ¿Podrías contar primero la ceremonia y después la fiesta?','No entendí nada de lo que escribiste; es muy confuso y no se sigue.','Escribe como escribo yo, con mis palabras, y seguro te quedará bien.'],'Propone una solución concreta al desorden.')
+],{pista:'Todavía no. Compara las dos versiones: ¿qué tiene la revisada que no tenía el borrador?'});
+</script>
+</body>
+</html>
