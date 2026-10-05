@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l3-3 · Registro formal e informal · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.3 · Registro formal e informal</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .msg{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:10px;padding:12px 16px;margin-bottom:8px}
+  .enun .situ{display:block;background:var(--cp-claro);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-weight:600}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:620px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:left}
+  .opciones.dos{flex-direction:row;justify-content:center}
+  .opciones.dos .op{min-width:140px;text-align:center}
+  .opciones.serif .op{font-family:Georgia,serif;font-size:1.1rem}
+</style>
+</head>
+<body>
+<h1>Práctica 3.3 · Registro formal e informal</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 3 · Acompaña a la Lección 3.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_3-3.html">← Volver a la Lección 3.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="clasifica">1 · ¿Formal o informal?</button>
+  <button type="button" class="pest" data-mod="destinatario">2 · El destinatario decide</button>
+  <button type="button" class="pest" data-mod="transforma">3 · Transforma el mensaje</button>
+</nav>
+
+<section class="modulo" id="clasifica" aria-labelledby="t-cla">
+  <h2 id="t-cla">1 · ¿Formal o informal?</h2>
+  <p class="consejo">Fíjate en el trato (<em>tú</em> o <em>usted</em>), el saludo, las palabras de cada país, las abreviaturas y los emojis.</p>
+  <div class="enun" id="cl-enun" aria-live="polite"></div>
+  <div class="opciones dos" id="cl-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cl-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cl-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cl-marcador"></div>
+</section>
+
+<section class="modulo" id="destinatario" aria-labelledby="t-des" hidden>
+  <h2 id="t-des">2 · El destinatario decide</h2>
+  <p class="consejo">Pregúntate a quién le hablas o escribes y para qué. Luego elige la forma que corresponde.</p>
+  <div class="enun" id="de-enun" aria-live="polite"></div>
+  <div class="opciones serif" id="de-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="de-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="de-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="de-marcador"></div>
+</section>
+
+<section class="modulo" id="transforma" aria-labelledby="t-tra" hidden>
+  <h2 id="t-tra">3 · Transforma el mensaje</h2>
+  <p class="consejo">Elige la mejor versión formal: debe decir lo mismo, con <em>usted</em>, palabras completas y buena puntuación.</p>
+  <div class="enun" id="tr-enun" aria-live="polite"></div>
+  <div class="opciones serif" id="tr-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="tr-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="tr-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="tr-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 3.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: 0 formal · 1 informal */
+unaAUna('cl',[
+  ['Buenos días. Quisiera confirmar mi cita del jueves a las diez.',0,'Saludo de cortesía y oración completa.'],
+  ['¿Qué onda? ¿Vamos al cine el sábado?',1,'<em>¿Qué onda?</em> es un saludo de confianza.'],
+  ['Le informamos que su pedido llegará el lunes.',0,'<em>usted</em> e <em>informar</em>.'],
+  ['Ya llegué, mamá, no te preocupes 😘',1,'Trato de <em>tú</em> y emoji.'],
+  ['Estimado cliente: le recordamos que su factura vence el día 15.',0,'Saludo formal con dos puntos.'],
+  ['Oye, tmb trae hielo xfa',1,'Abreviaturas: <em>tmb, xfa</em>.'],
+  ['¿Podría indicarme dónde está la oficina de admisiones?',0,'<em>¿Podría…?</em> es una petición cortés con <em>usted</em>.'],
+  ['Esa película está bien chida, ¡tienes que verla!',1,'<em>chida</em> es coloquial.'],
+  ['Le agradezco de antemano su atención.',0,'Fórmula de cortesía.'],
+  ['Nos vemos al rato, cuídate',1,'Despedida de confianza.'],
+  ['Adjunto le envío mi currículum para el puesto de recepcionista.',0,'Vocabulario de trabajo y <em>usted</em>.'],
+  ['Me quedé sin pega, ando buscando algo',1,'<em>pega</em> (trabajo, en Chile) y tono de conversación.'],
+  ['Señora Martínez, ¿tendría unos minutos para hablar sobre mi hijo?',0,'Trato de <em>usted</em> y pregunta cortés.'],
+  ['Jaja no manches, qué risa 😂',1,'Expresión coloquial y emoji.']
+].map(function(d){return {e:'<span class="msg">«'+d[0]+'»</span>¿En qué registro está?',ops:['Formal','Informal'],c:d[1],fijo:true,n:['Formal','Informal'][d[1]]+'. '+d[2]};}),
+{pista:'Todavía no. ¿Usa tú o usted? ¿Tiene abreviaturas, emojis o palabras de un solo país?'});
+
+/* Módulo 2 (la primera opción es la correcta) */
+unaAUna('de',[
+  ['Le escribes a la maestra de tu hija. ¿Cómo empiezas?',['Estimada maestra López:','¡Hola, profe! ¿Cómo andas?','Oye, maestra,']],
+  ['Le escribes a tu mejor amiga. ¿Cómo empiezas?',['¡Hola, Caro! ¿Cómo estás?','Estimada Carolina:','Muy señora mía:']],
+  ['Llamas a una clínica para pedir una cita.',['Buenos días, quisiera pedir una cita con el doctor Ruiz.','¿Qué tal? Oye, ¿me das cita?','Hola, ¿qué onda? Necesito al doctor.']],
+  ['Terminas un correo a una oficina del gobierno.',['Atentamente,','Chao, gracias!!','Un besote,']],
+  ['Le pides a tu hijo que saque la basura.',['Mijo, ¿sacas la basura, por favor?','Le solicito que retire los residuos.','Estimado hijo: saque la basura.']],
+  ['Le pides a tu supervisor que te cambie el turno.',['¿Sería posible cambiar mi turno del martes por el jueves?','Oye, cámbiame el turno, ¿va?','Cambia mi turno, porfa.']],
+  ['Respondes un mensaje de tu hermano que te invita a comer.',['¡Claro! Allí estaré a las dos.','Le confirmo mi asistencia a la comida.','Acepto cordialmente su invitación.']],
+  ['Escribes una queja a la compañía de cable.',['Les escribo porque el servicio lleva tres días sin funcionar.','Oigan, el cable no sirve, ¿qué pasó?','El cable anda bien mal 😡']],
+  ['Agradeces una entrevista de trabajo.',['Muchas gracias por recibirme ayer y por su tiempo.','Gracias x la entrevista!!','Ey, gracias, estuvo chido.']],
+  ['Le preguntas a un desconocido por una calle.',['Disculpe, ¿sabe dónde queda la calle Pulaski?','Oye, ¿dónde está Pulaski?','Tú, ¿dónde queda Pulaski?']],
+  ['Le escribes a tu compañera de clase para quedar a estudiar.',['¿Estudiamos juntas el jueves en la biblioteca?','Le propongo una sesión de estudio el jueves.','Estimada compañera: solicito su presencia el jueves.']],
+  ['Respondes en el GED a una pregunta de respuesta extendida.',['El autor presenta tres argumentos a favor de su postura.','Pues el autor dice como tres cosas, o sea…','El autor tiene razón y ya, eso es todo.']]
+].map(function(d){return {e:'<span class="situ">'+d[0]+'</span>',ops:d[1],c:0,n:'«'+d[1][0]+'»'};}),
+{pista:'Todavía no. Piensa en quién recibe el mensaje: ¿es alguien de confianza o una persona con la que debes ser formal?'});
+
+/* Módulo 3 (la primera opción es la correcta) */
+unaAUna('tr',[
+  ['oye q onda, mi hijo no va a ir mañana xq tiene gripa, ok?',['Les informo que mi hijo no asistirá mañana porque tiene gripe.','Oye, mi hijo no va mañana porque tiene gripa.','Les informo q mi hijo no va xq tiene gripa.']],
+  ['la llave del baño está rota otra vez, la arreglas ya porfa?',['Le informo que la llave del baño está rota de nuevo. ¿Podría repararla pronto?','La llave del baño ta rota otra vez, arréglala ya.','Le informo que la llave del baño está rota, arréglala porfa.']],
+  ['vi lo de la chamba de cocinero, cuánto pagan?',['Vi su anuncio para el puesto de cocinero. ¿Podría indicarme el salario?','Vi lo de la chamba de cocinero. ¿Cuánto pagan?','Vi su anuncio de chamba. ¿Cuánto me van a pagar?']],
+  ['no puedo ir a la junta, se me complicó, perdón',['Lamento informarle que no podré asistir a la reunión por un imprevisto.','No puedo ir a la junta, se me complicó, perdón.','Lamento que no puedo ir, se me complicó todo.']],
+  ['me mandas el papel de la renta xfa',['¿Podría enviarme el recibo del alquiler, por favor?','Mándame el papel de la renta, por favor.','Me envía el papel de la renta xfa.']],
+  ['gracias x todo, nos vemos',['Le agradezco mucho su ayuda. Saludos cordiales.','Gracias por todo, nos vemos.','Muchas gracias x su ayuda, nos vemos.']],
+  ['tengo q faltar el lunes, voy al doc',['Necesito faltar el lunes porque tengo una cita médica.','Tengo que faltar el lunes, voy al doc.','Necesito faltar el lunes xq voy al doctor.']],
+  ['está bien caro el curso, no hay descuento o algo?',['¿El curso ofrece algún descuento? El precio es alto para mí.','Está bien caro el curso, ¿no hay descuento?','¿No hay un descuentito o algo para el curso?']],
+  ['ya te pagué, checa tu cuenta',['Le informo que ya realicé el pago. Puede verificarlo en su cuenta.','Ya le pagué, chequee su cuenta.','Ya te pagué, revisa tu cuenta.']],
+  ['ando buscando info de las clases de compu',['Quisiera información sobre las clases de computación.','Busco info de las clases de compu.','Quisiera información de las clases de compu.']]
+].map(function(d){return {e:'<span class="msg">«'+d[0]+'»</span>¿Cuál es la mejor versión formal?',ops:d[1],c:0,n:'«'+d[1][0]+'»',a:d[1][0]};}),
+{leerAlAcertar:true,pista:'Todavía no. Esa versión conserva palabras informales o abreviaturas, o no usa usted.'});
+</script>
+</body>
+</html>

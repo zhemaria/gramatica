@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l3-2 · La tilde y la ortografía convencional · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.2 · La tilde y la ortografía</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.9rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .frase{display:block;font-family:Georgia,serif;font-size:1.3rem;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:520px;margin:0 auto}
+  .opciones .op{font-family:Georgia,serif;font-size:1.3rem;padding:10px 14px;text-align:center}
+  .opciones.silabas{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.silabas .op{min-width:80px}
+  textarea.escribir{width:100%;min-height:90px;font-family:Georgia,serif;font-size:1.2rem;padding:10px 12px;border:2px solid #c9d2db;border-radius:8px}
+  textarea.escribir:focus{outline:3px solid #b35316;outline-offset:2px;border-color:var(--cp)}
+  .revision{font-family:Georgia,serif;font-size:1.2rem;line-height:2.2;margin:10px 0}
+  .revision span{padding:1px 5px;border-radius:5px;margin-right:2px}
+  .w-ok{background:#d4edda;color:#155724}
+  .w-tilde{background:#fff3cd;color:#5c3900;border:2px dashed #b35316}
+  .w-mal{background:#f8d7da;color:#721c24;text-decoration:underline wavy}
+  .ley{font-size:.9rem;color:#555;text-align:center}
+  .solucion{font-family:Georgia,serif;font-size:1.2rem;background:var(--cp-claro);border-radius:8px;padding:10px 14px;margin:10px 0}
+  .solucion[hidden]{display:none}
+</style>
+</head>
+<body>
+<h1>Práctica 3.2 · La tilde y la ortografía</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 3 · Acompaña a la Lección 3.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_3-2.html">← Volver a la Lección 3.2</a>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que los módulos 1 y 4 no tendrán sonido. Pide a alguien que te lea las palabras y las oraciones.</p>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="tonica">1 · La sílaba tónica</button>
+  <button type="button" class="pest" data-mod="tilde">2 · ¿Con tilde?</button>
+  <button type="button" class="pest" data-mod="letras">3 · Letras que suenan igual</button>
+  <button type="button" class="pest" data-mod="dictado">4 · Dictado</button>
+</nav>
+
+<section class="modulo" id="tonica" aria-labelledby="t-ton">
+  <h2 id="t-ton">1 · La sílaba tónica</h2>
+  <p class="consejo">Escucha la palabra y toca la sílaba que suena con más fuerza. Dila tú en voz alta, como si llamaras a alguien de lejos.</p>
+  <div class="fila"><button type="button" class="oir" id="to-oir">🔊 Escuchar la palabra</button></div>
+  <div class="enun" id="to-enun" aria-live="polite"></div>
+  <div class="opciones silabas" id="to-ops" role="group" aria-label="Sílabas"></div>
+  <div class="fb" id="to-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="to-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="to-marcador"></div>
+</section>
+
+<section class="modulo" id="tilde" aria-labelledby="t-til" hidden>
+  <h2 id="t-til">2 · ¿Con tilde o sin tilde?</h2>
+  <p class="consejo"><strong>Aguda</strong> con tilde si termina en <em>n, s</em> o vocal. <strong>Llana</strong> con tilde si <em>no</em> termina así. <strong>Esdrújula</strong>, siempre.</p>
+  <div class="enun" id="ti-enun" aria-live="polite"></div>
+  <div class="opciones" id="ti-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ti-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ti-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ti-marcador"></div>
+</section>
+
+<section class="modulo" id="letras" aria-labelledby="t-let" hidden>
+  <h2 id="t-let">3 · Letras que suenan igual</h2>
+  <p class="consejo"><em>mb</em> y <em>nv</em> · pasado en <em>-aba</em> · <em>ce, ci</em> pero <em>za, zo, zu</em> · <em>-aje</em> con <em>j</em> · <em>-ger, -gir</em> con <em>g</em> · <em>haber</em> y <em>hacer</em> con <em>h</em>.</p>
+  <div class="enun" id="le-enun" aria-live="polite"></div>
+  <div class="opciones" id="le-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="le-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="le-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="le-marcador"></div>
+</section>
+
+<section class="modulo" id="dictado" aria-labelledby="t-dic" hidden>
+  <h2 id="t-dic">4 · Dictado</h2>
+  <p class="consejo">Escucha la oración todas las veces que necesites y escríbela con mayúscula, tildes y punto final. Luego pulsa <strong>Revisar</strong>.</p>
+  <div class="fila">
+    <button type="button" class="oir" id="dc-oir">🔊 Escuchar</button>
+    <button type="button" class="oir" id="dc-despacio">🔊 Más despacio</button>
+  </div>
+  <label class="sr-solo" for="dc-texto">Escribe aquí la oración</label>
+  <textarea class="escribir" id="dc-texto" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Escribe aquí lo que oyes…"></textarea>
+  <div class="fila">
+    <button type="button" class="btn btn-p" id="dc-revisar">Revisar</button>
+    <button type="button" class="btn btn-s" id="dc-ver">Ver la oración</button>
+    <button type="button" class="btn btn-p" id="dc-otra">Otro ejercicio</button>
+  </div>
+  <div class="revision" id="dc-rev" aria-live="polite"></div>
+  <p class="ley" id="dc-ley" hidden>Verde: bien escrita · Amarillo: revisa la tilde · Rojo: revisa las letras, o la palabra no está en la oración</p>
+  <div class="fb" id="dc-fb" role="status" aria-live="polite"></div>
+  <div class="solucion" id="dc-sol" hidden></div>
+  <div class="marcador" id="dc-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 3.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: palabra separada en sílabas y número de la sílaba tónica (empezando en 0) */
+(function(){
+  var T=['aguda','llana','esdrújula'];
+  var D=[['ca-mión',1],['ár-bol',0],['mú-si-ca',0],['ven-ta-na',1],['re-loj',1],['te-lé-fo-no',1],['tra-ba-jar',2],['e-xa-men',1],
+         ['ciu-dad',1],['sá-ba-do',0],['lá-piz',0],['ca-mi-se-ta',2],['com-pu-ta-do-ra',3],['pá-ja-ro',0],['co-ra-zón',2],['ma-ña-na',1],['in-glés',1],['mé-di-co',0]];
+  unaAUna('to',D.map(function(d){
+    var s=d[0].split('-'), w=s.join(''), tipo=T[s.length-1-d[1]];
+    return {e:'<span class="grande">'+w+'</span>¿Qué sílaba suena más fuerte?',ops:s,c:d[1],fijo:true,a:w,
+            n:'<strong>'+s[d[1]]+'</strong>. «'+w+'» es '+(tipo||'sobresdrújula')+'.'};
+  }),{pista:'Todavía no. Escúchala otra vez y prueba a decirla con la fuerza en cada sílaba.'});
+})();
+
+/* Módulo 2 (la primera opción es la correcta) */
+unaAUna('ti',[
+  ['canción','cancion','Aguda terminada en <em>n</em>: con tilde.'],
+  ['papel','papél','Aguda terminada en <em>l</em>: sin tilde.'],
+  ['árbol','arbol','Llana terminada en <em>l</em>: con tilde.'],
+  ['examen','exámen','Llana terminada en <em>n</em>: sin tilde.'],
+  ['música','musica','Esdrújula: siempre con tilde.'],
+  ['ciudad','ciudád','Aguda terminada en <em>d</em>: sin tilde.'],
+  ['fácil','facil','Llana terminada en <em>l</em>: con tilde.'],
+  ['camiones','camiónes','Llana terminada en <em>s</em>: sin tilde.'],
+  ['sofá','sofa','Aguda terminada en vocal: con tilde.'],
+  ['comer','comér','Aguda terminada en <em>r</em>: sin tilde.'],
+  ['lápiz','lapiz','Llana terminada en <em>z</em>: con tilde.'],
+  ['joven','jóven','Llana terminada en <em>n</em>: sin tilde.'],
+  ['médico','medico','Esdrújula: siempre con tilde.'],
+  ['café','cafe','Aguda terminada en vocal: con tilde.'],
+  ['azúcar','azucar','Llana terminada en <em>r</em>: con tilde.'],
+  ['nación','nacion','Aguda terminada en <em>n</em>: con tilde.'],
+  ['naciones','naciónes','Llana terminada en <em>s</em>: sin tilde.'],
+  ['difícil','dificil','Llana terminada en <em>l</em>: con tilde.'],
+  ['autobús','autobus','Aguda terminada en <em>s</em>: con tilde.'],
+  ['crisis','crísis','Llana terminada en <em>s</em>: sin tilde.'],
+  ['fue','fué','Una sola sílaba: sin tilde.'],
+  ['día','dia','Hiato: la <em>í</em> fuerte lleva tilde.']
+].map(function(d){return {e:'¿Cómo se escribe?',ops:[d[0],d[1]],c:0,n:'«'+d[0]+'». '+d[2],a:d[0]};}),
+{leerAlAcertar:true,pista:'Todavía no. Separa la palabra en sílabas, busca la tónica y mira en qué letra termina.'});
+
+/* Módulo 3 (la primera opción es la correcta) */
+unaAUna('le',[
+  ['Cuando era joven, ___ en una panadería.',['trabajaba','trabajava'],'Pasado en <em>-aba</em>: <em>b</em>.'],
+  ['Mi ___ trabaja en la construcción.',['hombre','honbre'],'Antes de <em>b</em> va <em>m</em>: <em>mb</em>.'],
+  ['Te voy a ___ la foto por mensaje.',['enviar','embiar'],'Después de <em>n</em>: <em>v</em>.'],
+  ['No quiero ___ la cita.',['olvidar','olbidar'],'Después de <em>ol</em>: <em>v</em>.'],
+  ['Mi hija es muy ___.',['activa','actiba'],'Termina en <em>-iva</em>: <em>v</em>.'],
+  ['Voy a ___ una carta a mi madre.',['escribir','escrivir'],'Verbo en <em>-bir</em>: <em>b</em>.'],
+  ['Hoy es un día ___.',['feliz','felis'],'De la familia de <em>felicidad</em>: <em>z</em> al final.'],
+  ['Los niños están muy ___.',['felices','felizes'],'<em>z</em> pasa a <em>c</em> delante de <em>e</em>.'],
+  ['Me compré unos ___ negros.',['zapatos','sapatos'],'<em>za</em> con <em>z</em>.'],
+  ['Recibí un ___ de mi jefe.',['mensaje','mensage'],'Termina en <em>-aje</em>: <em>j</em>.'],
+  ['Tienes que ___ entre las dos opciones.',['elegir','elejir'],'Verbo en <em>-gir</em>: <em>g</em>.'],
+  ['Esa ___ es muy bonita.',['imagen','imajen'],'Termina en <em>-gen</em>: <em>g</em>.'],
+  ['La ___ me dio el cambio.',['cajera','cagera'],'Termina en <em>-jera</em>: <em>j</em>.'],
+  ['___ mucho tráfico en la autopista.',['Hay','Ay'],'Del verbo <em>haber</em>: <em>hay</em>.'],
+  ['Pon las bolsas ___, junto a la puerta.',['ahí','hay'],'Es un lugar: <em>ahí</em>.'],
+  ['Ya he ___ la cena.',['hecho','echo'],'Del verbo <em>hacer</em>: <em>hecho</em>.'],
+  ['Siempre le ___ limón a la sopa.',['echo','hecho'],'Del verbo <em>echar</em>: <em>echo</em>.'],
+  ['Esta ___ sí llegué a tiempo.',['vez','ves'],'Una ocasión: <em>vez</em>.'],
+  ['Vamos ___ qué dice el doctor.',['a ver','haber'],'«Mirar, comprobar»: <em>a ver</em>.'],
+  ['Para el desayuno, compré una docena de ___.',['huevos','uevos'],'Empieza por <em>hue-</em>: con <em>h</em>.'],
+  ['El ___ del incendio llegó hasta mi calle.',['humo','umo'],'Empieza por <em>hum-</em>: con <em>h</em>.']
+].map(function(d){var o=d[0].replace('___',d[1][0]);o=o.charAt(0).toUpperCase()+o.slice(1);return {e:'<span class="frase">'+d[0].replace('___','_____')+'</span>',ops:d[1],c:0,n:'«'+o+'» · '+d[2],a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. Busca la regla en la consigna de arriba.'});
+
+/* Módulo 4: dictado */
+(function(){
+  var O=['El autobús llegó tarde porque había mucho tráfico.','Mi hijo escribió una canción para su abuela.','Hay que llevar el lápiz y el cuaderno a la clase.',
+         'Ayer trabajaba en la fábrica cuando sonó el teléfono.','¿Dónde dejaste las llaves del carro?','En invierno hace mucho frío en Chicago.',
+         'La médica me dio una receta para la tos.','Tú tienes razón: el examen fue difícil.','Mañana voy a enviar el mensaje a mi jefe.',
+         'Mis vecinos están felices con el huerto nuevo.','Ya he hecho la tarea de esta semana.','Si llueve, nos quedamos en casa a ver una película.'];
+  var cola=[], actual, bien=0, hechas=0, contado=false;
+  var txt=document.getElementById('dc-texto'), rev=document.getElementById('dc-rev'), fb=document.getElementById('dc-fb'), sol=document.getElementById('dc-sol'), ley=document.getElementById('dc-ley'), marc=document.getElementById('dc-marcador');
+  function sinTilde(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'');}
+  function palabras(s){return s.replace(/[¿?¡!.,;:«»"“”()]/g,' ').split(/\s+/).filter(Boolean);}
+  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function siguiente(){
+    if(!cola.length)cola=barajar(O);
+    actual=cola.pop(); contado=false; txt.value=''; rev.innerHTML=''; fb.textContent=''; fb.className='fb'; sol.hidden=true; sol.textContent=actual; ley.hidden=true;
+  }
+  function contar(){marc.textContent='Oraciones escritas sin errores: '+bien+' de '+hechas;}
+  document.getElementById('dc-revisar').addEventListener('click',function(){
+    var u=txt.value.trim(); if(!u){fb.textContent='Primero escribe la oración que oíste.';fb.className='fb mal';return;}
+    var E=palabras(actual), U=palabras(u), e=E.map(function(w){return sinTilde(w.toLowerCase());}), x=U.map(function(w){return sinTilde(w.toLowerCase());});
+    /* Alineación por la subsecuencia común más larga, comparando sin tildes */
+    var n=e.length, m=x.length, L=[];
+    for(var i=0;i<=n;i++){L.push(new Array(m+1).fill(0));}
+    for(i=n-1;i>=0;i--)for(var j=m-1;j>=0;j--)L[i][j]=e[i]===x[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+    var marca=new Array(m).fill('w-mal'), usadas=0; i=0; j=0;
+    while(i<n&&j<m){
+      if(e[i]===x[j]){marca[j]=(E[i].toLowerCase()===U[j].toLowerCase())?'w-ok':'w-tilde';usadas++;i++;j++;}
+      else if(L[i+1][j]>=L[i][j+1])i++; else j++;
+    }
+    rev.innerHTML=U.map(function(w,k){return '<span class="'+marca[k]+'">'+esc(w)+'</span>';}).join(' ');
+    ley.hidden=false;
+    var faltan=Math.max(0,(n-usadas)-(m-usadas)), malas=marca.filter(function(c){return c!=='w-ok';}).length;
+    var notas=[];
+    var pl=u.replace(/^[¿¡«"“]+/,'').charAt(0);
+    if(pl&&pl!==pl.toUpperCase())notas.push('la primera palabra va con mayúscula');
+    var fin=actual.slice(-1); if(u.slice(-1)!==fin)notas.push('al final va «'+fin+'»');
+    if(actual.charAt(0)==='¿'&&u.charAt(0)!=='¿')notas.push('la pregunta empieza con «¿»');
+    if(!malas&&!faltan&&!notas.length){
+      fb.textContent='✓ ¡Perfecto! Escribiste la oración sin errores.'; fb.className='fb bien';
+      if(!contado){hechas++;bien++;contado=true;contar();}
+    }else{
+      var partes=[]; if(malas)partes.push(malas===1?'1 palabra para revisar':malas+' palabras para revisar'); if(faltan)partes.push(faltan===1?'falta 1 palabra':'faltan '+faltan+' palabras');
+      fb.textContent='Casi: '+partes.concat(notas).join('; ')+'. Corrige y vuelve a revisar, o pulsa «Ver la oración».'; fb.className='fb mal';
+    }
+  });
+  document.getElementById('dc-ver').addEventListener('click',function(){sol.hidden=false; if(!contado){hechas++;contado=true;contar();}});
+  document.getElementById('dc-otra').addEventListener('click',siguiente);
+  document.getElementById('dc-oir').addEventListener('click',function(){hablar(actual,0.8);});
+  document.getElementById('dc-despacio').addEventListener('click',function(){hablar(actual,0.6);});
+  contar(); siguiente();
+})();
+</script>
+</body>
+</html>
