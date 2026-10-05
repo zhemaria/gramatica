@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l4-1 · Idea principal y detalles de apoyo · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.1 · Idea principal y detalles</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:12px 16px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.1rem;line-height:1.8}
+  .pasaje p{margin:0 0 8px}
+  .idea-box{display:block;background:var(--cp-claro);border-radius:8px;padding:10px 14px;margin-bottom:8px;font-family:Georgia,serif;font-size:1.1rem}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .num-p{display:inline-block;background:var(--cp-oscuro);color:#fff;border-radius:50%;width:1.6em;height:1.6em;text-align:center;line-height:1.6em;font-size:.8rem;font-family:'Segoe UI',Arial,sans-serif;margin-right:6px}
+  .tx-preg{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 14px;margin:10px 0}
+  .tx-preg h3{margin:0 0 8px;font-size:1rem;color:var(--cp-oscuro)}
+  .tx-preg .fb{text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 4.1 · Idea principal y detalles</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 4 · Acompaña a la Lección 4.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_4-1.html">← Volver a la Lección 4.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="idea">1 · La idea principal</button>
+  <button type="button" class="pest" data-mod="detalles">2 · Detalles de apoyo</button>
+  <button type="button" class="pest" data-mod="parrafos">3 · Varios párrafos</button>
+</nav>
+
+<section class="modulo" id="idea" aria-labelledby="t-idea">
+  <h2 id="t-idea">1 · Encuentra la idea principal</h2>
+  <p class="consejo">Tema + lo que el autor dice sobre él. Descarta las trampas: <strong>muy amplia</strong>, <strong>solo un detalle</strong>, <strong>no está en el texto</strong> o <strong>contraria</strong>. Si fallas, el programa te dice qué trampa elegiste.</p>
+  <div class="enun" id="id-enun" aria-live="polite"></div>
+  <div class="opciones" id="id-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="id-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="id-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="id-marcador"></div>
+</section>
+
+<section class="modulo" id="detalles" aria-labelledby="t-det" hidden>
+  <h2 id="t-det">2 · ¿Cuál no apoya la idea?</h2>
+  <p class="consejo">Tres oraciones ayudan a demostrar la idea principal y una no. Pregúntate de cada una: <em>¿esto demuestra la idea?</em> Que algo sea cierto no basta.</p>
+  <div class="enun" id="de-enun" aria-live="polite"></div>
+  <div class="opciones" id="de-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="de-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="de-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="de-marcador"></div>
+</section>
+
+<section class="modulo" id="parrafos" aria-labelledby="t-par" hidden>
+  <h2 id="t-par">3 · Textos de varios párrafos</h2>
+  <p class="consejo">Lee un párrafo y responde su pregunta; luego el siguiente. Al final responde la pregunta del texto completo: debe valer para todos los párrafos.</p>
+  <div id="pa-texto"></div>
+  <div id="pa-pregs"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pa-otra">Otro texto</button></div>
+  <div class="marcador" id="pa-marcador" role="status" aria-live="polite"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 4.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: [párrafo, correcta, [opción, tipo de trampa]...] */
+(function(){
+  var MSG={amplia:'Trampa: <strong>muy amplia</strong>. Es verdad, pero serviría para muchos textos distintos.',
+           detalle:'Trampa: <strong>solo un detalle</strong>. Está en el texto, pero es solo una parte.',
+           fuera:'Trampa: <strong>no está en el texto</strong>. Puede sonar lógica, pero el párrafo no lo dice.',
+           contraria:'Trampa: <strong>contraria</strong>. Dice lo opuesto de lo que dice el párrafo.'};
+  var D=[
+    ['La biblioteca pública ofrece mucho más que libros. Allí se pueden usar computadoras con internet, tomar clases de inglés y pedir ayuda para buscar empleo. También hay actividades para niños y préstamo de películas. Todo es gratis con la tarjeta de la biblioteca.',
+     'La biblioteca pública ofrece muchos servicios gratuitos además de libros.',[['Los servicios públicos son importantes para toda la comunidad.','amplia'],['En la biblioteca se pueden usar computadoras con internet.','detalle'],['La biblioteca solo sirve para pedir libros prestados.','contraria']]],
+    ['El cuerpo pierde agua al sudar, al respirar y al ir al baño. Cuando no la reponemos, aparecen el cansancio, el dolor de cabeza y la dificultad para concentrarse. En los días de calor, el riesgo es aún mayor. Por eso es importante beber agua durante todo el día, aunque no tengamos sed.',
+     'Es importante beber agua durante el día para reponer la que el cuerpo pierde.',[['En los días de calor, el riesgo de perder agua es mayor.','detalle'],['Hay que cuidar la salud de muchas maneras distintas.','amplia'],['Solo hace falta beber agua cuando se tiene mucha sed.','contraria']]],
+    ['Lucía llegó a Chicago sin hablar inglés. Los primeros meses no entendía las instrucciones en el trabajo y le daba vergüenza preguntar. Empezó a ir a clases dos noches por semana y a practicar con sus compañeros. Hoy ayuda a otros recién llegados a llenar formularios en inglés.',
+     'Con esfuerzo, Lucía pasó de no hablar inglés a poder ayudar a otros.',[['Lucía iba a clases de inglés dos noches por semana.','detalle'],['Aprender un idioma nuevo es posible a cualquier edad.','amplia'],['Lucía consiguió un trabajo mejor pagado gracias al inglés.','fuera']]],
+    ['Los expertos recomiendan limitar el tiempo que los niños pasan frente a las pantallas. Demasiadas horas con el teléfono o la tableta pueden afectar el sueño y la vista. Además, les quitan tiempo para jugar al aire libre, leer y conversar con la familia.',
+     'Conviene limitar el tiempo de los niños frente a las pantallas por sus efectos negativos.',[['Las pantallas pueden afectar la vista de los niños.','detalle'],['Los niños deberían usar más la tableta para aprender mejor.','contraria'],['La tecnología cambió por completo la vida moderna.','amplia']]],
+    ['Ahorrar un poco cada semana puede hacer una gran diferencia. Quien guarda diez dólares semanales tendrá más de quinientos al final del año. Ese dinero puede servir para una emergencia, como una reparación del carro o una visita al médico. Lo importante no es la cantidad, sino la constancia.',
+     'Ahorrar una cantidad pequeña cada semana puede hacer una gran diferencia.',[['Diez dólares por semana suman más de quinientos al año.','detalle'],['Los bancos pagan muchos intereses a quienes ahorran.','fuera'],['Solo vale la pena ahorrar cuando se tienen cantidades grandes.','contraria']]],
+    ['Cada sábado, un grupo de vecinos recoge la basura del parque. Otros reparan las bancas rotas y pintan los juegos de los niños. Algunos traen café y pan para compartir. Gracias a ellos, el parque está más limpio y seguro que nunca.',
+     'El trabajo voluntario de los vecinos mejoró mucho el parque.',[['Algunos vecinos traen café y pan para compartir.','detalle'],['Los parques son lugares agradables para toda la familia.','amplia'],['La ciudad pagó a una empresa para reparar el parque.','fuera']]],
+    ['Los abuelos cumplen un papel importante en muchas familias hispanas. Cuidan a los nietos mientras los padres trabajan, enseñan recetas y tradiciones, y transmiten la lengua de la familia. Para muchos niños nacidos en Estados Unidos, los abuelos son su principal conexión con el español.',
+     'Los abuelos cumplen un papel importante en muchas familias hispanas.',[['Los abuelos les enseñan recetas de cocina a sus nietos.','detalle'],['La familia es la base de toda la sociedad.','amplia'],['Los niños nacidos aquí ya no necesitan a sus abuelos.','contraria']]],
+    ['La gripe se contagia con facilidad en otoño e invierno. Lavarse las manos con frecuencia, cubrirse la boca al toser y quedarse en casa cuando se está enfermo ayudan a evitar el contagio. La vacuna anual es otra forma eficaz de protegerse.',
+     'Hay varias maneras sencillas de protegerse de la gripe.',[['Hay que cubrirse la boca con el brazo al toser.','detalle'],['La gripe solo afecta a los niños y a los ancianos.','fuera'],['Las enfermedades pueden ser muy peligrosas.','amplia']]],
+    ['Antes de una entrevista de trabajo, conviene informarse sobre la empresa. El día de la cita hay que llegar unos minutos antes y vestirse de manera adecuada. Durante la entrevista, es útil mirar a los ojos, responder con calma y hacer alguna pregunta sobre el puesto.',
+     'Prepararse antes y durante una entrevista ayuda a causar buena impresión.',[['Hay que llegar unos minutos antes de la hora de la cita.','detalle'],['Conseguir un buen trabajo hoy en día es muy difícil.','amplia'],['Las empresas siempre prefieren a quienes tienen experiencia.','fuera']]],
+    ['En muchas ciudades, los autobuses y los trenes funcionan con tarjetas recargables. Basta con acercar la tarjeta al lector para pagar el viaje. La tarjeta se recarga en las estaciones, en algunas tiendas o por internet. Así ya no hace falta llevar monedas exactas.',
+     'Las tarjetas recargables hacen más fácil pagar el transporte público.',[['La tarjeta se puede recargar en algunas tiendas.','detalle'],['El transporte público es necesario en las ciudades grandes.','amplia'],['Para pagar el autobús hay que llevar siempre monedas exactas.','contraria']]]
+  ];
+  unaAUna('id',D.map(function(d){
+    var ops=[d[1]].concat(d[2].map(function(x){return x[0];})), fbs=[null].concat(d[2].map(function(x){return MSG[x[1]];}));
+    return {e:'<span class="pasaje">'+d[0]+'</span><span class="preg">¿Cuál es la idea principal?</span>',ops:ops,c:0,fbs:fbs,n:'Correcto: cubre todo el párrafo, está en el texto y dice lo mismo.'};
+  }));
+})();
+
+/* Módulo 2: [idea, oración que NO apoya, [tres que sí apoyan], explicación] */
+unaAUna('de',[
+  ['Los perros son buenos compañeros para las personas mayores.','Los gatos duermen muchas horas al día.',['Les dan compañía y alegría.','Los obligan a caminar todos los días.','Les ayudan a sentirse más seguros en casa.'],'Habla de gatos, no de lo que los perros hacen por las personas mayores.'],
+  ['Cocinar en casa es más sano que comer fuera.','Los restaurantes de comida rápida abren hasta tarde.',['Uno controla la cantidad de sal y de grasa.','Se pueden usar ingredientes frescos.','Las porciones suelen ser más pequeñas.'],'El horario de los restaurantes no tiene que ver con la salud.'],
+  ['El invierno en Chicago puede ser peligroso.','En verano hay muchos festivales en la ciudad.',['Las temperaturas bajan muchos grados bajo cero.','El hielo en las aceras causa caídas.','La nieve hace más difícil manejar.'],'Habla del verano, no de los peligros del invierno.'],
+  ['Leer con los hijos tiene muchos beneficios.','Los libros de la biblioteca se devuelven en tres semanas.',['Mejora su vocabulario.','Crea un momento de unión familiar.','Les despierta el gusto por la lectura.'],'Es una regla de la biblioteca, no un beneficio de leer juntos.'],
+  ['Obtener el GED abre nuevas oportunidades.','El examen tiene cuatro materias.',['Permite estudiar en un college.','Muchos empleos lo piden como requisito.','Suele ayudar a conseguir un mejor salario.'],'Es cierto, pero describe el examen; no muestra una oportunidad.'],
+  ['Usar casco protege a los ciclistas.','Chicago tiene muchas ciclovías.',['Reduce las lesiones en la cabeza.','Absorbe parte del golpe en una caída.','Evita muchos accidentes graves.'],'Las ciclovías no explican cómo protege el casco.'],
+  ['El desayuno da energía para empezar el día.','El café se cultiva en muchos países de América.',['Después de la noche, el cuerpo necesita alimento.','Ayuda a concentrarse en el trabajo o la escuela.','Evita llegar con mucha hambre al almuerzo.'],'Dónde se cultiva el café no tiene que ver con la energía del desayuno.'],
+  ['Las plantas mejoran el ambiente de una casa.','Algunas plantas son originarias de Asia.',['Alegran los espacios.','Ayudan a reducir el estrés de quien las cuida.','Dan una sensación de frescura.'],'El origen de las plantas no muestra cómo mejoran la casa.'],
+  ['Tener un presupuesto ayuda a controlar los gastos.','Muchos bancos tienen aplicaciones para el teléfono.',['Muestra en qué se va el dinero cada mes.','Permite planear los pagos importantes.','Ayuda a separar dinero para ahorrar.'],'Las aplicaciones de los bancos no explican para qué sirve un presupuesto.'],
+  ['Las vacaciones son necesarias para la salud.','Las playas de México reciben muchos turistas.',['Ayudan a reducir el cansancio acumulado.','Dan tiempo para dormir y descansar.','Permiten pasar tiempo con la familia.'],'Es un dato sobre turismo, no sobre la salud.']
+].map(function(d){return {e:'<span class="idea-box">Idea principal: <strong>'+d[0]+'</strong></span><span class="preg">¿Qué oración NO apoya esta idea?</span>',ops:[d[1]].concat(d[2]),c:0,n:d[3]};}),
+{pista:'Todavía no: esa oración sí ayuda a demostrar la idea. Busca la que habla de otra cosa.'});
+
+/* Módulo 3: textos de varios párrafos */
+(function(){
+  var T=[
+    {t:'Los mercados del barrio',p:['Los mercados al aire libre que se instalan cada fin de semana venden frutas, verduras, huevos y pan recién hechos. Muchas veces los productos son más frescos que los del supermercado, porque se cosecharon el día anterior, y los precios suelen ser razonables.',
+      'Comprar en estos mercados también ayuda a los agricultores de la región. El dinero va directamente a las familias que cultivan los alimentos, sin intermediarios. Así, las pequeñas granjas pueden seguir funcionando.',
+      'Además, el mercado es un lugar de encuentro. Los vecinos se saludan, conversan con los vendedores y comparten recetas. En algunos hay música y actividades para los niños.'],
+     q:[['Párrafo 1',['Los mercados venden productos frescos a precios razonables.','Los huevos del mercado son más grandes.','Los supermercados cierran los fines de semana.'],0],
+        ['Párrafo 2',['Las granjas grandes no necesitan ayuda.','Comprar en el mercado ayuda a los agricultores de la región.','Los intermediarios ganan mucho dinero.'],1],
+        ['Párrafo 3',['En algunos mercados hay música.','Los vendedores comparten recetas.','El mercado es un lugar de encuentro para los vecinos.'],2],
+        ['Todo el texto',['Los mercados del barrio benefician a los compradores, a los agricultores y a la comunidad.','En los mercados hay actividades para los niños.','Es mejor no comprar nunca en el supermercado.'],0]]},
+    {t:'Listos para el invierno',p:['Antes de que llegue el frío, conviene revisar la calefacción de la casa. Un técnico puede limpiar el sistema y comprobar que funciona bien. También es buena idea tapar las rendijas de puertas y ventanas para que no se escape el calor.',
+      'El carro necesita su propia preparación. Hay que revisar las llantas, cambiar el líquido del limpiaparabrisas y llevar en el baúl un raspador de hielo, una cobija y una linterna por si hay una emergencia en la carretera.',
+      'Por último, hay que cuidarse uno mismo. La ropa en varias capas abriga más que una sola prenda gruesa, y los guantes, el gorro y la bufanda protegen las partes del cuerpo que más se enfrían.'],
+     q:[['Párrafo 1',['Hay que preparar la casa para el frío.','Los técnicos cobran mucho dinero.','Las ventanas viejas son peligrosas.'],0],
+        ['Párrafo 2',['Hay que llevar una linterna en el carro.','El carro también necesita prepararse para el invierno.','Las carreteras se cierran en invierno.'],1],
+        ['Párrafo 3',['Los guantes son caros.','La ropa gruesa no sirve para el frío.','Hay que protegerse el cuerpo con la ropa adecuada.'],2],
+        ['Todo el texto',['Para el invierno hay que preparar la casa, el carro y a uno mismo.','El invierno es la estación más difícil del año en todas partes.','Hay que llevar una cobija en el carro.'],0]]},
+    {t:'Nunca es tarde para aprender',p:['Muchas personas piensan que, después de cierta edad, ya es tarde para volver a estudiar. Creen que la memoria ya no ayuda o que no tendrán tiempo. Sin embargo, miles de adultos terminan cada año sus estudios y consiguen el GED.',
+      'Los adultos, de hecho, tienen ventajas. Su experiencia de vida les ayuda a entender muchos temas, y saben por qué estudian: para conseguir un mejor trabajo, para ayudar a sus hijos o por orgullo propio. Esa motivación es muy poderosa.',
+      'Para lograrlo, ayuda tener un horario fijo de estudio, ponerse metas pequeñas y celebrar cada avance. Pedir ayuda cuando algo no se entiende no es un fracaso: es parte de aprender.'],
+     q:[['Párrafo 1',['La memoria empeora con la edad.','Aunque muchos creen que es tarde, muchos adultos sí terminan sus estudios.','El GED es un examen muy difícil.'],1],
+        ['Párrafo 2',['Los adultos tienen ventajas al estudiar, como la experiencia y la motivación.','Los adultos estudian para ayudar a sus hijos.','Los jóvenes aprenden más rápido que los adultos.'],0],
+        ['Párrafo 3',['Hay que celebrar cada avance.','Pedir ayuda es un fracaso.','Algunos hábitos sencillos ayudan a lograr la meta.'],2],
+        ['Todo el texto',['El GED es necesario para conseguir un buen trabajo.','Nunca es tarde para estudiar: los adultos tienen ventajas y pueden lograrlo con buenos hábitos.','Los adultos deben estudiar todos los días.'],1]]}
+  ];
+  var caja=document.getElementById('pa-texto'), pregs=document.getElementById('pa-pregs'), marc=document.getElementById('pa-marcador'), k=-1, bien=0, total=0;
+  function contar(){marc.textContent='Respuestas correctas al primer intento: '+bien+' de '+total;}
+  function mostrar(){
+    k=(k+1)%T.length; var tx=T[k];
+    caja.innerHTML='<div class="pasaje"><p><strong style="font-family:Segoe UI,Arial,sans-serif">'+tx.t+'</strong></p>'+tx.p.map(function(p,i){return '<p><span class="num-p" aria-hidden="true">'+(i+1)+'</span>'+p+'</p>';}).join('')+'</div>';
+    pregs.innerHTML='';
+    tx.q.forEach(function(q){
+      var d=document.createElement('div'); d.className='tx-preg'; d.setAttribute('role','group');
+      d.innerHTML='<h3>'+q[0]+' · '+(q[0]==='Todo el texto'?'¿Cuál es la idea principal del texto completo?':'¿Cuál es su idea?')+'</h3><div class="opciones"></div><div class="fb" aria-live="polite"></div>';
+      var ops=d.querySelector('.opciones'), fb=d.querySelector('.fb'), primer=true, hecho=false;
+      q[1].forEach(function(o,j){
+        var b=document.createElement('button'); b.type='button'; b.className='op'; b.textContent=o;
+        b.addEventListener('click',function(){
+          if(hecho)return;
+          if(j===q[2]){hecho=true;total++;if(primer)bien++;b.classList.add('correcta');ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});fb.textContent='✓ Correcto.';fb.className='fb bien';contar();}
+          else{primer=false;b.classList.add('incorrecta');b.disabled=true;fb.textContent=q[0]==='Todo el texto'?'Todavía no: esa opción no vale para los tres párrafos.':'Todavía no: esa opción es un detalle o no está en el párrafo.';fb.className='fb mal';}
+        });
+        ops.appendChild(b);
+      });
+      pregs.appendChild(d);
+    });
+  }
+  document.getElementById('pa-otra').addEventListener('click',function(){mostrar();caja.scrollIntoView({behavior:'smooth',block:'start'});});
+  contar(); mostrar();
+})();
+</script>
+</body>
+</html>

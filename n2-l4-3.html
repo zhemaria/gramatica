@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l4-3 · Leer con ilustraciones y características del texto · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.3 · Las ayudas del texto</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .ficha{display:block;background:#fff;border:2px solid var(--cp);border-radius:10px;padding:12px 16px;margin:0 0 10px}
+  .ficha .tt{display:block;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);border-bottom:2px solid var(--cp);padding-bottom:4px;margin-bottom:6px}
+  .ficha .st{display:block;font-weight:600;color:#1a2332;padding-left:12px;border-left:4px solid #ff8c42;margin:4px 0}
+  .ficha .pf{display:block;font-size:.95rem;font-style:italic;color:#333;background:#f6faf9;border-radius:6px;padding:6px 10px;margin-top:6px}
+  .preg{font-weight:700;text-align:center;display:block;margin-top:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 4.3 · Las ayudas del texto</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 4 · Acompaña a la Lección 4.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_4-3.html">← Volver a la Lección 4.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="predice">1 · Predice</button>
+  <button type="button" class="pest" data-mod="subtitulos">2 · Busca con los subtítulos</button>
+  <button type="button" class="pest" data-mod="imagen-parrafo">3 · Imagen y párrafo</button>
+  <button type="button" class="pest" data-mod="caracteristicas">4 · ¿Qué característica es?</button>
+</nav>
+
+<section class="modulo" id="predice" aria-labelledby="t-pre">
+  <h2 id="t-pre">1 · Predice a partir del vistazo</h2>
+  <p class="consejo">Solo ves el título, los subtítulos y el pie de una imagen. ¿De qué tratará el texto?</p>
+  <div class="enun" id="pr-enun" aria-live="polite"></div>
+  <div class="opciones" id="pr-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pr-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pr-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pr-marcador"></div>
+</section>
+
+<section class="modulo" id="subtitulos" aria-labelledby="t-sub" hidden>
+  <h2 id="t-sub">2 · Busca con los subtítulos</h2>
+  <p class="consejo">Lee la pregunta, piensa qué palabra clave buscas y elige la sección donde está la respuesta.</p>
+  <div class="enun" id="su-enun" aria-live="polite"></div>
+  <div class="opciones" id="su-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="su-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="su-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="su-marcador"></div>
+</section>
+
+<section class="modulo" id="imagen-parrafo" aria-labelledby="t-img" hidden>
+  <h2 id="t-img">3 · ¿Qué parte del texto ilustra la imagen?</h2>
+  <p class="consejo">Lee la descripción de la imagen y su pie de foto. Elige el párrafo que la imagen acompaña.</p>
+  <div class="enun" id="im-enun" aria-live="polite"></div>
+  <div class="opciones" id="im-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="im-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="im-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="im-marcador"></div>
+</section>
+
+<section class="modulo" id="caracteristicas" aria-labelledby="t-car" hidden>
+  <h2 id="t-car">4 · ¿Qué característica es?</h2>
+  <p class="consejo">Título, subtítulo, negrita, pie de foto, lista, recuadro, tabla o glosario: ¿cuál se describe?</p>
+  <div class="enun" id="ca-enun" aria-live="polite"></div>
+  <div class="opciones" id="ca-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ca-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ca-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ca-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 4.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+function ficha(t,subs,pf){return '<span class="ficha"><span class="tt">'+t+'</span>'+subs.map(function(s){return '<span class="st">'+s+'</span>';}).join('')+(pf?'<span class="pf">Pie de foto: «'+pf+'»</span>':'')+'</span>';}
+var TX=[
+  {t:'Cómo cuidar tus dientes',s:['Cepillarse bien','El hilo dental','La visita al dentista'],pf:'Cepíllate dos veces al día durante dos minutos.'},
+  {t:'Los volcanes',s:['¿Cómo se forma un volcán?','Tipos de erupciones','Los volcanes de América Latina'],pf:'El volcán Popocatépetl, en México, sigue activo.'},
+  {t:'Cómo abrir una cuenta de banco',s:['Qué documentos llevar','Cuenta de ahorros o cuenta corriente','Cómo evitar las comisiones'],pf:'Muchos bancos aceptan la matrícula consular como identificación.'},
+  {t:'La migración de la mariposa monarca',s:['Un viaje de miles de kilómetros','Dónde pasan el invierno','Por qué están en peligro'],pf:'Millones de mariposas cubren los árboles en Michoacán.'},
+  {t:'Ahorrar energía en casa',s:['Las luces','La calefacción y el aire acondicionado','Los aparatos que se quedan enchufados'],pf:'Un foco LED gasta mucho menos que uno común.'},
+  {t:'Los derechos del trabajador',s:['El salario mínimo','Las horas extras','La seguridad en el trabajo'],pf:'Todo trabajador tiene derecho a un lugar de trabajo seguro.'}
+];
+
+/* Módulo 1 (la primera opción es la correcta) */
+unaAUna('pr',[
+  [0,['Consejos para mantener los dientes sanos','La historia de los dentistas famosos','Los mejores cepillos del mercado y sus precios'],'Los tres subtítulos son hábitos de cuidado.'],
+  [1,['Cómo se forman los volcanes, cómo hacen erupción y cuáles hay en América Latina','Cómo escapar de un incendio forestal','Los mejores lugares turísticos de México'],'El título da el tema y los subtítulos, las partes.'],
+  [2,['Los pasos y documentos para abrir una cuenta de banco','La historia de los bancos en Estados Unidos','Por qué es mejor guardar el dinero en casa'],'Los subtítulos explican qué llevar, qué tipo elegir y cómo ahorrar en comisiones.'],
+  [3,['El largo viaje de la mariposa monarca y los peligros que enfrenta','Cómo cultivar flores para atraer mariposas','Los insectos más peligrosos del mundo'],'Viaje, invierno y peligro: esas son las tres partes.'],
+  [4,['Maneras de gastar menos electricidad y gas en casa','Cómo instalar un aire acondicionado','La historia de la electricidad'],'Cada subtítulo es un lugar de la casa donde se puede ahorrar.'],
+  [5,['Los derechos básicos de quien trabaja: salario, horas extras y seguridad','Cómo conseguir un trabajo mejor pagado','La historia de los sindicatos'],'Los subtítulos nombran tres derechos.']
+].map(function(d){var x=TX[d[0]];return {e:ficha(x.t,x.s,x.pf)+'<span class="preg">¿De qué tratará el texto?</span>',ops:d[1],c:0,n:d[2]};}),
+{pista:'Todavía no. Vuelve a leer el título y los tres subtítulos: la respuesta debe abarcarlos todos.'});
+
+/* Módulo 2: [texto, pregunta, sección correcta] */
+unaAUna('su',[
+  [0,'¿Cuántas veces al año conviene ir al dentista?',2],[0,'¿Cómo se usa el hilo dental?',1],
+  [1,'¿Qué volcanes hay en Guatemala?',2],[1,'¿Qué pasa debajo de la tierra para que nazca un volcán?',0],
+  [2,'¿Sirve el pasaporte como identificación?',0],[2,'¿Cómo evito pagar dinero cada mes por tener la cuenta?',2],
+  [3,'¿En qué lugar de México descansan las mariposas en invierno?',1],[3,'¿Por qué hay cada vez menos mariposas?',2],
+  [4,'¿Conviene desenchufar el televisor por la noche?',2],[4,'¿A qué temperatura poner el termostato en invierno?',1],
+  [5,'¿Cuánto deben pagarme si trabajo más de cuarenta horas?',1],[5,'¿Qué hago si en mi trabajo no me dan equipo de protección?',2]
+].map(function(d){var x=TX[d[0]];return {e:ficha(x.t,x.s)+'<span class="preg">'+d[1]+'</span>',ops:x.s,c:d[2],fijo:true,n:'La respuesta está en «'+x.s[d[2]]+'».'};}),
+{pista:'Todavía no. ¿Qué palabra clave tiene la pregunta? Busca el subtítulo que se relaciona con ella.'});
+
+/* Módulo 3: [descripción de la imagen, pie de foto, [párrafos], correcto] */
+unaAUna('im',[
+  ['Un dibujo de una boca abierta con un cepillo inclinado sobre los dientes.','Inclina el cepillo hacia la encía.',['Párrafo sobre cómo cepillarse bien','Párrafo sobre el precio de las consultas','Párrafo sobre la historia del cepillo'],0],
+  ['Un mapa de América del Norte con flechas de Canadá a México.','La ruta de las monarcas cada otoño.',['Párrafo sobre por qué están en peligro','Párrafo sobre el viaje de miles de kilómetros','Párrafo sobre qué comen las orugas'],1],
+  ['Una gráfica de barras con el gasto de luz de una casa mes a mes.','El gasto sube en julio y agosto por el aire acondicionado.',['Párrafo sobre las luces LED','Párrafo sobre la calefacción y el aire acondicionado','Párrafo sobre la historia de la electricidad'],1],
+  ['Una foto de un trabajador con casco, chaleco y gafas.','El equipo de protección es obligatorio en la construcción.',['Párrafo sobre la seguridad en el trabajo','Párrafo sobre el salario mínimo','Párrafo sobre las vacaciones pagadas'],0],
+  ['Una tabla que compara dos tipos de cuenta con sus comisiones.','Comparación de una cuenta de ahorros y una cuenta corriente.',['Párrafo sobre los documentos que hay que llevar','Párrafo sobre cómo elegir el tipo de cuenta','Párrafo sobre los horarios del banco'],1],
+  ['Un dibujo del interior de un volcán con la lava subiendo por una chimenea.','El magma sube desde el interior de la Tierra.',['Párrafo sobre cómo se forma un volcán','Párrafo sobre los volcanes de América Latina','Párrafo sobre los terremotos'],0],
+  ['Un dibujo de un enchufe con varios cables y una regleta apagada.','Una regleta con interruptor apaga todo de una vez.',['Párrafo sobre los aparatos que se quedan enchufados','Párrafo sobre las ventanas','Párrafo sobre la calefacción'],0],
+  ['Una foto de un bosque de oyameles cubierto de mariposas naranjas.','Así pasan el invierno las monarcas en Michoacán.',['Párrafo sobre el viaje de ida','Párrafo sobre dónde pasan el invierno','Párrafo sobre cómo se reconoce una monarca'],1]
+].map(function(d){return {e:'<span class="ficha"><span class="st">Imagen: '+d[0]+'</span><span class="pf">Pie de foto: «'+d[1]+'»</span></span><span class="preg">¿Qué parte del texto acompaña esta imagen?</span>',ops:d[2],c:d[3],n:'La imagen y su pie muestran lo que explica ese párrafo.'};}),
+{pista:'Todavía no. Fíjate en las palabras clave del pie de foto y búscalas entre las opciones.'});
+
+/* Módulo 4: [descripción, característica correcta] */
+(function(){
+  var F=['Título','Subtítulo','Negrita','Pie de foto','Lista','Recuadro','Tabla','Glosario'];
+  var D=[
+    ['Va arriba de todo, en letra grande, y dice el tema del texto completo.',0],
+    ['Divide el texto en partes y dice de qué trata cada una.',1],
+    ['Una palabra escrita en letra más gruesa porque es importante.',2],
+    ['Una o dos oraciones debajo de una imagen que explican lo que muestra.',3],
+    ['Varios elementos uno debajo del otro, con puntos o números.',4],
+    ['Un cuadro de color, aparte del texto, con un dato curioso.',5],
+    ['Datos organizados en filas y columnas.',6],
+    ['Una lista de palabras difíciles con su significado, al final del texto.',7],
+    ['En una receta, los ingredientes escritos uno debajo del otro.',4],
+    ['«¿Sabías que…?», en un cuadro aparte con fondo amarillo.',5],
+    ['El horario de los autobuses con las horas de salida y de llegada de cada parada.',6],
+    ['«Figura 2. El corazón tiene cuatro cavidades.»',3]
+  ];
+  unaAUna('ca',D.map(function(d){
+    var otras=barajar(F.filter(function(_,i){return i!==d[1];})).slice(0,3), ops=[F[d[1]]].concat(otras);
+    return {e:'<span class="ficha">'+d[0]+'</span><span class="preg">¿Qué característica es?</span>',ops:ops,c:0,n:F[d[1]]+'.'};
+  }),{pista:'Todavía no. Piensa dónde aparece y para qué sirve.'});
+})();
+</script>
+</body>
+</html>
