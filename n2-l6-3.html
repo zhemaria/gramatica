@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l6-3 · Vocabulario de ciencias, de historia y pistas del contexto · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.3 · Vocabulario de dominio</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px;text-align:center}
+  .termino{display:block;font-size:1.6rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:4px}
+  .oracion{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.08rem;line-height:1.75;text-align:left}
+  .preg{font-weight:700;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 6.3 · Vocabulario de dominio</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 6 · Acompaña a la Lección 6.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_6-3.html">← Volver a la Lección 6.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="ciencias">1 · Ciencias</button>
+  <button type="button" class="pest" data-mod="historia">2 · Historia</button>
+  <button type="button" class="pest" data-mod="contexto">3 · Pistas del contexto</button>
+</nav>
+
+<section class="modulo" id="ciencias" aria-labelledby="t-cie">
+  <h2 id="t-cie">1 · Vocabulario de ciencias</h2>
+  <p class="consejo"><strong>bio</strong> = vida · <strong>eco</strong> = ambiente · <strong>foto</strong> = luz · <strong>hidro</strong> = agua · <strong>termo</strong> = calor · <strong>geo</strong> = tierra · <strong>-logía</strong> = estudio de · <strong>-metro</strong> = medida</p>
+  <div class="enun" id="ci-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="ci-oir">🔊 Escuchar la palabra</button></div>
+  <div class="opciones" id="ci-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ci-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ci-otra">Otra palabra</button></div>
+  <div class="marcador" id="ci-marcador"></div>
+</section>
+
+<section class="modulo" id="historia" aria-labelledby="t-his" hidden>
+  <h2 id="t-his">2 · Vocabulario de historia y gobierno</h2>
+  <p class="consejo"><strong>demo</strong> = pueblo · <strong>-cracia</strong> = gobierno · <strong>anti-</strong> = contra · <strong>inter-</strong> = entre · <strong>in-</strong> = hacia dentro · <strong>e-</strong> = hacia fuera</p>
+  <div class="enun" id="hi-enun" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="oir" id="hi-oir">🔊 Escuchar la palabra</button></div>
+  <div class="opciones" id="hi-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="hi-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="hi-otra">Otra palabra</button></div>
+  <div class="marcador" id="hi-marcador"></div>
+</section>
+
+<section class="modulo" id="contexto" aria-labelledby="t-con" hidden>
+  <h2 id="t-con">3 · Pistas del contexto</h2>
+  <p class="consejo">Busca la pista: <strong>definición</strong> (es decir, o sea), <strong>ejemplo</strong> (como, por ejemplo), <strong>sinónimo</strong> o <strong>contraste</strong> (pero, en cambio). Después cambia la palabra por tu respuesta y comprueba que la oración tenga sentido.</p>
+  <div class="enun" id="cx-enun" aria-live="polite"></div>
+  <div class="opciones" id="cx-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cx-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cx-otra">Otra oración</button></div>
+  <div class="marcador" id="cx-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 6.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+function T(w,ops,n){return {e:'<span class="termino">'+w+'</span><span class="preg">¿Qué significa?</span>',ops:ops,c:0,n:n,a:w};}
+unaAUna('ci',[
+  T('biología',['El estudio de los seres vivos','El estudio de las rocas y montañas','El estudio del clima y la lluvia'],'bio = vida; -logía = estudio de.'),
+  T('geología',['El estudio de la tierra y las rocas','El estudio de los animales salvajes','El estudio de las estrellas y planetas'],'geo = tierra.'),
+  T('hidratar',['Dar agua','Dar calor','Dar luz'],'hidro = agua.'),
+  T('termómetro',['Aparato que mide la temperatura','Aparato que mide la distancia','Aparato que mide el peso'],'termo = calor; -metro = medida.'),
+  T('fotosíntesis',['Las plantas fabrican alimento con la luz','Las plantas absorben agua por la raíz','Los animales digieren las plantas'],'foto = luz; síntesis = fabricar, unir.'),
+  T('ecosistema',['Los seres vivos de un lugar y su ambiente','Un sistema de riego para los cultivos','Un grupo de animales de la misma especie'],'eco = casa, ambiente.'),
+  T('célula',['La unidad más pequeña de un ser vivo','Una de las partes del sistema solar','Un tipo de roca que sale de volcanes'],'Todos los seres vivos están hechos de células.'),
+  T('organismo',['Cualquier ser vivo','Una máquina de laboratorio','Una sustancia química'],'Una bacteria, un árbol y una persona son organismos.'),
+  T('hipótesis',['Una explicación posible que se pone a prueba','El resultado final que ya se comprobó','La lista de pasos que sigue un experimento'],'El experimento sirve para comprobarla o descartarla.'),
+  T('variable',['Lo que cambia o se mide en un experimento','Lo que nunca cambia en un experimento','El nombre que recibe el laboratorio'],'Por ejemplo, la cantidad de agua que recibe una planta.'),
+  T('materia',['Todo lo que ocupa un lugar y tiene masa','Solo los objetos sólidos y duros','Solo lo que se puede ver a simple vista'],'El aire también es materia.'),
+  T('biodiversidad',['La variedad de seres vivos de un lugar','La cantidad de agua de un río','La temperatura media de una región'],'bio = vida; diverso = variado.'),
+  T('antibiótico',['Medicina que actúa contra las bacterias','Vitamina que da más energía al cuerpo','Aparato que mide la presión de la sangre'],'anti = contra; bio = vida (las bacterias).'),
+  T('geotérmica',['Energía que viene del calor de la tierra','Energía que viene de la fuerza del viento','Energía que viene de la luz del sol'],'geo = tierra; termo = calor.'),
+  T('evaporación',['El agua líquida se convierte en vapor','El vapor se convierte en gotas','El agua cae como lluvia'],'Lo contrario es la condensación.'),
+  T('herbívoro',['Animal que solo come plantas','Animal que solo come carne','Animal que come de todo'],'hierba + -voro (que come).')
+],{leerAlAcertar:false,pista:'Todavía no. Busca la pieza conocida dentro de la palabra.'});
+
+unaAUna('hi',[
+  T('democracia',['Gobierno del pueblo','Gobierno de un rey','Gobierno de los militares'],'demo = pueblo; -cracia = gobierno.'),
+  T('constitución',['La ley más importante de un país','Un discurso del presidente','Un impuesto a los productos'],'Organiza el gobierno y protege derechos.'),
+  T('enmienda',['Un cambio o una adición a la Constitución','Una multa por no cumplir con la ley','Un juicio importante de la Corte Suprema'],'La Constitución de EE. UU. tiene 27.'),
+  T('sufragio',['El derecho a votar','El derecho a protestar','El deber de pagar impuestos'],'Sufragio femenino: el voto de las mujeres.'),
+  T('abolición',['La eliminación de una ley o práctica','La creación de una ley nueva','El estudio de una ley antigua'],'Abolir = eliminar.'),
+  T('colonia',['Territorio gobernado por otro país','País que gobierna a otros','Grupo de ciudadanos que votan'],'Las 13 colonias eran gobernadas por Inglaterra.'),
+  T('emigrar',['Salir del propio país para vivir en otro','Llegar a un país para vivir en él','Viajar dentro del mismo país'],'e- = hacia fuera.'),
+  T('inmigrar',['Llegar a un país para vivir en él','Salir del propio país para siempre','Visitar otro país de vacaciones'],'in- = hacia dentro.'),
+  T('poder legislativo',['El que hace las leyes','El que aplica las leyes','El que juzga según las leyes'],'En EE. UU. es el Congreso.'),
+  T('poder ejecutivo',['El que aplica las leyes','El que escribe las leyes','El que juzga según las leyes'],'Lo encabeza el presidente.'),
+  T('poder judicial',['El que interpreta las leyes en los tribunales','El que escribe y vota las leyes en el Congreso','El que dirige el ejército y la policía'],'La Corte Suprema está en la cima.'),
+  T('ciudadano',['Miembro de un país con derechos y deberes','Persona que vive en una gran ciudad','Empleado del gobierno de una ciudad'],'Los ciudadanos pueden votar.'),
+  T('independencia',['Libertad de un país para gobernarse solo','Unión de varios países en uno','Guerra entre dos partes de un país'],'EE. UU. la declaró en 1776; México, en 1810.'),
+  T('internacional',['Entre varios países','Dentro de un solo país','Contra otro país'],'inter = entre.'),
+  T('antiesclavista',['Que está en contra de la esclavitud','Que está a favor de la esclavitud','Que estudia la historia de la esclavitud'],'anti = contra.'),
+  T('impuesto',['Dinero que se paga al gobierno','Dinero que el gobierno regala','Dinero que se presta a un banco'],'Con los impuestos se pagan escuelas, carreteras…')
+],{pista:'Todavía no. Busca la pieza conocida o piensa dónde has oído la palabra.'});
+
+function X(o,q,ops,n){return {e:'<span class="oracion">'+o+'</span><span class="preg">'+q+'</span>',ops:ops,c:0,n:n};}
+unaAUna('cx',[
+  X('Los <strong>carnívoros</strong>, es decir, los animales que comen carne, cazan a otros animales.','¿Qué significa «carnívoros»?',['Animales que comen carne','Animales que viven en el agua','Animales que duermen de día'],'Definición con «es decir».'),
+  X('Los <strong>combustibles fósiles</strong>, como el carbón y el petróleo, se formaron hace millones de años.','¿Qué son los «combustibles fósiles»?',['Materiales como el carbón y el petróleo','Plantas que crecen en el desierto','Máquinas que producen energía limpia'],'Ejemplos con «como».'),
+  X('El clima de la región es <strong>árido</strong>; en cambio, la costa recibe mucha lluvia.','¿Qué significa «árido»?',['Seco','Lluvioso','Frío'],'Contraste con «en cambio»: lo opuesto a mucha lluvia.'),
+  X('Los colonos pagaban un <strong>tributo</strong>, un impuesto, a la Corona.','¿Qué significa «tributo»?',['Un impuesto','Un regalo','Una cosecha'],'Sinónimo entre comas.'),
+  X('La <strong>epidemia</strong> se extendió rápidamente: miles de personas enfermaron en pocas semanas.','¿Qué significa «epidemia»?',['Enfermedad que afecta a muchas personas a la vez','Medicina nueva que cura muy rápido','Hospital especial para los enfermos graves'],'«Miles de personas enfermaron» lo explica.'),
+  X('El general era <strong>implacable</strong> con sus enemigos, pero generoso con sus soldados.','¿Qué significa «implacable»?',['Que no tiene compasión','Que es muy generoso','Que es muy joven'],'Contraste con «pero generoso».'),
+  X('Los <strong>mamíferos</strong>, por ejemplo, los perros, las ballenas y los seres humanos, alimentan a sus crías con leche.','¿Qué son los «mamíferos»?',['Animales que alimentan a sus crías con leche','Animales que ponen huevos en el agua','Animales que viven solo en el mar'],'Ejemplos y definición en la misma oración.'),
+  X('La enmienda fue <strong>ratificada</strong>; los estados la aprobaron y entró en vigor.','¿Qué significa «ratificada»?',['Aprobada','Rechazada','Olvidada'],'Sinónimo después del punto y coma.'),
+  X('La <strong>erosión</strong>, o sea, el desgaste de la tierra por el agua y el viento, formó el Gran Cañón.','¿Qué significa «erosión»?',['Desgaste de la tierra por el agua y el viento','Erupción de un volcán muy antiguo','Movimiento de la tierra durante un temblor'],'Definición con «o sea».'),
+  X('A diferencia de los países <strong>neutrales</strong>, Estados Unidos sí participó en la guerra.','¿Qué hacen los países «neutrales» en una guerra?',['No toman partido','Atacan primero','Ganan siempre'],'Contraste con «a diferencia de».'),
+  X('El nuevo medicamento resultó <strong>eficaz</strong>: casi todos los pacientes mejoraron.','¿Qué significa «eficaz»?',['Que da el resultado esperado','Que es muy caro','Que es difícil de encontrar'],'«Casi todos mejoraron» lo explica.'),
+  X('Durante la <strong>Gran Depresión</strong>, una crisis económica que empezó en 1929, millones de personas perdieron su empleo.','¿Qué fue la «Gran Depresión»?',['Una crisis económica','Una enfermedad muy contagiosa','Una guerra entre dos países'],'Definición entre comas.'),
+  X('Las plantas absorben <strong>nutrientes</strong>, como el nitrógeno y el potasio, a través de las raíces.','¿Qué son los «nutrientes»?',['Sustancias que alimentan a la planta','Insectos que dañan las raíces','Hojas que caen en otoño'],'Ejemplos con «como».'),
+  X('El presidente <strong>vetó</strong> la ley; se negó a firmarla.','¿Qué significa «vetó»?',['La rechazó','La escribió','La aprobó'],'Sinónimo después del punto y coma.')
+],{pista:'Todavía no. Busca la pista cerca de la palabra y cámbiala por tu respuesta para ver si la oración tiene sentido.'});
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l6-2 · Clasificar fuentes, citar evidencia y reconocer el punto de vista · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.2 · Fuentes primarias y secundarias</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .fuente-desc{display:block;background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:14px;font-size:1.1rem;text-align:center;margin-bottom:6px}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila .op{text-align:center;min-width:170px}
+</style>
+</head>
+<body>
+<h1>Práctica 6.2 · Fuentes primarias y secundarias</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 6 · Acompaña a la Lección 6.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_6-2.html">← Volver a la Lección 6.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="clasifica">1 · ¿Primaria o secundaria?</button>
+  <button type="button" class="pest" data-mod="cita">2 · Elegir la cita</button>
+  <button type="button" class="pest" data-mod="punto-de-vista">3 · Punto de vista</button>
+</nav>
+
+<section class="modulo" id="clasifica" aria-labelledby="t-cla">
+  <h2 id="t-cla">1 · ¿Primaria o secundaria?</h2>
+  <p class="consejo">Pregúntate: «¿Quien lo hizo estuvo allí, en ese tiempo?». Si sí, es primaria. Si lo estudió después, es secundaria.</p>
+  <div class="enun" id="cl-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="cl-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cl-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cl-otra">Otra fuente</button></div>
+  <div class="marcador" id="cl-marcador"></div>
+</section>
+
+<section class="modulo" id="cita" aria-labelledby="t-cit" hidden>
+  <h2 id="t-cit">2 · Elegir la cita</h2>
+  <p class="consejo">Lee el texto y la afirmación. Elige la cita que la <strong>demuestra directamente</strong>, no la que solo habla del mismo tema.</p>
+  <div class="enun" id="ci-enun" aria-live="polite"></div>
+  <div class="opciones" id="ci-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ci-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ci-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ci-marcador"></div>
+</section>
+
+<section class="modulo" id="punto-de-vista" aria-labelledby="t-pv" hidden>
+  <h2 id="t-pv">3 · Punto de vista y propósito</h2>
+  <p class="consejo">¿Quién escribe? ¿Cómo ve el hecho? ¿Para qué escribe: informar, convencer, pedir, recordar? Las palabras que elige te dan la pista.</p>
+  <div class="enun" id="pv-enun" aria-live="polite"></div>
+  <div class="opciones" id="pv-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pv-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pv-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pv-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 6.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+var PS=['Fuente primaria','Fuente secundaria'];
+function F(d,c,n){return {e:'<span class="fuente-desc">'+d+'</span>',ops:PS,c:c,n:n,fijo:true};}
+unaAUna('cl',[
+  F('Una carta que un soldado escribió a su esposa durante la Segunda Guerra Mundial',0,'La escribió alguien que vivía la guerra.'),
+  F('Un libro de texto de Estudios Sociales sobre la Segunda Guerra Mundial',1,'Su autor explica la guerra a partir de otras fuentes.'),
+  F('La Declaración de Independencia de 1776',0,'Es el documento original, escrito en el momento.'),
+  F('Un artículo de revista de 2010 que analiza la Declaración de Independencia',1,'Lo escribió alguien 234 años después.'),
+  F('Una foto de la Marcha sobre Washington de 1963',0,'Se tomó durante el hecho.'),
+  F('Una biografía de Martin Luther King Jr. publicada en 1995',1,'Su autor estudió la vida de King después.'),
+  F('El diario que escribió Ana Frank mientras estaba escondida',0,'Lo escribió ella misma, día a día.'),
+  F('Una enciclopedia en línea con un artículo sobre César Chávez',1,'Resume lo que otras fuentes documentaron.'),
+  F('Una entrevista de radio a un trabajador del campo que participó en la huelga de la uva de 1965',0,'Es la voz de un participante.'),
+  F('Un documental de 2018 sobre la huelga de la uva',1,'Se hizo décadas después, con otras fuentes.'),
+  F('Una ley aprobada por el Congreso en 1964',0,'Es el documento original del momento.'),
+  F('Un resumen de esa ley escrito por un profesor en 2021',1,'Explica la ley después.'),
+  F('Un cartel de propaganda de 1917 que llama a los jóvenes al ejército',0,'Se creó y se usó en esa época.'),
+  F('Un libro de historia de 1900 sobre la llegada de Colón en 1492',1,'Es antiguo, pero su autor no vivió 1492.'),
+  F('El acta de nacimiento de tu abuela',0,'Se hizo en el momento del nacimiento.'),
+  F('Una página web que explica la historia de tu ciudad',1,'Su autor reunió y explicó información de otras fuentes.'),
+  F('Una moneda romana encontrada en una excavación',0,'Es un objeto de la época.'),
+  F('El testimonio de una sobreviviente del terremoto de México de 1985',0,'Ella vivió el terremoto.'),
+  F('Un capítulo de libro que compara varios terremotos del siglo XX',1,'Analiza hechos que su autor estudió.'),
+  F('El discurso que dio un presidente el día que asumió el cargo',0,'Lo pronunció en el momento.')
+],{fijo:true,pista:'Todavía no. ¿La persona que lo creó estuvo allí, en ese tiempo?'});
+
+function C(t,af,ops,n){return {e:'<span class="pasaje">'+t+'</span><span class="preg">Afirmación: '+af+'</span>',ops:ops,c:0,n:n};}
+unaAUna('ci',[
+  C('«El barco salió de Veracruz el 3 de marzo. Éramos doscientos pasajeros y apenas había agua. A los diez días, muchos niños estaban enfermos. Mi madre repartía su pan entre los más pequeños.»','el viaje fue muy duro.',
+    ['«…apenas había agua. A los diez días, muchos niños estaban enfermos.»','«El barco salió de Veracruz el 3 de marzo. Éramos doscientos pasajeros…»','«Mi madre repartía su pan entre los más pequeños.»'],'Falta de agua y niños enfermos demuestran que fue duro.'),
+  C('«El barco salió de Veracruz el 3 de marzo. Éramos doscientos pasajeros y apenas había agua. A los diez días, muchos niños estaban enfermos. Mi madre repartía su pan entre los más pequeños.»','la madre de quien escribe era generosa.',
+    ['«Mi madre repartía su pan entre los más pequeños.»','«Éramos doscientos pasajeros y apenas había agua.»','«…muchos niños estaban enfermos.»'],'Compartir su pan demuestra generosidad.'),
+  C('«Las abejas polinizan cerca de un tercio de los cultivos que comemos. Sin ellas, frutas como las manzanas y las almendras serían escasas. En los últimos años, sin embargo, muchas colonias han desaparecido.»','las abejas son importantes para la alimentación.',
+    ['«Las abejas polinizan cerca de un tercio de los cultivos que comemos.»','«En los últimos años, sin embargo, muchas colonias han desaparecido.»','«Sin ellas, frutas como las manzanas y las almendras serían escasas.»'],'Un tercio de los cultivos depende de ellas.'),
+  C('«Las abejas polinizan cerca de un tercio de los cultivos que comemos. Sin ellas, frutas como las manzanas y las almendras serían escasas. En los últimos años, sin embargo, muchas colonias han desaparecido.»','hay un problema con las abejas.',
+    ['«…muchas colonias han desaparecido.»','«Las abejas polinizan cerca de un tercio de los cultivos…»','«…frutas como las manzanas y las almendras…»'],'La desaparición de colonias es el problema.'),
+  C('«Querido hermano: aquí en Chicago el invierno es terrible. El viento corta la cara y la nieve llega a las rodillas. Pero en la fábrica pagan bien y ya ahorré para traer a Rosa en primavera.»','el autor tiene planes para el futuro.',
+    ['«…ya ahorré para traer a Rosa en primavera.»','«Querido hermano: aquí en Chicago el invierno es terrible.»','«El viento corta la cara y la nieve llega a las rodillas.»'],'Traer a Rosa es un plan.'),
+  C('«Querido hermano: aquí en Chicago el invierno es terrible. El viento corta la cara y la nieve llega a las rodillas. Pero en la fábrica pagan bien y ya ahorré para traer a Rosa en primavera.»','al autor le cuesta el clima de Chicago.',
+    ['«El viento corta la cara y la nieve llega a las rodillas.»','«Pero en la fábrica pagan bien y ya ahorré para traer a Rosa…»','«Querido hermano: aquí en Chicago…»'],'Describe lo duro del clima.'),
+  C('«La vacuna contra la viruela, creada por Edward Jenner en 1796, fue la primera vacuna moderna. Gracias a las campañas de vacunación, en 1980 la viruela se declaró erradicada en todo el mundo.»','las vacunas pueden acabar con una enfermedad.',
+    ['«…en 1980 la viruela se declaró erradicada en todo el mundo.»','«La vacuna contra la viruela, creada por Edward Jenner en 1796…»','«…fue la primera vacuna moderna.»'],'«Erradicada» quiere decir eliminada por completo.'),
+  C('«El 1 de diciembre de 1955, en Montgomery, Rosa Parks se negó a ceder su asiento de autobús a un pasajero blanco. Fue arrestada. Su arresto inspiró un boicot a los autobuses que duró más de un año.»','la acción de Rosa Parks tuvo consecuencias importantes.',
+    ['«Su arresto inspiró un boicot a los autobuses que duró más de un año.»','«…Rosa Parks se negó a ceder su asiento de autobús a un pasajero blanco.»','«El 1 de diciembre de 1955, en Montgomery…»'],'El boicot fue la consecuencia.'),
+  C('«Hoy recorrimos doce millas. El camino está lleno de piedras y los bueyes están cansados. Esta noche, junto al fuego, papá tocó el violín y todos cantamos. Por un momento olvidamos el cansancio.»','el grupo encontró momentos de alegría en el viaje.',
+    ['«…papá tocó el violín y todos cantamos.»','«Hoy recorrimos doce millas.»','«El camino está lleno de piedras y los bueyes están cansados.»'],'Cantar junto al fuego es un momento alegre.'),
+  C('«El nuevo parque tiene canchas, juegos para niños y un huerto comunitario. Desde que abrió, los vecinos dicen que se ven más en la calle y que el barrio parece más seguro.»','el parque cambió la vida del barrio.',
+    ['«…los vecinos dicen que se ven más en la calle…»','«El nuevo parque tiene canchas…»','«…juegos para niños y un huerto comunitario.»'],'Habla de cómo cambió el barrio, no solo de lo que tiene el parque.')
+],{pista:'Todavía no. Esa cita habla del tema, pero ¿demuestra exactamente la afirmación?'});
+
+function P(t,q,ops,n){return {e:'<span class="pasaje">'+t+'</span><span class="preg">'+q+'</span>',ops:ops,c:0,n:n};}
+unaAUna('pv',[
+  P('<strong>Periódico del sindicato, 1937:</strong> «Miles de trabajadores valientes defendieron hoy su derecho a una vida digna.»','¿Cómo ve el autor a los huelguistas?',['Con admiración','Con desprecio','Sin ninguna opinión'],'«Valientes» y «vida digna» muestran admiración.'),
+  P('<strong>Periódico de los empresarios, 1937:</strong> «Un grupo de agitadores paralizó hoy la producción y dejó sin trabajo a cientos de familias.»','¿Cómo ve el autor a los huelguistas?',['Como alborotadores que causan daño','Como héroes que luchan por todos','Como personas sin ninguna culpa'],'«Agitadores» y «paralizó» son palabras negativas.'),
+  P('<strong>Carta al alcalde:</strong> «Le escribo porque en mi calle no hay alumbrado desde hace dos meses. Le ruego que envíe a alguien a repararlo cuanto antes.»','¿Cuál es el propósito de la carta?',['Pedir una solución','Contar una historia divertida','Felicitar al alcalde'],'«Le ruego que envíe…» es una petición.'),
+  P('<strong>Folleto de la ciudad:</strong> «El nuevo tren llegará al aeropuerto en 20 minutos. Funcionará de 5 de la mañana a 1 de la madrugada.»','¿Cuál es el propósito del folleto?',['Informar','Convencer de votar','Expresar tristeza'],'Da datos de horario y duración.'),
+  P('<strong>Discurso de una candidata:</strong> «Si votan por mí, cada familia tendrá una escuela de calidad cerca de casa. Juntos podemos lograrlo.»','¿Cuál es el propósito del discurso?',['Convencer al público','Informar de forma neutral','Contar un recuerdo personal'],'Pide el voto con una promesa.'),
+  P('<strong>Diario de un colono, 1849:</strong> «Por fin llegamos a California. Dicen que hay oro en cada río. ¡Pronto seremos ricos!»','¿Qué punto de vista muestra el autor?',['Optimista y lleno de esperanza','Triste, cansado y sin ánimo','Neutral: solo da datos del viaje'],'«¡Pronto seremos ricos!» es optimismo.'),
+  P('<strong>Recuerdo de una mujer indígena de California, escrito años después:</strong> «Cuando llegaron los buscadores de oro, los ríos se ensuciaron y perdimos los lugares donde pescábamos.»','¿Por qué su punto de vista es distinto del colono?',['Porque la llegada del oro la perjudicó','Porque ella no vivió en California','Porque escribe sobre otro país'],'Para ella, la fiebre del oro trajo pérdidas.'),
+  P('<strong>Anuncio de 1920:</strong> «¡Compre el nuevo jabón Blanca Nieve! Sus sábanas quedarán más blancas que nunca.»','¿Para qué sirve hoy este anuncio a un historiador?',['Para saber qué se vendía y cómo','Para saber si el jabón era el mejor','Para conocer la vida de Blanca Nieve'],'Una fuente puede ser útil aunque no sea neutral.'),
+  P('<strong>Enfermera en un hospital de guerra, 1864:</strong> «Hoy llegaron cuarenta heridos. No hay vendas suficientes. Escribo esto a las tres de la madrugada, sin haber dormido.»','¿Qué hace valiosa esta fuente?',['Es el testimonio directo de una testigo','Es una explicación escrita años después','Presenta las opiniones de los dos bandos'],'Es primaria: ella lo vivió.'),
+  P('<strong>Reseña de un vecino:</strong> «El restaurante de la esquina es el mejor del barrio. La comida es deliciosa y los dueños son amabilísimos.»','¿Qué tipo de texto es?',['Una opinión personal','Un informe con datos','Una ley de la ciudad'],'«El mejor», «deliciosa» y «amabilísimos» son opiniones.')
+],{pista:'Todavía no. Fíjate en las palabras que elige el autor y en lo que quiere lograr.'});
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l6-1 · Gráficas de barras, líneas y circulares; tablas de datos · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.1 · Gráficas y tablas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px;text-align:center}
+  .graf-caja{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:10px;margin:0 auto 10px;max-width:600px}
+  .graf-tit{display:block;font-weight:700;color:var(--cp-oscuro);margin-bottom:4px;text-align:left}
+  .preg{font-weight:700;display:block;margin-top:8px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:520px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  table.datos{border-collapse:collapse;margin:6px auto;font-size:1rem}
+  table.datos th,table.datos td{border:1px solid #9aa9b7;padding:6px 12px;text-align:center}
+  table.datos th{background:var(--cp-oscuro);color:#fff}
+  .sr-solo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+</style>
+</head>
+<body>
+<h1>Práctica 6.1 · Gráficas y tablas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 6 · Acompaña a la Lección 6.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_6-1.html">← Volver a la Lección 6.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="barras">1 · Barras</button>
+  <button type="button" class="pest" data-mod="lineas">2 · Líneas</button>
+  <button type="button" class="pest" data-mod="circular">3 · Circular</button>
+  <button type="button" class="pest" data-mod="tablas">4 · Tablas</button>
+</nav>
+
+<section class="modulo" id="barras" aria-labelledby="t-bar">
+  <h2 id="t-bar">1 · Gráficas de barras</h2>
+  <p class="consejo">Título, ejes, escala, valores y conclusión. Cada ejercicio trae datos nuevos.</p>
+  <div class="enun" id="ba-enun" aria-live="polite"></div>
+  <div class="opciones" id="ba-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ba-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ba-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ba-marcador"></div>
+</section>
+
+<section class="modulo" id="lineas" aria-labelledby="t-lin" hidden>
+  <h2 id="t-lin">2 · Gráficas de líneas</h2>
+  <p class="consejo">Si la línea sube, la cantidad aumenta; si baja, disminuye. Fíjate en los puntos más alto y más bajo.</p>
+  <div class="enun" id="li-enun" aria-live="polite"></div>
+  <div class="opciones" id="li-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="li-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="li-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="li-marcador"></div>
+</section>
+
+<section class="modulo" id="circular" aria-labelledby="t-cir" hidden>
+  <h2 id="t-cir">3 · Gráficas circulares</h2>
+  <p class="consejo">El círculo completo es el 100 %. Compara las porciones y suma cuando lo pidan.</p>
+  <div class="enun" id="ci-enun" aria-live="polite"></div>
+  <div class="opciones" id="ci-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ci-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ci-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ci-marcador"></div>
+</section>
+
+<section class="modulo" id="tablas" aria-labelledby="t-tab" hidden>
+  <h2 id="t-tab">4 · Tablas de datos</h2>
+  <p class="consejo">Busca la fila y la columna correctas: el dato está donde se cruzan.</p>
+  <div class="enun" id="ta-enun" aria-live="polite"></div>
+  <div class="opciones" id="ta-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ta-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ta-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ta-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 6.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* ===== Gráficas sencillas en SVG (barras, líneas, circular) =====
+   Colores validados para daltonismo: #00897b, #d9692a, #5c6bc0, #c2185b. Cada gráfica lleva valores
+   escritos sobre las marcas y una tabla con los datos, para que nada dependa solo del color. */
+var GCOL=['#00897b','#d9692a','#5c6bc0','#c2185b'];
+function svgEl(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+function marcoSvg(caja,ancho,alto,desc){
+  var s=svgEl('svg',{viewBox:'0 0 '+ancho+' '+alto,width:ancho,height:alto,role:'img','aria-label':desc});
+  s.style.maxWidth='100%'; s.style.height='auto'; caja.innerHTML=''; caja.appendChild(s); return s;
+}
+/* barras(caja, {titulo, etiquetas, valores, unidad, ejeY}) */
+function graficaBarras(caja,o){
+  var W=520,H=300,L=56,R=16,T=20,B=48, max=o.max||Math.ceil(Math.max.apply(null,o.valores)*1.15/10)*10, n=o.valores.length;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica de barras. '+o.etiquetas.map(function(e,i){return e+': '+o.valores[i]+(o.unidad||'');}).join('; '));
+  var paso=o.paso||max/5;
+  for(var v=0;v<=max+0.001;v+=paso){var y=T+(H-T-B)*(1-v/max);s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:'#dfe5ea','stroke-width':1}));s.appendChild(svgEl('text',{x:L-8,y:y+4,'text-anchor':'end','font-size':12,fill:'#555','font-family':'Arial'},Math.round(v)));}
+  if(o.ejeY)s.appendChild(svgEl('text',{x:14,y:(H-B+T)/2,transform:'rotate(-90 14 '+((H-B+T)/2)+')','text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeY));
+  var ancho=(W-L-R)/n, bw=Math.min(52,ancho*0.62);
+  o.valores.forEach(function(v,i){
+    var x=L+ancho*i+(ancho-bw)/2, h=(H-T-B)*v/max, y=H-B-h;
+    var r=svgEl('path',{d:'M'+x+','+(H-B)+' V'+(y+4)+' Q'+x+','+y+' '+(x+4)+','+y+' H'+(x+bw-4)+' Q'+(x+bw)+','+y+' '+(x+bw)+','+(y+4)+' V'+(H-B)+' Z',fill:o.color||GCOL[0]});
+    r.appendChild(svgEl('title',{},o.etiquetas[i]+': '+v+(o.unidad||''))); s.appendChild(r);
+    s.appendChild(svgEl('text',{x:x+bw/2,y:y-6,'text-anchor':'middle','font-size':12,'font-weight':'bold',fill:'#1a2332','font-family':'Arial'},v));
+    s.appendChild(svgEl('text',{x:x+bw/2,y:H-B+18,'text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.etiquetas[i]));
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  if(o.ejeX)s.appendChild(svgEl('text',{x:(W+L)/2,y:H-8,'text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeX));
+}
+/* lineas(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX}) */
+function graficaLineas(caja,o){
+  var W=540,H=300,L=56,R=70,T=20,B=48, min=o.min||0, max=o.max, n=o.etiquetas.length;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica de líneas. '+o.series.map(function(se){return se.nombre+': '+o.etiquetas.map(function(e,i){return e+' '+se.valores[i];}).join(', ');}).join('. '));
+  function Y(v){return T+(H-T-B)*(1-(v-min)/(max-min));} function X(i){return L+(W-L-R)*i/(n-1);}
+  for(var v=min;v<=max+0.001;v+=o.paso){s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:Y(v),y2:Y(v),stroke:'#dfe5ea','stroke-width':1}));s.appendChild(svgEl('text',{x:L-8,y:Y(v)+4,'text-anchor':'end','font-size':12,fill:'#555','font-family':'Arial'},v));}
+  o.etiquetas.forEach(function(e,i){s.appendChild(svgEl('text',{x:X(i),y:H-B+18,'text-anchor':'middle','font-size':11,fill:'#333','font-family':'Arial'},e));});
+  if(o.ejeY)s.appendChild(svgEl('text',{x:14,y:(H-B+T)/2,transform:'rotate(-90 14 '+((H-B+T)/2)+')','text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeY));
+  if(o.ejeX)s.appendChild(svgEl('text',{x:(W-R+L)/2,y:H-8,'text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeX));
+  o.series.forEach(function(se,k){
+    var c=se.color||GCOL[k], d=se.valores.map(function(v,i){return (i?'L':'M')+X(i)+','+Y(v);}).join(' ');
+    s.appendChild(svgEl('path',{d:d,fill:'none',stroke:c,'stroke-width':2.5,'stroke-linejoin':'round'}));
+    se.valores.forEach(function(v,i){var p=svgEl('circle',{cx:X(i),cy:Y(v),r:4.5,fill:c,stroke:'#fff','stroke-width':2});p.appendChild(svgEl('title',{},se.nombre+', '+o.etiquetas[i]+': '+v+(o.unidad||'')));s.appendChild(p);
+      if(o.valoresVisibles)s.appendChild(svgEl('text',{x:X(i),y:Y(v)-10,'text-anchor':'middle','font-size':11,fill:'#1a2332','font-family':'Arial'},v));});
+    var ul=se.valores.length-1; if(o.series.length>1)s.appendChild(svgEl('text',{x:X(ul)+8,y:Y(se.valores[ul])+4,'font-size':12,'font-weight':'bold',fill:'#1a2332','font-family':'Arial'},se.nombre));
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+}
+/* circular(caja, {titulo, etiquetas, valores (porcentajes)}) */
+function graficaCircular(caja,o){
+  var W=460,H=280,cx=140,cy=140,r=110, tot=o.valores.reduce(function(a,b){return a+b;},0), ang=-Math.PI/2;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica circular. '+o.etiquetas.map(function(e,i){return e+': '+o.valores[i]+'%';}).join('; '));
+  o.valores.forEach(function(v,i){
+    var a2=ang+2*Math.PI*v/tot, x1=cx+r*Math.cos(ang), y1=cy+r*Math.sin(ang), x2=cx+r*Math.cos(a2), y2=cy+r*Math.sin(a2), big=(a2-ang)>Math.PI?1:0;
+    var p=svgEl('path',{d:'M'+cx+','+cy+' L'+x1+','+y1+' A'+r+','+r+' 0 '+big+' 1 '+x2+','+y2+' Z',fill:GCOL[i%4],stroke:'#fff','stroke-width':2});
+    p.appendChild(svgEl('title',{},o.etiquetas[i]+': '+v+'%')); s.appendChild(p);
+    var m=(ang+a2)/2; s.appendChild(svgEl('text',{x:cx+r*0.62*Math.cos(m),y:cy+r*0.62*Math.sin(m)+5,'text-anchor':'middle','font-size':14,'font-weight':'bold',fill:'#fff','font-family':'Arial'},v+'%'));
+    ang=a2;
+    var ly=50+i*30; s.appendChild(svgEl('rect',{x:280,y:ly-12,width:16,height:16,rx:3,fill:GCOL[i%4]})); s.appendChild(svgEl('text',{x:304,y:ly+1,'font-size':14,fill:'#1a2332','font-family':'Arial'},o.etiquetas[i]+' · '+v+'%'));
+  });
+}
+/* Tabla de datos accesible debajo de la gráfica */
+function tablaDatos(caja,titulo,cabeceras,filas){
+  var h='<details class="ver-datos"><summary>Ver los datos en una tabla</summary><table class="tabla"><caption class="sr-solo">'+titulo+'</caption><thead><tr>'+cabeceras.map(function(c){return '<th scope="col">'+c+'</th>';}).join('')+'</tr></thead><tbody>'+
+    filas.map(function(f){return '<tr>'+f.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></details>';
+  caja.insertAdjacentHTML('beforeend',h);
+}
+
+function azar(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function distintos(n,a,b,paso){var s={},r=[];while(r.length<n){var v=azar(a/paso,b/paso)*paso;if(!s[v]){s[v]=1;r.push(v);}}return r;}
+function svgDe(fn,o){var d=document.createElement('div');fn(d,o);return d.innerHTML;}
+function numOps(v,d){var o=[v],k=1;while(o.length<3){var c=v+(k%2?1:-1)*d*Math.ceil(k/2);if(c>=0&&o.indexOf(c)<0)o.push(c);k++;}return o.map(String);}
+function caja(tit,svg){return '<div class="graf-caja"><span class="graf-tit">'+tit+'</span>'+svg+'</div>';}
+
+/* Módulo 1: barras con datos al azar */
+(function(){
+  var C=[
+    ['Estudiantes inscritos en cada curso del centro comunitario','Estudiantes',['Inglés','GED','Computación','Ciudadanía'],10,60,5],
+    ['Litros de leche vendidos cada día en la tienda','Litros',['Lun','Mar','Mié','Jue','Vie'],20,90,5],
+    ['Goles de cada equipo en la liga del barrio','Goles',['Águilas','Leones','Halcones','Tigres','Pumas'],5,30,1],
+    ['Horas de voluntariado de los vecinos cada mes','Horas',['Ene','Feb','Mar','Abr','May','Jun'],10,50,2],
+    ['Libros prestados por la biblioteca escolar','Libros',['1.º','2.º','3.º','4.º','5.º'],15,75,5]
+  ];
+  function item(){
+    var c=C[azar(0,C.length-1)], v=distintos(c[2].length,c[3],c[4],c[5]), et=c[2];
+    var maxV=Math.max.apply(null,v), minV=Math.min.apply(null,v), iM=v.indexOf(maxV), im=v.indexOf(minV);
+    var svg=svgDe(graficaBarras,{titulo:c[0],etiquetas:et,valores:v,ejeY:c[1],max:Math.ceil(maxV*1.2/10)*10||10,paso:(Math.ceil(maxV*1.2/10)*10)/5});
+    var tipo=azar(0,3), q, ops, ok, n;
+    if(tipo===0){q='¿Qué categoría tiene el valor más alto?';ok=et[iM];ops=[ok].concat(barajar(et.filter(function(e){return e!==ok;})).slice(0,2));n=ok+': '+maxV+', la barra más alta.';}
+    else if(tipo===1){q='¿Qué categoría tiene el valor más bajo?';ok=et[im];ops=[ok].concat(barajar(et.filter(function(e){return e!==ok;})).slice(0,2));n=ok+': '+minV+', la barra más baja.';}
+    else if(tipo===2){var i=azar(0,et.length-1);q='¿Cuál es el valor de «'+et[i]+'»?';ops=numOps(v[i],c[5]*2);n='Lee el número sobre la barra de '+et[i]+': '+v[i]+'.';}
+    else{q='¿Cuál es la diferencia entre el valor más alto y el más bajo?';ops=numOps(maxV-minV,c[5]*2);n=maxV+' − '+minV+' = '+(maxV-minV)+'.';}
+    return {e:caja(c[0],svg)+'<span class="preg">'+q+'</span>',ops:ops,c:0,n:n};
+  }
+  var B=[];for(var k=0;k<40;k++)B.push(item());
+  unaAUna('ba',B,{pista:'Todavía no. Vuelve a la gráfica: lee el título, el eje y el número sobre cada barra.'});
+})();
+
+/* Módulo 2: líneas */
+(function(){
+  var C=[
+    ['Precio de una docena de huevos en la tienda (dólares)','Dólares',['Ene','Feb','Mar','Abr','May','Jun'],2,6,0.5,8,2],
+    ['Visitantes del parque cada mes (en cientos)','Cientos de personas',['Mar','Abr','May','Jun','Jul','Ago'],2,12,1,15,3],
+    ['Estudiantes que asisten a la clase de la noche','Estudiantes',['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6'],8,24,1,30,6],
+    ['Lluvia de cada mes (pulgadas)','Pulgadas',['Ene','Feb','Mar','Abr','May','Jun'],1,5,0.5,6,1]
+  ];
+  function item(){
+    var c=C[azar(0,C.length-1)], et=c[2], v=distintos(et.length,c[3],c[4],c[5]);
+    var maxV=Math.max.apply(null,v), minV=Math.min.apply(null,v);
+    var tope=c[6], paso=c[7];
+    var svg=svgDe(graficaLineas,{titulo:c[0],etiquetas:et,series:[{nombre:c[1],valores:v}],min:0,max:tope,paso:paso,ejeY:c[1],valoresVisibles:true});
+    var tipo=azar(0,3), q, ops, n;
+    if(tipo===0){q='¿En qué momento se alcanza el valor más alto?';var ok=et[v.indexOf(maxV)];ops=[ok].concat(barajar(et.filter(function(e){return e!==ok;})).slice(0,2));n='El punto más alto está en '+ok+': '+maxV+'.';}
+    else if(tipo===1){q='¿En qué momento se alcanza el valor más bajo?';var ok2=et[v.indexOf(minV)];ops=[ok2].concat(barajar(et.filter(function(e){return e!==ok2;})).slice(0,2));n='El punto más bajo está en '+ok2+': '+minV+'.';}
+    else if(tipo===2){var i=azar(0,et.length-2);q='Entre '+et[i]+' y '+et[i+1]+', ¿qué hace la línea?';var sube=v[i+1]>v[i];ops=[sube?'Sube':'Baja',sube?'Baja':'Sube','Se queda igual'];n='Pasa de '+v[i]+' a '+v[i+1]+': '+(sube?'sube':'baja')+'.';}
+    else{var j=azar(0,et.length-1);q='¿Cuál es el valor en '+et[j]+'?';ops=numOps(v[j],c[5]);n='Lee el número junto al punto de '+et[j]+'.';}
+    return {e:caja(c[0],svg)+'<span class="preg">'+q+'</span>',ops:ops,c:0,n:n};
+  }
+  var B=[];for(var k=0;k<40;k++)B.push(item());
+  unaAUna('li',B,{pista:'Todavía no. Sigue la línea de izquierda a derecha y lee los números junto a cada punto.'});
+})();
+
+/* Módulo 3: circular */
+(function(){
+  var C=[
+    ['Cómo viajan los estudiantes a la escuela',['Autobús','Carro','A pie','Bicicleta']],
+    ['En qué gasta Ana su sueldo',['Renta','Comida','Transporte','Ahorro']],
+    ['Deporte favorito de la clase',['Fútbol','Béisbol','Básquetbol','Natación']],
+    ['Cómo usa Luis su día',['Trabajo','Sueño','Estudio','Familia']]
+  ];
+  function reparto(){while(true){var a=azar(5,9)*5,b=azar(3,6)*5,c=azar(2,4)*5,d=100-a-b-c;if(d>=5&&[a,b,c,d].filter(function(x,i,arr){return arr.indexOf(x)===i;}).length===4)return barajar([a,b,c,d]);}}
+  function item(){
+    var c=C[azar(0,C.length-1)], v=reparto(), et=c[1], maxV=Math.max.apply(null,v), minV=Math.min.apply(null,v);
+    var svg=svgDe(graficaCircular,{titulo:c[0],etiquetas:et,valores:v});
+    var tipo=azar(0,3), q, ops, n;
+    if(tipo===0){q='¿Qué porción es la más grande?';var ok=et[v.indexOf(maxV)];ops=[ok].concat(barajar(et.filter(function(e){return e!==ok;})).slice(0,2));n=ok+': '+maxV+' %.';}
+    else if(tipo===1){q='¿Qué porción es la más pequeña?';var ok2=et[v.indexOf(minV)];ops=[ok2].concat(barajar(et.filter(function(e){return e!==ok2;})).slice(0,2));n=ok2+': '+minV+' %.';}
+    else if(tipo===2){var i=azar(0,3),j=(i+1+azar(0,2))%4;q='¿Cuánto suman «'+et[i]+'» y «'+et[j]+'»?';var s=v[i]+v[j];ops=[s+' %',(s+10)+' %',(s-5>0?s-5:s+5)+' %'];n=v[i]+' % + '+v[j]+' % = '+s+' %.';}
+    else{q='¿Cuánto suman todas las porciones?';ops=['100 %',maxV+' %','50 %'];n='Siempre el 100 %.';}
+    return {e:caja(c[0],svg)+'<span class="preg">'+q+'</span>',ops:ops,c:0,n:n};
+  }
+  var B=[];for(var k=0;k<40;k++)B.push(item());
+  unaAUna('ci',B,{pista:'Todavía no. Mira los porcentajes escritos en cada porción y en la leyenda.'});
+})();
+
+/* Módulo 4: tablas */
+(function(){
+  var C=[
+    {t:'Precios en tres tiendas del barrio (dólares)',filas:['Tienda A','Tienda B','Tienda C'],cols:['Leche','Pan','Huevos'],min:2,max:7},
+    {t:'Minutos que tarda cada ruta de autobús',filas:['Ruta 9','Ruta 49','Ruta 66'],cols:['Mañana','Tarde','Noche'],min:15,max:45},
+    {t:'Estudiantes en cada clase por día',filas:['Inglés','GED','Computación'],cols:['Lunes','Miércoles','Viernes'],min:8,max:30}
+  ];
+  function item(){
+    var c=C[azar(0,C.length-1)], M=c.filas.map(function(){return distintos(3,c.min,c.max,1);});
+    var h='<table class="datos"><caption class="sr-solo">'+c.t+'</caption><thead><tr><th scope="col"></th>'+c.cols.map(function(x){return '<th scope="col">'+x+'</th>';}).join('')+'</tr></thead><tbody>'+
+      c.filas.map(function(f,i){return '<tr><th scope="row" style="background:#e0f2f1;color:#004d44">'+f+'</th>'+M[i].map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table>';
+    var tipo=azar(0,2), q, ops, n, i=azar(0,2), j=azar(0,2);
+    if(tipo===0){q='¿Qué valor hay en «'+c.filas[i]+'», columna «'+c.cols[j]+'»?';ops=numOps(M[i][j],2);n='Fila '+c.filas[i]+', columna '+c.cols[j]+': '+M[i][j]+'.';}
+    else if(tipo===1){var col=c.filas.map(function(_,k){return M[k][j];}), mn=Math.min.apply(null,col);
+      if(col.filter(function(x){return x===mn;}).length>1)return item();
+      q='En la columna «'+c.cols[j]+'», ¿qué fila tiene el valor más bajo?';var ok=c.filas[col.indexOf(mn)];ops=[ok].concat(c.filas.filter(function(f){return f!==ok;}));n=ok+': '+mn+'.';}
+    else{var a=M[i][j], k=(i+1)%3, b=M[k][j];q='¿Cuál es la diferencia entre «'+c.filas[i]+'» y «'+c.filas[k]+'» en «'+c.cols[j]+'»?';var d=Math.abs(a-b);ops=numOps(d,2);n='|'+a+' − '+b+'| = '+d+'.';}
+    return {e:caja(c.t,h)+'<span class="preg">'+q+'</span>',ops:ops,c:0,n:n};
+  }
+  var B=[];for(var k=0;k<40;k++)B.push(item());
+  unaAUna('ta',B,{pista:'Todavía no. Pon un dedo en la fila y otro en la columna: el dato está donde se cruzan.'});
+})();
+</script>
+</body>
+</html>
