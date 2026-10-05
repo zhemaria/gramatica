@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l1-3 · Fluidez lectora · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 1.3 · Fluidez lectora</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.8rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .situ{display:block;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:560px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.2rem}
+  .textos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  .textos .op[aria-pressed="true"]{background:var(--cp-oscuro);color:#fff;border-color:var(--cp-oscuro)}
+  .lectura{background:#fff;border:2px solid var(--gris-claro);border-radius:8px;padding:16px 20px;font-family:Georgia,serif;font-size:1.12rem;line-height:2;margin:12px 0}
+  .lectura p{margin:0 0 8px}
+  .crono-tiempo{text-align:center;font-family:Georgia,serif;font-size:2.2rem;font-weight:700;color:var(--cp-oscuro)}
+  table.res{width:100%;border-collapse:collapse;margin:10px 0}
+  table.res th{background:var(--cp-oscuro);color:#fff;padding:8px;text-align:left}
+  table.res td{border-bottom:1px solid var(--gris-claro);padding:8px;vertical-align:middle}
+  .barra{height:18px;background:var(--cp);border-radius:4px;min-width:4px}
+</style>
+</head>
+<body>
+<h1>Práctica 1.3 · Fluidez lectora</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 1 · Acompaña a la Lección 1.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_1-3.html">← Volver a la Lección 1.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="pausas">1 · Las pausas</button>
+  <button type="button" class="pest" data-mod="entonacion">2 · La entonación</button>
+  <button type="button" class="pest" data-mod="lectura-repetida">3 · Lectura repetida</button>
+</nav>
+
+<section class="modulo" id="pausas" aria-labelledby="t-pau">
+  <h2 id="t-pau">1 · Las pausas cambian el sentido</h2>
+  <p class="consejo">Lee la oración fijándote en las comas y elige lo que quiere decir. Puedes escucharla antes de responder.</p>
+  <div class="fila"><button type="button" class="oir" id="pz-oir">🔊 Escuchar la oración</button></div>
+  <div class="enun" id="pz-enun" aria-live="polite"></div>
+  <div class="opciones" id="pz-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pz-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pz-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pz-marcador"></div>
+</section>
+
+<section class="modulo" id="entonacion" aria-labelledby="t-ent" hidden>
+  <h2 id="t-ent">2 · Situación y entonación</h2>
+  <p class="consejo">Lee la situación y elige cómo se escribe. Al acertar, escucharás la entonación. Después repítela tú en voz alta.</p>
+  <div class="enun" id="en-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="en-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="en-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="en-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="en-marcador"></div>
+</section>
+
+<section class="modulo" id="lectura-repetida" aria-labelledby="t-lr" hidden>
+  <h2 id="t-lr">3 · Lectura repetida</h2>
+  <p class="consejo">Elige un texto. Escucha el modelo, luego léelo tú en voz alta tres veces con el cronómetro. La gráfica muestra si mejoras de una pasada a otra. Lo más importante es no perder precisión.</p>
+  <div class="textos" id="lr-textos" role="group" aria-label="Elige un texto"></div>
+  <div class="fila">
+    <button type="button" class="oir" id="lr-modelo">🔊 Escuchar el modelo</button>
+    <button type="button" class="oir" id="lr-despacio">🔊 Más despacio</button>
+    <button type="button" class="oir" id="lr-parar">⏹ Detener</button>
+  </div>
+  <div class="lectura" id="lr-texto"></div>
+  <div class="crono-tiempo" id="lr-tiempo">0:00</div>
+  <div class="fila">
+    <button type="button" class="btn btn-p" id="lr-empezar">Empezar</button>
+    <button type="button" class="btn btn-s" id="lr-terminar" disabled>Terminar</button>
+  </div>
+  <div class="fb" id="lr-fb" role="status" aria-live="polite"></div>
+  <table class="res" id="lr-tabla">
+    <caption style="text-align:left;font-weight:600;color:#555">Mis pasadas con este texto</caption>
+    <thead><tr><th scope="col">Pasada</th><th scope="col">Tiempo</th><th scope="col">Palabras por minuto</th><th scope="col" style="width:40%">Gráfica</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <p style="font-size:.9rem;color:#555;text-align:center">Los resultados se borran al cerrar la página o al cambiar de texto. Anótalos en tu cuaderno.</p>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que los botones 🔊 no sonarán. El cronómetro funciona igual.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 1.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: pausas (c = índice correcto) */
+unaAUna('pz',[
+  {f:'No, quiero café.',ops:['Pide café','No quiere café'],c:0,n:'La coma separa el «no»: dice que no a otra cosa y pide café.'},
+  {f:'No quiero café.',ops:['Pide café','No quiere café'],c:1,n:'Sin coma, el «no» niega el café.'},
+  {f:'María, la doctora llamó.',ops:['Le hablo a María','María es la doctora'],c:0,n:'Le cuento a María que llamó la doctora.'},
+  {f:'María, la doctora, llamó.',ops:['Le hablo a María','María es la doctora'],c:1,n:'Las dos comas encierran una explicación: «la doctora» es María.'},
+  {f:'Pedro, come.',ops:['Le pido a Pedro que coma','Cuento que Pedro come'],c:0,n:'La coma separa el nombre de la persona a quien se le habla.'},
+  {f:'Pedro come.',ops:['Le pido a Pedro que coma','Cuento que Pedro come'],c:1,n:'Sin coma, es una afirmación sobre Pedro.'},
+  {f:'Ana, mi prima viene mañana.',ops:['Le hablo a Ana','Ana es mi prima'],c:0,n:'Le aviso a Ana que viene mi prima.'},
+  {f:'Ana, mi prima, viene mañana.',ops:['Le hablo a Ana','Ana es mi prima'],c:1,n:'«Mi prima» explica quién es Ana.'},
+  {f:'Luis, vamos a comer.',ops:['Invito a Luis a comer','Cuento que Luis va a comer'],c:0,n:'Le hablo a Luis: la coma lo separa.'},
+  {f:'Luis va a comer.',ops:['Invito a Luis a comer','Cuento que Luis va a comer'],c:1,n:'Es una afirmación sobre lo que hará Luis.'}
+].map(function(d){return {e:'<span class="grande">'+d.f+'</span>¿Qué quiere decir?',ops:d.ops,c:d.c,n:d.n,a:d.f};}),
+{pista:'Todavía no. Fíjate dónde está la coma: ¿separa el nombre de la persona a quien se le habla, o encierra una explicación?'});
+
+/* Módulo 2: entonación (la primera opción es la correcta) */
+unaAUna('en',[
+  ['Quieres saber si tu hijo ya terminó la tarea.',['¿Terminaste la tarea?','Terminaste la tarea.','¡Terminaste la tarea!'],'Pregunta de sí o no: la voz sube al final.'],
+  ['Te alegra que tu hijo por fin haya terminado.',['¡Terminaste la tarea!','¿Terminaste la tarea?','Terminaste la tarea.'],'Hay emoción: exclamación.'],
+  ['Ves llegar el autobús y avisas a tu amiga con prisa.',['¡Llegó el autobús!','¿Llegó el autobús?','Llegó el autobús.'],'Un aviso urgente es una exclamación.'],
+  ['Quieres saber a qué hora abre la clínica.',['¿A qué hora abre la clínica?','La clínica abre temprano.','¡Qué temprano abre la clínica!'],'Pregunta con <em>qué</em>: la voz empieza alta y baja al final.'],
+  ['Quieres saber si queda leche en el refrigerador.',['¿Queda leche?','Queda leche.','¡Queda leche!'],'Pregunta de sí o no.'],
+  ['Te sorprende ver nieve en pleno mes de abril.',['¡Está nevando en abril!','¿Está nevando en abril?','Está nevando en abril.'],'La sorpresa se expresa con exclamación.'],
+  ['Le explicas a un compañero el horario de la tienda, sin emoción especial.',['La tienda cierra a las nueve.','¿La tienda cierra a las nueve?','¡La tienda cierra a las nueve!'],'Es una afirmación: la voz baja al final.'],
+  ['Buscas una farmacia y le preguntas a alguien por la calle.',['¿Dónde queda la farmacia?','La farmacia queda cerca.','¡Qué cerca queda la farmacia!'],'Pregunta con <em>dónde</em>.'],
+  ['Tu amiga consiguió un trabajo nuevo y la felicitas.',['¡Felicidades por tu nuevo trabajo!','¿Tienes un trabajo nuevo?','Tienes un trabajo nuevo.'],'Felicitar es expresar alegría: exclamación.'],
+  ['Le cuentas al médico cómo te sientes.',['Me duele la cabeza desde ayer.','¿Me duele la cabeza desde ayer?','¡Me duele la cabeza desde ayer!'],'Informas un hecho: afirmación.'],
+  ['No estás seguro de si tu cita es mañana.',['¿La cita es mañana?','La cita es mañana.','¡La cita es mañana!'],'Tienes una duda: pregunta.'],
+  ['Te da mucha pena que tu amigo no pudiera venir a tu fiesta.',['¡Qué lástima que no viniste!','¿Qué lástima que no viniste?','Qué lástima que no viniste'],'Un sentimiento fuerte: exclamación, con sus dos signos.']
+].map(function(d){return {e:'<span class="situ">'+d[0]+'</span>¿Cómo lo escribes?',ops:d[1],c:0,n:d[2],a:d[1][0]};}),
+{leerAlAcertar:true,pista:'Todavía no. ¿Preguntas algo, informas algo o expresas una emoción fuerte?'});
+
+/* Módulo 3: lectura repetida */
+(function(){
+  var T=[
+    {t:'La biblioteca del barrio',p:['La biblioteca del barrio abre todos los días a las nueve. Allí se pueden pedir libros prestados, usar las computadoras y leer el periódico sin pagar nada.','Los martes por la tarde hay clases gratuitas de inglés, y los sábados por la mañana, una hora de cuentos para niños. Para sacar libros solo hace falta la tarjeta de la biblioteca, que se obtiene con una identificación y un comprobante de domicilio. ¿Ya tienes la tuya?']},
+    {t:'El mercado del sábado',p:['Todos los sábados, la calle principal se llena de puestos de colores. Hay frutas, verduras, pan recién hecho y flores. Don Ernesto vende los mejores mangos del mercado; siempre le regala uno a cada niño que pasa.','—¡Pruebe este, señora, que está dulcísimo! —grita con alegría.','Al mediodía, cuando el sol aprieta, la gente busca la sombra de los árboles y compra agua fresca de jamaica. A las tres, los puestos se recogen y la calle vuelve a quedar en silencio.']},
+    {t:'La receta de mi abuela',p:['Mi abuela hacía el mejor arroz con leche de la familia. Primero ponía a hervir el arroz con agua, una rama de canela y la cáscara de un limón. Cuando el arroz estaba blando, añadía la leche poco a poco, sin dejar de mover la olla. Al final echaba el azúcar y una pizca de sal.','—El secreto es la paciencia —decía siempre—. Si tienes prisa, el arroz se pega.','Hoy preparo su receta y, cada vez que huelo la canela, la recuerdo.']},
+    {t:'Mi primer día de trabajo',p:['Mi primer día en la fábrica empezó muy temprano. Llegué a las seis menos cuarto, nervioso y con mucho sueño. Un supervisor me recibió en la puerta, me dio un casco y unas gafas de seguridad, y me explicó las reglas: nunca correr, usar siempre el equipo y avisar de cualquier problema.','Mis compañeros me ayudaron toda la mañana. A la hora del almuerzo, uno de ellos me preguntó:','—¿Qué tal te va?','—Mejor de lo que pensaba —le respondí.']}
+  ];
+  var cajaT=document.getElementById('lr-textos'), txt=document.getElementById('lr-texto'), tiempo=document.getElementById('lr-tiempo'), fb=document.getElementById('lr-fb'),
+      cuerpo=document.querySelector('#lr-tabla tbody'), bE=document.getElementById('lr-empezar'), bT=document.getElementById('lr-terminar');
+  var actual, palabras, inicio=0, reloj=null, pasadas=[];
+  function fmt(s){return Math.floor(s/60)+':'+('0'+Math.floor(s%60)).slice(-2);}
+  function plano(){return actual.p.join(' ');}
+  function elegir(k){
+    callar(); clearInterval(reloj); actual=T[k]; pasadas=[];
+    cajaT.querySelectorAll('.op').forEach(function(b,i){b.setAttribute('aria-pressed',i===k?'true':'false');});
+    txt.innerHTML='<p><strong>'+actual.t+'</strong></p>'+actual.p.map(function(p){return '<p>'+p+'</p>';}).join('');
+    palabras=plano().split(/\s+/).filter(function(w){return /[a-záéíóúñü0-9]/i.test(w);}).length;
+    tiempo.textContent='0:00'; fb.textContent=''; fb.className='fb'; bE.disabled=false; bT.disabled=true; bE.textContent='Empezar la pasada 1'; pintar();
+  }
+  function pintar(){
+    if(!pasadas.length){cuerpo.innerHTML='<tr><td colspan="4">Todavía no hay pasadas con este texto ('+palabras+' palabras).</td></tr>';return;}
+    var max=Math.max.apply(null,pasadas.map(function(x){return x.ppm;}));
+    cuerpo.innerHTML=pasadas.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td>'+fmt(x.s)+'</td><td>'+x.ppm+'</td><td><div class="barra" style="width:'+Math.round(x.ppm/max*100)+'%" aria-hidden="true"></div></td></tr>';}).join('');
+  }
+  T.forEach(function(t,k){var b=document.createElement('button');b.type='button';b.className='op';b.textContent=t.t;b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){elegir(k);});cajaT.appendChild(b);});
+  document.getElementById('lr-modelo').addEventListener('click',function(){hablar(plano(),0.9);});
+  document.getElementById('lr-despacio').addEventListener('click',function(){hablar(plano(),0.7);});
+  document.getElementById('lr-parar').addEventListener('click',function(){callar();});
+  bE.addEventListener('click',function(){
+    callar(); inicio=Date.now(); tiempo.textContent='0:00'; fb.textContent='Lee en voz alta. Pulsa «Terminar» al llegar al final.'; fb.className='fb mal';
+    bE.disabled=true; bT.disabled=false; bT.focus();
+    reloj=setInterval(function(){tiempo.textContent=fmt((Date.now()-inicio)/1000);},250);
+  });
+  bT.addEventListener('click',function(){
+    clearInterval(reloj); var s=(Date.now()-inicio)/1000; bE.disabled=false; bT.disabled=true;
+    if(s<10){fb.textContent='Fueron solo '+Math.round(s)+' segundos: parece que no leíste el texto completo. Inténtalo otra vez.'; fb.className='fb error'; return;}
+    var ppm=Math.round(palabras/s*60); pasadas.push({s:s,ppm:ppm}); pintar();
+    var n=pasadas.length, msg='Pasada '+n+': unas '+ppm+' palabras por minuto.';
+    if(n>1){var d=ppm-pasadas[n-2].ppm; msg+=d>0?' Subiste '+d+' respecto a la anterior. ¡Bien!':' No subiste esta vez: concéntrate en leer sin tropiezos; la velocidad llega sola.';}
+    fb.textContent=msg; fb.className='fb bien';
+    bE.textContent='Empezar la pasada '+(n+1);
+  });
+  elegir(0);
+})();
+</script>
+</body>
+</html>
