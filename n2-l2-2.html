@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l2-2 · Pronombres reflexivos y concordancia · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 2.2 · Pronombres reflexivos y concordancia</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:560px;margin:0 auto}
+  .opciones .op{font-size:1.1rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.2rem}
+  .opciones.fila4{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila4 .op{min-width:90px}
+</style>
+</head>
+<body>
+<h1>Práctica 2.2 · Pronombres reflexivos y concordancia</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 2 · Acompaña a la Lección 2.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_2-2.html">← Volver a la Lección 2.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="reflexivos">1 · Pronombres reflexivos</button>
+  <button type="button" class="pest" data-mod="concordancia">2 · Concordancia</button>
+  <button type="button" class="pest" data-mod="corrige">3 · ¿Cuál está bien?</button>
+</nav>
+
+<section class="modulo" id="reflexivos" aria-labelledby="t-ref">
+  <h2 id="t-ref">1 · Pronombres reflexivos</h2>
+  <p class="consejo">yo → <em>me</em> · tú → <em>te</em> · él, ella, usted → <em>se</em> · nosotros → <em>nos</em> · ellos, ustedes → <em>se</em>. Busca primero quién hace la acción.</p>
+  <div class="enun" id="re-enun" aria-live="polite"></div>
+  <div class="opciones pal fila4" id="re-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="re-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="re-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="re-marcador"></div>
+</section>
+
+<section class="modulo" id="concordancia" aria-labelledby="t-con" hidden>
+  <h2 id="t-con">2 · Concordancia</h2>
+  <p class="consejo">Busca la palabra con la que debe ir de acuerdo: ¿es masculina o femenina? ¿singular o plural? ¿quién hace la acción?</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+
+<section class="modulo" id="corrige" aria-labelledby="t-cor" hidden>
+  <h2 id="t-cor">3 · ¿Cuál está bien escrita?</h2>
+  <p class="consejo">Dos de las tres versiones tienen un error de pronombre, de tilde o de concordancia. Elige la correcta.</p>
+  <div class="enun" id="cr-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="cr-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cr-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cr-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cr-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 2.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: oración con ___, pronombre correcto, explicación */
+(function(){
+  var O=['me','te','se','nos'];
+  var D=[
+    ['Yo ___ despierto con la alarma.','me','yo → me.'],
+    ['Mi abuela ___ sienta junto a la ventana.','se','ella → se.'],
+    ['Tú ___ cepillas los dientes después de comer.','te','tú → te.'],
+    ['Mis vecinos ___ quejan del ruido.','se','ellos → se.'],
+    ['Mi esposo y yo ___ acostamos a las diez.','nos','mi esposo y yo = nosotros → nos.'],
+    ['Ustedes ___ preparan muy bien para las entrevistas.','se','ustedes → se.'],
+    ['¿Por qué ___ vas tan temprano?','te','Se le habla a «tú»: te vas.'],
+    ['Nosotras ___ vestimos para la fiesta.','nos','nosotras → nos.'],
+    ['Voy a duchar___ antes de salir.','me','Yo voy a ducharme: el pronombre pegado también concuerda.'],
+    ['Estamos preparándo___ para el examen.','nos','Nosotros: preparándonos.'],
+    ['Juan, ¡siénta___ aquí!','te','Orden a «tú»: siéntate.'],
+    ['Señora, ¿quiere sentar___?','se','A «usted» → se: sentarse.'],
+    ['Niños, ¡no ___ levanten de la mesa!','se','Orden negativa a «ustedes»: no se levanten.'],
+    ['Cuando ___ enfermo, llamo al médico.','me','Cuando yo me enfermo.'],
+    ['Mi hija ___ está peinando en el baño.','se','ella → se está peinando.'],
+    ['¿A qué hora ___ levantas los sábados?','te','tú → te levantas.']
+  ];
+  unaAUna('re',D.map(function(d){var o=d[0].replace('___',d[1]);return {e:'<span class="grande">'+d[0].replace('___','<u>&nbsp;?&nbsp;</u>')+'</span>¿Qué pronombre falta?',ops:O,c:O.indexOf(d[1]),n:'«'+o+'» · '+d[2],a:o};}),
+    {leerAlAcertar:true,pista:'Todavía no. ¿Quién hace la acción? Busca el sujeto o la persona a quien se le habla.'});
+})();
+
+/* Módulo 2 (la primera opción es la correcta) */
+unaAUna('co',[
+  ['Las paredes del cuarto están ___.',['pintadas','pintados','pintada'],'paredes: femenino plural.'],
+  ['El agua del vaso está ___.',['limpia','limpio','limpios'],'agua es femenina aunque lleve el.'],
+  ['Mi papá y mi tío ___ en una fábrica.',['trabajan','trabaja','trabajamos'],'Sujeto doble: plural.'],
+  ['Mi hermana y yo ___ al mercado los sábados.',['vamos','van','va'],'mi hermana y yo = nosotros.'],
+  ['El equipo de mi hijo ___ el partido.',['ganó','ganaron','ganamos'],'equipo es colectivo: singular.'],
+  ['Los problemas de matemáticas son ___.',['difíciles','difícil','difícila'],'problemas: plural.'],
+  ['El mapa de la ciudad es muy ___.',['viejo','vieja','viejas'],'mapa es masculino aunque termine en -a.'],
+  ['La mano me duele: la tengo ___.',['hinchada','hinchado','hinchados'],'mano es femenina aunque termine en -o.'],
+  ['El águila ___ voló sobre el lago.',['blanca','blanco','blancas'],'águila es femenina: el águila blanca.'],
+  ['Mis compañeras de clase son muy ___.',['amables','amable','amablas'],'plural; amable no cambia de género.'],
+  ['La gente del mercado ___ muy temprano.',['llega','llegan','llegamos'],'gente: singular.'],
+  ['Tú y tu hermano ___ igual.',['se parecen','te parecen','nos parecemos'],'tú y tu hermano = ustedes → se parecen.'],
+  ['Las flores que compraste son ___.',['preciosas','preciosos','preciosa'],'flores: femenino plural.'],
+  ['Mi familia ___ en Chicago desde 2010.',['vive','viven','vivimos'],'familia: singular.'],
+  ['Los días de invierno son ___.',['cortos','cortas','corto'],'días: masculino plural.'],
+  ['El hacha ___ está en el garaje.',['nueva','nuevo','nuevas'],'hacha es femenina: el hacha nueva.']
+].map(function(d){var o=d[0].replace('___',d[1][0]);return {e:'<span class="grande">'+d[0].replace('___','_____')+'</span>',ops:d[1],c:0,n:'«'+o+'» · '+d[2],a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. ¿Con qué palabra tiene que ir de acuerdo? Fíjate en su género y en su número.'});
+
+/* Módulo 3 (la primera opción es la correcta) */
+unaAUna('cr',[
+  [['Me lavo las manos antes de comer.','Me lavo mis manos antes de comer.','Se lavo las manos antes de comer.'],'Con verbo reflexivo, las partes del cuerpo llevan artículo.'],
+  [['Mis padres se levantan temprano.','Mis padres se levanta temprano.','Mis padres nos levantan temprano.'],'padres: plural → se levantan.'],
+  [['Voy a acostarme temprano.','Voy a acostarse temprano.','Voy a me acostar temprano.'],'yo → acostarme.'],
+  [['¡Levántate, que es tarde!','¡Levantate, que es tarde!','¡Te levanta, que es tarde!'],'Orden afirmativa: pronombre pegado y tilde.'],
+  [['El agua está fría.','El agua está frío.','La agua está fría.'],'el agua, pero fría.'],
+  [['Mi esposo y yo nos fuimos al parque.','Mi esposo y yo se fuimos al parque.','Mi esposo y yo me fui al parque.'],'mi esposo y yo = nosotros.'],
+  [['La gente está contenta con el huerto.','La gente están contentos con el huerto.','La gente están contenta con el huerto.'],'gente: singular y femenino.'],
+  [['Estoy vistiéndome para la boda.','Estoy vistiendome para la boda.','Estoy me vistiendo para la boda.'],'Pronombre pegado al gerundio: lleva tilde.'],
+  [['No te preocupes por eso.','No preocúpate por eso.','No te preocupas por eso.'],'Orden negativa: el pronombre va antes.'],
+  [['Las sillas nuevas son cómodas.','Las sillas nuevos son cómodas.','Las sillas nuevas es cómodas.'],'sillas: femenino plural, y el verbo en plural.'],
+  [['Mi hija se peina sola.','Mi hija me peina sola.','Mi hija se peinan sola.'],'ella → se peina.'],
+  [['Siéntense, por favor.','Sientense, por favor.','Se sienten, por favor.'],'Orden afirmativa a «ustedes»: siéntense.'],
+  [['El problema fue difícil.','El problema fue difícila.','La problema fue difícil.'],'problema es masculino.'],
+  [['¿Te acuerdas de mi nombre?','¿Se acuerdas de mi nombre?','¿Te acuerda de mi nombre?'],'tú → te acuerdas.']
+].map(function(d){return {e:'¿Cuál está bien escrita?',ops:d[0],c:0,n:'«'+d[0][0]+'» · '+d[1],a:d[0][0]};}),
+{leerAlAcertar:true,pista:'Todavía no. Revisa el pronombre, la tilde y la concordancia de esa versión.'});
+</script>
+</body>
+</html>
