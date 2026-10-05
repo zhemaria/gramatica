@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l5-2 · Vocabulario por contexto · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.2 · Vocabulario por contexto</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.12rem;line-height:1.75}
+  .nueva{background:#e3f2fd;color:#0d3c78;font-weight:700;padding:0 3px;border-radius:3px}
+  .entrada{display:block;background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;line-height:1.7}
+  .entrada .lema{font-weight:700;color:var(--cp-oscuro);font-size:1.15rem}
+  .preg{font-weight:700;text-align:center;display:block}
+  .grande{display:block;text-align:center;font-family:Georgia,serif;font-size:1.8rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:4px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:620px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 5.2 · Vocabulario por contexto</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 5 · Acompaña a la Lección 5.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_5-2.html">← Volver a la Lección 5.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="pistas">1 · Pistas del contexto</button>
+  <button type="button" class="pest" data-mod="afijos">2 · Afijos y familias</button>
+  <button type="button" class="pest" data-mod="diccionario">3 · Elige la acepción</button>
+</nav>
+
+<section class="modulo" id="pistas" aria-labelledby="t-pis">
+  <h2 id="t-pis">1 · Pistas del contexto</h2>
+  <p class="consejo">Busca la pista: definición, sinónimo, contraste, ejemplo o sentido general. Luego prueba tu respuesta en lugar de la palabra azul.</p>
+  <div class="enun" id="pi-enun" aria-live="polite"></div>
+  <div class="opciones" id="pi-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pi-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pi-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pi-marcador"></div>
+</section>
+
+<section class="modulo" id="afijos" aria-labelledby="t-afi" hidden>
+  <h2 id="t-afi">2 · Afijos y familias</h2>
+  <p class="consejo">Separa la palabra en piezas o piensa en otra palabra de su familia. Recuerda: el contexto tiene la última palabra.</p>
+  <div class="enun" id="af-enun" aria-live="polite"></div>
+  <div class="opciones" id="af-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="af-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="af-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="af-marcador"></div>
+</section>
+
+<section class="modulo" id="diccionario" aria-labelledby="t-dic" hidden>
+  <h2 id="t-dic">3 · Elige la acepción</h2>
+  <p class="consejo">La palabra tiene varios significados. Lee la oración y elige la acepción que tiene sentido en ella. (Entradas adaptadas para la práctica.)</p>
+  <div class="enun" id="di-enun" aria-live="polite"></div>
+  <div class="opciones" id="di-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="di-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="di-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="di-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 5.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+function az(t){return t.replace(/\[(.+?)\]/,'<span class="nueva">$1</span>');}
+/* Módulo 1: [oración con [palabra], opciones (la primera es la correcta), pista] */
+unaAUna('pi',[
+  ['El doctor le recetó un [analgésico], es decir, un medicamento para calmar el dolor.',['Un medicamento contra el dolor','Un examen de sangre','Una dieta especial'],'Definición: «es decir».'],
+  ['Mi vecino es muy [generoso]; siempre comparte lo que tiene con los demás.',['Que da y comparte con gusto','Que habla mucho','Que vive solo'],'Sentido general: comparte lo que tiene.'],
+  ['El primer apartamento era [amplio], pero el segundo era muy pequeño.',['Grande, con mucho espacio','Caro','Viejo'],'Contraste: «pero… muy pequeño».'],
+  ['En la tienda venden [herramientas], como martillos, serruchos y destornilladores.',['Instrumentos para trabajar','Ropa de trabajo','Materiales de limpieza'],'Ejemplo: martillos, serruchos, destornilladores.'],
+  ['Estaba [perplejo]: tan confundido que no sabía qué decir.',['Muy confundido','Muy enojado','Muy cansado'],'Sinónimo: «tan confundido».'],
+  ['El accidente fue [leve]; nadie se lastimó y los carros solo tuvieron rayones.',['Sin gravedad','Muy grave','Muy rápido'],'Sentido general: nadie se lastimó.'],
+  ['Por la sequía, el río estaba casi [seco]; en cambio, el año pasado venía muy crecido.',['Sin agua','Muy sucio','Muy profundo'],'Contraste con «crecido».'],
+  ['Mi hija es [bilingüe]: habla español e inglés desde pequeña.',['Que habla dos idiomas','Que estudia mucho','Que vive en dos países'],'Definición después de los dos puntos.'],
+  ['Le dieron un [reembolso], o sea, le devolvieron el dinero del producto dañado.',['La devolución del dinero','Un descuento para la próxima compra','Una multa'],'Definición: «o sea».'],
+  ['El examen fue [agotador]; después de cuatro horas, todos salimos sin energía.',['Que cansa mucho','Que es muy fácil','Que es muy corto'],'Sentido general: sin energía.'],
+  ['Prefiere los colores [vivos], como el rojo, el amarillo y el naranja.',['Fuertes y brillantes','Oscuros y tristes','Claros y suaves'],'Ejemplo: rojo, amarillo, naranja.'],
+  ['El discurso fue [breve]: duró solo tres minutos.',['Corto','Aburrido','Importante'],'Definición: «duró solo tres minutos».'],
+  ['El niño era muy [tímido]; su hermana, por el contrario, hablaba con todo el mundo.',['Que le cuesta hablar con otros','Que es muy travieso','Que tiene mucha energía'],'Contraste: «por el contrario, hablaba con todo el mundo».'],
+  ['Hay que [desinfectar] la herida, es decir, limpiarla para que no se infecte.',['Limpiar para evitar una infección','Cubrir con una venda','Dejar que se seque sola'],'Definición: «es decir».']
+].map(function(d){return {e:'<span class="pasaje">'+az(d[0])+'</span><span class="preg">¿Qué significa la palabra azul?</span>',ops:d[1],c:0,n:'Pista: '+d[2],a:d[0].replace(/[\[\]]/g,'')};}),
+{pista:'Todavía no. Pon esa respuesta en lugar de la palabra azul: ¿la oración tiene sentido?'});
+
+/* Módulo 2: [oración, opciones (primera correcta), explicación] */
+unaAUna('af',[
+  ['La carretera quedó [intransitable] por la nieve.',['No se podía pasar por ella','Estaba recién pavimentada','Tenía mucho tráfico'],'in- (no) + transitar (pasar) + -able (que se puede).'],
+  ['Hay que [reutilizar] las bolsas del mercado.',['Volver a usar','Tirar a la basura','Comprar nuevas'],'re- (otra vez) + utilizar.'],
+  ['El [panadero] del barrio empieza a trabajar a las tres.',['La persona que hace pan','El dueño del edificio','El cartero'],'Familia de pan; -ero, quien hace o vende.'],
+  ['Con el frío, sus mejillas empezaron a [enrojecer].',['Ponerse rojas','Ponerse pálidas','Secarse'],'Familia de rojo.'],
+  ['Las instrucciones eran [incomprensibles]; nadie supo armar el mueble.',['Que no se pueden entender','Muy largas','Muy fáciles'],'in- (no) + comprender + -ble (que se puede).'],
+  ['Mi tía es una gran [cocinera].',['Persona que cocina','Persona que limpia','Persona que vende'],'Familia de cocinar; -era, quien hace la acción.'],
+  ['Antes de pintar, hay que [desarmar] la cama.',['Separar sus piezas','Limpiarla','Moverla de lugar'],'des- (lo contrario) + armar.'],
+  ['El agua del lago era muy [cristalina].',['Clara y transparente','Fría y salada','Sucia y oscura'],'Familia de cristal: como el cristal.'],
+  ['Es un trabajo [peligrosísimo].',['Extremadamente peligroso','Un poco peligroso','Nada peligroso'],'peligroso + -ísimo (muchísimo).'],
+  ['Hay que [actualizar] la aplicación del teléfono.',['Ponerla al día','Borrarla','Comprarla'],'Familia de actual: hacer que esté al día.'],
+  ['El tanque de gasolina lleva un letrero de [inflamable].',['Que se quema con facilidad','Que no se puede quemar','Que está vacío'],'Aquí in- no niega: el contexto (gasolina) lo confirma.'],
+  ['El [ensordecedor] ruido de la fábrica no lo dejaba pensar.',['Tan fuerte que deja sordo','Muy suave','Agradable'],'Familia de sordo: que ensordece.']
+].map(function(d){return {e:'<span class="pasaje">'+az(d[0])+'</span><span class="preg">¿Qué significa la palabra azul?</span>',ops:d[1],c:0,n:d[2]};}),
+{pista:'Todavía no. Separa la palabra en piezas o busca una palabra conocida dentro de ella.'});
+
+/* Módulo 3: palabras con varias acepciones */
+(function(){
+  var E={
+    planta:['Ser vivo que crece en la tierra, como un árbol o una flor.','Fábrica o instalación industrial.','Cada uno de los pisos de un edificio.','Parte de abajo del pie.'],
+    carta:['Papel escrito que se envía a otra persona.','Cada uno de los naipes de una baraja.','Lista de comidas y bebidas de un restaurante.'],
+    sierra:['Herramienta con dientes para cortar madera.','Cadena de montañas.'],
+    cola:['Extremo del cuerpo de algunos animales.','Fila de personas que esperan su turno.','Pegamento.'],
+    sobre:['Cubierta de papel en la que se mete una carta.','Encima de algo.','Acerca de, hablando de un tema.']
+  };
+  var D=[
+    ['planta','Mi esposo trabaja en una planta de automóviles.',1],['planta','Le duele la planta del pie derecho.',3],['planta','Riega la planta de la cocina dos veces por semana.',0],['planta','La oficina está en la tercera planta del edificio.',2],
+    ['carta','El mesero nos trajo la carta para elegir la comida.',2],['carta','Recibí una carta de mi abuela desde Honduras.',0],['carta','Le tocó la mejor carta del juego.',1],
+    ['sierra','Cortó la tabla con una sierra eléctrica.',0],['sierra','Los fines de semana suben a la sierra a caminar.',1],
+    ['cola','Había una cola larguísima para entrar al concierto.',1],['cola','El perro movía la cola de alegría.',0],['cola','Pegó las piezas rotas con cola.',2],
+    ['sobre','Dejé las llaves sobre la mesa.',1],['sobre','Metí la carta en un sobre y le puse una estampilla.',0],['sobre','Leímos un artículo sobre la salud del corazón.',2]
+  ];
+  unaAUna('di',D.map(function(d){
+    var ac=E[d[0]];
+    return {e:'<span class="entrada"><span class="lema">'+d[0]+'</span><br>'+ac.map(function(a,i){return (i+1)+'. '+a;}).join('<br>')+'</span><span class="pasaje">«'+d[1].replace(d[0],'<span class="nueva">'+d[0]+'</span>')+'»</span><span class="preg">¿Qué acepción corresponde?</span>',
+            ops:ac.map(function(a,i){return 'Acepción '+(i+1)+': '+a;}),c:d[2],fijo:true,n:'Acepción '+(d[2]+1)+'.'};
+  }),{pista:'Todavía no. Prueba ese significado en la oración: ¿tiene sentido?'});
+})();
+</script>
+</body>
+</html>

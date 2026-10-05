@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l5-1 · Comparar y contrastar dos textos · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.1 · Comparar y contrastar</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .pasaje.b{background:#eef7f6;border-left-color:#004d44}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:700px){.dos{grid-template-columns:1fr}}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:640px;margin:0 auto}
+  .opciones .op{font-size:1.02rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .opciones.fila .op{text-align:center;min-width:130px}
+  .item{flex-direction:column;align-items:stretch}
+  .item-pal{font-family:Georgia,serif;font-size:1.05rem}
+  .item-ops{flex-wrap:wrap}
+</style>
+</head>
+<body>
+<h1>Práctica 5.1 · Comparar y contrastar</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 5 · Acompaña a la Lección 5.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_5-1.html">← Volver a la Lección 5.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="venn">1 · Diagrama de Venn</button>
+  <button type="button" class="pest" data-mod="semejanza-diferencia">2 · ¿Semejanza o diferencia?</button>
+  <button type="button" class="pest" data-mod="conectores">3 · Conectores</button>
+</nav>
+
+<section class="modulo" id="venn" aria-labelledby="t-venn">
+  <h2 id="t-venn">1 · Diagrama de Venn</h2>
+  <p class="consejo">Lee los dos textos y decide dónde va cada idea: solo en el texto A, en los dos, o solo en el texto B. Lee con precisión: que los dos hablen de lo mismo no significa que digan lo mismo.</p>
+  <div id="ve-textos"></div>
+  <div id="ve-items"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ve-otra">Otro par de textos</button></div>
+  <div class="marcador" id="ve-marcador" role="status" aria-live="polite"></div>
+</section>
+
+<section class="modulo" id="semejanza-diferencia" aria-labelledby="t-sd" hidden>
+  <h2 id="t-sd">2 · ¿Semejanza o diferencia?</h2>
+  <p class="consejo">Dos autores escriben sobre el mismo tema. ¿Sus afirmaciones se parecen o se oponen?</p>
+  <div class="enun" id="sd-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="sd-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="sd-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="sd-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="sd-marcador"></div>
+</section>
+
+<section class="modulo" id="conectores" aria-labelledby="t-con" hidden>
+  <h2 id="t-con">3 · Conectores de comparación</h2>
+  <p class="consejo"><strong>Semejanza:</strong> ambos, los dos, al igual que, también, tanto… como. <strong>Diferencia:</strong> en cambio, mientras que, a diferencia de, sin embargo, por el contrario.</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 5.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: pares de textos; ideas: 0 solo A · 1 los dos · 2 solo B */
+(function(){
+  var P=[
+    {a:'Vivir en la ciudad tiene muchas ventajas. Hay trabajo, hospitales cerca y transporte público. Los niños tienen escuelas a pocas cuadras. Eso sí, los alquileres son caros.',
+     b:'Vivir en el campo es más tranquilo. Hay aire limpio, menos tráfico y los vecinos se conocen. Eso sí, los hospitales y las escuelas quedan lejos, y no hay transporte público.',
+     i:[['Hay transporte público.',0],['Hay aire limpio y menos tráfico.',2],['Menciona una desventaja del lugar.',1],['Las escuelas están cerca.',0],['Los vecinos se conocen.',2],['Habla de dónde quedan los hospitales.',1]]},
+    {a:'El perro es el mejor compañero: es fiel, cuida la casa y te obliga a salir a caminar. Necesita paseos todos los días y mucha atención.',
+     b:'El gato es ideal para quien trabaja muchas horas: es independiente y no necesita paseos. Igual que el perro, da cariño y compañía.',
+     i:[['Da cariño y compañía.',1],['Necesita paseos diarios.',0],['Es independiente.',2],['Cuida la casa.',0],['Es bueno para quien trabaja mucho.',2],['El texto presenta a una mascota como buena opción.',1]]},
+    {a:'Pagar en efectivo ayuda a controlar los gastos: cuando el dinero se acaba, dejas de comprar. Además, no hay intereses.',
+     b:'Pagar con tarjeta de débito es más seguro que llevar efectivo, porque si la pierdes puedes bloquearla. Como con el efectivo, gastas solo el dinero que tienes y no pagas intereses.',
+     i:[['No se pagan intereses.',1],['Se puede bloquear si se pierde.',2],['Cuando el dinero se acaba, dejas de comprar.',0],['Se gasta solo el dinero que se tiene.',1],['Es más seguro que llevar efectivo.',2]]},
+    {a:'Leer libros en papel es un placer: se puede subrayar, se descansa la vista y no se necesita batería. Además, un libro bonito se puede regalar.',
+     b:'Leer en el celular es práctico: se lleva una biblioteca entera en el bolsillo y muchos libros son gratis. Pero cansa la vista y depende de la batería.',
+     i:[['No necesita batería.',0],['Muchos libros son gratis.',2],['El texto habla de la vista.',1],['Se lleva una biblioteca en el bolsillo.',2],['Se puede regalar.',0]]}
+  ];
+  var T=['Solo A','Los dos','Solo B'], tx=document.getElementById('ve-textos'), it=document.getElementById('ve-items'), marc=document.getElementById('ve-marcador'), k=-1, bien=0, total=0;
+  function contar(){marc.textContent='Ideas bien colocadas al primer intento: '+bien+' de '+total;}
+  function mostrar(){
+    k=(k+1)%P.length; var p=P[k];
+    tx.innerHTML='<div class="dos"><span class="pasaje"><strong>Texto A:</strong> '+p.a+'</span><span class="pasaje b"><strong>Texto B:</strong> '+p.b+'</span></div>';
+    it.innerHTML='';
+    barajar(p.i).forEach(function(x){
+      var d=document.createElement('div'); d.className='item'; d.setAttribute('role','group'); d.setAttribute('aria-label',x[0]);
+      d.innerHTML='<span class="item-pal">'+x[0]+'</span><span class="item-ops"></span><span class="item-fb" aria-live="polite"></span>';
+      var ops=d.querySelector('.item-ops'), fb=d.querySelector('.item-fb'), hecho=false, primer=true;
+      T.forEach(function(t,j){
+        var b=document.createElement('button'); b.type='button'; b.className='op'; b.textContent=t;
+        b.addEventListener('click',function(){
+          if(hecho)return;
+          if(j===x[1]){hecho=true;total++;if(primer)bien++;b.classList.add('correcta');ops.querySelectorAll('.op').forEach(function(y){y.disabled=true;});fb.textContent='✓ '+T[j]+'.';contar();}
+          else{primer=false;b.classList.add('incorrecta');b.disabled=true;fb.textContent='Todavía no: vuelve a buscar esa idea en los dos textos.';}
+        });
+        ops.appendChild(b);
+      });
+      it.appendChild(d);
+    });
+  }
+  document.getElementById('ve-otra').addEventListener('click',function(){mostrar();tx.scrollIntoView({behavior:'smooth',block:'start'});});
+  contar(); mostrar();
+})();
+
+/* Módulo 2: [tema, autor A, autor B, 0 semejanza / 1 diferencia, explicación] */
+unaAUna('sd',[
+  ['El ejercicio','«Caminar media hora al día mejora la salud del corazón.»','«Un paseo diario de treinta minutos protege el corazón.»',0,'Dicen lo mismo con otras palabras.'],
+  ['La comida rápida','«La comida rápida es barata y práctica para quien trabaja.»','«La comida rápida parece barata, pero a la larga daña la salud.»',1,'El primero la defiende; el segundo, no.'],
+  ['El teléfono en clase','«El celular distrae a los estudiantes.»','«El celular puede ser una buena herramienta para aprender.»',1,'Ven el celular de manera opuesta.'],
+  ['El reciclaje','«Reciclar reduce la basura que llega a los vertederos.»','«Gracias al reciclaje, hay menos desechos en los basureros.»',0,'Es la misma idea.'],
+  ['El invierno','«El invierno en Chicago es duro por el viento y la nieve.»','«Los inviernos de Chicago son difíciles: el viento helado y la nieve no perdonan.»',0,'Coinciden en que es duro y en las razones.'],
+  ['El trabajo nocturno','«Trabajar de noche paga mejor.»','«El turno de noche afecta el sueño y la salud.»',1,'Uno ve una ventaja; el otro, un problema.'],
+  ['Las bibliotecas','«Las bibliotecas son un servicio gratuito para todos.»','«Cualquier persona puede usar la biblioteca sin pagar.»',0,'Dicen lo mismo.'],
+  ['Comprar en línea','«Comprar en línea ahorra tiempo.»','«Comprar en la tienda permite ver y tocar el producto antes de pagar.»',1,'Cada uno defiende una forma distinta de comprar.'],
+  ['Los abuelos','«Los abuelos transmiten la lengua y las tradiciones.»','«Gracias a los abuelos, muchos niños aprenden el español y las costumbres de la familia.»',0,'La misma idea, con un ejemplo.'],
+  ['El transporte','«El autobús es lento y casi siempre llega tarde.»','«El autobús es una forma cómoda y puntual de moverse.»',1,'Opiniones opuestas sobre el mismo servicio.']
+].map(function(d){return {e:'<span class="preg">Tema: '+d[0]+'</span><span class="pasaje"><strong>A:</strong> '+d[1]+'</span><span class="pasaje b"><strong>B:</strong> '+d[2]+'</span><span class="preg">¿Se parecen o se oponen?</span>',ops:['Semejanza','Diferencia'],c:d[3],fijo:true,n:['Semejanza','Diferencia'][d[3]]+'. '+d[4]};}),
+{pista:'Todavía no. Fíjate en la opinión de cada autor: ¿piensan lo mismo o lo contrario?'});
+
+/* Módulo 3 (la primera opción es la correcta) */
+unaAUna('co',[
+  ['___ textos hablan del mismo tema.',['Ambos','En cambio','Mientras que']],
+  ['Ana prefiere el campo; Luis, ___, prefiere la ciudad.',['en cambio','también','al igual que']],
+  ['___ su madre, Rosa es enfermera.',['Al igual que','A diferencia de','Sin embargo']],
+  ['El texto A da datos, ___ el texto B cuenta una historia.',['mientras que','ambos','también']],
+  ['___ el perro, el gato no necesita paseos.',['A diferencia de','Al igual que','Tanto']],
+  ['Los dos autores hablan del dinero. ___, sus opiniones son distintas.',['Sin embargo','Además','Ambos']],
+  ['Pedro trabaja de noche, y su esposa ___.',['también','en cambio','mientras que']],
+  ['___ mi hijo como mi hija terminaron la escuela.',['Tanto','Ambos','Mientras']],
+  ['El primer anuncio exagera; el segundo, ___, da datos reales.',['por el contrario','también','al igual que']],
+  ['___ autores reconocen que el problema es grave.',['Los dos','A diferencia de','En cambio']]
+].map(function(d){var o=d[0].replace('___',d[1][0]);o=o.charAt(0).toUpperCase()+o.slice(1);return {e:'<span class="pasaje">'+d[0].replace('___','_____')+'</span>',ops:d[1],c:0,n:'«'+o+'»',a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. ¿La oración señala algo en común o una diferencia?'});
+</script>
+</body>
+</html>

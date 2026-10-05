@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!-- Interactivo n2-l5-3 · Significado literal frente a figurado; modismos · Artes del Lenguaje Nivel 2 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.3 · Lenguaje figurado y modismos</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#00796b;--cp-claro:#e0f2f1;--cp-oscuro:#004d44;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#9fd3cc}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{font-size:1.05rem;margin:10px 0 14px}
+  .pasaje{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px;margin:0 0 8px;font-family:Georgia,serif;font-size:1.15rem;line-height:1.75}
+  .situ{display:block;background:var(--cp-claro);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-weight:600}
+  .grande{display:block;text-align:center;font-family:Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:4px}
+  .preg{font-weight:700;text-align:center;display:block}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:620px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:left}
+  .opciones.fila{flex-direction:row;justify-content:center}
+  .opciones.fila .op{min-width:140px;text-align:center}
+</style>
+</head>
+<body>
+<h1>Práctica 5.3 · Lenguaje figurado y modismos</h1>
+<p class="sub">Artes del Lenguaje · Nivel 2 · Tema 5 · Acompaña a la Lección 5.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng2/clase_5-3.html">← Volver a la Lección 5.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="literal-figurado">1 · ¿Literal o figurado?</button>
+  <button type="button" class="pest" data-mod="modismos">2 · ¿Qué significa?</button>
+  <button type="button" class="pest" data-mod="en-contexto">3 · En su contexto</button>
+</nav>
+
+<section class="modulo" id="literal-figurado" aria-labelledby="t-lf">
+  <h2 id="t-lf">1 · ¿Literal o figurado?</h2>
+  <p class="consejo">Imagina la oración al pie de la letra. Si lo que imaginas es imposible o exagerado, es figurada.</p>
+  <div class="enun" id="lf-enun" aria-live="polite"></div>
+  <div class="opciones fila" id="lf-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="lf-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="lf-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="lf-marcador"></div>
+</section>
+
+<section class="modulo" id="modismos" aria-labelledby="t-mod" hidden>
+  <h2 id="t-mod">2 · ¿Qué significa el modismo?</h2>
+  <p class="consejo">El significado de un modismo no sale de sus palabras sueltas. Lee el ejemplo: el contexto te ayuda.</p>
+  <div class="enun" id="mo-enun" aria-live="polite"></div>
+  <div class="opciones" id="mo-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="mo-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="mo-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="mo-marcador"></div>
+</section>
+
+<section class="modulo" id="en-contexto" aria-labelledby="t-ctx" hidden>
+  <h2 id="t-ctx">3 · El modismo en su contexto</h2>
+  <p class="consejo">Lee la situación y elige la expresión que le corresponde. Al acertar escucharás la oración.</p>
+  <div class="enun" id="ct-enun" aria-live="polite"></div>
+  <div class="opciones" id="ct-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ct-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ct-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ct-marcador"></div>
+</section>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 2: Conectando Ideas y Textos · Práctica de la Lección 5.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar, fijo:no barajar,
+           fbs:[mensaje propio de cada opción incorrecta]}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    var idx=actual.ops.map(function(_,j){return j;});
+    (actual.fijo||opts.fijo?idx:barajar(idx)).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+          if(opts.alAcertar)opts.alAcertar(actual);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=(actual.fbs&&actual.fbs[j])||actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+/* Módulo 1: [oración, 0 literal / 1 figurado, explicación] */
+unaAUna('lf',[
+  ['Se me partió el corazón al ver a mi hijo llorar.',1,'Sentir mucha tristeza; el corazón no se parte de verdad.'],
+  ['El médico revisó el corazón del paciente.',0,'Habla del órgano.'],
+  ['Mi jefe es una fiera cuando se enoja.',1,'Se comporta con mucha furia; no es un animal.'],
+  ['En el zoológico vimos una fiera enorme.',0,'Un animal salvaje de verdad.'],
+  ['Estoy muerto de hambre.',1,'Tener mucha hambre; una exageración.'],
+  ['Me comí un plato enorme de arroz con frijoles.',0,'Pasó de verdad.'],
+  ['Las palabras de mi madre fueron un bálsamo para mí.',1,'Me calmaron, como un remedio.'],
+  ['La farmacia vende un bálsamo para los labios.',0,'Un producto de verdad.'],
+  ['Ese niño es un terremoto: no se queda quieto.',1,'Es muy inquieto.'],
+  ['El terremoto de 2017 dañó muchos edificios en México.',0,'Un sismo real.'],
+  ['Le llovieron las críticas después del partido.',1,'Recibió muchas críticas.'],
+  ['Ayer llovió toda la tarde en Chicago.',0,'Lluvia de verdad.'],
+  ['Tengo la cabeza llena de ideas para el negocio.',1,'Se le ocurren muchas ideas.'],
+  ['Me duele la cabeza desde la mañana.',0,'Un dolor real.']
+].map(function(d){return {e:'<span class="pasaje">«'+d[0]+'»</span>',ops:['Literal','Figurado'],c:d[1],fijo:true,n:['Literal','Figurado'][d[1]]+'. '+d[2],a:d[0]};}),
+{pista:'Todavía no. Imagínalo al pie de la letra: ¿podría pasar de verdad?'});
+
+/* Módulo 2: [modismo, ejemplo, opciones (primera correcta)] */
+unaAUna('mo',[
+  ['tomar el pelo','No le creas: te está tomando el pelo.',['Engañar a alguien en broma','Cortarle el pelo a alguien','Saludar con cariño']],
+  ['buscarle tres pies al gato','No le busques tres pies al gato: el problema es sencillo.',['Complicar algo que es simple','Buscar a un animal perdido','Ahorrar dinero']],
+  ['estar entre la espada y la pared','Estoy entre la espada y la pared: si renuncio no tengo dinero, y si me quedo no tengo tiempo.',['Tener que elegir entre dos opciones malas','Estar en peligro de muerte','Estar muy tranquilo']],
+  ['ser uña y carne','Mi hija y su prima son uña y carne.',['Ser muy amigos, inseparables','Pelear todo el tiempo','Parecerse físicamente']],
+  ['no pegar ojo','Con el ruido de la fiesta no pegué ojo en toda la noche.',['No poder dormir','No ver bien','No querer mirar']],
+  ['dar la lata','El niño estuvo dando la lata toda la tarde para que le compraran un helado.',['Molestar insistiendo','Regalar algo','Hacer ruido con una lata']],
+  ['ir al grano','No tengo mucho tiempo, así que voy al grano.',['Decir lo importante sin rodeos','Ir al campo a sembrar','Comer cereal']],
+  ['estar en las nubes','Estás en las nubes: te pregunté tres veces y no contestaste.',['Estar distraído','Estar muy contento','Viajar en avión']],
+  ['ponerse las pilas','Si quieres el ascenso, tienes que ponerte las pilas.',['Esforzarse más','Cambiar las baterías','Ponerse un abrigo']],
+  ['dar en el clavo','Con tu idea diste en el clavo: eso era lo que faltaba.',['Acertar','Lastimarse un dedo','Arreglar un mueble']],
+  ['quedarse en blanco','En la entrevista me quedé en blanco y no supe qué decir.',['Olvidar todo de repente','Ponerse pálido de frío','Vestirse de blanco']],
+  ['estar hecho polvo','Después de mudarnos, estoy hecho polvo.',['Estar muy cansado','Estar muy sucio','Estar enfermo de alergia']],
+  ['no tener pelos en la lengua','Mi abuela no tiene pelos en la lengua: dice todo lo que piensa.',['Hablar con franqueza','Hablar muy poco','Tener la lengua lastimada']],
+  ['consultar con la almohada','Antes de aceptar el trabajo, lo voy a consultar con la almohada.',['Pensarlo con calma antes de decidir','Dormir mucho','Pedir consejo a un médico']],
+  ['tirar la toalla','Después de tres intentos, no tiró la toalla y aprobó.',['Rendirse','Lavar la ropa','Enojarse']],
+  ['costar un ojo de la cara','Arreglar el techo nos costó un ojo de la cara.',['Ser muy caro','Ser peligroso','Ser muy difícil']]
+].map(function(d){return {e:'<span class="grande">'+d[0]+'</span><span class="pasaje">«'+d[1]+'»</span><span class="preg">¿Qué significa?</span>',ops:d[2],c:0,n:'«'+d[0]+'»: '+d[2][0].toLowerCase()+'.',a:d[1]};}),
+{pista:'Todavía no. No lo leas al pie de la letra: ¿qué quiere decir la persona en el ejemplo?'});
+
+/* Módulo 3: [situación, frase con ___, opciones (primera correcta)] */
+unaAUna('ct',[
+  ['Tu hermano habla sin parar durante toda la cena.','Mi hermano habla ___.',['hasta por los codos','como pez en el agua','en las nubes']],
+  ['Ayudas a tu vecina a cargar las bolsas del mercado.','Le ___ a mi vecina.',['eché una mano','tomé el pelo','di la lata']],
+  ['Te equivocaste y le diste a tu jefe el informe de otro cliente.','¡___!',['Metí la pata','Di en el clavo','Fue pan comido']],
+  ['La tormenta no deja de echar agua desde la mañana.','Está ___.',['lloviendo a cántaros','dando la lata','yendo al grano']],
+  ['El examen de manejo fue facilísimo.','El examen fue ___.',['pan comido','un ojo de la cara','una fiera']],
+  ['Tu amigo quiere dejar el curso cuando ya casi termina.','No ___.',['tires la toalla','pegues ojo','metas la pata']],
+  ['Tu compañera explica en un minuto lo esencial, sin rodeos.','Mi compañera ___.',['fue al grano','buscó tres pies al gato','se quedó en blanco']],
+  ['Tu primo te hace creer, en broma, que ganó la lotería.','Mi primo me ___.',['tomó el pelo','echó una mano','dio en el clavo']],
+  ['Tienes que decidir hoy si aceptas un trabajo, pero prefieres pensarlo.','Lo voy a ___.',['consultar con la almohada','tirar la toalla','meter la pata']],
+  ['Dos hermanas siempre están juntas y se lo cuentan todo.','Son ___.',['uña y carne','hechas polvo','pan comido']],
+  ['El bebé lloró toda la noche y no dormiste nada.','No ___ en toda la noche.',['pegué ojo','eché una mano','di en el clavo']],
+  ['Tu hijo encuentra la causa exacta de una gotera.','¡___!',['Diste en el clavo','Estás en las nubes','Metiste la pata']]
+].map(function(d){var o=d[1].replace('___',d[2][0]);return {e:'<span class="situ">'+d[0]+'</span><span class="pasaje">'+d[1].replace('___','_____')+'</span>',ops:d[2],c:0,n:'«'+o+'»',a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. Piensa qué significa cada expresión y cuál describe la situación.'});
+</script>
+</body>
+</html>
