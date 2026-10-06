@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l4-2 · Géneros literarios · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.2 · Géneros literarios</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  .opciones .op,.enun{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<h1>Práctica 4.2 · Géneros literarios</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 4 · Acompaña a la Lección 4.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_4-2.html">← Volver a la Lección 4.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="genero">1 · ¿Qué género es?</button>
+  <button type="button" class="pest" data-mod="rasgos">2 · Los rasgos de cada género</button>
+  <button type="button" class="pest" data-mod="forma-sentido">3 · Forma y sentido</button>
+</nav>
+
+<section class="modulo" id="genero" aria-labelledby="t-ge">
+  <h2 id="t-ge">1 · ¿Qué género es?</h2>
+  <p class="consejo">¿Hay nombres de personajes delante de lo que dicen? Es <strong>drama</strong>, aunque esté en verso. ¿Líneas cortas en estrofas? <strong>Poema</strong>. ¿Párrafos contados por un narrador? <strong>Prosa</strong>.</p>
+  <div class="enun" id="ge-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="ge-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ge-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ge-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ge-marcador"></div>
+</section>
+
+<section class="modulo" id="rasgos" aria-labelledby="t-ra" hidden>
+  <h2 id="t-ra">2 · Los rasgos de cada género</h2>
+  <p class="consejo">Verso y estrofa son rasgos del poema; diálogo y acotaciones, del drama; párrafo y narrador, de la prosa. Lee el fragmento y busca el rasgo que te piden.</p>
+  <div class="enun" id="ra-enun" aria-live="polite"></div>
+  <div class="opciones" id="ra-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ra-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ra-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ra-marcador"></div>
+</section>
+
+<section class="modulo" id="forma-sentido" aria-labelledby="t-fs" hidden>
+  <h2 id="t-fs">3 · Forma y sentido</h2>
+  <p class="consejo">La forma no es solo un envase: ayuda a decir lo que el texto quiere decir. Piensa en qué hace la forma: repetir, comparar, mostrar sin explicar o contar desde dentro.</p>
+  <div class="enun" id="fs-enun" aria-live="polite"></div>
+  <div class="opciones" id="fs-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="fs-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="fs-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="fs-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 4.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function frag(t,f){return '<span class="texto"><p>'+t+'</p><p style="font-size:.85rem;margin:0">'+f+'</p></span>';}
+
+/* ===== Módulo 1 · ¿Qué género es? [fragmento, fuente, 0 poema · 1 drama · 2 prosa, nota] ===== */
+(function(){
+  var O=['Poema','Drama','Prosa'];
+  unaAUna('ge',[
+    ['Volverán las oscuras golondrinas<br>en tu balcón sus nidos a colgar,<br>y otra vez con el ala a sus cristales<br>jugando llamarán.','Gustavo Adolfo Bécquer, <em>Rimas</em>',0,'Versos cortos agrupados en estrofa, con ritmo: un yo que le habla a un «tú».'],
+    ['Juventud, divino tesoro,<br>¡ya te vas para no volver!<br>Cuando quiero llorar, no lloro…<br>y a veces lloro sin querer…','Rubén Darío, «Canción de otoño en primavera»',0,'Versos con rima (<em>tesoro / lloro</em>, <em>volver / querer</em>).'],
+    ['Hombres necios que acusáis<br>a la mujer sin razón,<br>sin ver que sois la ocasión<br>de lo mismo que culpáis…','Sor Juana Inés de la Cruz',0,'Una estrofa de cuatro versos con rima.'],
+    ['Yo soy un hombre sincero<br>de donde crece la palma,<br>y antes de morirme quiero<br>echar mis versos del alma.','José Martí, <em>Versos sencillos</em>',0,'Un yo poético que habla de sí mismo en versos que riman.'],
+    ['DOÑA LAURA. También usted ha debido pedirme permiso para sentarse en este banco, que es mío.<br>DON GONZALO. Aquí no hay bancos de nadie.','Álvarez Quintero, <em>Mañana de sol</em>',1,'Nombres de personajes y diálogo directo, sin narrador.'],
+    ['DON JUAN. ¡Cuál gritan esos malditos!<br>Pero ¡mal rayo me parta<br>si en concluyendo la carta<br>no pagan caros sus gritos!','José Zorrilla, <em>Don Juan Tenorio</em>',1,'Está en verso, pero habla un personaje: es teatro en verso.'],
+    ['SEGISMUNDO. ¿Qué es la vida? Un frenesí.<br>¿Qué es la vida? Una ilusión,<br>una sombra, una ficción…','Calderón de la Barca, <em>La vida es sueño</em>',1,'Teatro en verso: el nombre del personaje lo delata.'],
+    ['<em>(Entra MARÍA con una carta en la mano.)</em><br>MARÍA. ¿Ya pasó el cartero?<br>JOSÉ. <em>(Sin levantar la vista del periódico.)</em> Hace una hora.','Fragmento inventado para practicar',1,'Acotaciones entre paréntesis y diálogo de personajes.'],
+    ['En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.','Miguel de Cervantes, <em>Don Quijote de la Mancha</em>',2,'Un narrador cuenta; la línea sigue hasta el margen.'],
+    ['Pues sepa vuestra merced, ante todas cosas, que a mí llaman Lázaro de Tormes, hijo de Tomé González y de Antona Pérez, naturales de Tejares, aldea de Salamanca.','<em>Lazarillo de Tormes</em>',2,'Prosa con narrador en primera persona.'],
+    ['Platero es pequeño, peludo, suave; tan blando por fuera, que se diría todo de algodón, que no lleva huesos.','Juan Ramón Jiménez, <em>Platero y yo</em>',2,'Prosa poética: tiene ritmo, pero se escribe en párrafos y la cuenta un narrador.'],
+    ['Para los niños es este periódico, y para las niñas, por supuesto. Sin las niñas no se puede vivir, como no puede vivir la tierra sin luz.','José Martí, <em>La Edad de Oro</em>',2,'Martí también escribió en prosa: aquí habla directamente a sus lectores en párrafos.']
+  ].map(function(d){return {e:frag(d[0],d[1])+preg('¿De qué género es?'),ops:O,c:d[2],n:O[d[2]]+'. '+d[3]};}),
+  {pista:'Todavía no. ¿Hay nombres de personajes antes de lo que dicen? ¿Son líneas cortas agrupadas en estrofas? ¿O es un párrafo contado por un narrador?'});
+})();
+
+/* ===== Módulo 2 · Los rasgos de cada género [fragmento, pregunta, correcta, d1, d2, nota] ===== */
+unaAUna('ra',[
+  ['DOÑA LAURA. <em>(Deteniéndola.)</em> Pero escucha.','¿Qué es «(Deteniéndola.)»?','Una acotación: dice lo que hace el personaje','Algo que doña Laura dice en voz alta','La voz del narrador que cuenta la escena','Las acotaciones van entre paréntesis y no se dicen.'],
+  ['Cultivo una rosa blanca,<br>en julio como en enero,<br>para el amigo sincero<br>que me da su mano franca.','¿Cuántos versos tiene esta estrofa?','Cuatro','Uno','Ocho','Cada línea es un verso; las cuatro forman una estrofa.'],
+  ['Cultivo una rosa blanca,<br>en julio como en enero,<br>para el amigo sincero<br>que me da su mano franca.','¿Qué verso rima con el primero (<em>blanca</em>)?','El cuarto (<em>franca</em>)','El segundo (<em>enero</em>)','El tercero (<em>sincero</em>)','Riman desde la última vocal acentuada: <em>bl-anca / fr-anca</em>.'],
+  ['Lo dejo suelto, y se va al prado, y acaricia tibiamente con su hocico las florecillas…','¿En qué persona está el narrador?','En primera persona: «Lo dejo»','En tercera persona: «se va al prado»','No hay narrador: es un diálogo','Quien cuenta participa en la historia.'],
+  ['Lugar apartado de un paseo público, en Madrid. Un banco a la izquierda del actor. Es una mañana de otoño templada y alegre.','¿Qué parte de una obra de teatro es este texto?','La acotación inicial, que describe el lugar y la hora','El diálogo de la protagonista con la criada','El narrador que cuenta lo que piensa la protagonista','Las obras suelen empezar con una acotación que sitúa la escena.'],
+  ['Tiene acero. Acero y plata de luna, al mismo tiempo.','¿Qué rasgo de la prosa poética aparece aquí?','Una imagen poética («plata de luna») dentro de un párrafo','Versos cortos que riman y forman una sola estrofa','Nombres de personajes delante de su diálogo','La prosa poética usa imágenes sin dejar de ser prosa.'],
+  ['MARÍA. ¿Ya pasó el cartero?<br>JOSÉ. Hace una hora.','¿Cómo sabemos quién habla en un drama?','Por el nombre del personaje delante de lo que dice','Porque el narrador lo dice con «dijo María» o «contestó José»','Por el número de verso que lleva cada una de las líneas','En el teatro no hay «dijo»: el nombre va delante.'],
+  ['¿Qué es poesía?, dices mientras clavas<br>en mi pupila tu pupila azul.<br>¿Qué es poesía? ¿Y tú me lo preguntas?<br>Poesía… eres tú.','¿Quién habla en este poema?','Un yo poético que le habla a un «tú»','Un narrador que cuenta la vida de otros','Dos personajes que discuten en escena','En la lírica, un «yo» expresa lo que siente.'],
+  ['Platero es pequeño, peludo, suave; tan blando por fuera, que se diría todo de algodón.','¿Cómo está organizado este texto?','En oraciones dentro de un párrafo','En versos agrupados en una estrofa','En diálogo con acotaciones entre paréntesis','La línea continúa hasta el margen: es prosa.'],
+  ['PETRA. Tome usted. <em>(Le da un cartucho de papel pequeñito y se va por la izquierda.)</em>','¿Para quién está escrita la acotación?','Para los actores y el director de la obra','Para que el público la escuche en voz alta','Para que la lea en voz alta otro personaje','Indica movimientos: el público los ve, no los oye.']
+].map(function(d){return {e:'<span class="texto"><p>'+d[0]+'</p></span>'+preg(d[1]),ops:[d[2],d[3],d[4]],c:0,n:d[5]};}),
+{pista:'Todavía no. Repasa: verso y estrofa son del poema; diálogo y acotación, del drama; párrafo y narrador, de la prosa.'});
+
+/* ===== Módulo 3 · Forma y sentido [pregunta, correcta, d1, d2, nota] ===== */
+unaAUna('fs',[
+  ['El poema de Martí empieza con «Cultivo una rosa blanca» y termina con «cultivo la rosa blanca». ¿Qué efecto tiene?','Muestra que su respuesta no cambia, sea amigo o enemigo','Hace que el poema parezca que no tiene un final claro','Sirve solo para que el poema tenga más versos y más rima','La estructura circular expresa la constancia de su generosidad.'],
+  ['«En julio como en enero». ¿Por qué el poeta nombra dos meses opuestos?','Para decir «siempre», en cualquier época del año','Para indicar en qué meses florecen las rosas blancas','Para contar cuándo conoció a su amigo más sincero','Los extremos representan todo el año.'],
+  ['En <em>Mañana de sol</em>, ninguna acotación dice que doña Laura sea tierna. ¿Cómo lo sabe el lector?','Por lo que hace: guarda migas para «los más chicos»','Porque el narrador lo explica bien en un párrafo','Porque lo dice la rima de todos sus diálogos','En el teatro, los actos y las palabras revelan el carácter.'],
+  ['¿Por qué los versos de los <em>Versos sencillos</em> son cortos y riman?','Para que suenen como canciones populares y se recuerden','Porque Martí no sabía escribir versos más largos','Porque así lo exige siempre el teatro clásico español','La forma sencilla acerca el poema a todos los lectores.'],
+  ['<em>Platero y yo</em> está contado en primera persona. ¿Qué aporta eso?','Vemos a Platero con los ojos de alguien que lo quiere','Sabemos exactamente lo que piensa el burro en cada momento','La historia es más objetiva, más fría y más imparcial','La primera persona transmite el cariño desde dentro.'],
+  ['Platero es «tierno y mimoso igual que un niño… pero fuerte y seco como de piedra». ¿Qué sugieren las dos comparaciones juntas?','Que Platero reúne ternura y fuerza al mismo tiempo','Que Platero cambia de carácter según el día de la semana','Que el narrador no sabe bien cómo es Platero de verdad','Los contrarios se resumen al final: «acero y plata de luna».'],
+  ['Si <em>Mañana de sol</em> se contara en prosa, con narrador, ¿qué cambiaría?','Alguien nos diría cómo son los personajes, en vez de verlo nosotros','Los personajes hablarían todos en verso y con mucha rima','Desaparecerían de la historia el parque, el banco y los pájaros','El teatro muestra; la narración cuenta y explica.'],
+  ['¿Por qué la primera acotación de <em>Mañana de sol</em> describe tanto a doña Laura («no chochea»)?','Para que la actriz y el director sepan cómo es y cómo actuar','Para que el público lo escuche en voz alta al empezar la obra','Para que el lector sepa en qué año exacto se escribió la obra','Las acotaciones guían la representación.']
+].map(function(d){return {e:preg(d[0]),ops:[d[1],d[2],d[3]],c:0,n:d[4]};}),
+{pista:'Todavía no. Piensa en qué hace la forma: ¿repite, compara, muestra sin explicar, cuenta desde dentro?'});
+</script>
+</body>
+</html>
