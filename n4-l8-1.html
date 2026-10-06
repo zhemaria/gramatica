@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l8-1 · Lección 8.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.1 · Credibilidad, plagio y citación APA</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 8.1 · Credibilidad, plagio y citación APA</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 8 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_8-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 8.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Las fuentes descritas, salvo las de la lección, fueron inventadas para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#credibilidad">¿Es confiable?</a></li>
+    <li><a href="#plagio">¿Cita correcta o plagio?</a></li>
+    <li><a href="#cita">La cita en formato APA</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="credibilidad" aria-labelledby="h-cr">
+  <h2 id="h-cr">1. ¿Es confiable?</h2>
+  <p class="regla"><strong>Cinco preguntas:</strong> autoría (¿quién?) · actualidad (¿cuándo?) · propósito (¿para qué?) · evidencia (¿con qué pruebas?) · corroboración (¿lo confirman otras fuentes?).</p>
+  <p class="instr">Lee la descripción de la fuente y responde.</p>
+  <div id="m-cr"></div>
+</section>
+
+<section class="modulo" id="plagio" aria-labelledby="h-pl">
+  <h2 id="h-pl">2. ¿Cita correcta o plagio?</h2>
+  <p class="regla"><strong>Plagio:</strong> copiar sin comillas o cambiar solo algunas palabras del original. <strong>Correcto:</strong> cita textual entre comillas con su fuente, o paráfrasis con palabras y estructura propias, también con su fuente.</p>
+  <p class="instr">Compara la versión con el original y clasifícala.</p>
+  <div id="m-pl"></div>
+</section>
+
+<section class="modulo" id="cita" aria-labelledby="h-ci">
+  <h2 id="h-ci">3. La cita en formato APA</h2>
+  <p class="regla"><strong>En el texto:</strong> (Apellido, año) · (Institución, s. f.). <strong>En la lista:</strong> Apellido, I. (año). Título. <em>Revista o sitio</em>. URL · orden alfabético · sangría francesa.</p>
+  <p class="instr">Elige la opción correcta.</p>
+  <div id="m-ci"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_8-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 8.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l8-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-cr',[
+  {p:P('Una publicación sin autor dice: «¡El agua de la llave causa cáncer! Compártelo antes de que lo borren».','¿Qué criterio falla más claramente?'),o:['Evidencia: no presenta ninguna prueba','Actualidad: la fecha es demasiado antigua','Autoría: la escribió un especialista'],c:0,n:'Además, quiere provocar y nadie responde por ella.'},
+  {p:P('Un informe del Departamento de Educación de EE. UU. publicado este año, con tablas de datos y su metodología.','¿Cómo lo evalúas?'),o:['Confiable: institución, fecha y evidencia','Poco confiable: tiene demasiados números','No confiable: el gobierno nunca informa'],c:0,n:'Cumple autoría, actualidad y evidencia.'},
+  {p:P('Una página de una marca de colchones explica «la ciencia del sueño» y termina con un botón de compra.','¿Qué criterio debe hacerte dudar?'),o:['El propósito: quiere vender un producto','La autoría: tiene demasiados autores','La actualidad: se publicó demasiado pronto'],c:0,n:'Puede tener datos ciertos, pero hay que corroborarlos.'},
+  {p:P('Un artículo de salud de 2009 sobre el tratamiento de una enfermedad.','¿Qué criterio debe hacerte dudar?'),o:['La actualidad: en salud, los datos cambian','El propósito: un artículo siempre quiere vender','La autoría: un artículo nunca tiene autor'],c:0,n:'Busca una versión reciente.'},
+  {p:P('Un dato aparece en un blog y en Wikipedia, pero Wikipedia cita ese mismo blog como fuente.','¿Está corroborado?'),o:['No: las dos remiten a la misma fuente','Sí: aparece en dos sitios distintos','Sí: Wikipedia siempre confirma los datos'],c:0,n:'Las fuentes deben ser independientes.'},
+  {p:P('Artículo de Rosa Cartagena en <em>Smithsonian Magazine</em> (2020), con fechas, nombres y fuentes históricas.','¿Cómo lo evalúas?'),o:['Muy confiable por sus pruebas','Poco confiable: es de una revista','No confiable: es de 2020'],c:0,n:'Autora, institución, fecha y evidencia.'},
+  {p:P('Un video de un influencer con un millón de seguidores afirma que una dieta «quema grasa mientras duermes».','¿Por qué no basta con la cantidad de seguidores?'),o:['La popularidad no es una prueba de que sea cierto','Porque un millón de seguidores todavía es muy poco','Porque los videos no se pueden citar nunca en APA'],c:0,n:'Popular no es lo mismo que confiable.'},
+  {p:P('Una noticia de un periódico conocido, con el nombre del periodista, la fecha y declaraciones de dos expertos con nombre.','¿Qué hace falta para usarla en un trabajo?'),o:['Nada más: es confiable; se cita en APA','Que la confirme un video en las redes','Que no tenga el nombre del periodista'],c:0,n:'Cumple los criterios.'}
+],null,true);
+
+modulo('m-pl',[
+  {p:P('Original: «El canal invirtió la corriente del río para alejar las aguas residuales del lago.»<br>Versión: El canal invirtió la corriente del río para alejar las aguas residuales del lago.',''),o:['Plagio: copia sin comillas ni fuente','Paráfrasis correcta con fuente','Cita textual correcta con fuente'],c:0,n:'Copia literal sin marcar.'},
+  {p:P('Original: «El canal invirtió la corriente del río para alejar las aguas residuales del lago.»<br>Versión: El canal dio vuelta a la corriente del río para apartar las aguas sucias del lago.',''),o:['Plagio: solo cambia algunas palabras','Paráfrasis correcta con fuente','Cita textual correcta con fuente'],c:0,n:'Misma estructura y sin fuente.'},
+  {p:P('Original: «El canal invirtió la corriente del río para alejar las aguas residuales del lago.»<br>Versión: Para proteger el lago, Chicago hizo que su río corriera en sentido contrario (Lección 7.2).',''),o:['Paráfrasis correcta con fuente','Plagio: copia sin comillas ni fuente','Plagio: solo cambia algunas palabras'],c:0,n:'Palabras y estructura propias.'},
+  {p:P('Original: «La altura no es lo mismo que la salud.»<br>Versión: Como concluye el informe del experimento, «la altura no es lo mismo que la salud».',''),o:['Cita textual correcta con fuente','Plagio: copia sin comillas ni fuente','Paráfrasis demasiado cercana'],c:0,n:'Comillas y fuente.'},
+  {p:P('Original: «Las devoluciones aumentaron un 240 % después de eliminar las multas.»<br>Versión: Al quitar las multas, la cantidad de libros devueltos se multiplicó.',''),o:['Plagio: la idea es ajena y no se cita','Paráfrasis correcta con fuente','Cita textual correcta con fuente'],c:0,n:'Las palabras son propias, pero falta la fuente.'},
+  {p:P('Original: «Sin luz, la planta no fabrica clorofila.»<br>Versión: «Sin luz, la planta no fabrica clorofila» (Lección 6.3).',''),o:['Cita textual correcta con fuente','Plagio: copia sin comillas ni fuente','Plagio: solo cambia algunas palabras'],c:0,n:'Entre comillas y con fuente.'},
+  {p:P('Original: «La ciudad bebía su propia agua contaminada.»<br>Versión: La ciudad tomaba su misma agua sucia (Lección 7.2).',''),o:['Plagio: paráfrasis demasiado cercana','Paráfrasis correcta con fuente','Cita textual correcta con fuente'],c:0,n:'Aunque cita, cambia palabra por palabra: o comillas, o paráfrasis de verdad.'},
+  {p:P('¿Qué versión de «Las multas alejaban a las familias de la biblioteca» es una paráfrasis correcta?',''),o:['Muchas familias dejaban de usar la biblioteca por miedo a las deudas (Telli, 2019)','Las multas apartaban a las familias de la biblioteca (Telli, 2019)','Las multas alejaban a las familias de la biblioteca'],c:0,n:'Las otras son demasiado cercanas o copia sin comillas.'}
+],null,true);
+
+modulo('m-ci',[
+  {p:'¿Cuál es la cita dentro del texto correcta para un artículo de Rosa Cartagena de 2020?',o:['(Cartagena, 2020)','(Rosa, 2020)','(Cartagena, Rosa, Smithsonian)'],c:0,n:'Solo el apellido y el año.'},
+  {p:'¿Cuál es la cita correcta para una página del Senado de Puerto Rico sin fecha?',o:['(Senado de Puerto Rico, s. f.)','(Senado de Puerto Rico, 0000)','(Puerto Rico, sin fecha, Senado)'],c:0,n:'Autor institucional y «s. f.».'},
+  {p:'Dos fuentes confirman el mismo dato. ¿Cómo se citan juntas?',o:['(Cartagena, 2020; Senado de Puerto Rico, s. f.)','(Cartagena y Senado de Puerto Rico, 2020)','(Cartagena, 2020) y luego (Senado) (s. f.)'],c:0,n:'Separadas por punto y coma.'},
+  {p:'¿Qué referencia sigue el modelo APA?',o:['Cartagena, R. (2020, 2 de noviembre). In Puerto Rico, women won the vote… <em>Smithsonian Magazine</em>. https://…','<em>Smithsonian Magazine</em>, Rosa Cartagena, «In Puerto Rico, women won the vote…», noviembre de 2020','R. Cartagena — In Puerto Rico, women won the vote… — 2 nov. 2020 — https://… — Smithsonian'],c:0,n:'Autor, fecha, título, revista en cursiva, URL.'},
+  {p:'¿En qué orden van estas referencias: Senado de Puerto Rico; Cartagena, R.; Pagán, G.?',o:['Cartagena, Pagán, Senado','Senado, Cartagena, Pagán','Pagán, Senado, Cartagena'],c:0,n:'Orden alfabético.'},
+  {p:'¿Qué significa la sangría francesa?',o:['La segunda línea y las siguientes entran más','La primera línea entra más que las demás','Todas las líneas van centradas en la página'],c:0,n:'Así el apellido se ve primero.'},
+  {p:'¿Dónde va la página en una cita textual de un libro?',o:['Al final: (Apellido, año, p. 45)','Al principio: (p. 45, Apellido, año)','En la lista de referencias, nunca en el texto'],c:0,n:'Autor, año y página.'},
+  {p:'Consultaste cinco fuentes y citaste tres. ¿Cuántas van en la lista de referencias?',o:['Tres','Cinco','Ninguna'],c:0,n:'Solo las que se citan.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

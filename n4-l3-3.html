@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l3-3 · Lección 3.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.3 · Resumen objetivo e incertidumbre</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 3.3 · Resumen objetivo e incertidumbre</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 3 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_3-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 3.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Los fragmentos fueron escritos para esta práctica; los estudios, programas y ciudades que mencionan son inventados.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#objetivo-sesgado">¿Objetivo o sesgado?</a></li>
+    <li><a href="#incertidumbre">Lo seguro y lo incierto</a></li>
+    <li><a href="#no-lo-dice">Lo que el texto no dice</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="objetivo-sesgado" aria-labelledby="h-obj">
+  <h2 id="h-obj">1. ¿Objetivo o sesgado?</h2>
+  <p class="regla"><strong>Un resumen objetivo</strong> recoge las ideas centrales, sin opinión ni añadidos, y respeta la certeza del original: lo posible sigue siendo posible.</p>
+  <p class="instr">Lee el fragmento y elige el resumen más fiel.</p>
+  <div id="m-obj"></div>
+</section>
+
+<section class="modulo" id="incertidumbre" aria-labelledby="h-inc">
+  <h2 id="h-inc">2. Lo seguro y lo incierto</h2>
+  <p class="regla"><strong>Certeza:</strong> se sabe, está comprobado, lo cierto es, los datos muestran, verbos en indicativo. <strong>Incertidumbre:</strong> una hipótesis, algunos piensan, pudo, es posible, quizá, condicional.</p>
+  <p class="instr">¿El autor lo da por seguro o lo deja abierto?</p>
+  <div id="m-inc"></div>
+</section>
+
+<section class="modulo" id="no-lo-dice" aria-labelledby="h-nodice">
+  <h2 id="h-nodice">3. Lo que el texto no dice</h2>
+  <p class="regla"><strong>Una afirmación no está respaldada</strong> si convierte la duda en certeza (o al revés), añade información o exagera el alcance.</p>
+  <p class="instr">Elige la afirmación que el texto <strong>no</strong> respalda.</p>
+  <div id="m-nodice"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_3-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 3.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l3-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+var A='Un estudio de la universidad local siguió durante un año a 200 adultos que empezaron a caminar media hora al día. Al final, la mayoría dormía mejor y decía sentirse con más energía. Los autores advierten, sin embargo, que no hubo un grupo de comparación, así que no pueden asegurar que el cambio se deba solo a caminar.';
+var B='La ciudad instaló cámaras en diez cruces peligrosos. Un año después, los accidentes en esos cruces bajaron un 30 %. El ayuntamiento atribuye la mejora a las cámaras, pero ese mismo año también se repintaron los pasos de cebra y se redujo el límite de velocidad.';
+var C='Los arqueólogos encontraron en la cueva restos de fogatas y huesos de animales con marcas de corte. Están seguros de que allí vivieron personas. No saben si vivían todo el año o solo en invierno: algunos creen que las marcas en las paredes indican estaciones, pero otros dudan de esa interpretación.';
+var D='El programa de tutorías del centro comunitario empezó en enero con 30 estudiantes adultos. En junio, 22 seguían asistiendo y 15 habían aprobado al menos una prueba del GED. La coordinadora cree que las tutorías ayudaron, aunque reconoce que muchos estudiantes también estudiaban por su cuenta.';
+modulo('m-obj',[
+  {p:P(A,'¿Qué resumen es el más fiel?'),o:['Tras un año caminando, la mayoría de los participantes durmió mejor, aunque sin grupo de comparación no se puede asegurar que la causa sea caminar.','Un estudio de un año demostró que caminar media hora al día mejora el sueño y la energía de cualquier adulto, sin excepción.','Un estudio muy interesante muestra que todos deberíamos caminar más cada día para dormir mejor y tener más energía.'],c:0,n:'Respeta la advertencia de los autores, sin opinión.'},
+  {p:P(B,'¿Qué resumen es el más fiel?'),o:['Los accidentes bajaron un 30 % tras instalar cámaras, pero ese año hubo otros cambios que también pudieron influir.','Las cámaras redujeron un 30 % los accidentes en los diez cruces, como demostró el ayuntamiento con sus datos.','Las cámaras no sirvieron para nada, porque la mejora se debió a la pintura nueva de los pasos de cebra.'],c:0,n:'Recoge la mejora y la duda sobre su causa.'},
+  {p:P(C,'¿Qué resumen es el más fiel?'),o:['Es seguro que en la cueva vivieron personas, pero no se sabe si vivían todo el año o solo en invierno.','En la cueva vivieron personas solo durante el invierno, como prueban las marcas que dejaron en las paredes.','Los arqueólogos todavía no saben si en la cueva vivieron personas o solo animales de la zona.'],c:0,n:'Mantiene lo seguro y lo dudoso.'},
+  {p:P(D,'¿Qué resumen es el más fiel?'),o:['De 30 estudiantes, 22 seguían en junio y 15 aprobaron alguna prueba; la coordinadora cree que las tutorías ayudaron, aunque muchos también estudiaban solos.','Las tutorías lograron que la mitad de los estudiantes aprobara el GED completo en solo seis meses de trabajo en el centro.','El programa de tutorías es un gran éxito y debería copiarse cuanto antes en todos los centros comunitarios de la ciudad.'],c:0,n:'Datos fieles y la opinión atribuida a la coordinadora.'},
+  {p:P(A,'¿Qué le falta al resumen «La mayoría de los participantes durmió mejor después de caminar un año»?'),o:['La advertencia de que no hubo grupo de comparación','El número exacto de horas que dormían','El nombre de la universidad que hizo el estudio'],c:0,n:'Sin la advertencia, el resumen parece más seguro que el original.'},
+  {p:P(B,'¿Por qué es sesgado el resumen «Gracias a las cámaras, los cruces ya son seguros»?'),o:['Atribuye toda la mejora a las cámaras y exagera el resultado','Incluye la cifra exacta del 30 % de reducción','Menciona que había diez cruces peligrosos'],c:0,n:'Toma la versión del ayuntamiento como un hecho.'}
+],null,true);
+
+modulo('m-inc',[
+  {p:'«Los arqueólogos están seguros de que allí vivieron personas.»',c:0,n:'«Están seguros».'},
+  {p:'«Algunos creen que las marcas indican estaciones.»',c:1,n:'«Algunos creen».'},
+  {p:'«Los accidentes en esos cruces bajaron un 30 %.»',c:0,n:'Dato en indicativo.'},
+  {p:'«El cambio podría deberse a otros factores.»',c:1,n:'Condicional «podría».'},
+  {p:'«La mayoría de los participantes dormía mejor al final del año.»',c:0,n:'Resultado observado.'},
+  {p:'«Quizá las tutorías influyeron en los resultados.»',c:1,n:'«Quizá».'},
+  {p:'«Una hipótesis sostiene que el lago se formó por un meteorito.»',c:1,n:'«Una hipótesis».'},
+  {p:'«Los datos muestran que el río creció dos metros en una semana.»',c:0,n:'«Los datos muestran».'},
+  {p:'«Es posible que el edificio fuera un templo.»',c:1,n:'«Es posible».'},
+  {p:'«Lo cierto es que nadie ha encontrado los planos originales.»',c:0,n:'«Lo cierto es».'},
+  {p:'«Según algunos historiadores, la carta nunca llegó a enviarse.»',c:1,n:'«Según algunos».'},
+  {p:'«El puente se inauguró en 1932.»',c:0,n:'Fecha en indicativo.'},
+  {p:'«Los primeros pobladores habrían llegado en canoa.»',c:1,n:'Condicional «habrían».'},
+  {p:'«Está comprobado que la vacuna reduce los casos graves.»',c:0,n:'«Está comprobado».'}
+],['El autor lo da por seguro','El autor lo deja abierto']);
+
+modulo('m-nodice',[
+  {p:P(A,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Está demostrado que caminar mejora el sueño.','El estudio duró un año y siguió a 200 adultos.','No hubo un grupo de comparación.'],c:0,n:'Convierte la duda en certeza.'},
+  {p:P(A,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Los participantes también cambiaron su dieta.','La mayoría decía sentirse con más energía.','Caminaban media hora al día.'],c:0,n:'Añade información.'},
+  {p:P(B,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Las cámaras son la única causa de la mejora.','Ese año se redujo el límite de velocidad.','Los accidentes bajaron un 30 % en esos cruces.'],c:0,n:'Exagera el alcance.'},
+  {p:P(B,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['No se sabe si los accidentes bajaron.','El ayuntamiento atribuye la mejora a las cámaras.','También se repintaron los pasos de cebra.'],c:0,n:'Convierte un dato seguro en duda.'},
+  {p:P(C,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Las personas de la cueva vivían solo en invierno.','Había huesos de animales con marcas de corte.','Algunos dudan de la interpretación de las marcas.'],c:0,n:'Convierte una hipótesis en hecho.'},
+  {p:P(C,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Las personas de la cueva pintaban animales en las paredes.','Se encontraron restos de fogatas.','Los arqueólogos discuten si vivían allí todo el año.'],c:0,n:'Añade información: el texto habla de «marcas», no de pinturas de animales.'},
+  {p:P(D,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Las tutorías fueron la razón de que 15 estudiantes aprobaran.','22 estudiantes seguían asistiendo en junio.','La coordinadora reconoce que muchos estudiaban por su cuenta.'],c:0,n:'Convierte la opinión de la coordinadora en hecho.'},
+  {p:P(D,'¿Qué afirmación <strong>no</strong> respalda el texto?'),o:['Todos los estudiantes que siguieron aprobaron el GED completo.','El programa empezó en enero con 30 estudiantes.','15 estudiantes aprobaron al menos una prueba.'],c:0,n:'Exagera: «al menos una prueba» no es el GED completo, y 22 no son 15.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

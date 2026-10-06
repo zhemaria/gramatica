@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l6-1 · Lección 6.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.1 · Del texto a la gráfica y de la gráfica al texto</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+  .mini{display:block;width:100%;max-width:360px;height:auto;background:#fff;border:1px solid #d6dde4;border-radius:6px;margin:6px 0}
+  .op .mini{max-width:240px;margin:4px 0 0}
+  .ops.graficas{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 6.1 · Del texto a la gráfica y de la gráfica al texto</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 6 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_6-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 6.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los datos de esta práctica son inventados, salvo los del experimento de la luz del profesor.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#texto-grafica">Del texto a la gráfica</a></li>
+    <li><a href="#grafica-texto">De la gráfica al texto</a></li>
+    <li><a href="#error">Detecta la representación incorrecta</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="texto-grafica" aria-labelledby="h-tg">
+  <h2 id="h-tg">1. Del texto a la gráfica</h2>
+  <p class="regla"><strong>Líneas:</strong> cambio en el tiempo · <strong>barras:</strong> comparar categorías · <strong>circular:</strong> partes de un todo que suman 100 % · <strong>tabla:</strong> cifras exactas. Comprueba también que los valores coincidan con el texto.</p>
+  <p class="instr">Lee el texto y elige la representación correcta.</p>
+  <div id="m-tg"></div>
+</section>
+
+<section class="modulo" id="grafica-texto" aria-labelledby="h-gt">
+  <h2 id="h-gt">2. De la gráfica al texto</h2>
+  <p class="regla"><strong>Una buena descripción</strong> dice qué se mide, la tendencia general y las comparaciones clave con cifras, sin decir más de lo que la gráfica muestra.</p>
+  <p class="instr">Elige la descripción más precisa.</p>
+  <div id="m-gt"></div>
+</section>
+
+<section class="modulo" id="error" aria-labelledby="h-er">
+  <h2 id="h-er">3. Detecta la representación incorrecta</h2>
+  <p class="regla"><strong>Revisa:</strong> ¿el eje vertical empieza en cero? ¿Los intervalos son regulares? ¿El tipo de gráfica es el adecuado? ¿Tiene título y unidades? ¿Los datos coinciden con el texto?</p>
+  <p class="instr">¿Qué error tiene la representación?</p>
+  <div id="m-er"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_6-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 6.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l6-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+/* Gráfica pequeña de barras o de líneas.
+   o = {t:título, et:[etiquetas], v:[valores], u:'unidad', ymin:0, ymax:…, tipo:'barras'|'lineas', xs:[posiciones x opcionales], sinTitulo:true} */
+var nMini=0;
+function mini(o){
+  nMini++;
+  var W=340,H=200,x0=44,x1=328,y0=160,y1=(o.sinTitulo?14:34),ymin=o.ymin||0,ymax=o.ymax||Math.max.apply(null,o.v)*1.1;
+  /* marcas redondas: paso de 1, 2, 2.5 o 5 por una potencia de 10 */
+  var bruto=(ymax-ymin)/4, mag=Math.pow(10,Math.floor(Math.log10(bruto))), nrm=bruto/mag;
+  var pasoY=(nrm<=1?1:nrm<=2?2:nrm<=2.5?2.5:nrm<=5?5:10)*mag, nm=Math.ceil((ymax-ymin)/pasoY-1e-9);
+  ymax=ymin+nm*pasoY;
+  function Y(v){return y0-((v-ymin)/(ymax-ymin))*(y0-y1);}
+  var n=o.v.length, paso=(x1-x0)/n;
+  function X(i){return o.xs?x0+((o.xs[i]-o.xs[0])/(o.xs[n-1]-o.xs[0]))*(x1-x0-30)+15:x0+paso*i+paso/2;}
+  var desc=(o.sinTitulo?'Gráfica sin título':o.t)+'. '+(o.tipo==='lineas'?'Gráfica de líneas':'Gráfica de barras')+'. '+
+    o.et.map(function(e,i){return e+': '+o.v[i]+(o.u?' '+o.u:'');}).join('; ')+'. El eje vertical empieza en '+ymin+'.';
+  var s='<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+desc.replace(/"/g,'&quot;')+'">';
+  if(!o.sinTitulo)s+='<text x="'+(W/2)+'" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2332">'+o.t+'</text>';
+  for(var k=0;k<=nm;k++){var v=ymin+pasoY*k, yy=Y(v);
+    s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+yy+'" y2="'+yy+'" stroke="#e1e6eb"/><text x="'+(x0-5)+'" y="'+(yy+4)+'" text-anchor="end" font-size="10.5" fill="#333">'+(Math.round(v*10)/10)+'</text>';}
+  s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+y0+'" y2="'+y0+'" stroke="#555"/>';
+  if(o.tipo==='lineas'){
+    s+='<polyline points="'+o.v.map(function(v,i){return X(i)+','+Y(v);}).join(' ')+'" fill="none" stroke="#b91c1c" stroke-width="2.5"/>';
+    o.v.forEach(function(v,i){s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="4" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/>';});
+  }else{
+    var bw=Math.min(40,paso*0.6);
+    o.v.forEach(function(v,i){var top=Y(v);s+='<rect x="'+(X(i)-bw/2)+'" y="'+top+'" width="'+bw+'" height="'+(y0-top)+'" rx="3" fill="#b91c1c"/>';
+      s+='<text x="'+X(i)+'" y="'+(top-4)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a2332">'+v+'</text>';});
+  }
+  o.et.forEach(function(e,i){s+='<text x="'+X(i)+'" y="'+(y0+15)+'" text-anchor="middle" font-size="10.5" fill="#333">'+e+'</text>';});
+  if(o.u)s+='<text x="'+x0+'" y="'+(y0+32)+'" font-size="10.5" fill="#555">Unidad: '+o.u+'</text>';
+  return s+'</svg>';
+}
+var MES=['ene','feb','mar','abr'];
+modulo('m-tg',[
+  {p:P('En la biblioteca se prestaron 120 libros en enero, 150 en febrero, 90 en marzo y 180 en abril.','¿Qué gráfica representa bien estos datos?'),
+   o:[mini({t:'Libros prestados',et:MES,v:[120,150,90,180]}),mini({t:'Libros prestados',et:MES,v:[120,150,180,90]}),mini({t:'Libros prestados',et:MES,v:[120,90,150,180]})],c:0,n:'Marzo es el más bajo (90) y abril el más alto (180).'},
+  {p:P('La temperatura máxima subió de 18 °C el lunes a 22 °C el martes y 25 °C el miércoles, y bajó a 20 °C el jueves.','¿Qué gráfica la representa bien?'),
+   o:[mini({t:'Temperatura máxima',et:['lun','mar','mié','jue'],v:[18,22,25,20],u:'°C',tipo:'lineas'}),mini({t:'Temperatura máxima',et:['lun','mar','mié','jue'],v:[18,25,22,20],u:'°C',tipo:'lineas'}),mini({t:'Temperatura máxima',et:['lun','mar','mié','jue'],v:[18,22,25,28],u:'°C',tipo:'lineas'})],c:0,n:'Sube hasta el miércoles y baja el jueves.'},
+  {p:P('En el experimento de la luz, las alturas finales fueron: A, 10.2 cm; B, 14.5 cm; C, 18.8 cm.','¿Qué gráfica las representa bien?'),
+   o:[mini({t:'Altura final',et:['A','B','C'],v:[10.2,14.5,18.8],u:'cm'}),mini({t:'Altura final',et:['A','B','C'],v:[18.8,14.5,10.2],u:'cm'}),mini({t:'Altura final',et:['A','B','C'],v:[10.2,18.8,14.5],u:'cm'})],c:0,n:'A es la más baja y C la más alta.'},
+  {p:P('Quieres mostrar cómo cambió el precio de la renta cada año entre 2015 y 2025.','¿Qué tipo de gráfica eliges?'),o:['Gráfica de líneas','Gráfica circular','Una tabla de una sola fila'],c:0,n:'Cambio a lo largo del tiempo.'},
+  {p:P('Quieres comparar cuántos alumnos hay en cinco programas del centro comunitario.','¿Qué tipo de gráfica eliges?'),o:['Gráfica de barras','Gráfica de líneas','Gráfica circular de dos partes'],c:0,n:'Comparación entre categorías.'},
+  {p:P('El presupuesto de una familia se reparte así: renta 40 %, comida 25 %, transporte 15 %, otros 20 %.','¿Qué tipo de gráfica eliges?'),o:['Gráfica circular','Gráfica de líneas','Gráfica de barras con eje desde 15'],c:0,n:'Partes de un todo que suman 100 %.'},
+  {p:P('El texto dice: «Las ventas se duplicaron de enero (50) a febrero».','¿Qué valor debe tener febrero en la gráfica?'),o:['100','52','150'],c:0,n:'Duplicar = multiplicar por dos.'},
+  {p:P('El texto dice: «La asistencia bajó a la mitad entre el lunes (80 personas) y el viernes».','¿Qué valor debe tener el viernes en la tabla?'),o:['40','160','78'],c:0,n:'La mitad de 80.'}
+],null,true);
+
+modulo('m-gt',[
+  {p:mini({t:'Altura final de las plantas',et:['A','B','C'],v:[10.2,14.5,18.8],u:'cm'})+'<span class="preg">¿Qué descripción es la más precisa?</span>',
+   o:['La C es la más alta (18.8 cm), casi el doble que la A (10.2 cm); la B queda en medio.','Las plantas crecieron mucho en esos días y la gráfica es muy interesante.','La A es la mejor maceta de las tres porque sus plantas son las más sanas.'],c:0,n:'Comparación con cifras; la salud no aparece en la gráfica.'},
+  {p:mini({t:'Visitantes del parque',et:MES,v:[300,300,310,305]})+'<span class="preg">¿Qué descripción es la más precisa?</span>',
+   o:['Los visitantes se mantienen estables, alrededor de 300 al mes.','Los visitantes aumentan mucho cada mes, de enero a abril.','Los visitantes bajan a la mitad en abril respecto a enero.'],c:0,n:'Las barras casi no cambian.'},
+  {p:mini({t:'Pasajeros del tren (miles)',et:['2021','2022','2023','2024'],v:[8,10,12,14],tipo:'lineas'})+'<span class="preg">¿Qué descripción es la más precisa?</span>',
+   o:['Los pasajeros aumentan de forma constante: 2,000 más cada año.','Los pasajeros se duplican cada año desde 2021 hasta 2024.','Los pasajeros bajan poco a poco desde 2021.'],c:0,n:'De 8 a 14 mil, de dos en dos.'},
+  {p:mini({t:'Alumnos inscritos',et:['2022','2023','2024','2025'],v:[40,55,80,120]})+'<span class="preg">¿Qué afirmación muestra la gráfica?</span>',
+   o:['Los inscritos se triplicaron entre 2022 y 2025.','Los alumnos aprenden más cada año.','La mayoría de los alumnos son mujeres.'],c:0,n:'40 × 3 = 120. Las otras dos no salen de la gráfica.'},
+  {p:mini({t:'Ventas de paraguas',et:MES,v:[20,25,90,30]})+'<span class="preg">¿Qué descripción es la más precisa?</span>',
+   o:['Las ventas suben mucho en marzo (90) y vuelven a bajar en abril (30).','Las ventas suben sin parar, mes tras mes, de enero a abril.','En marzo llovió más que en ningún otro mes del año.'],c:0,n:'Lo de la lluvia es una explicación posible, no un dato de la gráfica.'},
+  {p:mini({t:'Horas de sueño (promedio)',et:['lun','mar','mié','jue'],v:[7,6,5,4],tipo:'lineas'})+'<span class="preg">¿Qué expresión describe la tendencia?</span>',
+   o:['Disminuye una hora cada día.','Se mantiene estable toda la semana.','Aumenta poco a poco hasta el jueves.'],c:0,n:'De 7 a 4.'},
+  {p:mini({t:'Altura de la maceta C',et:['día 0','día 10','día 21'],v:[1.3,13.5,18.8],u:'cm',tipo:'lineas'})+'<span class="preg">¿Qué descripción es la más precisa?</span>',
+   o:['Crece muy deprisa los primeros 10 días y después más despacio.','Crece siempre al mismo ritmo durante los 21 días.','Deja de crecer por completo después del día 10.'],c:0,n:'12.2 cm en 10 días; 5.3 cm en los 11 siguientes.'}
+],null,true);
+
+var ERR=['El eje no empieza en cero','Intervalos desiguales','Tipo de gráfica equivocado','Los datos no coinciden con el texto'];
+modulo('m-er',[
+  {p:mini({t:'Altura final',et:['A','B'],v:[10,11],u:'cm',ymin:9,ymax:11.5})+'<span class="preg">La barra B parece el doble que la A. ¿Qué error hay?</span>',c:0,n:'Con el eje desde 9, una diferencia de 1 cm parece enorme.'},
+  {p:mini({t:'Pasajeros (miles)',et:['2010','2011','2012','2020'],v:[8,9,10,15],tipo:'lineas'})+'<span class="preg">Los años están a la misma distancia. ¿Qué error hay?</span>',c:1,n:'Entre 2012 y 2020 hay ocho años, no uno: parece un salto brusco.'},
+  {p:P('Una gráfica de líneas une con una línea las ventas de cinco tiendas distintas: Norte, Sur, Este, Oeste y Centro.','¿Qué error hay?'),c:2,n:'Las tiendas son categorías: corresponde una gráfica de barras.'},
+  {p:mini({t:'Libros prestados',et:MES,v:[120,150,90,180]})+'<span class="preg">El texto dice: «En marzo se prestaron 190 libros, el mejor mes». ¿Qué error hay?</span>',c:3,n:'La gráfica muestra 90 en marzo y el mejor mes es abril.'},
+  {p:P('Una gráfica circular muestra: A 40 %, B 35 %, C 45 %.','¿Qué error hay?'),c:2,n:'Suman 120 %: los datos no son partes de un mismo todo, así que la circular no sirve.'},
+  {p:mini({t:'Visitas a la clínica',et:['ene','feb'],v:[500,520],ymin:480,ymax:525})+'<span class="preg">Un titular dice: «¡Las visitas se disparan!». ¿Qué error tiene la gráfica?</span>',c:0,n:'Un aumento del 4 % parece enorme con el eje desde 480.'},
+  {p:P('En una gráfica del crecimiento de una planta, los días 0, 2, 4, 6, 8, 10, 14, 20 y 21 aparecen a la misma distancia.','¿Qué error hay?'),c:1,n:'Entre el 14 y el 20 hay seis días, no dos.'},
+  {p:mini({t:'Altura final',et:['A','B','C'],v:[10.2,14.5,18.8],u:'cm'})+'<span class="preg">El texto dice: «La maceta A fue la más alta». ¿Qué error hay?</span>',c:3,n:'La gráfica muestra que A es la más baja.'}
+],ERR);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

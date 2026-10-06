@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l6-3 · Lección 6.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.3 · Sintetizar fuentes científicas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 6.3 · Sintetizar fuentes científicas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 6 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_6-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 6.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los estudios de esta práctica son inventados, salvo el experimento de la luz del profesor.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#atribuye">Atribuye cada dato a su fuente</a></li>
+    <li><a href="#discrepancia">Identifica y explica la discrepancia</a></li>
+    <li><a href="#sintesis">La síntesis mejor respaldada</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="atribuye" aria-labelledby="h-at">
+  <h2 id="h-at">1. Atribuye cada dato a su fuente</h2>
+  <p class="regla"><strong>Las tres fuentes de la Lección 6.3:</strong></p>
+  <p class="pas"><strong>Fuente 1 · Experimento del profesor (21 días):</strong> A luz plena 10.2 cm, 12 a 14 hojas; B poca luz 14.5 cm; C oscuridad 18.8 cm, 2 hojas, blanca, «casi sin vida» el día 20.<br><strong>Fuente 2 · Texto explicativo:</strong> etiolación; sin luz no hay clorofila; la auxina alarga el tallo; la planta vive de las reservas de la semilla y, si no encuentra la luz, muere.<br><strong>Fuente 3 · Réplica (35 días, sótano frío):</strong> el día 21, oscuridad 16 cm y poca luz 14 cm; el día 35, poca luz 22 cm y oscuridad 16 cm, plantas secas.</p>
+  <p class="instr">¿De qué fuente sale?</p>
+  <div id="m-at"></div>
+</section>
+
+<section class="modulo" id="discrepancia" aria-labelledby="h-di">
+  <h2 id="h-di">2. Identifica y explica la discrepancia</h2>
+  <p class="regla"><strong>Pasos:</strong> precisa dónde difieren · compara las condiciones (tiempo, lugar, muestra, método) · compara en el mismo punto · busca la explicación · di qué queda abierto.</p>
+  <p class="instr">Responde sobre la diferencia entre las fuentes.</p>
+  <div id="m-di"></div>
+</section>
+
+<section class="modulo" id="sintesis" aria-labelledby="h-si">
+  <h2 id="h-si">3. La síntesis mejor respaldada</h2>
+  <p class="regla"><strong>Una buena síntesis científica</strong> dice en qué coinciden las fuentes, explica la discrepancia con evidencia, llega a una conclusión que ninguna da sola y dice qué queda abierto.</p>
+  <p class="instr">Elige la mejor síntesis.</p>
+  <div id="m-si"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_6-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 6.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l6-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-at',[
+  {p:'La auxina ablanda las paredes de las células del tallo.',c:1,n:'Explicación biológica: texto.'},
+  {p:'La planta de poca luz llegó a 22 cm el día 35.',c:2,n:'Solo la réplica midió 35 días.'},
+  {p:'La maceta de luz plena terminó con 12 a 14 hojas.',c:0,n:'Experimento del profesor.'},
+  {p:'Sin luz, la planta vive de las reservas de la semilla.',c:1,n:'Texto explicativo.'},
+  {p:'La planta en oscuridad estaba «casi sin vida» el día 20.',c:0,n:'Bitácora del profesor.'},
+  {p:'El día 21, la planta en oscuridad medía 16 cm.',c:2,n:'En la réplica; en la del profesor, 18.8 cm.'},
+  {p:'Ese fenómeno se llama etiolación.',c:1,n:'El texto le pone nombre.'},
+  {p:'Las plantas en oscuridad estaban secas el día 35.',c:2,n:'Réplica.'},
+  {p:'La maceta en oscuridad medía 18.8 cm al final.',c:0,n:'Experimento del profesor.'}
+],['Fuente 1 · Profesor','Fuente 2 · Texto','Fuente 3 · Réplica']);
+
+modulo('m-di',[
+  {p:P('Fuente 1: la planta en oscuridad terminó más alta que la de poca luz. Fuente 3: terminó más baja.','¿Qué condición explica mejor la diferencia?'),o:['El tiempo de medición: 21 días frente a 35','El color de las macetas de cada grupo','El nombre de quien hizo cada experimento'],c:0,n:'El día 21, las dos coinciden.'},
+  {p:P('Estudio A (en julio): un fertilizante aumentó la cosecha de lechuga un 30 %. Estudio B (en enero, en invernadero sin calefacción): el mismo fertilizante no tuvo efecto.','¿Qué condición puede explicar la diferencia?'),o:['La temperatura: con frío las plantas crecen poco','El tipo de letra con que se escribió cada informe','Que los dos estudios usaron lechuga del mismo tipo'],c:0,n:'Una condición distinta entre los estudios.'},
+  {p:P('Encuesta A (500 adultos de todo el estado): el 45 % usa el autobús. Encuesta B (100 adultos del centro de la ciudad): el 80 % usa el autobús.','¿Qué explica la discrepancia?'),o:['La muestra: en el centro hay más autobuses','Que una de las dos encuestas mintió sobre sus datos','Que el boleto de autobús cambió de precio ese año'],c:0,n:'Muestras distintas dan resultados distintos.'},
+  {p:P('Estudio A: un jarabe redujo la tos en 3 días. Estudio B: el mismo jarabe no la redujo. El estudio A lo pagó la empresa que vende el jarabe; el B, una universidad.','¿Qué conviene hacer?'),o:['Tener en cuenta el posible interés y buscar más estudios independientes','Creer al estudio A porque se hizo primero y es el más conocido','Descartar los dos estudios y no pensar más en el tema'],c:0,n:'El interés no anula, pero obliga a contrastar.'},
+  {p:P('Fuente 1 y Fuente 3 sobre la planta en oscuridad.','¿En qué coinciden las dos?'),o:['En que se alarga deprisa al principio y no está sana','En que es la más alta al final del experimento','En que midieron durante el mismo número de días'],c:0,n:'Coinciden en mucho; difieren en el final.'},
+  {p:P('Fuente 1: el día 20, la planta oscura estaba «casi sin vida». Fuente 2: si no encuentra la luz, se debilita y muere.','¿Qué relación hay entre las dos?'),o:['Se complementan: el texto explica lo observado','Se contradicen por completo en todo lo que dicen','No tienen ninguna relación entre sí'],c:0,n:'El dato y su explicación.'},
+  {p:P('Dos mediciones de la temperatura del agua de un lago dan 18 °C y 24 °C el mismo día.','¿Qué pregunta ayuda más a resolver la discrepancia?'),o:['¿A qué hora y a qué profundidad se midió cada una?','¿Cuál de los dos termómetros es más bonito?','¿Cuál de las dos cifras es mayor?'],c:0,n:'Las condiciones de medición.'},
+  {p:P('Fuente 1 (21 días) y Fuente 3 (35 días).','¿Qué queda abierto después de comparar las fuentes?'),o:['Si el frío del sótano influyó en los resultados de la réplica','Si la planta oscura se alarga deprisa al principio','Si la planta oscura llega a tener hojas verdes'],c:0,n:'Las fuentes no lo resuelven.'}
+],null,true);
+
+modulo('m-si',[
+  {p:P('Fuentes 1, 2 y 3 de la Lección 6.3.','¿Qué síntesis es la mejor respaldada?'),o:['Sin luz, el frijol se alarga deprisa mientras duran las reservas de la semilla, y después se detiene y muere','La réplica demuestra que el experimento del profesor estaba mal hecho y hay que repetirlo','La oscuridad es lo que más hace crecer al frijol, según el experimento del profesor'],c:0,n:'Usa las tres fuentes y resuelve la discrepancia.'},
+  {p:P('Estudio A (julio): el fertilizante aumentó la cosecha un 30 %. Estudio B (enero, sin calefacción): no tuvo efecto. Texto: las plantas crecen muy poco con temperaturas bajas.','¿Qué síntesis es la mejor respaldada?'),o:['El fertilizante parece eficaz con buen clima, pero no compensa el frío','El fertilizante no sirve para nada, como demuestra el estudio B','El fertilizante funciona siempre, como demuestra el estudio A'],c:0,n:'Integra las tres y dice qué falta.'},
+  {p:P('Encuesta A (todo el estado): 45 % usa el autobús. Encuesta B (centro de la ciudad): 80 %. Mapa: casi todas las rutas de autobús pasan por el centro.','¿Qué síntesis es la mejor respaldada?'),o:['El uso del autobús es mucho mayor donde hay más rutas, como en el centro','La encuesta B está equivocada porque da una cifra muy alta','La mayoría de la gente del estado usa el autobús cada día'],c:0,n:'El mapa explica la diferencia.'},
+  {p:P('Fuentes 1, 2 y 3 de la Lección 6.3.','¿Qué le falta a la síntesis «La planta en oscuridad crece deprisa, como muestran el profesor y la réplica»?'),o:['Explicar por qué después se detiene y qué queda abierto','El número exacto de semillas por maceta','La fecha en que se publicó el texto explicativo'],c:0,n:'Le falta la Fuente 2 y la discrepancia.'},
+  {p:P('Estudio A (pagado por el fabricante): el jarabe reduce la tos. Estudio B (universidad): no la reduce. Estudio C (otra universidad): efecto pequeño.','¿Qué síntesis es la más prudente?'),o:['El efecto es dudoso: los estudios independientes no lo confirman','El jarabe funciona, porque así lo dice el primer estudio que se hizo','El jarabe es peligroso y debería prohibirse en todas las farmacias'],c:0,n:'Pesa las fuentes según su independencia y no va más allá.'},
+  {p:P('Medición A: 18 °C a 5 metros de profundidad, de madrugada. Medición B: 24 °C en la superficie, a mediodía.','¿Qué síntesis es la mejor?'),o:['Las dos pueden ser correctas: arriba y a mediodía el agua está más caliente','La medición A es falsa porque da una temperatura más baja','El termómetro de la medición B debía de estar roto o mal calibrado'],c:0,n:'Las condiciones explican la diferencia.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

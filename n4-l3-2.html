@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l3-2 · Lección 3.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.2 · Evidencia sólida e inferencias complejas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 3.2 · Evidencia sólida e inferencias complejas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 3 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_3-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 3.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Todos los fragmentos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#evidencia-solida">La evidencia más sólida</a></li>
+    <li><a href="#inferencia">La inferencia mejor apoyada</a></li>
+    <li><a href="#descarta">Descarta lo que no sirve</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="evidencia-solida" aria-labelledby="h-evidencia">
+  <h2 id="h-evidencia">1. La evidencia más sólida</h2>
+  <p class="regla"><strong>Evidencia sólida:</strong> pertinente (habla de lo que se afirma), específica (un detalle concreto del texto) y suficiente (alcanza para la conclusión).</p>
+  <p class="instr">Elige la cita que mejor demuestra la afirmación.</p>
+  <div id="m-solida"></div>
+</section>
+
+<section class="modulo" id="inferencia" aria-labelledby="h-inferencia">
+  <h2 id="h-inferencia">2. La inferencia mejor apoyada</h2>
+  <p class="regla"><strong>Integra las pistas:</strong> reúnelas, busca qué tienen en común y prueba la conclusión contra el resto del texto.</p>
+  <p class="instr">Elige la conclusión que mejor integra todas las pistas.</p>
+  <div id="m-inferencia"></div>
+</section>
+
+<section class="modulo" id="descarta" aria-labelledby="h-descarta">
+  <h2 id="h-descarta">3. Descarta lo que no sirve</h2>
+  <p class="regla"><strong>Trampas:</strong> va demasiado lejos · es irrelevante · la contradice el texto · se basa en una sola pista ambigua.</p>
+  <p class="instr">¿Qué trampa es la opción en negrita?</p>
+  <div id="m-descarta"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_3-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 3.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l3-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+var T1='Doña Elvira abrió la tienda a las seis, como siempre. Pasó un trapo por el mostrador que ya brillaba, ordenó tres veces las latas de sardinas y miró el reloj. A las diez solo había entrado un cliente, que preguntó por una dirección. Al otro lado de la calle, el supermercado nuevo tenía el estacionamiento lleno.';
+var T2='Joaquín revisó el informe por cuarta vez. Cambió una coma, la volvió a poner y apagó la computadora a la una de la madrugada. A la mañana siguiente llegó media hora antes que nadie y dejó el informe sobre el escritorio de la directora con una nota: «Por si quiere revisarlo antes de la junta».';
+var T3='En la clínica, la doctora habló despacio y dibujó el corazón en una hoja. Le pidió a Inés que repitiera las instrucciones con sus palabras. Cuando Inés se equivocó en la dosis, la doctora no la corrigió enseguida: le preguntó qué haría si se olvidaba de una pastilla.';
+modulo('m-solida',[
+  {p:P(T1,'Afirmación: «A la tienda le va mal». ¿Qué evidencia es más sólida?'),o:['«A las diez solo había entrado un cliente, que preguntó por una dirección»','«Abrió la tienda a las seis, como siempre, y pasó un trapo por el mostrador»','«Pasó un trapo por el mostrador que ya brillaba y ordenó las latas»'],c:0,n:'Pertinente y específica: casi no hay clientes.'},
+  {p:P(T1,'Afirmación: «Elvira está inquieta». ¿Qué evidencia es más sólida?'),o:['«Ordenó tres veces las latas de sardinas y miró el reloj»','«Abrió la tienda a las seis de la mañana, como siempre»','«El supermercado nuevo tenía el estacionamiento lleno»'],c:0,n:'Repetir tareas sin necesidad muestra inquietud.'},
+  {p:P(T1,'Afirmación: «El supermercado le quita clientes a la tienda». ¿Qué evidencia es más sólida?'),o:['El contraste entre el único cliente y el estacionamiento lleno','«Ordenó tres veces las latas de sardinas y miró el reloj»','«Un cliente entró a la tienda a preguntar por una dirección»'],c:0,n:'Dos pistas que, juntas, sostienen la afirmación.'},
+  {p:P(T2,'Afirmación: «Joaquín es muy exigente consigo mismo». ¿Qué evidencia es más sólida?'),o:['«Revisó el informe por cuarta vez. Cambió una coma, la volvió a poner»','«Apagó la computadora a la una de la madrugada»','«Dejó el informe sobre el escritorio de la directora»'],c:0,n:'Revisar cuatro veces y dudar de una coma.'},
+  {p:P(T2,'Afirmación: «A Joaquín le importa la opinión de la directora». ¿Qué evidencia es más sólida?'),o:['La nota «Por si quiere revisarlo antes de la junta»','«Cambió una coma, la volvió a poner y apagó la computadora»','«Apagó la computadora a la una de la madrugada»'],c:0,n:'Escribe pensando en lo que ella necesita antes de la junta.'},
+  {p:P(T3,'Afirmación: «La doctora quiere asegurarse de que Inés entienda». ¿Qué evidencia es más sólida?'),o:['«Le pidió a Inés que repitiera las instrucciones con sus palabras»','«En la clínica, la doctora habló despacio con Inés»','«Dibujó el corazón en una hoja para explicarlo»'],c:0,n:'Pedir que repita con sus palabras comprueba la comprensión. El dibujo ayuda, pero no lo comprueba.'},
+  {p:P(T3,'Afirmación: «La doctora enseña sin humillar». ¿Qué evidencia es más sólida?'),o:['«La doctora no la corrigió enseguida: le preguntó qué haría…»','«La doctora habló despacio y dibujó el corazón en una hoja»','«Inés se equivocó en la dosis de las pastillas»'],c:0,n:'Ante el error, pregunta en lugar de corregir.'},
+  {p:P('Los registros del refugio muestran que en enero llegaron 40 personas por noche; en marzo, 25; en mayo, 12. La directora explicó que el refugio solo abre los meses de frío.','Afirmación: «El refugio cierra en los meses cálidos». ¿Qué evidencia es más sólida?'),o:['«La directora explicó que el refugio solo abre los meses de frío»','«En mayo llegaron 12 personas por noche»','«En enero llegaron 40 personas por noche»'],c:0,n:'La cifra de mayo sugiere, pero la declaración lo dice directamente.'}
+],null,true);
+
+modulo('m-inferencia',[
+  {p:P(T1,'¿Qué inferencia integra mejor todas las pistas?'),o:['La tienda pierde clientes desde que abrió el supermercado y Elvira está preocupada','Elvira está pensando en abrir un supermercado propio','A Elvira le gusta limpiar y ordenar su tienda'],c:0,n:'Une la tienda vacía, el supermercado lleno y la inquietud.'},
+  {p:P(T2,'¿Qué inferencia integra mejor todas las pistas?'),o:['Joaquín está ansioso por causar buena impresión con ese informe','Joaquín es nuevo en la empresa y no sabe usar la computadora','Joaquín quiere que la directora haga el informe por él'],c:0,n:'Revisiones, madrugón y nota apuntan a lo mismo.'},
+  {p:P(T3,'¿Qué inferencia integra mejor todas las pistas?'),o:['La doctora quiere que Inés aprenda a cuidarse sola en casa','La doctora no sabe explicar bien los tratamientos','Inés no quiere seguir las indicaciones de la doctora'],c:0,n:'Explicar, comprobar y preguntar qué haría sola.'},
+  {p:P('Carmen guardó en una caja las cartas, las fotos y la bufanda de lana. La puso en lo alto del armario, donde no la viera. Pero no la tiró.','¿Qué inferencia es la mejor apoyada?'),o:['Quiere dejar atrás una relación o una pérdida, pero no olvidarla del todo','Está ordenando el armario para mudarse de casa','Quiere regalar esas cosas a otra persona'],c:0,n:'Guardar lejos, pero no tirar.'},
+  {p:P('El niño dejó de pedir que lo llevaran al parque. Ya no invitaba amigos. Cuando sonaba el teléfono de su madre, se tapaba los oídos. La maestra dice que en clase se sienta solo.','¿Qué inferencia es la mejor apoyada?'),o:['Algo lo hace sentir mal y se está aislando','Prefiere los videojuegos a jugar en el parque','Está enfermo de los oídos'],c:0,n:'Varias conductas apuntan al aislamiento; ninguna sola basta.'},
+  {p:P('Las ventas de paraguas subieron en abril. Ese mes, la estación meteorológica registró lluvia en 22 días, el doble que el año anterior.','¿Qué inferencia es la mejor apoyada?'),o:['La lluvia probablemente aumentó la venta de paraguas','Los paraguas causaron que lloviera más','Las tiendas bajaron el precio de los paraguas'],c:0,n:'Relación probable entre los dos datos; el texto no da precios.'},
+  {p:P('La señora Ruiz saluda a todos en el ascensor por su nombre, sabe qué vecino trabaja de noche y le guarda los paquetes al del quinto cuando no está.','¿Qué inferencia es la mejor apoyada?'),o:['Conoce bien a sus vecinos y se preocupa por ellos','Es la administradora oficial del edificio','No tiene nada que hacer durante el día'],c:0,n:'Las tres pistas apuntan a cercanía y cuidado; la segunda opción va demasiado lejos.'},
+  {p:P('El abuelo pidió que pusieran en su cuarto la foto del barco en que llegó. Se pasaba las tardes mirando el mapa de su isla. Una noche le preguntó a su nieta si «allá» seguirían los mangos.','¿Qué inferencia es la mejor apoyada?'),o:['Extraña su tierra natal','Quiere comprar un barco','Le gustan mucho los mangos'],c:0,n:'Foto del barco, mapa y pregunta: nostalgia.'}
+],null,true);
+
+var TR=['Va demasiado lejos','Es irrelevante','La contradice el texto','Se basa en una sola pista ambigua'];
+modulo('m-descarta',[
+  {p:P(T1,'Pregunta: ¿qué siente Elvira? Opción: <strong>«Elvira odia al dueño del supermercado»</strong>.'),c:0,n:'Nada en el texto habla de odio ni del dueño.'},
+  {p:P(T1,'Pregunta: ¿cómo le va a la tienda? Opción: <strong>«Las latas eran de sardinas»</strong>.'),c:1,n:'Es cierto, pero no responde a la pregunta.'},
+  {p:P(T1,'Opción: <strong>«La tienda de Elvira estaba llena de clientes»</strong>.'),c:2,n:'Solo había entrado un cliente.'},
+  {p:P(T2,'Opción: <strong>«Joaquín está enfermo, porque se acostó tarde»</strong>.'),c:3,n:'Acostarse tarde admite muchas explicaciones.'},
+  {p:P(T2,'Opción: <strong>«Joaquín quiere quitarle el puesto a la directora»</strong>.'),c:0,n:'El texto no da pie a esa conclusión.'},
+  {p:P(T2,'Opción: <strong>«A Joaquín no le importa el informe»</strong>.'),c:2,n:'Lo revisó cuatro veces.'},
+  {p:P(T3,'Pregunta: ¿cómo enseña la doctora? Opción: <strong>«La clínica tiene varias consultas»</strong>.'),c:1,n:'No dice nada sobre cómo enseña.'},
+  {p:P(T3,'Opción: <strong>«La doctora es la mejor del país»</strong>.'),c:0,n:'Exagera: el texto solo muestra cómo trata a Inés.'},
+  {p:P(T3,'Opción: <strong>«La doctora corrigió a Inés con dureza»</strong>.'),c:2,n:'No la corrigió enseguida: le hizo una pregunta.'},
+  {p:P('Marcos llegó con los zapatos mojados.','Opción: <strong>«Marcos cruzó un río para llegar»</strong>.'),c:3,n:'Una sola pista que admite muchas explicaciones (lluvia, un charco…).'}
+],TR);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

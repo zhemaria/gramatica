@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l4-1 · Lección 4.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.1 · Tramas paralelas y retrospección</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 4.1 · Tramas paralelas y retrospección</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 4 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_4-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 4.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Todos los fragmentos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#orden">Orden narrativo y orden cronológico</a></li>
+    <li><a href="#retrospeccion">Retrospección y anticipación</a></li>
+    <li><a href="#efecto">El efecto de la estructura</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="orden" aria-labelledby="h-orden">
+  <h2 id="h-orden">1. Orden narrativo y orden cronológico</h2>
+  <p class="regla"><strong>Recuerda:</strong> el orden cronológico es el de los hechos; el narrativo, el que elige el autor. Busca las fechas, los marcadores de tiempo y el pluscuamperfecto.</p>
+  <p class="instr">Responde sobre el orden de los hechos.</p>
+  <div id="m-orden"></div>
+</section>
+
+<section class="modulo" id="retrospeccion" aria-labelledby="h-retro">
+  <h2 id="h-retro">2. Retrospección y anticipación</h2>
+  <p class="regla"><strong>Retrospección:</strong> vuelve al pasado (recordó, años antes, había…). <strong>Anticipación:</strong> adelanta el futuro (años después, sería, nunca imaginó que…). <strong>Presente del relato:</strong> lo que está pasando ahora en la historia.</p>
+  <p class="instr">¿Qué técnica hay en el fragmento?</p>
+  <div id="m-retro"></div>
+</section>
+
+<section class="modulo" id="efecto" aria-labelledby="h-efecto">
+  <h2 id="h-efecto">3. El efecto de la estructura</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿qué se perdería si se contara en orden lineal? La comparación entre épocas, la sorpresa, la tensión, lo que el lector sabe antes que el personaje…</p>
+  <p class="instr">¿Qué logra el autor con esa organización?</p>
+  <div id="m-efecto"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_4-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 4.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l4-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-orden',[
+  {p:P('Lucía firmó los papeles de la casa con las manos temblorosas. Pensó en el cuarto alquilado donde había dormido con sus tres hijos durante cinco años. Esa noche, por primera vez, cada niño tuvo su propia cama.','¿Qué ocurrió primero?'),o:['Vivir cinco años en un cuarto alquilado','Firmar los papeles de la casa','Que cada niño tuviera su cama'],c:0,n:'«Había dormido»: anterior a la firma.'},
+  {p:P('El juez leyó la sentencia: inocente. Pedro abrazó a su abogada. Tres años antes lo habían detenido a la salida de la fábrica, sin explicaciones.','¿En qué orden ocurrieron los hechos?'),o:['Detención → sentencia → abrazo','Sentencia → detención → abrazo','Abrazo → sentencia → detención'],c:0,n:'El relato empieza por el final: comienzo por el medio.'},
+  {p:P('Capítulo 1: Ponce, 1950. Capítulo 2: Nueva York, 1985. Capítulo 3: Ponce, 1952. Capítulo 4: Nueva York, 1987.','¿Qué estructura tiene la novela?'),o:['Dos tramas paralelas que avanzan alternándose','Orden lineal, de 1950 a 1987 sin saltos','Una sola retrospección al final del libro'],c:0,n:'Dos lugares y épocas que se alternan.'},
+  {p:P('Al llegar al aeropuerto, Rosa se dio cuenta de que había olvidado el pasaporte. Dos horas antes, lo había sacado del cajón para revisarlo y lo había dejado sobre la mesa.','¿Qué ocurrió primero?'),o:['Sacar el pasaporte del cajón','Llegar al aeropuerto','Darse cuenta del olvido'],c:0,n:'«Dos horas antes» y el pluscuamperfecto.'},
+  {p:P('La niña tocó el piano en el concierto de fin de curso. Recordó el primer día, cuando no sabía ni dónde poner las manos. Al terminar, su maestra lloraba.','¿Cuál es el orden cronológico?'),o:['Primer día → concierto → la maestra llora','Concierto → primer día → la maestra llora','La maestra llora → concierto → primer día'],c:0,n:'El recuerdo del primer día es lo más antiguo.'},
+  {p:P('«Nunca imaginé que aquel billete de lotería cambiaría mi vida», dice el narrador. Luego cuenta cómo lo compró, sin ganas, un martes de lluvia.','¿Qué conoce el lector antes que los hechos?'),o:['Que el billete le cambiará la vida','El día exacto en que compró el billete','Cuánto dinero ganó con el billete'],c:0,n:'Una anticipación al principio.'},
+  {p:P('Mientras su nieto le leía las noticias, don Felipe se acordó de la primera vez que vio un periódico: tenía doce años y no sabía leer. Aprendió a los cuarenta, en una escuela nocturna.','¿Qué ocurrió primero?'),o:['Ver un periódico sin saber leer','Aprender a leer en la escuela nocturna','Escuchar a su nieto leer las noticias'],c:0,n:'A los doce años.'},
+  {p:P('Trama A: una hija busca a su madre en 2020. Trama B: la madre deja a su bebé en un orfanato en 1990. Las tramas se alternan hasta que se encuentran.','¿Cuál es el hecho más antiguo?'),o:['La madre deja al bebé en el orfanato','La hija empieza a buscar a su madre','La madre y la hija se encuentran'],c:0,n:'1990, trama B.'}
+],null,true);
+
+modulo('m-retro',[
+  {p:'«Años después, Marta entendería por qué su padre nunca hablaba de la guerra.»',c:1,n:'«Años después… entendería».'},
+  {p:'«Mientras esperaba el autobús, recordó el día en que llegó a la ciudad.»',c:0,n:'Verbo de recuerdo.'},
+  {p:'«Abrió la puerta y encontró la carta sobre la mesa.»',c:2,n:'Lo que pasa ahora en la historia.'},
+  {p:'«Ella le había prometido volver antes del invierno.»',c:0,n:'Pluscuamperfecto: hecho anterior.'},
+  {p:'«Nadie sabía todavía que aquel niño sería el primer médico de la familia.»',c:1,n:'«Sería»: adelanta el futuro.'},
+  {p:'«Cuando tenía siete años, su abuelo le había enseñado a pescar en ese mismo río.»',c:0,n:'Marcador de tiempo y pluscuamperfecto.'},
+  {p:'«Sirvió el café, se sentó junto a la ventana y esperó.»',c:2,n:'Acciones del presente del relato.'},
+  {p:'«Esa fue la última vez que vio a su hermano.»',c:1,n:'Anuncia algo que se sabrá después: no lo volverá a ver.'},
+  {p:'«Le vino a la memoria la cocina de su madre, el olor a café y a pan.»',c:0,n:'«Le vino a la memoria».'},
+  {p:'«El reloj marcó las doce y el teléfono sonó.»',c:2,n:'Presente del relato.'},
+  {p:'«Diez años más tarde, sus hijos le preguntarían por qué se quedó.»',c:1,n:'«Diez años más tarde… preguntarían».'},
+  {p:'«Aquella mañana de 1980, su madre había cosido el vestido toda la noche.»',c:0,n:'Fecha pasada y pluscuamperfecto.'}
+],['Retrospección','Anticipación','Presente del relato']);
+
+modulo('m-efecto',[
+  {p:P('Un relato empieza con un hombre que sale de la cárcel después de veinte años y, después, cuenta por qué entró.','¿Qué efecto tiene empezar por el final?'),o:['Crea curiosidad: el lector quiere saber qué pasó','Hace que el relato sea más fácil de resumir','Evita que el lector sienta lástima del personaje'],c:0,n:'Comienzo por el medio: genera intriga.'},
+  {p:P('Una novela alterna la vida de una abuela que cruza la frontera en 1970 con la de su nieta que entra a la universidad en 2020.','¿Qué efecto tienen las tramas paralelas?'),o:['Invitan a comparar los sacrificios y los logros de dos generaciones','Hacen que el lector olvide a la abuela','Explican con datos la historia de la inmigración'],c:0,n:'Poner dos vidas lado a lado.'},
+  {p:P('En la primera página, el narrador dice: «Ese verano murió mi mejor amigo». El resto del cuento narra el verano día a día.','¿Qué efecto tiene esa anticipación?'),o:['Cada escena feliz se lee con tristeza, porque se sabe cómo terminará','Elimina toda la tensión del cuento','Hace que el final sea una sorpresa'],c:0,n:'La anticipación tiñe todo lo que sigue.'},
+  {p:P('En medio de una discusión con su hijo, el padre recuerda la vez que él mismo le gritó a su propio padre a la misma edad.','¿Qué aporta la retrospección?'),o:['Muestra que el conflicto se repite entre generaciones','Interrumpe la discusión para que el lector descanse','Explica cómo terminó la discusión'],c:0,n:'El recuerdo da profundidad al presente.'},
+  {p:P('Un cuento policiaco revela al final que el narrador, que parecía un testigo, era el culpable. Las pistas estaban en escenas del pasado contadas a lo largo del relato.','¿Qué efecto tiene guardar ese dato para el final?'),o:['Sorpresa: obliga a releer todo de otra manera','Claridad: el lector lo sabe desde el principio','Lentitud: el cuento se hace más largo'],c:0,n:'El dato escondido cambia el sentido de lo anterior.'},
+  {p:P('Una trama sigue a una familia que espera noticias de un barco. La otra trama, alternada, muestra al barco en plena tormenta.','¿Qué efecto produce alternar las dos tramas?'),o:['Tensión: el lector sabe lo que la familia no sabe','Calma: las dos tramas ocurren lejos','Confusión: el lector no distingue las escenas'],c:0,n:'El lector sabe más que los personajes.'},
+  {p:P('Un relato sobre una mudanza se interrumpe tres veces con recuerdos de la casa vieja: la primera Navidad, el nacimiento de un hijo, la muerte de la abuela.','¿Para qué sirven esas retrospecciones?'),o:['Muestran por qué cuesta tanto dejar la casa','Explican cuánto costó la casa nueva','Anticipan lo que pasará en la casa nueva'],c:0,n:'Cada recuerdo pesa en la decisión.'},
+  {p:P('Si «El reloj del abuelo» se contara en orden cronológico, empezaría en Guanajuato en 1968 y terminaría en Chicago en 2026.','¿Qué se perdería?'),o:['La sorpresa de «Yo lo paré» y el paralelismo entre las dos épocas','Las fechas de los acontecimientos más importantes','El nombre del nieto y del relojero de la calle 26'],c:0,n:'El orden crea la sorpresa y la comparación.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

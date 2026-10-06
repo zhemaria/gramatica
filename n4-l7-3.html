@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l7-3 · Lección 7.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.3 · Escritura disciplinar y revisión</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 7.3 · Escritura disciplinar y revisión</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 7 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_7-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 7.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los borradores y las situaciones fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#evidencia">La evidencia documental adecuada</a></li>
+    <li><a href="#revision">El paso del proceso</a></li>
+    <li><a href="#mejora">La mejora más pertinente</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="evidencia" aria-labelledby="h-ev">
+  <h2 id="h-ev">1. La evidencia documental adecuada</h2>
+  <p class="regla"><strong>La mejor evidencia</strong> prueba exactamente lo que se afirma. Se presenta, se cita y se explica.</p>
+  <p class="instr">Elige la evidencia que mejor apoya la afirmación.</p>
+  <div id="m-ev"></div>
+</section>
+
+<section class="modulo" id="revision" aria-labelledby="h-rv">
+  <h2 id="h-rv">2. El paso del proceso</h2>
+  <p class="regla"><strong>Planificar</strong> (ideas y orden) → <strong>borrador</strong> (escribir sin detenerse) → <strong>revisar</strong> (contenido y organización) → <strong>editar</strong> (ortografía, puntuación, concordancia) → <strong>reescribir</strong> → <strong>publicar</strong>.</p>
+  <p class="instr">¿En qué paso del proceso está el autor?</p>
+  <div id="m-rv"></div>
+</section>
+
+<section class="modulo" id="mejora" aria-labelledby="h-me">
+  <h2 id="h-me">3. La mejora más pertinente</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿la afirmación es precisa? ¿Cada evidencia está explicada? ¿Hay fechas y cifras exactas? ¿El tono es objetivo? Primero el contenido; después las convenciones.</p>
+  <p class="instr">Elige el cambio que más mejora el borrador.</p>
+  <div id="m-me"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_7-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 7.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l7-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-ev',[
+  {p:P('Afirmación: «La Decimonovena Enmienda solo prohibía excluir a alguien por ser mujer».',''),o:['Su texto: prohíbe negar el voto «por razón de sexo»','La fecha en que entró en vigor: agosto de 1920','Un discurso de una sufragista de Nueva York'],c:0,n:'Prueba exactamente lo que se afirma.'},
+  {p:P('Afirmación: «En Puerto Rico, la enmienda no se aplicó en 1920».',''),o:['En 1920, el gobierno de EE. UU. decidió que no se aplicaba a la isla','La enmienda prohíbe negar el voto por razón de sexo','En 1965 se suspendieron las pruebas de alfabetización'],c:0,n:'Documento sobre Puerto Rico.'},
+  {p:P('Afirmación: «El sufragio de las puertorriqueñas llegó por etapas».',''),o:['La ley de 1929 para las que sabían leer y el sufragio universal de 1935','El texto completo de la Decimonovena Enmienda de 1920','La Ley de Ciudadanía Indígena aprobada por el Congreso en 1924'],c:0,n:'Dos etapas documentadas.'},
+  {p:P('Afirmación: «La altura no indica la salud de una planta».',''),o:['La planta en oscuridad fue la más alta, pero tenía 2 hojas y no se sostenía','Las tres macetas recibieron la misma agua cada dos días durante todo el experimento','La planta de luz plena estaba junto a una ventana grande de la habitación'],c:0,n:'Contradicción entre altura y salud.'},
+  {p:P('Afirmación: «Las multas no hacían volver los libros».',''),o:['Al eliminarlas, las devoluciones aumentaron un 240 %','Chicago fue la primera gran ciudad en eliminarlas','La alcaldía quería quitar barreras a los jóvenes'],c:0,n:'El dato que prueba la afirmación.'},
+  {p:P('Afirmación: «La baja de la tifoidea tuvo varias causas».',''),o:['El canal (1900), la pasteurización (1909) y la cloración (1912)','El río Chicago desembocaba en el lago Míchigan','El túnel de 1869 tomaba agua a una milla de la orilla'],c:0,n:'Varias medidas.'},
+  {p:P('¿Cuál integra mejor la evidencia?',''),o:['Según el Documento 2, la ley de 1924 hizo ciudadanos a los indígenas; antes, la enmienda no los protegía','Documento 2. Ley de 1924. Indígenas ciudadanos. Muy importante para el tema que estamos tratando.','Hay un documento de 1924 que es muy interesante y que todos deberían leer con mucha atención'],c:0,n:'Presenta, resume y explica.'},
+  {p:P('¿Qué le falta a: «La enmienda dice “por razón de sexo” (Documento 1).»?',''),o:['Explicar qué prueba esa cita','Copiar el resto de la enmienda','Ponerla en letras mayúsculas'],c:0,n:'Falta el tercer paso.'}
+],null,true);
+
+var PASOS=['Planificar','Borrador','Revisar','Editar','Publicar'];
+modulo('m-rv',[
+  {p:'Rosa hace una lista de los documentos que usará y decide en qué orden presentarlos.',c:0,n:'Planificar.'},
+  {p:'Carmen escribe sus ideas en párrafos sin detenerse en las comas.',c:1,n:'Borrador.'},
+  {p:'Luis mueve un párrafo al final porque así la conclusión se entiende mejor.',c:2,n:'Revisar: organización.'},
+  {p:'Ana corrige «hubieron» por «hubo» y añade una tilde.',c:3,n:'Editar.'},
+  {p:'Pedro borra una oración que repetía la misma idea.',c:2,n:'Revisar: contenido.'},
+  {p:'Marta copia su texto terminado y lo envía al foro del grupo.',c:4,n:'Publicar.'},
+  {p:'Jorge escribe su afirmación en una oración y anota debajo dos razones.',c:0,n:'Planificar.'},
+  {p:'Elena añade una explicación después de una cita que estaba sola.',c:2,n:'Revisar: contenido.'},
+  {p:'Tomás cambia «la decimonovena enmienda» por «la Decimonovena Enmienda».',c:3,n:'Editar: mayúsculas.'},
+  {p:'Sofía guarda su texto en un documento y lo comparte con su grupo de estudio.',c:4,n:'Publicar.'}
+],PASOS);
+
+modulo('m-me',[
+  {p:P('Borrador: «Hace mucho tiempo, las mujeres ganaron el voto.»',''),o:['Precisar la fecha y el documento: «En 1920, la Decimonovena Enmienda…»','Cambiar «mujeres» por «señoras» para que suene más formal y respetuoso','Añadir un signo de exclamación al final de la oración para darle más fuerza'],c:0,n:'Precisión disciplinar.'},
+  {p:P('Borrador: «Era muy injusto y todo el mundo lo sabía.»',''),o:['Sustituir la opinión por un hecho documentado','Repetir la oración en el párrafo siguiente','Escribir «injusto» en letras mayúsculas'],c:0,n:'Tono objetivo.'},
+  {p:P('Borrador: un párrafo con una cita de la enmienda y nada más.',''),o:['Añadir una oración que explique qué prueba la cita','Añadir otra cita de la misma enmienda','Quitar la cita para que el párrafo sea más corto'],c:0,n:'Falta el análisis.'},
+  {p:P('Borrador: buen contenido, pero tres faltas de ortografía.',''),o:['Editar las faltas','Volver a planificar todo','Escribir otro borrador desde cero'],c:0,n:'Convenciones.'},
+  {p:P('Borrador: «Muchas mujeres votaron en Puerto Rico en 1932.»',''),o:['Precisar la cifra: «unas 50,000 mujeres»','Cambiar 1932 por «hace unos años»','Quitar «en Puerto Rico» para acortar'],c:0,n:'Cifra exacta y comprobable.'},
+  {p:P('Borrador: la afirmación aparece en el último párrafo.',''),o:['Moverla al final de la introducción','Repetirla en todos los párrafos','Eliminarla porque ya se entiende'],c:0,n:'El lector debe saber pronto qué se defiende.'},
+  {p:P('Borrador: tres párrafos que empiezan con «Y también».',''),o:['Variar las transiciones según la relación entre las ideas','Quitar todas las transiciones del texto','Escribir «Y también» en negrita para destacarlas'],c:0,n:'Transiciones variadas (Lección 7.2).'},
+  {p:P('Borrador: «La planta C creció mucho.»',''),o:['Precisar: «La planta C llegó a 18.8 cm el día 21»','Cambiar «mucho» por «muchísimo» para dar más fuerza','Añadir «en mi opinión» al principio de la oración'],c:0,n:'Dato con cifra y unidad.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l7-2 · Lección 7.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.2 · Texto explicativo con análisis</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 7.2 · Texto explicativo con análisis</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 7 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_7-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 7.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los ejemplos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#pertinente">El contenido pertinente</a></li>
+    <li><a href="#analisis">Descripción o análisis</a></li>
+    <li><a href="#transiciones">La transición adecuada</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="pertinente" aria-labelledby="h-pe">
+  <h2 id="h-pe">1. El contenido pertinente</h2>
+  <p class="regla"><strong>Prueba de la pregunta:</strong> ¿el dato ayuda a responder la pregunta guía? Si solo es curioso, déjalo fuera.</p>
+  <p class="instr">Elige el dato que sí es pertinente.</p>
+  <div id="m-pe"></div>
+</section>
+
+<section class="modulo" id="analisis" aria-labelledby="h-an">
+  <h2 id="h-an">2. Descripción o análisis</h2>
+  <p class="regla"><strong>Describir</strong> dice qué pasó o cómo es. <strong>Analizar</strong> dice por qué, qué significa, en qué se diferencia o qué consecuencias tuvo: responde «¿y qué?».</p>
+  <p class="instr">¿La oración describe o analiza?</p>
+  <div id="m-an"></div>
+</section>
+
+<section class="modulo" id="transiciones" aria-labelledby="h-tr">
+  <h2 id="h-tr">3. La transición adecuada</h2>
+  <p class="regla"><strong>Adición:</strong> además · <strong>causa:</strong> porque, ya que · <strong>consecuencia:</strong> por eso, por lo tanto · <strong>contraste:</strong> sin embargo, en cambio · <strong>ejemplo:</strong> por ejemplo · <strong>explicación:</strong> es decir · <strong>resumen:</strong> en resumen.</p>
+  <p class="instr">Elige la transición que expresa la relación entre las ideas.</p>
+  <div id="m-tr"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_7-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 7.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l7-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-pe',[
+  {p:P('Pregunta guía: ¿Por qué Chicago invirtió la corriente de su río?',''),o:['El río llevaba las aguas residuales al lago del que se bebía','El río se tiñe de verde cada Día de San Patricio','Chicago es una de las ciudades más pobladas del país'],c:0,n:'Es la causa.'},
+  {p:P('Pregunta guía: ¿Por qué bajaron los casos de tifoidea en Chicago?',''),o:['En 1912 se empezó a clorar el agua de la ciudad','El Gran Incendio de Chicago ocurrió en 1871','El primer rascacielos se construyó en Chicago'],c:0,n:'Una de las medidas sanitarias.'},
+  {p:P('Pregunta guía: ¿Por qué la planta en oscuridad fue la más alta pero la menos sana?',''),o:['Sin luz, la planta no fabrica clorofila y vive de las reservas de la semilla','El frijol es una planta muy usada en la cocina de América Latina','Las macetas del experimento eran de plástico y del mismo tamaño'],c:0,n:'Explica el fenómeno.'},
+  {p:P('Pregunta guía: ¿Por qué aumentaron las devoluciones de libros en Chicago?',''),o:['Se eliminaron las multas y se perdonaron las deudas anteriores','La biblioteca central tiene nueve pisos y muchos libros','Las bibliotecas prestan también películas y música'],c:0,n:'Causa directa.'},
+  {p:P('Pregunta guía: ¿Por qué la gente de la ciudad usa más el autobús en el centro?',''),o:['Casi todas las rutas de autobús pasan por el centro','Los autobuses de la ciudad son de color azul y blanco','El precio de la gasolina cambia cada semana en todo el país'],c:0,n:'Explica la diferencia.'},
+  {p:P('Pregunta guía: ¿Por qué se inclinó hacia la ventana la planta de poca luz?',''),o:['Las plantas crecen hacia la fuente de luz','La maceta B se regó con 60 ml cada dos días','El experimento duró 21 días en total'],c:0,n:'Es la explicación (fototropismo).'},
+  {p:P('Pregunta guía: ¿Por qué las multas alejaban a las familias de la biblioteca?',''),o:['Las deudas acumuladas hacían que no se atrevieran a volver','La biblioteca central abre de lunes a sábado por la mañana','Las bibliotecas públicas existen desde hace siglos en el mundo'],c:0,n:'Causa del alejamiento.'},
+  {p:P('Pregunta guía: ¿Qué consecuencias tuvo el canal de 1900 fuera de Chicago?',''),o:['Misuri demandó a Illinois porque el agua residual llegaba río abajo','El canal se abrió después de varios años de obras y mucho trabajo','Chicago tomaba su agua potable del lago desde el siglo XIX'],c:0,n:'Consecuencia fuera de la ciudad.'}
+],null,true);
+
+modulo('m-an',[
+  {p:'«El canal se abrió en 1900.»',c:0,n:'Solo informa.'},
+  {p:'«El canal fue la solución de fondo porque impidió que la contaminación llegara al lago.»',c:1,n:'Explica por qué importa.'},
+  {p:'«Los túneles tomaban agua a una y a cuatro millas de la orilla.»',c:0,n:'Datos sin interpretación.'},
+  {p:'«A diferencia de los túneles, el canal sí atacaba la causa del problema.»',c:1,n:'Comparación.'},
+  {p:'«La planta en oscuridad medía 18.8 cm el día 21.»',c:0,n:'Un dato.'},
+  {p:'«Esa altura no indica salud: la planta se estiró buscando luz y se debilitó.»',c:1,n:'Interpreta el dato.'},
+  {p:'«Las devoluciones aumentaron un 240 %.»',c:0,n:'Un dato.'},
+  {p:'«Esto muestra que las multas no hacían volver los libros, sino que los retenían.»',c:1,n:'Responde «¿y qué?».'},
+  {p:'«La cloración comenzó en 1912.»',c:0,n:'Un dato con fecha.'},
+  {p:'«Por eso, sería un error atribuir toda la mejora a una sola medida.»',c:1,n:'Matiz: límite de la conclusión.'}
+],['Describe','Analiza']);
+
+modulo('m-tr',[
+  {p:'«Los túneles buscaban agua más limpia. ___, no detenían la contaminación.»',o:['Sin embargo','Por ejemplo','Además'],c:0,n:'Contraste.'},
+  {p:'«La ciudad usaba cada vez más agua. ___, llegaban más aguas residuales al lago.»',o:['Como consecuencia','En cambio','Por ejemplo'],c:0,n:'Consecuencia.'},
+  {p:'«Hubo otras medidas sanitarias; ___, la pasteurización de la leche.»',o:['por ejemplo','sin embargo','en conclusión'],c:0,n:'Ejemplo.'},
+  {p:'«La ciudad bebía su propia agua sucia; ___, el agua potable y las residuales se mezclaban.»',o:['es decir','además','en cambio'],c:0,n:'Explicación.'},
+  {p:'«La planta no recibía luz, ___ no podía fabricar clorofila.»',o:['por lo que','aunque','por ejemplo'],c:0,n:'Consecuencia.'},
+  {p:'«La planta de luz plena fue la más baja. ___, fue la más sana.»',o:['Sin embargo','Por lo tanto','Por ejemplo'],c:0,n:'Contraste.'},
+  {p:'«Las multas alejaban a los usuarios. ___, no hacían que los libros volvieran.»',o:['Además','En cambio','Es decir'],c:0,n:'Adición: otra razón en la misma dirección.'},
+  {p:'«Las devoluciones subieron ___ se eliminaron las multas.»',o:['porque','aunque','sin embargo'],c:0,n:'Causa.'},
+  {p:'«___, el canal protegió el agua de Chicago, pero trasladó el problema río abajo.»',o:['En resumen','Por ejemplo','Además'],c:0,n:'Resumen al final.'},
+  {p:'«___ de los túneles, el canal sí atacaba la causa.»',o:['A diferencia','Por eso','Es decir'],c:0,n:'Contraste.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

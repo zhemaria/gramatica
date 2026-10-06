@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l5-2 · Lección 5.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.2 · Documentos fundacionales y análisis de fuentes</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 5.2 · Documentos fundacionales y análisis de fuentes</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 5 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_5-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 5.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los fragmentos de los documentos de Estados Unidos son traducciones escritas para esta práctica (los originales son de dominio público); los comentarios de «analistas» son inventados.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#premisas">Identifica y evalúa premisas</a></li>
+    <li><a href="#interpretaciones">Dos interpretaciones</a></li>
+    <li><a href="#evidencia">La evidencia que sostiene una interpretación</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="premisas" aria-labelledby="h-pre">
+  <h2 id="h-pre">1. Identifica y evalúa premisas</h2>
+  <p class="regla"><strong>Premisa:</strong> la idea de la que parte el argumento. Puede ser <strong>explícita</strong> (dicha) o <strong>implícita</strong> (necesaria, pero no dicha).</p>
+  <p class="instr">Responde sobre la premisa del argumento.</p>
+  <div id="m-pre"></div>
+</section>
+
+<section class="modulo" id="interpretaciones" aria-labelledby="h-int">
+  <h2 id="h-int">2. Dos interpretaciones</h2>
+  <p class="regla"><strong>Compara:</strong> ¿aceptan la misma premisa? ¿En qué juicio difieren? ¿Desde qué perspectiva habla cada uno?</p>
+  <p class="instr">Compara las dos interpretaciones.</p>
+  <div id="m-int"></div>
+</section>
+
+<section class="modulo" id="evidencia" aria-labelledby="h-ev">
+  <h2 id="h-ev">3. La evidencia que sostiene una interpretación</h2>
+  <p class="regla"><strong>Recuerda:</strong> la evidencia más sólida es la que sale del propio documento o de un hecho comprobable, y apoya justo lo que se afirma.</p>
+  <p class="instr">Elige la evidencia que mejor sostiene la interpretación.</p>
+  <div id="m-ev"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_5-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 5.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l5-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+var DEC='Declaración de Independencia (1776): «Sostenemos como evidentes estas verdades: que todos los hombres son creados iguales; que son dotados por su Creador de ciertos derechos inalienables; que entre estos están la vida, la libertad y la búsqueda de la felicidad.»';
+var PRE='Preámbulo de la Constitución (1787): «Nosotros, el pueblo de los Estados Unidos, a fin de formar una unión más perfecta, establecer la justicia, asegurar la tranquilidad interior, proveer a la defensa común, promover el bienestar general y asegurar para nosotros y para nuestra posteridad los beneficios de la libertad, ordenamos y establecemos esta Constitución para los Estados Unidos de América.»';
+var EN1='Primera Enmienda (1791): «El Congreso no hará ninguna ley que establezca una religión oficial o que prohíba su libre ejercicio; ni que limite la libertad de expresión o de prensa, ni el derecho del pueblo a reunirse pacíficamente y a pedir al gobierno que repare sus agravios.»';
+var EN19='Decimonovena Enmienda (1920): «El derecho de los ciudadanos de los Estados Unidos al voto no será negado ni limitado por los Estados Unidos ni por ningún estado por razón de sexo.»';
+modulo('m-pre',[
+  {p:P(DEC,'¿Cuál es la premisa central?'),o:['Todos los hombres son creados iguales y tienen derechos inalienables','Las colonias deben separarse de Gran Bretaña','El gobierno debe tener tres poderes'],c:0,n:'Es el punto de partida; la separación es la conclusión.'},
+  {p:P(PRE,'¿De quién dice el Preámbulo que procede la Constitución?'),o:['Del pueblo de los Estados Unidos','Del rey de Gran Bretaña','De los gobernadores de cada estado'],c:0,n:'«Nosotros, el pueblo…».'},
+  {p:P(PRE,'¿Qué premisa implícita hay en «Nosotros, el pueblo… ordenamos y establecemos esta Constitución»?'),o:['Que la autoridad del gobierno viene del pueblo','Que el pueblo no necesita gobierno','Que la Constitución no se puede cambiar'],c:0,n:'Por eso es el pueblo quien la establece.'},
+  {p:P(EN1,'¿Qué premisa implícita sostiene la Primera Enmienda?'),o:['Que el gobierno no debe controlar lo que la gente cree, dice o publica','Que todos los ciudadanos deben tener la misma religión','Que la prensa debe ser propiedad del gobierno'],c:0,n:'Por eso limita al Congreso.'},
+  {p:P(EN19,'¿Qué hecho anterior supone esta enmienda?'),o:['Que antes de 1920 a muchas mujeres se les negaba el voto','Que antes de 1920 nadie podía votar','Que en 1920 se creó el Congreso'],c:0,n:'Una enmienda corrige algo que ocurría.'},
+  {p:P('«Todos los niños tienen derecho a la educación; por eso la escuela pública debe ser gratuita.»','¿Qué tipo de premisa es «todos los niños tienen derecho a la educación»?'),o:['Explícita','Implícita','No es una premisa'],c:0,n:'Está dicha en el argumento.'},
+  {p:P('«La escuela debe ser gratuita, porque si cuesta, los pobres no podrán ir.»','¿Cuál es la premisa implícita?'),o:['Que todos, también los pobres, deben poder estudiar','Que los pobres no quieren estudiar','Que la escuela privada es mejor'],c:0,n:'Sin esa idea, el argumento no funciona.'},
+  {p:P(DEC,'¿Qué pregunta permite evaluar críticamente la premisa en el contexto de 1776?'),o:['¿A quiénes incluía, en la práctica, ese «todos»?','¿Cuántas páginas tenía la Declaración?','¿En qué ciudad se firmó la Declaración?'],c:0,n:'La esclavitud era legal: la práctica contradecía la premisa.'}
+],null,true);
+
+modulo('m-int',[
+  {p:P('Analista A: «La Declaración fue una promesa que el país tardó siglos en cumplir». Analista B: «La Declaración fue una hipocresía, porque la firmaron dueños de esclavos».','¿En qué coinciden?'),o:['En que la práctica no estaba a la altura de la frase','En que la Declaración no tiene ningún valor','En que la igualdad ya se cumplió en 1776'],c:0,n:'Los dos ven la distancia entre promesa y realidad.'},
+  {p:P('Analista A: «La Declaración fue una promesa que el país tardó siglos en cumplir». Analista B: «La Declaración fue una hipocresía, porque la firmaron dueños de esclavos».','¿En qué difieren?'),o:['A ve una promesa por cumplir; B, una contradicción en su origen','A habla de la Constitución y B, de la Declaración','A está en contra de la igualdad y B, a favor'],c:0,n:'Mismo hecho, distinto juicio.'},
+  {p:P('Douglass (1852): «Este 4 de julio es de ustedes, no mío». Lincoln (1863): la nación está «consagrada a la proposición de que todos los hombres son creados iguales».','¿Qué premisa comparten?'),o:['La igualdad que afirma la Declaración','Que la Declaración debe abolirse','Que el 4 de julio no debe celebrarse nunca'],c:0,n:'Los dos reclaman la frase de 1776.'},
+  {p:P(PRE+'<br>Analista A: «El Preámbulo describe el gobierno ideal». Analista B: «El Preámbulo dice para qué sirve el gobierno; si no lo cumple, el pueblo puede exigirlo».','¿Qué interpretación se apoya más en el texto?'),o:['La de B, porque el Preámbulo enumera fines concretos del gobierno','La de A, porque el Preámbulo describe un país perfecto','Ninguna, porque el Preámbulo no tiene sentido político'],c:0,n:'«A fin de…» enumera propósitos.'},
+  {p:P(EN1+'<br>Analista A: «La enmienda permite decir cualquier cosa sin consecuencias». Analista B: «La enmienda limita lo que el Congreso puede hacer contra la libertad de expresión».','¿Qué interpretación es más fiel al texto?'),o:['La de B: el texto habla de lo que el Congreso no hará','La de A: el texto habla de que no hay consecuencias','Las dos dicen exactamente lo mismo'],c:0,n:'A va demasiado lejos: el texto limita al gobierno.'},
+  {p:P(EN19+'<br>Analista A: «Fue una conquista de décadas de lucha de las sufragistas». Analista B: «Fue una ley que el Congreso decidió aprobar un día».','¿Qué distingue la perspectiva de A?'),o:['Pone el foco en quienes lucharon por el cambio','Pone el foco en el procedimiento legal','No toma ninguna perspectiva'],c:0,n:'Las dos pueden ser ciertas; difieren en lo que destacan.'},
+  {p:P('Un historiador escribe sobre la Declaración en 1876, en el centenario. Otro escribe en 1963, durante el movimiento por los derechos civiles.','¿Por qué podrían interpretarla de forma distinta?'),o:['Su contexto influye en lo que ven en el documento','Leyeron textos diferentes de la Declaración','Uno de los dos no sabía leer inglés antiguo'],c:0,n:'El contexto de quien interpreta importa.'},
+  {p:P('Lincoln llama a la igualdad «proposición»; Douglass dice que el 4 de julio revela la injusticia que sufre el esclavo.','¿Qué tono distingue a cada uno?'),o:['Lincoln, solemne y esperanzado; Douglass, acusador','Lincoln, irónico; Douglass, alegre','Los dos, neutros e informativos'],c:0,n:'Perspectiva y propósito distintos.'}
+],null,true);
+
+modulo('m-ev',[
+  {p:P('Interpretación: «La Constitución se presenta como obra del pueblo y no de un rey».','¿Qué evidencia la sostiene mejor?'),o:['«Nosotros, el pueblo de los Estados Unidos… ordenamos y establecemos»','«proveer a la defensa común»','«para los Estados Unidos de América»'],c:0,n:'El sujeto que establece es el pueblo.'},
+  {p:P('Interpretación: «Douglass usa la propia premisa del país para acusarlo».','¿Qué evidencia la sostiene mejor?'),o:['Habla de la libertad que se celebra el 4 de julio mientras existe la esclavitud','Habló en el Corinthian Hall de Rochester','Había escapado de la esclavitud en 1838'],c:0,n:'El contraste entre la fiesta de la libertad y la esclavitud.'},
+  {p:P('Interpretación: «Para Lincoln, la igualdad era una meta todavía no alcanzada».','¿Qué evidencia la sostiene mejor?'),o:['La llama «proposición» y pide «un nuevo nacimiento de la libertad»','Habló en noviembre de 1863','Contó «ochenta y siete años» desde 1776'],c:0,n:'Una proposición se pone a prueba; un nuevo nacimiento supone que falta algo.'},
+  {p:P('Interpretación: «La Primera Enmienda protege también la protesta pacífica».','¿Qué evidencia la sostiene mejor?'),o:['«el derecho del pueblo a reunirse pacíficamente y a pedir al gobierno que repare sus agravios»','«El Congreso no hará ninguna ley que establezca una religión oficial»','«la libertad… de prensa»'],c:0,n:'Reunirse y reclamar al gobierno.'},
+  {p:P('Interpretación: «Antes de 1920, el sexo de una persona podía impedirle votar».','¿Qué evidencia la sostiene mejor?'),o:['Que la enmienda prohíba negar el voto «por razón de sexo»','Que la enmienda se refiera a los «ciudadanos»','Que la enmienda se aprobara en el siglo XX'],c:0,n:'Se prohíbe lo que estaba ocurriendo.'},
+  {p:P('Interpretación: «La Declaración no ofrece pruebas de su premisa principal».','¿Qué evidencia la sostiene mejor?'),o:['Llama a esas verdades «evidentes»','Habla de la «búsqueda de la felicidad»','Menciona al «Creador»'],c:0,n:'Evidente = no necesita demostración.'},
+  {p:P('Interpretación: «Según la Declaración, un gobierno que no protege los derechos pierde su legitimidad».','¿Qué evidencia la sostiene mejor?'),o:['«cuando una forma de gobierno se haga destructora de estos fines, el pueblo tiene el derecho a reformarla o abolirla»','«todos los hombres son creados iguales»','«entre estos están la vida, la libertad»'],c:0,n:'La conclusión del argumento.'},
+  {p:P('Interpretación: «El Preámbulo piensa también en las generaciones futuras».','¿Qué evidencia la sostiene mejor?'),o:['«para nosotros y para nuestra posteridad»','«formar una unión más perfecta»','«establecer la justicia»'],c:0,n:'Posteridad = los que vendrán.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

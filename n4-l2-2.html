@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l2-2 · Lección 2.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 2.2 · Ironía, sátira, paradoja y eufemismo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 2.2 · Ironía, sátira, paradoja y eufemismo</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 2 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_2-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 2.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#recurso">¿Qué recurso es?</a></li>
+    <li><a href="#literal-intencion">Lo literal y lo intencionado</a></li>
+    <li><a href="#efecto">El efecto en el tono</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="recurso" aria-labelledby="h-recurso">
+  <h2 id="h-recurso">1. ¿Qué recurso es?</h2>
+  <p class="regla"><strong>Ironía:</strong> lo contrario de lo que se piensa · <strong>Sátira:</strong> crítica con burla de una costumbre o institución · <strong>Paradoja:</strong> contradicción que encierra una verdad · <strong>Eufemismo:</strong> palabra suave por una dura · <strong>Analogía:</strong> explicar un funcionamiento por su parecido con otro.</p>
+  <p class="instr">¿Qué recurso aparece?</p>
+  <div id="m-recurso"></div>
+</section>
+
+<section class="modulo" id="literal-intencion" aria-labelledby="h-literal">
+  <h2 id="h-literal">2. Lo literal y lo intencionado</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿lo que dice encaja con la situación? Si no encaja, busca lo que de verdad quiere decir.</p>
+  <p class="instr">¿Qué quiere decir de verdad quien habla o escribe?</p>
+  <div id="m-literal"></div>
+</section>
+
+<section class="modulo" id="efecto" aria-labelledby="h-efecto">
+  <h2 id="h-efecto">3. El efecto en el tono</h2>
+  <p class="regla"><strong>Recuerda:</strong> cada recurso tiene un propósito. La sátira critica; el eufemismo consuela u oculta; la paradoja hace pensar; la analogía aclara; la ironía se burla o reprocha.</p>
+  <p class="instr">¿Qué efecto busca el autor?</p>
+  <div id="m-efecto"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_2-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 2.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l2-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+modulo('m-recurso',[
+  {p:'Llueve a cántaros y alguien dice: «¡Qué día tan bonito para la playa!».',c:0,n:'Dice lo contrario de lo que piensa.'},
+  {p:'Un artículo describe con burla una oficina donde cada trámite exige diez sellos y nadie sabe para qué sirve ninguno.',c:1,n:'Critica una institución exagerando sus defectos.'},
+  {p:'«Cuanto más aprendo, más me doy cuenta de lo que no sé.»',c:2,n:'Parece contradictorio, pero es verdad.'},
+  {p:'«La empresa realizó una reestructuración de su plantilla.»',c:3,n:'Suaviza «despidió a trabajadores».'},
+  {p:'«El corazón es como una bomba: empuja la sangre por las arterias igual que la bomba empuja el agua por las tuberías.»',c:4,n:'Explica un funcionamiento punto por punto.'},
+  {p:'«Mi abuelo pasó a mejor vida el invierno pasado.»',c:3,n:'Forma suave de decir «murió».'},
+  {p:'«Es hielo abrasador, es fuego helado.» (Quevedo)',c:2,n:'Contradicción que expresa la naturaleza del amor.'},
+  {p:'«Gracias por la rapidez», al técnico que tardó tres semanas.',c:0,n:'El elogio no encaja con los hechos.'},
+  {p:'Una caricatura muestra a un político prometiendo un puente en una ciudad sin río.',c:1,n:'Burla de las promesas vacías.'},
+  {p:'«La memoria es como una biblioteca: lo que no se ordena, después no se encuentra.»',c:4,n:'Compara el funcionamiento de la memoria con el de una biblioteca.'},
+  {p:'«Para ganar la paz, hay que prepararse para la guerra.»',c:2,n:'Dos ideas contrarias que, juntas, expresan una postura.'},
+  {p:'«Personas en situación de calle» en lugar de «indigentes».',c:3,n:'Expresión más suave y respetuosa.'},
+  {p:'«¡Qué suerte la mía!», dice quien pierde el autobús, se moja y llega tarde.',c:0,n:'Llama suerte a la mala suerte.'},
+  {p:'«Explicar la economía a un niño es como explicarle una alcancía: si sacas más de lo que metes, se vacía.»',c:4,n:'Compara dos funcionamientos para explicar uno.'},
+  {p:'«Lo más difícil de la libertad es tener que elegir.»',c:2,n:'La libertad, que debería aliviar, también pesa.'}
+],['Ironía','Sátira','Paradoja','Eufemismo','Analogía']);
+
+modulo('m-literal',[
+  {p:'Tu compañero llega una hora tarde y el jefe dice: «Qué puntual vienes hoy».',o:['Que llegó muy tarde','Que llegó a la hora exacta','Que mañana puede llegar más tarde'],c:0,n:'Ironía: lo contrario.'},
+  {p:'«La empresa anunció un ajuste de personal de 200 puestos.»',o:['Que despedirá a 200 personas','Que contratará a 200 personas','Que cambiará de horario a 200 personas'],c:0,n:'Eufemismo de despidos.'},
+  {p:'Después de esperar tres horas en la oficina, una señora comenta: «Aquí da gusto lo rápido que atienden».',o:['Que la atención es muy lenta','Que la atención es excelente','Que va a volver con gusto'],c:0,n:'Ironía de queja.'},
+  {p:'«Mi tío está entre trabajos desde hace un año.»',o:['Que está desempleado','Que tiene dos empleos','Que cambia mucho de empleo'],c:0,n:'Eufemismo de desempleo.'},
+  {p:'Un comentarista escribe: «Nuestros políticos trabajan tanto que este año solo se tomaron cuatro meses de vacaciones».',o:['Que los políticos trabajan poco','Que los políticos trabajan demasiado','Que cuatro meses es lo normal'],c:0,n:'Ironía satírica.'},
+  {p:'«La tienda tiene un producto con una pequeña imperfección estética: la pantalla está rota.»',o:['Que el producto está dañado','Que el producto es más bonito','Que el producto es nuevo'],c:0,n:'Eufemismo que contradice los hechos.'},
+  {p:'Un vecino que nunca saluda recibe este comentario: «Qué simpático es tu vecino».',o:['Que el vecino es antipático','Que el vecino es muy agradable','Que el vecino es nuevo en el barrio'],c:0,n:'Ironía.'},
+  {p:'El aviso del supermercado dice: «Precios en evolución».',o:['Que los precios suben','Que los precios bajan','Que los precios no cambian'],c:0,n:'Eufemismo comercial de la subida.'},
+  {p:'«Ese restaurante es tan bueno que siempre está vacío», comenta un cliente.',o:['Que el restaurante es malo','Que el restaurante es muy exclusivo','Que el restaurante es barato'],c:0,n:'Ironía: si fuera bueno, estaría lleno.'},
+  {p:'«Las fuerzas del orden procedieron a neutralizar al sospechoso.»',o:['Que lo detuvieron o lo redujeron por la fuerza','Que hablaron con él con calma','Que lo dejaron ir sin cargos'],c:0,n:'Eufemismo del lenguaje oficial.'}
+],null,true);
+
+modulo('m-efecto',[
+  {p:'Larra repite «vuelva usted mañana» una y otra vez en su artículo. ¿Qué efecto busca?',o:['Que la frase se vuelva símbolo de la pereza que critica','Dar instrucciones claras a quienes hacen trámites','Mostrar la cortesía de los empleados de Madrid'],c:0,n:'La repetición convierte la frase en crítica.'},
+  {p:'En un pésame se escribe «nos dejó» en lugar de «murió». ¿Qué efecto tiene?',o:['Suaviza el dolor con respeto','Oculta un hecho a la familia','Hace un chiste sobre la muerte'],c:0,n:'Eufemismo de cortesía.'},
+  {p:'Un comunicado dice «daños colaterales» al hablar de civiles heridos. ¿Qué efecto tiene?',o:['Hace menos visible una tragedia','Hace la noticia más emotiva','Explica con datos lo ocurrido'],c:0,n:'Eufemismo que oculta.'},
+  {p:'Un libro de ciencias compara el sistema inmunitario con un ejército. ¿Para qué?',o:['Para explicar algo complejo con una imagen conocida','Para burlarse de los médicos y los científicos','Para criticar el gasto militar del país'],c:0,n:'La analogía aclara.'},
+  {p:'Quevedo define el amor como «una libertad encarcelada». ¿Qué efecto busca?',o:['Hacer pensar en lo contradictorio del amor','Advertir de que el amor es un delito','Explicar con exactitud qué es el amor'],c:0,n:'La paradoja invita a reflexionar.'},
+  {p:'Un cliente escribe una reseña: «Excelente servicio: solo me hicieron esperar dos horas por un café». ¿Qué tono tiene?',o:['De queja burlona','De agradecimiento sincero','De información neutral'],c:0,n:'La ironía expresa la queja.'},
+  {p:'Un artículo satírico exagera la cantidad de formularios que pide una oficina. ¿Cuál es el propósito?',o:['Criticar la burocracia para que mejore','Enseñar a llenar los formularios','Alabar el orden de la oficina'],c:0,n:'La sátira busca corregir.'},
+  {p:'Una empresa dice «reestructuración» en vez de «despidos». ¿Qué efecto busca?',o:['Que la noticia suene menos grave','Que la noticia suene más alegre','Que la noticia se entienda mejor'],c:0,n:'Suavizar una mala noticia.'},
+  {p:'«Cuanto más aprendo, más me doy cuenta de lo que no sé.» ¿Qué tono tiene?',o:['Reflexivo y humilde','Burlón y crítico','Triste y desesperado'],c:0,n:'La paradoja expresa humildad.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

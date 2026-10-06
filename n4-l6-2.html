@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l6-2 · Lección 6.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.2 · Hipótesis, datos y conclusiones</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 6.2 · Hipótesis, datos y conclusiones</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 6 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_6-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 6.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los experimentos de esta práctica son inventados, salvo el de la luz del profesor.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#hipotesis">Hipótesis y variables</a></li>
+    <li><a href="#respaldo">¿Los datos lo respaldan?</a></li>
+    <li><a href="#conclusion">La conclusión no sustentada</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="hipotesis" aria-labelledby="h-hip">
+  <h2 id="h-hip">1. Hipótesis y variables</h2>
+  <p class="regla"><strong>Hipótesis:</strong> «Si…, entonces…, porque…». <strong>Variable independiente:</strong> lo que se cambia. <strong>Dependiente:</strong> lo que se mide. <strong>Controladas:</strong> lo que se mantiene igual.</p>
+  <p class="instr">Responde sobre el diseño del experimento.</p>
+  <div id="m-hip"></div>
+</section>
+
+<section class="modulo" id="respaldo" aria-labelledby="h-res">
+  <h2 id="h-res">2. ¿Los datos lo respaldan?</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿qué dato lo muestra? ¿Se midió o solo se observó? ¿Es un dato o una explicación? ¿Alcanza la cantidad de casos?</p>
+  <p class="instr">Juzga la conclusión.</p>
+  <div id="m-res"></div>
+</section>
+
+<section class="modulo" id="conclusion" aria-labelledby="h-con">
+  <h2 id="h-con">3. La conclusión no sustentada</h2>
+  <p class="regla"><strong>Errores frecuentes:</strong> generalizar de más · ignorar datos en contra · contradecir el diseño · extrapolar sin base · confundir que dos cosas ocurran juntas con que una cause la otra.</p>
+  <p class="instr">Responde sobre la conclusión.</p>
+  <div id="m-con"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_6-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 6.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l6-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+var E1='Una estudiante quiere saber si la sal hace hervir antes el agua. Pone 1 litro de agua en tres ollas iguales, en el mismo fogón: una sin sal, otra con 1 cucharada y otra con 3. Mide cuántos minutos tarda cada una en hervir.';
+var E2='Un grupo prueba si la música clásica ayuda a memorizar. Veinte voluntarios estudian la misma lista de 30 palabras durante 10 minutos: diez con música y diez en silencio. Después cuentan cuántas palabras recuerda cada uno.';
+var E3='Un jardinero riega cuatro tomateras con distinta cantidad de agua al día (0.5, 1, 1.5 y 2 litros) durante un mes. Todas están en el mismo patio y tienen la misma tierra. Al final pesa los tomates de cada planta.';
+modulo('m-hip',[
+  {p:P(E1,'¿Cuál es la variable independiente?'),o:['La cantidad de sal en cada olla','Los minutos que tarda en hervir','La cantidad de agua'],c:0,n:'Es lo que la estudiante cambia.'},
+  {p:P(E1,'¿Cuál es la variable dependiente?'),o:['Los minutos que tarda en hervir','La cantidad de sal en cada olla','El tamaño y el material de las ollas'],c:0,n:'Es lo que se mide.'},
+  {p:P(E1,'¿Cuál es una variable controlada?'),o:['El litro de agua en cada olla','La cantidad de sal en cada olla','El tiempo que tarda en hervir'],c:0,n:'Se mantiene igual en las tres.'},
+  {p:P(E2,'¿Qué hipótesis está mejor formulada?'),o:['Si se estudia con música clásica, se recordarán más palabras','La música clásica es buena para el cerebro de todas las personas','La memoria es muy importante para estudiar cualquier materia'],c:0,n:'Dice qué se cambia y qué se medirá.'},
+  {p:P(E3,'¿Cuál es la variable dependiente?'),o:['El peso de los tomates','La cantidad de agua al día','El tipo de tierra'],c:0,n:'Lo que se mide al final.'},
+  {p:P(E3,'¿Cuál es una variable controlada?'),o:['La tierra y el patio','Los litros de agua al día','El peso de los tomates'],c:0,n:'Iguales para las cuatro plantas.'},
+  {p:P('Experimento de la luz del profesor: maceta A con luz plena, B con poca luz, C en oscuridad; misma agua y sustrato.','¿Cuál es la variable independiente?'),o:['La cantidad de luz','La altura de las plantas','Los 60 ml de agua'],c:0,n:'Lo único que cambia entre las macetas.'},
+  {p:P('Hipótesis: «Si una planta recibe menos luz, entonces crecerá menos». Resultado: la planta sin luz fue la más alta, pero con 2 hojas y sin color verde.','¿Qué conclusión sobre la hipótesis es la más precisa?'),o:['En altura no se confirmó; en hojas y color, sí apunta bien','Se confirmó por completo en todos los datos','No se puede decir nada porque faltan datos de altura'],c:0,n:'Depende de qué se entienda por «crecer».'}
+],null,true);
+
+modulo('m-res',[
+  {p:P('Datos: sin sal, 9 min; 1 cucharada, 9 min; 3 cucharadas, 9.5 min. Conclusión: «La sal hace que el agua hierva mucho antes».','¿Los datos la respaldan?'),o:['No: los tiempos son casi iguales y la de más sal tardó un poco más','Sí: la olla con sal hirvió antes que las otras dos','Sí: porque se usaron tres ollas iguales en el fogón'],c:0,n:'Los datos dicen casi lo contrario.'},
+  {p:P('Datos: con música, 18 palabras de promedio; en silencio, 17. Diez personas por grupo. Conclusión: «La música clásica mejora mucho la memoria».','¿Los datos la respaldan?'),o:['No: la diferencia es de una palabra con pocos voluntarios','Sí: el grupo con música recordó más palabras','Sí: porque se usó la misma lista de palabras'],c:0,n:'Una diferencia tan pequeña puede deberse al azar.'},
+  {p:P('Datos: 0.5 L, 0.8 kg de tomates; 1 L, 1.6 kg; 1.5 L, 2.1 kg; 2 L, 1.2 kg. Conclusión: «Cuanta más agua, más tomates».','¿Los datos la respaldan?'),o:['Solo en parte: con 2 litros la cosecha bajó','Sí: la planta de 2 litros fue la que más dio','No: el agua no tuvo ningún efecto'],c:0,n:'Más agua ayudó hasta 1.5 L; después, la cosecha cayó.'},
+  {p:P('Experimento de la luz: el día 6, la maceta C medía 8.5 cm y la A, 3.4 cm. Conclusión: «Sin luz, el frijol gana altura más rápido».','¿Los datos la respaldan?'),o:['Sí: es un dato medido, con la misma agua y sustrato','No: en ese experimento solo se midió el número de hojas','No: el agua fue distinta en cada una de las macetas'],c:0,n:'Altura medida y variables controladas.'},
+  {p:P('Experimento de la luz: las plantas de C eran blancas o amarillas. Conclusión: «Les faltaba clorofila».','¿Qué tipo de afirmación es?'),o:['Una inferencia razonable a partir del color','Una medición hecha en un laboratorio','Un dato que se midió con una regla'],c:0,n:'La clorofila no se midió; se infiere.'},
+  {p:P('Experimento de la luz: «La planta crece rápido buscando el sol».','¿Qué parte es una explicación y no un dato?'),o:['«buscando el sol»','«la planta crece»','«crece rápido»'],c:0,n:'Interpreta por qué; no se midió.'},
+  {p:P('Una encuesta a 1,000 personas elegidas al azar en todo el país encuentra que el 60 % prefiere el transporte público. Conclusión: «La mayoría de la población de ese país prefiere el transporte público».','¿Los datos la respaldan?'),o:['Sí: la muestra es grande y elegida al azar','No: 1,000 personas no sirven para nada','No: la encuesta no dice qué prefieren'],c:0,n:'Muestra grande y representativa.'},
+  {p:P('Una encuesta a 15 personas en la puerta de un gimnasio encuentra que todas hacen ejercicio. Conclusión: «Todos los vecinos del barrio hacen ejercicio».','¿Los datos la respaldan?'),o:['No: la muestra es pequeña y no representa al barrio','Sí: el 100 % de los encuestados hace ejercicio','Sí: porque se preguntó a personas reales'],c:0,n:'A la puerta del gimnasio solo hay deportistas.'}
+],null,true);
+
+modulo('m-con',[
+  {p:P('Experimento de la luz.','«Todas las plantas crecen más en la oscuridad.» ¿Qué error comete?'),o:['Generaliza de más: solo se probó el frijol','Contradice el diseño del experimento de la luz','Extrapola a más días de los medidos'],c:0,n:'Tres semillas de una sola especie.'},
+  {p:P('Experimento de la luz.','«Las plantas de C se debilitaron por falta de agua.» ¿Qué error comete?'),o:['Contradice el diseño: todas recibieron 60 ml','Generaliza de más a otras especies','Confunde una cosa que ocurre con su causa'],c:0,n:'El agua fue una variable controlada.'},
+  {p:P('Experimento de la luz.','«La oscuridad es buena para las plantas, porque crecen más.» ¿Qué error comete?'),o:['Ignora los datos en contra: hojas, color y firmeza','Contradice el diseño del experimento de la luz','Extrapola a un año entero de crecimiento'],c:0,n:'Se queda solo con la altura.'},
+  {p:P('Experimento de la luz.','«Con más días, la planta de C llegaría al metro de altura.» ¿Qué error comete?'),o:['Extrapola sin base: su crecimiento se estaba frenando','Ignora el color de las hojas de la planta','Generaliza a todas las semillas del mundo'],c:0,n:'Del día 14 al 20 solo creció 1.9 cm.'},
+  {p:P('En los meses en que se venden más helados, también hay más ahogados en las playas.','«Los helados causan ahogamientos.» ¿Qué error comete?'),o:['Confunde que ocurran juntos con que uno cause el otro','Generaliza a partir de un solo verano de datos','Ignora cuántas playas tiene el país en total'],c:0,n:'Los dos aumentan en verano: el calor es la causa común.'},
+  {p:P('Un medicamento se probó en 40 hombres adultos y redujo la presión en el 70 % de los casos.','«El medicamento funciona en niños.» ¿Qué error comete?'),o:['Generaliza a un grupo que no se estudió','Contradice los datos del 70 % de los casos','Ignora que eran 40 personas en total'],c:0,n:'No se probó en niños.'},
+  {p:P('Datos de tomates: 1.5 L, 2.1 kg; 2 L, 1.2 kg.','¿Qué conclusión SÍ respaldan los datos?'),o:['En este patio, 1.5 litros al día dio la mejor cosecha','Las tomateras necesitan siempre 2 litros','El agua no influye en la cosecha de tomates'],c:0,n:'Se queda en lo que se midió.'},
+  {p:P('Experimento de la luz.','¿Qué conclusión SÍ respaldan los datos?'),o:['Sin luz, este frijol ganó altura pero no hojas sanas','La luz no tiene ningún efecto en el crecimiento de las plantas','El frijol crece mejor y más sano en la oscuridad'],c:0,n:'Fiel a lo medido y observado.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

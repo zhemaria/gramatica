@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l2-3 · Lección 2.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 2.3 · Connotación, matices y la palabra precisa</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 2.3 · Connotación, matices y la palabra precisa</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 2 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_2-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 2.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#connotacion">La carga de la palabra</a></li>
+    <li><a href="#escala">Escalas de intensidad</a></li>
+    <li><a href="#palabra-justa">La palabra justa</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="connotacion" aria-labelledby="h-connotacion">
+  <h2 id="h-connotacion">1. La carga de la palabra</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿la palabra en negrita elogia, solo describe o critica? Fíjate también en los sufijos (<em>-ucho, -uza, -ito</em>) y en el registro.</p>
+  <p class="instr">¿Qué connotación tiene la palabra en negrita?</p>
+  <div id="m-connot"></div>
+</section>
+
+<section class="modulo" id="escala" aria-labelledby="h-escala">
+  <h2 id="h-escala">2. Escalas de intensidad</h2>
+  <p class="regla"><strong>Recuerda:</strong> molesto → enojado → furioso · inquieto → preocupado → angustiado → desesperado · aceptar → gustar → encantar → adorar · frugal → ahorrativo → tacaño → avaro.</p>
+  <p class="instr">Elige la respuesta correcta.</p>
+  <div id="m-escala"></div>
+</section>
+
+<section class="modulo" id="palabra-justa" aria-labelledby="h-palabra-justa">
+  <h2 id="h-palabra-justa">3. La palabra justa</h2>
+  <p class="regla"><strong>Cambia los comodines</strong> (cosa, tema, hacer, poner, decir) y elige el verbo de cita que corresponde: <em>sostiene</em> (afirma con firmeza) · <em>sugiere</em> (da a entender) · <em>reconoce</em> (acepta algo en contra) · <em>refuta</em> (demuestra que es falso) · <em>advierte</em> (avisa de un peligro).</p>
+  <p class="instr">Elige la palabra que expresa con exactitud la idea.</p>
+  <div id="m-justa"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_2-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 2.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l2-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+modulo('m-connot',[
+  {p:'Es una mujer muy <strong>decidida</strong>.',c:0,n:'Elogia su firmeza.'},
+  {p:'Es un hombre muy <strong>terco</strong>.',c:2,n:'Critica que no cambie de opinión.'},
+  {p:'Viven en una <strong>vivienda</strong> de dos habitaciones.',c:1,n:'Término técnico, sin valoración.'},
+  {p:'Mi vecino es un <strong>entrometido</strong>.',c:2,n:'Critica su curiosidad.'},
+  {p:'Desde la cocina llegaba un <strong>aroma</strong> a café.',c:0,n:'Olor agradable.'},
+  {p:'Del basurero salía una <strong>peste</strong> insoportable.',c:2,n:'Olor muy desagradable.'},
+  {p:'Alquilaron una <strong>casucha</strong> a las afueras.',c:2,n:'El sufijo -ucha desprecia.'},
+  {p:'Pidieron la <strong>opinión</strong> de los empleados.',c:1,n:'Describe sin valorar.'},
+  {p:'Es un <strong>defensor</strong> de los derechos de los inquilinos.',c:0,n:'Elogia su compromiso.'},
+  {p:'Es un <strong>fanático</strong> del equipo local.',c:2,n:'Sugiere exceso e irracionalidad.'},
+  {p:'Mi abuela es muy <strong>ahorrativa</strong>.',c:0,n:'Elogia que gaste con cuidado.'},
+  {p:'El jefe es un <strong>tacaño</strong>: no aprueba ni un café.',c:2,n:'Critica que no gaste.'},
+  {p:'La reunión empezó a las <strong>nueve</strong>.',c:1,n:'Un dato, sin carga.'},
+  {p:'Llegó con su <strong>gentuza</strong> de siempre.',c:2,n:'El sufijo -uza desprecia a las personas.'},
+  {p:'Volvimos a nuestro <strong>hogar</strong> después de las vacaciones.',c:0,n:'Connota calor y familia.'},
+  {p:'Es una niña muy <strong>curiosa</strong>: quiere saberlo todo.',c:0,n:'Aquí la curiosidad se valora bien.'}
+],['Positiva','Neutra','Negativa']);
+
+modulo('m-escala',[
+  {p:'¿Cuál es la palabra <strong>más intensa</strong>?',o:['furioso','molesto','enojado'],c:0,n:'molesto → enojado → furioso.'},
+  {p:'¿Cuál es la palabra <strong>menos intensa</strong>?',o:['inquieto','angustiado','desesperado'],c:0,n:'inquieto es el grado más bajo.'},
+  {p:'¿Cuál expresa más agrado?',o:['adorar','gustar','aceptar'],c:0,n:'aceptar → gustar → encantar → adorar.'},
+  {p:'El texto dice que el personaje «estaba algo inquieto». ¿Qué lo describe mejor?',o:['Un poco preocupado','Totalmente desesperado','Fuera de sí por el miedo'],c:0,n:'«Algo inquieto» marca poca intensidad.'},
+  {p:'¿Qué palabra es positiva y moderada?',o:['frugal','tacaño','avaro'],c:0,n:'Frugal: sin excesos.'},
+  {p:'Ordena de menor a mayor: <em>tibio, hirviendo, caliente</em>.',o:['tibio, caliente, hirviendo','caliente, tibio, hirviendo','hirviendo, caliente, tibio'],c:0,n:'tibio → caliente → hirviendo.'},
+  {p:'Ordena de menor a mayor: <em>aguacero, llovizna, lluvia</em>.',o:['llovizna, lluvia, aguacero','lluvia, llovizna, aguacero','aguacero, lluvia, llovizna'],c:0,n:'llovizna → lluvia → aguacero.'},
+  {p:'Ordena de menor a mayor: <em>vendaval, brisa, viento</em>.',o:['brisa, viento, vendaval','viento, brisa, vendaval','vendaval, viento, brisa'],c:0,n:'brisa → viento → vendaval.'},
+  {p:'Una reseña dice que la película «no estuvo mal». ¿Qué conclusión es la más fiel?',o:['Le pareció aceptable','Le pareció una obra maestra','Le pareció pésima'],c:0,n:'Expresión de baja intensidad.'},
+  {p:'¿Cuál de estas palabras exagera más un problema?',o:['catástrofe','inconveniente','dificultad'],c:0,n:'inconveniente → dificultad → catástrofe.'},
+  {p:'¿Cuál es la palabra <strong>menos intensa</strong>?',o:['susurrar','hablar','gritar'],c:0,n:'susurrar → hablar → gritar.'},
+  {p:'Si un informe dice que las ventas «bajaron ligeramente», ¿qué titular exagera?',o:['«Las ventas se desploman»','«Las ventas bajan un poco»','«Leve descenso de las ventas»'],c:0,n:'«Desplomarse» es una caída brusca.'}
+],null,true);
+
+modulo('m-justa',[
+  {p:'«Tengo que ___ una queja en la oficina de vivienda.»',o:['presentar','hacer','tener'],c:0,n:'Se presenta una queja.'},
+  {p:'«Necesito ___ un informe para el lunes.»',o:['redactar','hacer','poner'],c:0,n:'Un informe se redacta.'},
+  {p:'«Quiero ___ mi opinión en la reunión.»',o:['expresar','decir','poner'],c:0,n:'Una opinión se expresa.'},
+  {p:'El autor acepta que su propuesta es cara, aunque la defiende. «El autor ___ que es cara.»',o:['reconoce','sostiene','refuta'],c:0,n:'Admite algo que no le favorece.'},
+  {p:'El autor demuestra con datos que una idea contraria es falsa. «El autor ___ esa idea.»',o:['refuta','sugiere','admite'],c:0,n:'Refutar: demostrar que es falso.'},
+  {p:'El autor da a entender, sin decirlo, que el alcalde mintió. «El autor ___ que el alcalde mintió.»',o:['sugiere','sostiene','refuta'],c:0,n:'Lo insinúa.'},
+  {p:'El autor afirma con firmeza su postura en cada párrafo. «El autor ___ que hay que subir el salario.»',o:['sostiene','insinúa','admite'],c:0,n:'Afirma con firmeza.'},
+  {p:'El autor avisa del peligro de no revisar los frenos. «El autor ___ del peligro.»',o:['advierte','reconoce','refuta'],c:0,n:'Avisa de un peligro.'},
+  {p:'«El problema es el <em>tema</em> del dinero.» ¿Qué versión es más precisa?',o:['El problema es la falta de presupuesto.','El problema es la cosa del dinero.','El problema es el asunto de lo económico.'],c:0,n:'Nombra exactamente el problema.'},
+  {p:'«Hay una <em>cosa</em> importante para inscribirte: la identificación.»',o:['requisito','cosa','tema'],c:0,n:'«Requisito» dice exactamente qué es.'},
+  {p:'Quieres describir con respeto a una persona que habla poco. ¿Qué palabra eliges?',o:['reservada','callada como una tumba','antipática'],c:0,n:'Neutra o positiva, sin juzgar.'},
+  {p:'Quieres decir de forma neutra que alguien no cambia de idea. ¿Qué expresión eliges?',o:['mantiene su postura','es un cabezota','es inflexible y cerrado'],c:0,n:'Describe sin valorar.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

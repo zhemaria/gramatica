@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l4-3 · Lección 4.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.3 · Punto de vista y persuasión</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 4.3 · Punto de vista y persuasión</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 4 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_4-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 4.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Los textos, personas y datos de esta práctica son inventados.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#punto-de-vista">El punto de vista</a></li>
+    <li><a href="#apelaciones">Lógica, emoción o autoridad</a></li>
+    <li><a href="#eficacia">¿Cuál convence mejor?</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="punto-de-vista" aria-labelledby="h-pdv">
+  <h2 id="h-pdv">1. El punto de vista</h2>
+  <p class="regla"><strong>Postura</strong> (a favor o en contra) · <strong>perspectiva</strong> (desde dónde habla) · <strong>propósito</strong> (qué quiere que hagas) · <strong>selección</strong> (qué muestra y qué omite).</p>
+  <p class="instr">Responde sobre el punto de vista del autor.</p>
+  <div id="m-pdv"></div>
+</section>
+
+<section class="modulo" id="apelaciones" aria-labelledby="h-apel">
+  <h2 id="h-apel">2. Lógica, emoción o autoridad</h2>
+  <p class="regla"><strong>Lógica</strong> (<em>logos</em>): datos y razonamientos. <strong>Emoción</strong> (<em>pathos</em>): historias, imágenes, palabras que conmueven. <strong>Autoridad</strong> (<em>ethos</em>): experiencia, expertos, credibilidad.</p>
+  <p class="instr">¿Qué apelación predomina?</p>
+  <div id="m-apel"></div>
+</section>
+
+<section class="modulo" id="eficacia" aria-labelledby="h-efi">
+  <h2 id="h-efi">3. ¿Cuál convence mejor?</h2>
+  <p class="regla"><strong>Criterios:</strong> equilibrio de apelaciones · datos con fuente · emoción proporcionada · objeciones reconocidas · nada importante omitido.</p>
+  <p class="instr">Valora la eficacia con los criterios.</p>
+  <div id="m-efi"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_4-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 4.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l4-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+var A1='«Como dueño de una panadería del barrio desde hace quince años, les pido que voten en contra del nuevo supermercado. Las pequeñas tiendas damos empleo a los vecinos y conocemos a nuestros clientes por su nombre.»';
+var A2='«Soy chofer de autobús. Cada mañana veo a niños esperar en una parada sin techo, bajo la nieve. La ciudad gastó el año pasado dos millones en adornos navideños. Con una parte se podrían techar todas las paradas del barrio.»';
+var A3='«El nuevo parque tendrá canchas, juegos infantiles y un jardín comunitario. La constructora, que financia la obra, promete terminarlo en seis meses.»';
+modulo('m-pdv',[
+  {p:P(A1,'¿Desde qué perspectiva habla el autor?'),o:['Como comerciante del barrio','Como cliente del supermercado','Como funcionario de la ciudad'],c:0,n:'«Dueño de una panadería».'},
+  {p:P(A1,'¿Qué omite el autor?'),o:['Que el supermercado podría tener precios más bajos','Cuántos años tiene su panadería','A quién le pide que vote'],c:0,n:'No menciona ninguna ventaja del supermercado.'},
+  {p:P(A2,'¿Cuál es la postura del autor?'),o:['Que la ciudad ponga techo a las paradas de autobús','Que se eliminen los adornos de Navidad','Que los niños no salgan cuando nieva'],c:0,n:'Propone usar parte del dinero para techar las paradas.'},
+  {p:P(A2,'¿Desde qué perspectiva habla?'),o:['Como chofer que lo ve cada día','Como padre de uno de los niños','Como experto en presupuestos'],c:0,n:'«Soy chofer de autobús».'},
+  {p:P(A3,'¿Qué debería hacer sospechar al lector?'),o:['Que la constructora, que se beneficia, es quien hace la promesa','Que el parque tendrá un jardín comunitario','Que el texto menciona canchas y juegos'],c:0,n:'La fuente tiene interés en lo que afirma.'},
+  {p:P(A3,'¿Qué omite el texto?'),o:['Qué gana la constructora con la obra','Qué tendrá el parque nuevo','Cuánto tardarán en terminarlo'],c:0,n:'La selección también es punto de vista.'},
+  {p:P('«Los profesores llevamos tres años sin aumento. Mientras tanto, el alquiler en esta ciudad subió un 20 %. Pedimos lo justo.»','¿Cuál es el propósito del autor?'),o:['Conseguir apoyo para un aumento de salario','Informar del precio de los alquileres','Explicar cómo se calcula un salario'],c:0,n:'«Pedimos lo justo».'},
+  {p:P('«Como madre de un niño con asma, apoyo prohibir que los camiones esperen con el motor encendido frente a la escuela.»','¿Qué parte del punto de vista aparece en «como madre de un niño con asma»?'),o:['La perspectiva','La selección de datos','La objeción'],c:0,n:'Dice desde dónde habla.'}
+],null,true);
+
+modulo('m-apel',[
+  {p:'«Según el Departamento de Salud, el 30 % de los niños del condado no tiene seguro médico.»',c:0,n:'Dato con su fuente.'},
+  {p:'«Imagina la cara de tu hijo el día de su graduación.»',c:1,n:'Imagen que conmueve.'},
+  {p:'«Como mecánico con veinticinco años de oficio, les aseguro que ese repuesto no sirve.»',c:2,n:'Experiencia del autor.'},
+  {p:'«Si el tren pasa cada diez minutos en lugar de cada veinte, la espera media se reduce a la mitad.»',c:0,n:'Razonamiento.'},
+  {p:'«Mi madre murió esperando una cama de hospital.»',c:1,n:'Historia personal dolorosa.'},
+  {p:'«La Asociación de Bibliotecarios recomienda este programa de lectura.»',c:2,n:'Opinión de expertos.'},
+  {p:'«Cada niño merece dormir en una casa caliente.»',c:1,n:'Apela a los sentimientos y a la justicia.'},
+  {p:'«El programa costó 50,000 dólares y atendió a 1,000 familias: 50 dólares por familia.»',c:0,n:'Cálculo con datos.'},
+  {p:'«He sido enfermera durante treinta años; sé lo que significa un turno doble.»',c:2,n:'Credibilidad por experiencia.'},
+  {p:'«Una abuela de ochenta años tuvo que subir doce pisos porque el ascensor llevaba un mes roto.»',c:1,n:'Caso concreto que conmueve.'},
+  {p:'«Tres estudios de universidades distintas llegaron a la misma conclusión.»',c:0,n:'Evidencia acumulada.'},
+  {p:'«El jefe de bomberos, que ha visto cientos de incendios, insiste en revisar las alarmas.»',c:2,n:'Autoridad de un experto.'}
+],['Lógica','Emoción','Autoridad']);
+
+modulo('m-efi',[
+  {p:P('A: «¡Es una vergüenza! Todo el barrio está furioso. Si no lo arreglan, alguien morirá.»<br>B: «El semáforo de la calle 18 lleva dos meses dañado. La policía registró cuatro choques allí desde entonces. Pedimos que lo reparen esta semana.»','¿Cuál convence mejor y por qué?'),o:['B: da datos con fuente y una petición concreta','A: tiene más emoción y más fuerza','Los dos por igual: piden lo mismo'],c:0,n:'A depende solo de la emoción y exagera.'},
+  {p:P('«Sé que subir la cuota del club cuesta a todos. Lo entiendo, porque a mí también. Pero sin ese dinero no podremos pagar el seguro de la cancha.»','¿Qué técnica hace eficaz este texto?'),o:['Reconoce la objeción y la responde','Usa «todos lo hacen» para presionar','Exagera las consecuencias para asustar'],c:0,n:'Da credibilidad.'},
+  {p:P('«Nueve de cada diez vecinos ya firmaron. ¿A qué esperas tú?»','¿Qué problema tiene este argumento?'),o:['Que muchos firmen no prueba que tengan razón','Usa demasiados datos con fuente','Reconoce demasiado la postura contraria'],c:0,n:'Técnica de «todos lo hacen».'},
+  {p:P('«Un estudio demuestra que este té cura el insomnio.»','¿Qué le falta para ser eficaz?'),o:['Decir qué estudio es y quién lo hizo','Contar una historia más emotiva','Usar una pregunta retórica al final'],c:0,n:'Dato sin fuente.'},
+  {p:P('Texto A: solo historias tristes de vecinos.<br>Texto B: una historia, dos datos con fuente y la opinión de un experto.','¿Cuál es más eficaz según el criterio de equilibrio?'),o:['El B, porque combina las tres apelaciones','El A, porque conmueve más al lector','Ninguno, porque los dos usan emoción'],c:0,n:'El equilibrio fortalece el argumento.'},
+  {p:P('«Si dejamos que abran una tienda más en la avenida, pronto el barrio será un caos y nadie podrá vivir aquí.»','¿Qué problema tiene?'),o:['Exagera las consecuencias para provocar miedo','Cita una fuente poco confiable','No dice lo que pide'],c:0,n:'Miedo desproporcionado.'},
+  {p:P('«Como médica de urgencias, he atendido a muchos ciclistas heridos en esta calle. Los datos de la ciudad muestran 12 accidentes este año. Una ciclovía protegida salvaría vidas.»','¿Por qué es eficaz?'),o:['Combina autoridad, datos y una propuesta clara','Usa solo la emoción para convencer','Evita dar cualquier cifra o dato'],c:0,n:'Las tres apelaciones juntas.'},
+  {p:P('Una carta pide más fondos para la escuela, pero no dice cuánto dinero, para qué ni de dónde saldría.','¿Qué criterio falla?'),o:['Lo que omite: faltan datos clave para decidir','El equilibrio entre emoción y autoridad','El reconocimiento de la objeción'],c:0,n:'Omite información esencial.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

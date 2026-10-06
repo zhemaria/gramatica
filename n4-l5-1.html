@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l5-1 · Lección 5.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.1 · Validez, relevancia y falacias</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 5.1 · Validez, relevancia y falacias</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 5 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_5-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 5.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Los ejemplos y datos fueron inventados para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#validez">¿Se sigue la conclusión?</a></li>
+    <li><a href="#relevancia">Relevante, irrelevante o insuficiente</a></li>
+    <li><a href="#falacias">Identifica la falacia</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="validez" aria-labelledby="h-val">
+  <h2 id="h-val">1. ¿Se sigue la conclusión?</h2>
+  <p class="regla"><strong>Prueba del contraejemplo:</strong> imagina un caso en que las razones sean ciertas y la conclusión falsa. Si puedes, el razonamiento no es válido.</p>
+  <p class="instr">Evalúa el razonamiento.</p>
+  <div id="m-val"></div>
+</section>
+
+<section class="modulo" id="relevancia" aria-labelledby="h-rel">
+  <h2 id="h-rel">2. Relevante, irrelevante o insuficiente</h2>
+  <p class="regla"><strong>Relevante:</strong> tiene que ver con la afirmación. <strong>Suficiente:</strong> alcanza (varios casos, representativos, sin esconder lo que va en contra).</p>
+  <p class="instr">¿Cómo es la evidencia para esa afirmación?</p>
+  <div id="m-rel"></div>
+</section>
+
+<section class="modulo" id="falacias" aria-labelledby="h-fal">
+  <h2 id="h-fal">3. Identifica la falacia</h2>
+  <p class="regla"><strong>Generalización apresurada</strong> · <strong>falsa causa</strong> · <strong>ataque a la persona</strong> · <strong>falso dilema</strong> · <strong>pendiente resbaladiza</strong> · <strong>apelación a la mayoría</strong> · <strong>falsa analogía</strong> · <strong>hombre de paja</strong> · <strong>autoridad irrelevante</strong>.</p>
+  <p class="instr">¿Qué falacia comete?</p>
+  <div id="m-fal"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_5-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 5.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l5-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+var V=['Válido: la conclusión se sigue','Inválido: hay un salto en el razonamiento'];
+modulo('m-val',[
+  {p:'«Todos los empleados deben fichar al entrar. Rosa es empleada. Por lo tanto, Rosa debe fichar.»',c:0,n:'Si las razones son ciertas, la conclusión también.'},
+  {p:'«Los que hacen ejercicio suelen dormir bien. Marta duerme bien. Por lo tanto, Marta hace ejercicio.»',c:1,n:'Marta puede dormir bien por otras razones.'},
+  {p:'«Desde que contrataron al gerente, bajaron las ventas. El gerente es el culpable.»',c:1,n:'Que ocurra después no prueba que lo cause.'},
+  {p:'«Si llueve, se suspende el partido. Llovió. Por lo tanto, se suspendió el partido.»',c:0,n:'La regla y el hecho llevan a la conclusión.'},
+  {p:'«Para entrar en la piscina hay que mostrar la tarjeta de socio. Ana no tiene tarjeta. Ana no puede entrar en la piscina.»',c:0,n:'Se sigue de la regla.'},
+  {p:'«Algunos políticos mienten. Pérez es político. Por lo tanto, Pérez miente.»',c:1,n:'«Algunos» no son «todos»: Pérez puede no mentir.'},
+  {p:'«Todos los mamíferos respiran aire. La ballena es un mamífero. La ballena respira aire.»',c:0,n:'Razonamiento válido.'},
+  {p:'«El restaurante está lleno. Por lo tanto, su comida es la mejor de la ciudad.»',c:1,n:'Puede estar lleno por precio, ubicación o moda.'},
+  {p:'«Si estudias, aprobarás. No aprobaste. Por lo tanto, no estudiaste.»',c:0,n:'Si la regla fuera cierta, la conclusión se seguiría. (Otra cosa es que la regla sea demasiado absoluta.)'},
+  {p:'«Mi abuelo fumó toda la vida y vivió 95 años. El tabaco no hace daño.»',c:1,n:'Un caso no anula la regla general.'},
+  {p:'«Ningún menor de 16 años puede conducir en este estado. Tomás tiene 14. Tomás no puede conducir en este estado.»',c:0,n:'Se sigue de la regla.'},
+  {p:'«Las personas inteligentes leen mucho. Yo leo mucho. Soy inteligente.»',c:1,n:'Leer mucho no basta para concluirlo.'}
+],V);
+
+modulo('m-rel',[
+  {p:'Afirmación: «El nuevo horario perjudica a los trabajadores». Evidencia: «La clínica pintó la sala de espera».',c:1,n:'No tiene que ver con el horario.'},
+  {p:'Misma afirmación. Evidencia: «Mi vecino no pudo ir porque trabaja de nueve a cinco».',c:2,n:'Relevante, pero un solo caso.'},
+  {p:'Misma afirmación. Evidencia: «Según el registro de la clínica, el 40 % de las citas eran después de las 5 p. m., la nueva hora de cierre».',c:0,n:'Relevante y con datos que alcanzan.'},
+  {p:'Afirmación: «El programa de lectura funciona». Evidencia: «Tres padres dicen que les gusta».',c:2,n:'Pocos casos; gustar no es funcionar.'},
+  {p:'Afirmación: «El programa de lectura funciona». Evidencia: «El 70 % de los 400 niños inscritos mejoró en el examen del distrito».',c:0,n:'Muestra grande y medida concreta.'},
+  {p:'Afirmación: «El parque es peligroso de noche». Evidencia: «El parque tiene un lago muy bonito».',c:1,n:'No dice nada sobre el peligro.'},
+  {p:'Afirmación: «El parque es peligroso de noche». Evidencia: «La policía registró 30 robos allí entre las 10 p. m. y las 5 a. m. el último año».',c:0,n:'Relevante y con datos concretos.'},
+  {p:'Afirmación: «A los clientes les gusta el nuevo menú». Evidencia: «Encuestamos solo a los empleados del restaurante».',c:2,n:'No es representativa: los empleados no son los clientes.'},
+  {p:'Afirmación: «El puente necesita reparación». Evidencia: «El puente se inauguró un martes».',c:1,n:'El día de la inauguración no dice nada del estado del puente.'},
+  {p:'Afirmación: «El puente necesita reparación». Evidencia: «La inspección estatal de 2025 encontró grietas en cuatro de sus seis pilares».',c:0,n:'Relevante, reciente y de una fuente experta.'},
+  {p:'Afirmación: «Los jóvenes de la ciudad no leen». Evidencia: «Le pregunté a mi sobrino y a su amigo».',c:2,n:'Dos casos no hablan por toda la ciudad.'},
+  {p:'Afirmación: «La medicina es segura». Evidencia: «El laboratorio que la vende dice que es segura».',c:2,n:'Relevante, pero la fuente tiene interés; hace falta una evaluación independiente.'}
+],['Relevante y suficiente','Irrelevante','Relevante pero insuficiente']);
+
+modulo('m-fal',[
+  {p:'«Dos taxistas me cobraron de más: todos los taxistas son unos ladrones.»',o:['Generalización apresurada','Falso dilema','Hombre de paja'],c:0,n:'De dos casos a «todos».'},
+  {p:'«No le hagan caso al doctor Pérez: se divorció dos veces.»',o:['Ataque a la persona','Falsa causa','Pendiente resbaladiza'],c:0,n:'Critica a la persona.'},
+  {p:'«O aprobamos este presupuesto, o la ciudad se queda sin servicios.»',o:['Falso dilema','Apelación a la mayoría','Falsa analogía'],c:0,n:'Hay más opciones.'},
+  {p:'«Si dejamos que los empleados trabajen un día desde casa, pronto nadie vendrá y la empresa quebrará.»',o:['Pendiente resbaladiza','Generalización apresurada','Autoridad irrelevante'],c:0,n:'Cadena de desastres sin prueba.'},
+  {p:'«Millones de personas usan esta crema: tiene que funcionar.»',o:['Apelación a la mayoría','Ataque a la persona','Falsa causa'],c:0,n:'Muchos no es prueba.'},
+  {p:'«—Deberíamos revisar el gasto en seguridad. —O sea que quieres dejar la ciudad sin policía.»',o:['Hombre de paja','Falso dilema','Generalización apresurada'],c:0,n:'Deforma la postura.'},
+  {p:'«Me puse la camisa roja y ganó mi equipo: la camisa trae suerte.»',o:['Falsa causa','Falsa analogía','Hombre de paja'],c:0,n:'Después no es por causa de.'},
+  {p:'«Un famoso futbolista recomienda este seguro de vida.»',o:['Autoridad irrelevante','Apelación a la mayoría','Pendiente resbaladiza'],c:0,n:'No es experto en seguros.'},
+  {p:'«Un país es como una familia: si una familia no debe endeudarse, el país tampoco.»',o:['Falsa analogía','Falso dilema','Ataque a la persona'],c:0,n:'Funcionan de forma muy distinta.'},
+  {p:'«¿Por qué vamos a escuchar a la vecina sobre la basura, si ni siquiera es dueña de su apartamento?»',o:['Ataque a la persona','Falsa causa','Generalización apresurada'],c:0,n:'Su situación no invalida su argumento.'},
+  {p:'«Desde que pusieron la antena de telefonía, mis plantas crecen peor.»',o:['Falsa causa','Hombre de paja','Apelación a la mayoría'],c:0,n:'Puede haber otras causas: el clima, el riego…'},
+  {p:'«O estás con nosotros, o estás contra el barrio.»',o:['Falso dilema','Falsa analogía','Autoridad irrelevante'],c:0,n:'Se puede tener otra postura.'},
+  {p:'«Todo el mundo deja propina del 20 %, así que es lo correcto.»',o:['Apelación a la mayoría','Pendiente resbaladiza','Ataque a la persona'],c:0,n:'Que muchos lo hagan no lo justifica por sí solo.'},
+  {p:'«—Propongo que el gimnasio cierre una hora más tarde. —¿Quieres que la gente viva en el gimnasio?»',o:['Hombre de paja','Falso dilema','Falsa causa'],c:0,n:'Exagera y deforma la propuesta.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

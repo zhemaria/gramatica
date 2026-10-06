@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l3-1 · Lección 3.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.1 · Dos o más temas en interacción</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 3.1 · Dos o más temas en interacción</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 3 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_3-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 3.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Todos los fragmentos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#temas">Los temas de un texto</a></li>
+    <li><a href="#desarrollo">El desarrollo de un tema</a></li>
+    <li><a href="#cruce">Dónde se cruzan</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="temas" aria-labelledby="h-temas">
+  <h2 id="h-temas">1. Los temas de un texto</h2>
+  <p class="regla"><strong>Recuerda:</strong> el tema es una idea general formulada como oración completa; serviría para otras historias. El asunto son los hechos de esta.</p>
+  <p class="instr">Lee el fragmento y elige el tema mejor formulado.</p>
+  <div id="m-temas"></div>
+</section>
+
+<section class="modulo" id="desarrollo" aria-labelledby="h-desarrollo">
+  <h2 id="h-desarrollo">2. El desarrollo de un tema</h2>
+  <p class="regla"><strong>Compara</strong> el principio y el final: ¿qué cambia en lo que piensa o siente el personaje sobre ese tema?</p>
+  <p class="instr">¿Cómo se desarrolla el tema?</p>
+  <div id="m-desarrollo"></div>
+</section>
+
+<section class="modulo" id="cruce" aria-labelledby="h-cruce">
+  <h2 id="h-cruce">3. Dónde se cruzan</h2>
+  <p class="regla"><strong>Los temas interactúan</strong> cuando uno resuelve, causa o se opone al otro, o cuando un símbolo los une.</p>
+  <p class="instr">Responde sobre la relación entre los dos temas.</p>
+  <div id="m-cruce"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_3-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 3.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l3-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-temas',[
+  {p:P('Don Julián trabajó cuarenta años en la misma panadería. El día de su jubilación, sus compañeros le regalaron un reloj. Esa noche, en casa, se despertó a las tres de la mañana, como siempre, y no supo qué hacer con sus manos.','¿Cuál es el tema?'),o:['El trabajo puede convertirse en una parte de la identidad','Don Julián se jubila de la panadería después de cuarenta años','Los relojes son el mejor regalo para una jubilación'],c:0,n:'La segunda es el asunto; la tercera no la sostiene el texto.'},
+  {p:P('Marta ahorró tres años para comprarse un carro. Cuando por fin lo tuvo, descubrió que lo que más disfrutaba eran los domingos en el autobús con su madre, que ya no podía caminar mucho. Vendió el carro y siguió tomando el autobús.','¿Cuál es el tema?'),o:['Lo que más valoramos no siempre es lo que perseguimos','Marta vende su carro y vuelve a tomar el autobús','El transporte público es mejor que el carro propio'],c:0,n:'Idea general sobre la vida.'},
+  {p:P('En la escuela nadie hablaba con Samuel porque tartamudeaba. Un día la maestra le pidió que leyera su poema en voz alta. Tardó mucho. Al terminar, el salón se quedó en silencio y después todos aplaudieron.','¿Cuál es el tema?'),o:['El valor de mostrarse puede vencer el rechazo','Samuel lee un poema en voz alta en su escuela','Los poemas siempre reciben aplausos en clase'],c:0,n:'Formulado como idea completa.'},
+  {p:P('La tienda de la esquina cerró después de sesenta años. En su lugar abrieron una cadena de café. Los vecinos mayores pasan ahora por delante sin entrar; los jóvenes hacen fila desde temprano.','¿Cuál es el tema?'),o:['Los cambios de un barrio dividen a las generaciones','Una tienda cerró y abrieron una cadena de café','El café de las cadenas es mejor que el de las tiendas'],c:0,n:'La reacción opuesta de mayores y jóvenes señala el tema.'},
+  {p:P('Lucía siempre decía que no necesitaba a nadie. Cuando se rompió la pierna, fue el vecino al que nunca saludaba quien le subió la compra durante un mes.','¿Cuál es el tema?'),o:['Nadie es tan autosuficiente como cree','Lucía se rompe la pierna y su vecino la ayuda','Los vecinos deben subir la compra a los enfermos'],c:0,n:'Lo que el personaje creía al principio se desmiente.'},
+  {p:P('Cada noche, al volver de su segundo empleo, Ramiro revisaba la tarea de su hija aunque se le cerraran los ojos. Ella nunca se lo agradeció. Veinte años después, en su graduación de enfermera, buscó entre el público a su padre antes que a nadie.','¿Cuál es el tema?'),o:['El sacrificio de los padres da frutos aunque no se reconozca enseguida','Ramiro tiene dos empleos y revisa la tarea de su hija','Las hijas siempre estudian lo mismo que sus padres'],c:0,n:'El final da sentido al esfuerzo del principio.'},
+  {p:P('Los dos hermanos se pelearon por la casa de sus padres. Diez años sin hablarse. La casa, mientras tanto, se fue cayendo: nadie la cuidaba porque ninguno quería ceder.','¿Cuál es el tema?'),o:['El orgullo puede destruir lo mismo que se quiere conservar','Dos hermanos discuten por la casa de sus padres','Las casas viejas se caen si no se reparan'],c:0,n:'La casa que se cae es símbolo de la relación.'},
+  {p:P('La abuela no sabía leer, pero conocía de memoria todas las plantas del monte y para qué servía cada una. Su nieto, que estudia biología, ahora graba sus explicaciones con el teléfono.','¿Cuál es el tema?'),o:['El conocimiento no depende solo de la escuela','La abuela no sabe leer y su nieto estudia biología','Las plantas del monte curan todas las enfermedades'],c:0,n:'Idea general que el fragmento sugiere.'}
+],null,true);
+
+modulo('m-desarrollo',[
+  {p:P('Al principio: «Este país no es para mí», decía Ana en sus cartas. Al final: Ana enseña español a los hijos de sus vecinos en la biblioteca del barrio.','¿Cómo se desarrolla el tema de la pertenencia?'),o:['Del rechazo a sentirse parte de la comunidad','De la alegría inicial a la decepción final','No cambia: sigue sintiéndose extranjera'],c:0,n:'Compara el principio con el final.'},
+  {p:P('Al principio: Tomás presume de que nunca ha pedido ayuda a nadie. A la mitad: pierde su empleo y le avergüenza ir al banco de comida. Al final: él mismo organiza los turnos de voluntarios del banco de comida.','¿Cómo se desarrolla el tema del orgullo?'),o:['Del orgullo que aísla a la ayuda que une','De la humildad al orgullo por su éxito','Del trabajo estable a la riqueza'],c:0,n:'Tres etapas: orgullo, crisis, transformación.'},
+  {p:P('Al principio: la madre prohíbe a su hija ir a la universidad lejos de casa. Al final: la madre guarda en la cartera una foto de su hija con la toga.','¿Cómo cambia la actitud de la madre?'),o:['Del miedo a perderla al orgullo por lo que logró','De la confianza inicial a la desconfianza','No cambia: sigue en contra de la universidad'],c:0,n:'La foto en la cartera muestra el cambio.'},
+  {p:P('Al principio: el jardín del edificio es un lote lleno de basura. A la mitad: dos vecinas plantan tomates sin pedir permiso. Al final: veinte familias tienen su parcela y celebran juntas la cosecha.','¿Cómo se desarrolla el tema de la comunidad?'),o:['De vecinos aislados a una comunidad unida por un proyecto','De una comunidad unida a vecinos enfrentados','Del jardín bonito al lote abandonado'],c:0,n:'Lo que empieza con dos termina con veinte.'},
+  {p:P('Al principio: Raúl escribe a su madre cada semana. A la mitad: las cartas son cada mes. Al final: solo la llama en Navidad y dice que «ya no tiene tiempo».','¿Cómo se desarrolla el tema de la distancia?'),o:['La distancia física se va convirtiendo en distancia afectiva','La relación con su madre se vuelve cada vez más cercana','Raúl regresa a vivir con su madre al final'],c:0,n:'La frecuencia baja: el vínculo se enfría.'},
+  {p:P('Al principio: Elena oculta en el trabajo que habla poco inglés. A la mitad: un cliente que solo habla español necesita ayuda y ella lo atiende. Al final: la empresa le pide que capacite a otros en atención en español.','¿Cómo se desarrolla el tema de la identidad?'),o:['De esconder su idioma a valorarlo como una fortaleza','De sentirse orgullosa a sentirse avergonzada','De trabajar en la empresa a perder el empleo'],c:0,n:'Lo que ocultaba se vuelve su valor.'},
+  {p:P('Al principio: el anciano no deja que nadie toque su bicicleta. Al final: se la regala al niño del tercer piso, que la había mirado todo el verano.','¿Cómo se desarrolla el tema del desapego?'),o:['De aferrarse a un objeto a desprenderse de él con generosidad','De la generosidad a la desconfianza hacia los niños','No cambia: sigue sin dejar que la toquen'],c:0,n:'El regalo final contrasta con el principio.'},
+  {p:P('Al principio: «Las matemáticas no son para mí», dice Rosa. A la mitad: estudia con su hijo para ayudarlo con la tarea. Al final: aprueba el examen de matemáticas del GED.','¿Cómo se desarrolla el tema de la confianza en uno mismo?'),o:['De la creencia de no poder a la prueba de que sí puede','De la seguridad inicial al fracaso final','De estudiar sola a dejar de estudiar'],c:0,n:'El final desmiente la frase del principio.'}
+],null,true);
+
+modulo('m-cruce',[
+  {p:P('En «La máquina de coser», una abuela emigrante enseña a su nieta a coser con la máquina que trajo de su pueblo.','¿Cómo interactúan el desarraigo y la herencia?'),o:['Transmitir el oficio alivia el dolor de haber emigrado','La abuela emigró para poder enseñar a su nieta','Los dos temas no tienen relación en el relato'],c:0,n:'Un tema resuelve al otro.'},
+  {p:P('Un padre trabaja de noche para pagar la escuela de su hijo y casi nunca puede verlo. El hijo crece sintiendo que su padre no lo quiere. Años después descubre los recibos de la colegiatura en una caja.','¿Cómo se relacionan el sacrificio y la incomprensión?'),o:['El sacrificio causa la distancia que provoca la incomprensión','La incomprensión del hijo causa que el padre trabaje de noche','El sacrificio y la incomprensión no se relacionan'],c:0,n:'Uno causa al otro.'},
+  {p:P('Una joven quiere estudiar arte, pero su familia necesita que trabaje. Pinta en las noches, después del turno, en el reverso de los recibos de la tienda.','¿Cómo se relacionan el deber familiar y la vocación?'),o:['Se oponen, y la joven busca un espacio para los dos','El deber familiar hace desaparecer la vocación','La vocación resuelve los problemas económicos de la familia'],c:0,n:'Tiran en direcciones contrarias.'},
+  {p:P('Una anciana guarda la llave de la casa que perdió en la guerra. Se la da a su nieta el día que esta compra su primer apartamento.','¿Qué une los temas de la pérdida y la esperanza?'),o:['La llave, que es un símbolo de los dos','El apartamento nuevo, que borra el pasado','La guerra, que la nieta no conoció'],c:0,n:'Un objeto representa los dos temas.'},
+  {p:P('Un hombre pierde su empleo en la fábrica. Para no quedarse en casa, empieza a arreglar las bicicletas de los niños del barrio. Al año tiene un pequeño taller y dos aprendices.','¿Cómo interactúan la pérdida y la reinvención?'),o:['La pérdida del empleo es lo que provoca la reinvención','La reinvención causa que pierda el empleo','Se oponen: la pérdida impide la reinvención'],c:0,n:'Uno causa al otro.'},
+  {p:P('Dos amigas de la infancia se separan cuando una se muda a otro estado. Durante años se escriben poco. Cuando una enferma, la otra cruza el país en autobús para cuidarla.','¿Qué muestra mejor que la distancia y la amistad se cruzan?'),o:['El viaje en autobús para cuidarla','Que se mudó a otro estado','Que durante años se escribieron poco'],c:0,n:'Es el momento en que la amistad vence a la distancia.'},
+  {p:P('En un pueblo pequeño todos se conocen. Eso hace que nadie pase hambre, pero también que nadie pueda equivocarse sin que todos lo sepan.','¿Cómo se relacionan la solidaridad y la falta de privacidad?'),o:['Las dos nacen de lo mismo: que todos se conocen','La solidaridad elimina la falta de privacidad','Se trata de dos pueblos distintos'],c:0,n:'Una misma causa produce los dos temas.'},
+  {p:P('Un inmigrante aprende inglés para conseguir un mejor trabajo. Cuanto mejor lo habla, menos español hablan sus hijos en casa.','¿Cómo se relacionan el progreso y la pérdida?'),o:['El progreso trae consigo una pérdida inesperada','El progreso se detiene por la pérdida del idioma','No hay relación entre los dos hechos'],c:0,n:'Avanzan en direcciones contrarias.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l8-2 · Lección 8.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.2 · Formatos de preguntas del GED y simulacro</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .fx{background:#fff;border:2px solid var(--gris-claro);border-radius:12px;padding:14px 16px;margin:14px 0}
+  .fx-tit{font-weight:700;color:var(--cp-oscuro);margin:0 0 8px}
+  .fx-ayuda{font-size:.92rem;color:#444;margin:0 0 10px}
+  .fx-preg{font-weight:600;margin:0 0 10px}
+  .fx-texto{font-family:Georgia,serif;font-size:1.05rem;line-height:2.1;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:10px 14px}
+  .fx-sel{font-family:'Segoe UI',Arial,sans-serif;font-size:.98rem;padding:4px 6px;border:2px solid var(--cp-oscuro);border-radius:6px;background:#fff;color:var(--texto);max-width:100%}
+  .fx-sel.fx-ok{border-color:#2e7d32;border-style:solid;background:#e8f5e9}
+  .fx-sel.fx-mal{border-color:#c62828;border-style:dashed;background:#fdecea}
+  .fx-ok-t{color:#155724;font-weight:700}
+  .fx-mal-t{color:#721c24;font-weight:700}
+  .fx-barra{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
+  .fx-btn{cursor:pointer;font-family:inherit;font-weight:600;border:2px solid var(--cp);border-radius:8px;padding:8px 16px;font-size:.95rem;background:var(--cp);color:#fff}
+  .fx-btn:hover{background:var(--cp-oscuro)}
+  .fx-btn.fx-sec{background:#fff;color:var(--cp-oscuro)}
+  .fx-btn.fx-sec:hover{background:var(--cp-claro)}
+  .fx-fb{min-height:1.4em;margin:8px 0 0}
+  .fx-notas{margin:6px 0 0;padding-left:1.2em;font-size:.95rem;color:#3d2600}
+  .fx-nota{margin:6px 0 0;font-size:.95rem}
+  .fx-cajas{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:10px}
+  .fx-zona{border:2px dashed #8a97a6;border-radius:10px;padding:8px;min-height:90px;background:#fafbfc}
+  .fx-zona.fx-origen{background:var(--gris-claro);border-style:solid}
+  .fx-zona.fx-sobre{border-color:var(--cp);background:var(--cp-claro)}
+  .fx-dest{display:block;width:100%;cursor:pointer;font-family:inherit;font-weight:700;font-size:.95rem;background:var(--cp-oscuro);color:#fff;border:none;border-radius:6px;padding:6px 10px;margin-bottom:6px;text-align:left}
+  .fx-dest::after{content:' ⬇';opacity:.8}
+  .fx-origen .fx-dest{background:#4a5563}
+  .fx-lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .fx-ficha{width:100%;text-align:left;cursor:grab;font-family:inherit;font-size:.95rem;background:#fff;border:2px solid #c9d2db;border-radius:8px;padding:7px 10px;color:var(--texto)}
+  .fx-ficha.fx-elegida{border-color:var(--cp-oscuro);background:var(--cp-claro);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cp)}
+  .fx-ficha.fx-ok,.fx-frase.fx-ok{border-color:#2e7d32;border-style:solid;background:#e8f5e9}
+  .fx-ficha.fx-ok::before,.fx-frase.fx-ok::before{content:'✓ ';color:#155724;font-weight:700}
+  .fx-ficha.fx-mal,.fx-frase.fx-mal{border-color:#c62828;border-style:dashed;background:#fdecea}
+  .fx-ficha.fx-mal::before,.fx-frase.fx-mal::before{content:'✗ ';color:#721c24;font-weight:700}
+  .fx-area{line-height:1.9}
+  .fx-frase{display:inline;font-family:Georgia,serif;font-size:1.03rem;line-height:1.9;text-align:left;background:transparent;border:2px solid transparent;border-radius:4px;padding:1px 3px;color:var(--texto);cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .fx-frase:hover:not(:disabled),.fx-frase:focus-visible{border-color:var(--cp);background:var(--cp-claro)}
+  .fx-frase:disabled{cursor:default}
+
+  .crono{background:#fff;border:2px solid var(--cp-oscuro);border-radius:12px;padding:12px 16px;margin:14px 0}
+  .crono-t,.crono-plan{margin:0 0 8px}
+  .crono-plan{font-size:.93rem;color:#333}
+  .crono-fila{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .crono-reloj{font-family:'Courier New',monospace;font-size:2rem;font-weight:700;color:var(--cp-oscuro);background:var(--cp-claro);border-radius:8px;padding:2px 14px;min-width:6ch;text-align:center}
+  .crono-reloj.crono-poco{background:#fff3cd;color:#5c3900;outline:3px dashed #8a5a00}
+  .crono-reloj.crono-fin{background:#1a2332;color:#fff}
+  .crono-barra{height:8px;background:var(--gris-claro);border-radius:4px;margin:10px 0 4px;overflow:hidden}
+  .crono-barra span{display:block;height:100%;width:0;background:var(--cp)}
+  .crono-aviso{min-height:1.4em;font-weight:700;color:var(--cp-oscuro);margin:4px 0 0}
+
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+  .sim-texto{background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:12px 16px;margin:12px 0;font-family:Georgia,serif;font-size:1.03rem;line-height:1.75}
+  .sim-texto h3{font-family:'Segoe UI',Arial,sans-serif;color:var(--cp-oscuro);margin:0 0 6px;font-size:1.1rem}
+  .sim-texto .np{display:inline-block;min-width:1.8em;font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--cp-oscuro)}
+  .sim-texto .cab{font-family:'Courier New',monospace;font-size:.95rem;line-height:1.5;margin:0 0 8px}
+  .sim-preg{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 16px;margin:10px 0}
+  .sim-enun{font-weight:600;margin:0 0 8px}
+  .sim-num{display:inline-block;background:var(--cp-oscuro);color:#fff;border-radius:12px;padding:1px 10px;font-size:.8rem;margin-right:8px}
+  .sim-ops{display:flex;flex-direction:column;gap:6px}
+  .sim-op{text-align:left;background:#fff;border:2px solid #c9d2db;border-radius:8px;padding:8px 12px;font-family:inherit;font-size:.98rem;cursor:pointer;color:var(--texto)}
+  .sim-op:hover:not(:disabled){border-color:var(--cp)}
+  .sim-op.elegida{background:var(--cp-claro);border-color:var(--cp-oscuro);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cp)}
+  .sim-op.correcta{background:#d4edda;border-color:#2e7d32;color:#155724}
+  .sim-op.correcta::before{content:'✓ '}
+  .sim-op.incorrecta{background:#f8d7da;border-color:#c62828;border-style:dashed;color:#721c24}
+  .sim-op.incorrecta::before{content:'✗ '}
+  .sim-op:disabled{cursor:default}
+  .sim-exp{margin:8px 0 0;padding:6px 10px;background:#fff3cd;border-radius:6px;color:#3d2600;font-size:.95rem}
+  .sim-res{display:none;margin:14px 0;padding:14px;border-radius:10px;text-align:center;font-weight:600}
+  .sim-res.visible{display:block}
+  .sim-botones{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 8.2 · Formatos de preguntas del GED y simulacro</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 8 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_8-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 8.2</a></p>
+<p>Los tres primeros módulos te dan un ejercicio a la vez: pulsa <strong>«Otro ejercicio»</strong> para seguir. El cuarto es un <strong>simulacro de 15 preguntas</strong> con cronómetro opcional. Todos los textos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#seleccion">Opción múltiple</a></li>
+    <li><a href="#desplegable">Menú desplegable</a></li>
+    <li><a href="#arrastra">Arrastrar y soltar</a></li>
+    <li><a href="#simulacro">Simulacro de 15 preguntas</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="seleccion" aria-labelledby="h-se">
+  <h2 id="h-se">1. Opción múltiple</h2>
+  <p class="regla"><strong>Descarta las trampas:</strong> extremo · dato mal usado · no está en el texto · cierto, pero no responde. Busca la oración que prueba tu respuesta.</p>
+  <p class="instr">Lee el fragmento y elige la mejor respuesta.</p>
+  <div id="m-se"></div>
+</section>
+
+<section class="modulo" id="desplegable" aria-labelledby="h-de">
+  <h2 id="h-de">2. Menú desplegable</h2>
+  <p class="regla"><strong>Lee la oración completa con cada opción.</strong> Fíjate en la concordancia, los tiempos verbales, la ortografía, la puntuación y la relación entre las ideas.</p>
+  <p class="instr">Elige la opción correcta en cada espacio y pulsa «Comprobar».</p>
+  <div class="fx" id="m-de"></div>
+</section>
+
+<section class="modulo" id="arrastra" aria-labelledby="h-ar">
+  <h2 id="h-ar">3. Arrastrar y soltar</h2>
+  <p class="regla"><strong>Empieza por lo que tienes claro.</strong> Si una tarjeta te hace dudar, déjala para el final y decide por descarte.</p>
+  <p class="instr">Lleva cada tarjeta a su caja y pulsa «Comprobar».</p>
+  <div class="fx" id="m-ar"></div>
+</section>
+
+<section class="modulo" id="simulacro" aria-labelledby="h-si">
+  <h2 id="h-si">4. Simulacro de 15 preguntas</h2>
+  <p class="regla"><strong>Como en el examen:</strong> dos textos, unos 2 minutos por pregunta, ninguna en blanco. No verás si aciertas hasta que pulses «Ver mi resultado».</p>
+  <div class="crono" id="crono-sim"></div>
+  <div id="sim"></div>
+  <div class="sim-botones">
+    <button type="button" class="btn btn-otro" id="sim-calificar">Ver mi resultado</button>
+    <button type="button" class="btn btn-oir" id="sim-reintentar" style="display:none">Intentar de nuevo</button>
+  </div>
+  <div class="sim-res" id="sim-res" role="status" aria-live="polite"></div>
+  <p style="font-size:.95rem">¿Listo para el examen completo? Prueba el <a href="https://zhemaria.github.io/examen/lenguaje_lectura" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">simulador de Artes del Lenguaje</a> (45 preguntas, se abre en una pestaña nueva).</p>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_8-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 8.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l8-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+/* ===== Formatos de preguntas del GED: menú desplegable, arrastrar y soltar, seleccionar un área =====
+   Cada componente recibe un banco de ejercicios; con más de uno, aparece «Otro ejercicio».
+   Todos se usan con teclado y lector de pantalla; los avisos aparecen dentro de la página. */
+function fxBaraja(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+function fxRotador(banco){var p=[];return function(){if(!p.length)p=fxBaraja(banco.map(function(_,i){return i;}));return banco[p.pop()];};}
+function fxBarra(n){return '<div class="fx-barra"><button type="button" class="fx-btn fx-comp">Comprobar</button>'+
+  (n>1?'<button type="button" class="fx-btn fx-sec fx-otro">Otro ejercicio</button>':'<button type="button" class="fx-btn fx-sec fx-otro">Volver a empezar</button>')+'</div>'+
+  '<p class="fx-fb" role="status" aria-live="polite"></p>';}
+
+/* Menú desplegable: e = {t:'Texto con [[0]] y [[1]]', h:[{o:[...],c:0,n:'nota'}], titulo} */
+function desplegable(id,banco){
+  var caja=document.getElementById(id); if(!caja)return; var sig=fxRotador(banco), e;
+  function nuevo(){
+    e=sig();
+    var t=e.t.replace(/\[\[(\d+)\]\]/g,function(_,k){k=+k; var h=e.h[k];
+      return '<select class="fx-sel" data-k="'+k+'" aria-label="Espacio '+(k+1)+' del texto: elige una opción"><option value="">Seleccionar…</option>'+
+        h.o.map(function(x,j){return '<option value="'+j+'">'+x+'</option>';}).join('')+'</select><span class="fx-marca" data-k="'+k+'"></span>';});
+    caja.innerHTML=(e.titulo?'<p class="fx-tit">'+e.titulo+'</p>':'')+'<div class="fx-texto">'+t+'</div>'+fxBarra(banco.length)+'<ul class="fx-notas"></ul>';
+    caja.querySelector('.fx-comp').addEventListener('click',comprobar);
+    caja.querySelector('.fx-otro').addEventListener('click',function(){nuevo(); caja.querySelector('.fx-sel').focus();});
+  }
+  function comprobar(){
+    var sels=caja.querySelectorAll('.fx-sel'), bien=0, vacios=0, notas=caja.querySelector('.fx-notas'); notas.innerHTML='';
+    sels.forEach(function(s){var k=+s.getAttribute('data-k'), m=caja.querySelector('.fx-marca[data-k="'+k+'"]'), h=e.h[k];
+      s.classList.remove('fx-ok','fx-mal');
+      if(s.value===''){vacios++; m.textContent=''; return;}
+      if(+s.value===h.c){bien++; s.classList.add('fx-ok'); m.textContent=' ✓'; m.className='fx-marca fx-ok-t';}
+      else{s.classList.add('fx-mal'); m.textContent=' ✗'; m.className='fx-marca fx-mal-t';
+        notas.insertAdjacentHTML('beforeend','<li>Espacio '+(k+1)+': '+h.n+'</li>');}
+      m.setAttribute('data-k',k);
+    });
+    var fb=caja.querySelector('.fx-fb');
+    if(vacios){fb.className='fx-fb fx-mal-t'; fb.textContent='Te faltan '+vacios+' espacio(s) por elegir.'; return;}
+    fb.className='fx-fb '+(bien===sels.length?'fx-ok-t':'fx-mal-t');
+    fb.textContent=bien===sels.length?'✓ ¡Todo correcto! '+bien+' de '+sels.length+'.':'Llevas '+bien+' de '+sels.length+'. Lee las pistas, cambia lo marcado con ✗ y vuelve a comprobar.';
+  }
+  nuevo();
+}
+
+/* Arrastrar y soltar: e = {titulo, cajas:['A','B'], fichas:[{t:'...',c:0}], nota} */
+function arrastra(id,banco){
+  var caja=document.getElementById(id); if(!caja)return; var sig=fxRotador(banco), e, elegida=null;
+  function nuevo(){
+    e=sig(); elegida=null;
+    var fichas=fxBaraja(e.fichas.map(function(f,i){return i;}));
+    caja.innerHTML=(e.titulo?'<p class="fx-tit">'+e.titulo+'</p>':'')+
+      '<p class="fx-ayuda">Arrastra cada tarjeta a su caja. Sin ratón: pulsa una tarjeta (o Enter) y después el botón de la caja.</p>'+
+      '<div class="fx-zona fx-origen" data-z="-1"><button type="button" class="fx-dest" data-z="-1">Tarjetas sin colocar</button><ul class="fx-lista">'+
+      fichas.map(function(i){return '<li><button type="button" class="fx-ficha" draggable="true" data-i="'+i+'" aria-pressed="false">'+e.fichas[i].t+'</button></li>';}).join('')+'</ul></div>'+
+      '<div class="fx-cajas">'+e.cajas.map(function(c,z){return '<div class="fx-zona" data-z="'+z+'"><button type="button" class="fx-dest" data-z="'+z+'">'+c+'</button><ul class="fx-lista"></ul></div>';}).join('')+'</div>'+
+      fxBarra(banco.length)+'<p class="fx-nota"></p>';
+    caja.querySelector('.fx-comp').addEventListener('click',comprobar);
+    caja.querySelector('.fx-otro').addEventListener('click',function(){nuevo(); caja.querySelector('.fx-ficha').focus();});
+  }
+  function fb(t,cl){var f=caja.querySelector('.fx-fb'); f.className='fx-fb '+(cl||''); f.textContent=t;}
+  function mover(i,z){
+    var b=caja.querySelector('.fx-ficha[data-i="'+i+'"]'), lista=caja.querySelector('.fx-zona[data-z="'+z+'"] .fx-lista');
+    if(!b||!lista)return; b.classList.remove('fx-ok','fx-mal','fx-elegida'); b.setAttribute('aria-pressed','false');
+    lista.appendChild(b.parentNode); elegida=null; caja.querySelector('.fx-nota').textContent='';
+    fb('«'+b.textContent+'» → '+(z<0?'sin colocar':e.cajas[z])+'.'); b.focus();
+  }
+  caja.addEventListener('click',function(ev){
+    var f=ev.target.closest('.fx-ficha'), d=ev.target.closest('.fx-dest');
+    if(f){caja.querySelectorAll('.fx-ficha').forEach(function(x){x.classList.remove('fx-elegida');x.setAttribute('aria-pressed','false');});
+      if(elegida===f.getAttribute('data-i')){elegida=null; fb('Tarjeta soltada.'); return;}
+      elegida=f.getAttribute('data-i'); f.classList.add('fx-elegida'); f.setAttribute('aria-pressed','true');
+      fb('Elegiste «'+f.textContent+'». Ahora pulsa el botón de la caja a la que va.'); return;}
+    if(d){if(elegida===null){fb('Primero elige una tarjeta.'); return;} mover(elegida,+d.getAttribute('data-z'));}
+  });
+  caja.addEventListener('dragstart',function(ev){var f=ev.target.closest&&ev.target.closest('.fx-ficha'); if(!f)return;
+    ev.dataTransfer.setData('text/plain',f.getAttribute('data-i')); ev.dataTransfer.effectAllowed='move';});
+  caja.addEventListener('dragover',function(ev){var z=ev.target.closest&&ev.target.closest('.fx-zona'); if(z){ev.preventDefault(); z.classList.add('fx-sobre');}});
+  caja.addEventListener('dragleave',function(ev){var z=ev.target.closest&&ev.target.closest('.fx-zona'); if(z)z.classList.remove('fx-sobre');});
+  caja.addEventListener('drop',function(ev){var z=ev.target.closest&&ev.target.closest('.fx-zona'); if(!z)return; ev.preventDefault(); z.classList.remove('fx-sobre');
+    mover(ev.dataTransfer.getData('text/plain'),+z.getAttribute('data-z'));});
+  function comprobar(){
+    var sueltas=caja.querySelectorAll('.fx-origen .fx-ficha').length;
+    if(sueltas){fb('Te quedan '+sueltas+' tarjeta(s) sin colocar.','fx-mal-t'); return;}
+    var bien=0, n=e.fichas.length;
+    caja.querySelectorAll('.fx-cajas .fx-zona').forEach(function(zn){var z=+zn.getAttribute('data-z');
+      zn.querySelectorAll('.fx-ficha').forEach(function(b){var ok=e.fichas[+b.getAttribute('data-i')].c===z; if(ok)bien++;
+        b.classList.toggle('fx-ok',ok); b.classList.toggle('fx-mal',!ok);});});
+    fb(bien===n?'✓ ¡Todo correcto! '+bien+' de '+n+'.':'Llevas '+bien+' de '+n+'. Las tarjetas marcadas con ✗ están en la caja equivocada: muévelas y vuelve a comprobar.',bien===n?'fx-ok-t':'fx-mal-t');
+    caja.querySelector('.fx-nota').textContent=bien===n&&e.nota?e.nota:'';
+  }
+  nuevo();
+}
+
+/* Seleccionar un área: e = {titulo, preg, partes:['oración 1','oración 2',...], c:índice, n:'nota'} */
+function zonaSeleccion(id,banco){
+  var caja=document.getElementById(id); if(!caja)return; var sig=fxRotador(banco), e, intentos=0;
+  function nuevo(){
+    e=sig(); intentos=0;
+    caja.innerHTML=(e.titulo?'<p class="fx-tit">'+e.titulo+'</p>':'')+'<p class="fx-preg">'+e.preg+'</p>'+
+      '<div class="fx-texto fx-area" role="group" aria-label="Texto: cada oración es un botón">'+e.partes.map(function(p,j){return '<button type="button" class="fx-frase" data-j="'+j+'">'+p+'</button>';}).join(' ')+'</div>'+
+      '<div class="fx-barra"><button type="button" class="fx-btn fx-sec fx-otro">'+(banco.length>1?'Otro ejercicio':'Volver a empezar')+'</button></div><p class="fx-fb" role="status" aria-live="polite"></p>';
+    caja.querySelector('.fx-otro').addEventListener('click',function(){nuevo(); caja.querySelector('.fx-frase').focus();});
+  }
+  caja.addEventListener('click',function(ev){
+    var b=ev.target.closest('.fx-frase'); if(!b||b.disabled)return; intentos++;
+    var f=caja.querySelector('.fx-fb'), ok=+b.getAttribute('data-j')===e.c;
+    if(ok){b.classList.add('fx-ok'); caja.querySelectorAll('.fx-frase').forEach(function(x){x.disabled=true;}); f.className='fx-fb fx-ok-t'; f.textContent='✓ ¡Correcto! '+e.n;}
+    else if(intentos<2){b.classList.add('fx-mal'); b.disabled=true; f.className='fx-fb fx-mal-t'; f.textContent='Todavía no. Te queda un intento: vuelve a leer la pregunta.';}
+    else{b.classList.add('fx-mal'); caja.querySelectorAll('.fx-frase').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===e.c)x.classList.add('fx-ok');});
+      f.className='fx-fb fx-mal-t'; f.textContent='La oración correcta está marcada con ✓. '+e.n;}
+  });
+  nuevo();
+}
+
+/* ===== Cronómetro opcional para ensayar con el tiempo del examen =====
+   Los avisos los da la página (nunca cuadros del navegador). La cuenta visible no se anuncia cada segundo;
+   solo se anuncian los momentos clave en una zona de estado. */
+function cronometro(id,minutos,etapas,opc){
+  opc=opc||{};
+  var caja=document.getElementById(id); if(!caja)return;
+  var total=minutos*60, resta=total, t=null;
+  caja.innerHTML='<p class="crono-t">⏱️ <strong>Cronómetro opcional:</strong> '+(opc.titulo||minutos+' minutos, como la Respuesta Extendida del GED. Úsalo si quieres practicar con el tiempo del examen.')+'</p>'+
+    (etapas?'<p class="crono-plan">'+etapas+'</p>':'')+
+    '<div class="crono-fila"><span class="crono-reloj" role="timer" aria-live="off" aria-label="Tiempo restante">'+fmt(resta)+'</span>'+
+    '<button type="button" class="btn btn-primario crono-ini">▶ Empezar</button>'+
+    '<button type="button" class="btn btn-secundario crono-rei">↺ Reiniciar</button></div>'+
+    '<div class="crono-barra" aria-hidden="true"><span></span></div>'+
+    '<p class="crono-aviso" role="status" aria-live="polite"></p>';
+  var reloj=caja.querySelector('.crono-reloj'), ini=caja.querySelector('.crono-ini'), rei=caja.querySelector('.crono-rei'),
+      barra=caja.querySelector('.crono-barra span'), aviso=caja.querySelector('.crono-aviso'), rei2=false;
+  function fmt(s){var m=Math.floor(s/60), x=s%60; return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
+  function pinta(){reloj.textContent=fmt(resta); barra.style.width=(100*(total-resta)/total)+'%';
+    reloj.classList.toggle('crono-poco',resta<=300&&resta>0); reloj.classList.toggle('crono-fin',resta===0);}
+  var hitos={};
+  if(opc.hitos){for(var hm in opc.hitos)hitos[Math.round(hm*60)]=opc.hitos[hm];}
+  else{hitos[Math.round(total*2/3)]='Quedan '+Math.round(minutos*2/3)+' minutos. Si todavía estás planificando, empieza a escribir ya.';
+  hitos[Math.round(total/3)]='Quedan '+Math.round(minutos/3)+' minutos. Asegúrate de tener ya el contrargumento y empieza a cerrar.';}
+  if(!opc.hitos)hitos[300]='Quedan 5 minutos: termina la conclusión y deja tiempo para revisar.';
+  function tic(){
+    resta--; pinta();
+    if(hitos[resta])aviso.textContent=hitos[resta];
+    if(resta<=0){clearInterval(t); t=null; ini.textContent='▶ Empezar'; ini.disabled=true;
+      aviso.textContent=opc.fin||'⏰ Se acabó el tiempo. En el examen tendrías que entregar ahora. Puedes seguir escribiendo para terminar tu práctica.';}
+  }
+  ini.addEventListener('click',function(){
+    if(t){clearInterval(t); t=null; ini.textContent='▶ Seguir'; aviso.textContent='Cronómetro en pausa.';}
+    else{t=setInterval(tic,1000); ini.textContent='⏸ Pausar'; aviso.textContent='Cronómetro en marcha. ¡Adelante!';}
+  });
+  rei.addEventListener('click',function(){
+    if(resta<total&&resta>0&&!rei2){rei2=true; aviso.textContent='¿Seguro? Pulsa «Reiniciar» otra vez para volver a '+minutos+' minutos.'; setTimeout(function(){rei2=false;},4000); return;}
+    rei2=false; if(t){clearInterval(t); t=null;} resta=total; ini.disabled=false; ini.textContent='▶ Empezar'; aviso.textContent='Cronómetro en '+minutos+' minutos.'; pinta();
+  });
+  pinta();
+}
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+
+/* ===== 1. Opción múltiple ===== */
+modulo('m-se',[
+  {p:P('«La biblioteca ampliará su horario a partir de mayo. Los sábados abrirá hasta las 8 de la noche, y los domingos, de 12 a 5. La medida responde a una encuesta en la que el 62 % de los usuarios pidió más horas en fin de semana.»','¿Por qué se amplía el horario?'),o:['Porque la mayoría de los usuarios lo pidió en una encuesta','Porque todos los vecinos trabajan de lunes a viernes','Porque la biblioteca cerraba los sábados a las 8'],c:0,n:'62 % = la mayoría. La segunda es un extremo; la tercera, un dato mal usado.'},
+  {p:P('«Aunque la fábrica creó 200 empleos, los vecinos se quejan del ruido nocturno. El ayuntamiento estudia limitar el horario de carga y descarga.»','¿Cuál es la idea principal?'),o:['La fábrica trae empleo, pero también un problema que se busca resolver','La fábrica debería cerrar porque molesta a todo el barrio','El ayuntamiento ya prohibió la carga y la descarga de noche'],c:0,n:'Recoge las dos partes. La tercera exagera: solo lo «estudia».'},
+  {p:P('«María guardó la carta sin abrirla. Durante tres días la miró sobre la mesa, como quien mira una puerta que no se atreve a cruzar.»','¿Qué sugiere la comparación?'),o:['Que María teme lo que la carta puede cambiar en su vida','Que la carta estaba cerrada con llave dentro de un cajón','Que María no sabe leer y necesita que alguien la ayude'],c:0,n:'La puerta = un paso hacia algo desconocido.'},
+  {p:P('«El informe recomienda plantar árboles en las calles más calurosas. Según sus autores, una calle arbolada puede estar varios grados más fresca en verano.»','¿Qué función cumple la segunda oración?'),o:['Da la razón que apoya la recomendación','Presenta un contrargumento a la recomendación','Cuenta una anécdota personal de los autores'],c:0,n:'Es la evidencia.'},
+  {p:P('«Los críticos dicen que el nuevo carril para bicicletas causará atascos. Sin embargo, en las tres ciudades que lo probaron, el tiempo de viaje en carro apenas cambió.»','¿Qué hace el autor en la segunda oración?'),o:['Refuta la objeción con evidencia','Ataca a los críticos personalmente','Cambia de tema para no responder'],c:0,n:'«Sin embargo» + datos.'},
+  {p:P('«La nueva política de la empresa es, sin duda, un desastre total que solo un incompetente podría haber aprobado.»','¿Qué problema tiene el razonamiento?'),o:['Usa palabras cargadas y ataca a la persona sin dar pruebas','Usa demasiados datos con su fuente para un texto breve','Es demasiado objetivo y no deja clara la postura del autor'],c:0,n:'Lenguaje cargado + ataque a la persona.'},
+  {p:P('«El sendero era tan empinado que, al llegar arriba, Tomás tuvo que sentarse en una piedra. Desde allí, el pueblo parecía un juguete.»','¿Qué se puede inferir?'),o:['Tomás está cansado y el pueblo queda muy lejos y abajo','Tomás vive en un pueblo donde fabrican juguetes','El sendero era fácil y Tomás subió sin esfuerzo'],c:0,n:'Se sienta (cansancio); el pueblo se ve pequeño (lejos).'},
+  {p:P('«Recuerde: la renovación del permiso debe hacerse en persona. No se aceptarán solicitudes por correo ni por teléfono.»','¿Qué debe hacer una persona que quiere renovar su permiso?'),o:['Ir a hacer el trámite en persona','Enviar la solicitud por correo','Llamar por teléfono a la oficina'],c:0,n:'Las otras dos están prohibidas en el texto.'},
+  {p:P('Texto 1: «La jornada de cuatro días aumenta la productividad.» Texto 2: «En algunos sectores, como la salud, la jornada de cuatro días es difícil de aplicar.»','¿Cómo se relacionan los textos?'),o:['El texto 2 matiza la idea del texto 1','El texto 2 repite la idea del texto 1','El texto 2 no tiene relación con el texto 1'],c:0,n:'Añade un límite.'},
+  {p:P('«El nuevo puente, inaugurado en 2019, redujo a la mitad el tiempo de viaje entre los dos barrios.»','En el contexto, ¿qué significa «inaugurado»?'),o:['Abierto al público por primera vez','Reparado después de una avería','Diseñado por un equipo de ingenieros'],c:0,n:'Inaugurar = abrir o estrenar.'}
+],null,true);
+
+/* ===== 2. Menú desplegable ===== */
+desplegable('m-de',[
+  {titulo:'Correo de trabajo',t:'Estimado señor López:<br>Le escribo para informarle de que el pedido [[0]] el martes. Los documentos que me pidió [[1]] en el archivo adjunto. Si tiene alguna pregunta, no dude en [[2]].',
+   h:[{o:['llegará','llegara','llegó'],c:0,n:'Hecho futuro anunciado: futuro de indicativo, con tilde.'},
+      {o:['están','está','estás'],c:0,n:'El sujeto es «los documentos» (plural).'},
+      {o:['contactarme','contactarnos a mí','contactándome'],c:0,n:'«No dude en» + infinitivo.'}]},
+  {titulo:'Aviso del edificio',t:'A partir del lunes, el ascensor estará en reparación. [[0]], los vecinos deberán usar las escaleras. Pedimos disculpas a [[1]] tengan dificultades para subir y les ofrecemos ayuda en la portería.',
+   h:[{o:['Por lo tanto','Sin embargo','Por ejemplo'],c:0,n:'Es una consecuencia de la reparación.'},
+      {o:['quienes','quién','cuales'],c:0,n:'Relativo de persona, plural y sin tilde.'}]},
+  {titulo:'Informe escolar',t:'Los estudiantes [[0]] participaron en el proyecto mejoraron sus notas. [[1]] embargo, el informe advierte que el grupo era pequeño, [[2]] los resultados deben tomarse con cautela.',
+   h:[{o:['que','quien','cuyos'],c:0,n:'Relativo que introduce la subordinada.'},
+      {o:['Sin','Con','Por'],c:0,n:'La locución es «sin embargo».'},
+      {o:['así que','aunque','porque'],c:0,n:'Consecuencia: el grupo era pequeño → cautela.'}]},
+  {titulo:'Nota a una vecina',t:'Hola, Carmen: [[0]] un paquete para ti en la portería. Pasa a [[1]] cuando puedas. Si no estoy, [[2]] la llave en el buzón.',
+   h:[{o:['Hay','Ahí','Ay'],c:0,n:'Verbo haber (existe un paquete).'},
+      {o:['recogerlo','recojerlo','recogerla'],c:0,n:'«Recoger» se escribe con g; «el paquete» es masculino.'},
+      {o:['te dejo','te dejé','te dejara'],c:0,n:'Acción que hará (presente con valor de futuro).'}]},
+  {titulo:'Ensayo argumentativo',t:'Algunos opinan que el transporte gratuito es demasiado caro. [[0]], los datos de otras ciudades muestran que el aumento de pasajeros reduce el tráfico. Si la ciudad [[1]] este programa, ahorraría en el mantenimiento de las calles.',
+   h:[{o:['No obstante','Además','En primer lugar'],c:0,n:'Introduce una refutación: contraste.'},
+      {o:['adoptara','adoptaría','adopta'],c:0,n:'Condicional hipotético: «si» + imperfecto de subjuntivo … condicional.'}]},
+  {titulo:'Solicitud de empleo',t:'Me dirijo a ustedes para solicitar el puesto de recepcionista [[0]] publicaron en su página web. Tengo cinco años de experiencia en atención al público, y [[1]] hablo inglés y español con fluidez.',
+   h:[{o:['que','el cual que','cual'],c:0,n:'Relativo simple: «el puesto que publicaron».'},
+      {o:['asimismo','no obstante','por lo tanto'],c:0,n:'Suma otro mérito: adición («asimismo» = además).'}]}
+]);
+
+/* ===== 3. Arrastrar y soltar ===== */
+arrastra('m-ar',[
+  {titulo:'¿Hecho u opinión?',cajas:['Hecho (se puede comprobar)','Opinión (es un juicio)'],
+   fichas:[{t:'La biblioteca abre los domingos de 12 a 5.',c:0},{t:'El 62 % de los usuarios pidió más horas.',c:0},{t:'El nuevo horario es el mejor de la ciudad.',c:1},{t:'Abrir los domingos es una idea genial.',c:1},{t:'La biblioteca tiene 40 computadoras.',c:0},{t:'Los sábados son aburridos sin biblioteca.',c:1}]},
+  {titulo:'Afirmación: «La ciudad debería plantar más árboles en las calles»',cajas:['Apoya la afirmación','Contradice la afirmación','No tiene relación'],
+   fichas:[{t:'Las calles arboladas son más frescas en verano.',c:0},{t:'Los árboles reducen la contaminación del aire.',c:0},{t:'Las raíces pueden romper las aceras si no se cuidan.',c:1},{t:'El mantenimiento de los árboles cuesta dinero cada año.',c:1},{t:'La ciudad tiene tres equipos de fútbol.',c:2},{t:'El alcalde nació en otra ciudad.',c:2}]},
+  {titulo:'Pregunta: ¿Por qué se amplió el horario de la biblioteca? (el 62 % de los usuarios lo pidió en una encuesta)',cajas:['Respuesta correcta','Trampa: extremo','Trampa: no está en el texto'],
+   fichas:[{t:'Porque la mayoría de los usuarios lo pidió.',c:0},{t:'Porque así lo prefería más de la mitad de los usuarios encuestados.',c:0},{t:'Porque todos los vecinos lo exigieron.',c:1},{t:'Porque nadie usaba la biblioteca entre semana.',c:1},{t:'Porque el alcalde quería ganar las elecciones.',c:2},{t:'Porque contrataron a más bibliotecarios.',c:2}]},
+  {titulo:'Recursos literarios',cajas:['Símil (compara con «como»)','Metáfora (identifica sin «como»)','Personificación (da rasgos humanos)'],
+   fichas:[{t:'Sus ojos brillaban como dos linternas.',c:0},{t:'Corría como el viento.',c:0},{t:'Su voz era un río tranquilo.',c:1},{t:'La ciudad es una selva de cemento.',c:1},{t:'El viento susurraba entre las hojas.',c:2},{t:'La casa vieja dormía al final de la calle.',c:2}]},
+  {titulo:'Partes del ensayo argumentativo',cajas:['Introducción','Desarrollo','Conclusión'],
+   fichas:[{t:'Hoy, las bibliotecas de la ciudad cierran los domingos.',c:0},{t:'Este ensayo defiende que deberían abrir ese día.',c:0},{t:'En primer lugar, según una encuesta, el 62 % lo pide.',c:1},{t:'Es cierto que cuesta dinero; sin embargo, podría abrir solo cinco horas.',c:1},{t:'En resumen, abrir los domingos acerca la biblioteca a quien más la necesita.',c:2},{t:'Por todas estas razones, la propuesta merece una prueba de un año.',c:2}],
+   nota:'La introducción presenta el tema y la afirmación; el desarrollo, las razones y la refutación; la conclusión resume y cierra.'},
+  {titulo:'¿Qué tipo de texto es?',cajas:['Informativo','Literario','Argumentativo'],
+   fichas:[{t:'Un memorando sobre el nuevo horario de trabajo',c:0},{t:'Las instrucciones para renovar un permiso',c:0},{t:'Un cuento sobre un hombre que espera en una estación',c:1},{t:'Un poema sobre el mar',c:1},{t:'Una carta al periódico que pide cerrar una calle',c:2},{t:'Un editorial a favor del transporte gratuito',c:2}]}
+]);
+
+/* ===== 4. Simulacro ===== */
+var TEXTOS=[
+ '<div class="sim-texto" id="sim-a"><h3>Texto 1 · Memorando</h3><p class="cab">PARA: Todo el personal de la Clínica Comunitaria del Sur<br>DE: Marta Ibáñez, gerente de operaciones<br>FECHA: 2 de marzo<br>ASUNTO: Nuevo sistema de citas en línea</p>'+
+ '<p><span class="np" aria-hidden="true">1</span>A partir del 1 de abril, los pacientes podrán pedir sus citas en línea, a través del portal de la clínica. El sistema telefónico seguirá funcionando, pero esperamos que la mitad de las citas se pidan en línea antes de fin de año.</p>'+
+ '<p><span class="np" aria-hidden="true">2</span>El cambio responde a un problema que todos conocemos: el año pasado, el tiempo medio de espera al teléfono fue de 14 minutos, y uno de cada cinco pacientes colgó antes de ser atendido. En la prueba piloto de enero, en la que participaron 300 pacientes, el 85 % pidió su cita en línea en menos de cinco minutos.</p>'+
+ '<p><span class="np" aria-hidden="true">3</span>El nuevo sistema no reemplaza al personal de recepción. Al contrario: con menos llamadas, la recepción podrá dedicar más tiempo a los pacientes que necesitan ayuda, en especial a las personas mayores y a quienes no tienen internet.</p>'+
+ '<p><span class="np" aria-hidden="true">4</span>Todo el personal de recepción deberá asistir a una capacitación de tres horas el 20 o el 27 de marzo. Inscríbanse con su supervisor antes del 15 de marzo. Quienes no puedan asistir en esas fechas deben comunicarlo por escrito.</p></div>',
+ '<div class="sim-texto" id="sim-b"><h3>Texto 2 · «El reloj de la estación» (relato)</h3>'+
+ '<p><span class="np" aria-hidden="true">1</span>Don Aurelio llegaba a la estación a las seis menos cuarto, aunque el primer tren no salía hasta las seis y veinte. Se sentaba en el mismo banco, el tercero desde la puerta, y abría el periódico sin leerlo.</p>'+
+ '<p><span class="np" aria-hidden="true">2</span>—¿Otra vez esperando a alguien, don Aurelio? —le preguntaba cada mañana Lucía, la muchacha del quiosco.</p>'+
+ '<p><span class="np" aria-hidden="true">3</span>—Esperando no —contestaba él—. Acompañando.</p>'+
+ '<p><span class="np" aria-hidden="true">4</span>Lucía tardó un año en entender la respuesta. Fue el día en que don Aurelio no apareció y ella, al mirar el banco vacío, sintió que la estación entera se había quedado sin reloj. Entonces comprendió que los trabajadores del turno de madrugada, que pasaban de prisa con los ojos hinchados de sueño, buscaban sin saberlo aquella figura inmóvil del tercer banco: mientras él estuviera allí, todo estaba en su sitio.</p>'+
+ '<p><span class="np" aria-hidden="true">5</span>A la mañana siguiente, don Aurelio volvió con una bufanda nueva y una tos que se le quedaba en el pecho. Lucía le llevó un café sin que él lo pidiera. Él lo aceptó como quien acepta una medalla.</p></div>'];
+var SIM=[
+ {x:0,t:'¿Cuál es el propósito principal del memorando?',o:['Informar al personal de un cambio y de lo que debe hacer','Convencer a los pacientes de que usen más internet','Quejarse del mal servicio telefónico de la clínica','Anunciar que se reducirá el personal de recepción'],c:0,e:'Anuncia el sistema (párr. 1) y las tareas del personal (párr. 4).'},
+ {x:0,t:'¿Qué evidencia usa la autora para justificar el cambio?',o:['La espera media de 14 minutos y que uno de cada cinco colgaba','Que la capacitación del personal dura solo tres horas','Que el sistema telefónico seguirá funcionando igual','Que la clínica tiene un portal en internet desde abril'],c:0,e:'Párrafo 2: el problema que justifica el cambio.'},
+ {x:0,t:'¿Por qué incluye la autora el párrafo 3?',o:['Para responder a la preocupación de que el sistema sustituya al personal','Para anunciar que la clínica contratará más recepcionistas','Para explicar paso a paso cómo funciona el portal en línea','Para pedir al personal que se inscriba en la capacitación'],c:0,e:'«No reemplaza al personal de recepción»: anticipa una objeción.'},
+ {x:0,t:'En el párrafo 2, ¿qué significa «responde a»?',o:['Es una reacción a','Contesta una pregunta de','Está en contra de','Se parece mucho a'],c:0,e:'El cambio se hace por causa del problema.'},
+ {x:0,t:'¿Qué deben hacer quienes no puedan ir a la capacitación?',o:['Comunicarlo por escrito','Llamar a la gerente','Ir el 1 de abril','Pedir una cita en línea'],c:0,e:'Última oración del párrafo 4.'},
+ {x:0,t:'¿Qué afirmación NO se apoya en el memorando?',o:['El sistema telefónico desaparecerá el 1 de abril','Hubo una prueba piloto con pacientes en enero','La capacitación del personal dura tres horas','La recepción ayudará a las personas mayores'],c:0,e:'El texto dice que el sistema telefónico «seguirá funcionando».'},
+ {x:0,t:'¿Cuántos pacientes de la prueba piloto pidieron su cita en línea en menos de cinco minutos?',o:['Unos 255','Unos 85','Unos 300','Unos 45'],c:0,e:'85 % de 300 = 255.'},
+ {x:0,t:'¿Cómo describirías el tono del memorando?',o:['Informativo y tranquilizador','Irónico y burlón con el personal','Alarmado y muy urgente','Nostálgico y algo triste'],c:0,e:'Informa con datos y tranquiliza al personal (párr. 3).'},
+ {x:1,t:'¿Qué quiere decir don Aurelio con «Esperando no. Acompañando»?',o:['Que su presencia hace compañía a quienes pasan por la estación','Que espera todos los días a un familiar que vuelve en tren','Que trabaja en la estación y acompaña a los viajeros al tren','Que acompaña a Lucía mientras ella atiende el quiosco'],c:0,e:'El párrafo 4 lo explica: los trabajadores buscaban su figura.'},
+ {x:1,t:'¿Qué significa que «la estación entera se había quedado sin reloj»?',o:['Que faltaba algo que daba orden y regularidad a la mañana','Que el reloj de la estación se había roto aquel día','Que los trenes salieron tarde por culpa de un reloj','Que Lucía había llegado tarde a abrir el quiosco'],c:0,e:'Don Aurelio era como un reloj: siempre a la misma hora y en el mismo sitio.'},
+ {x:1,t:'¿Cómo cambia Lucía a lo largo del relato?',o:['Pasa de no entender a don Aurelio a valorar su presencia','Pasa de admirar a don Aurelio a sentirse molesta con él','Pasa de trabajar en el quiosco a viajar en el tren','No cambia: siempre piensa lo mismo de don Aurelio'],c:0,e:'Al principio pregunta con curiosidad; al final le lleva un café.'},
+ {x:1,t:'¿A qué hora salía el primer tren?',o:['A las seis y veinte','A las seis menos cuarto','A las seis en punto','A las cinco y veinte'],c:0,e:'Párrafo 1. Las seis menos cuarto es la hora a la que llega don Aurelio (dato mal usado).'},
+ {x:1,t:'¿Qué sugiere la comparación «como quien acepta una medalla»?',o:['Que el café es para él un reconocimiento que lo honra','Que no le gusta el café, pero lo acepta por educación','Que Lucía le cobra el café como si fuera un premio','Que don Aurelio ganó un concurso en la estación'],c:0,e:'Una medalla reconoce un mérito: su compañía.'},
+ {x:1,t:'¿Cuál es el tema del relato?',o:['Las pequeñas presencias cotidianas dan seguridad a una comunidad','Los trenes de madrugada nunca salen a la hora anunciada','Hay que leer el periódico todos los días para estar informado','Los jóvenes de hoy no respetan a las personas mayores'],c:0,e:'La figura del banco ordena la mañana de todos.'},
+ {x:1,t:'¿Por qué menciona el narrador la «tos que se le quedaba en el pecho»?',o:['Sugiere que don Aurelio está enfermo o envejece, y da más valor al gesto de Lucía','Explica por qué don Aurelio abría el periódico sin leerlo cada mañana','Muestra que en la estación hacía calor y los viajeros se sentían mal','Indica que Lucía también estaba enferma y no podía ir a trabajar'],c:0,e:'Explica su ausencia y hace más tierno el café.'}
+];
+(function(){
+  var caja=document.getElementById('sim'), el={}, res=document.getElementById('sim-res'), h='', x=-1;
+  SIM.forEach(function(q,i){
+    if(q.x!==x){x=q.x; h+=TEXTOS[x]+'<p style="margin:6px 0 0"><button type="button" class="btn btn-oir sim-oir" data-x="'+x+'">🔊 Escuchar el texto '+(x+1)+'</button></p>';}
+    var orden=barajar(q.o.map(function(_,j){return j;}));
+    h+='<div class="sim-preg" role="group" aria-labelledby="sim-e'+i+'"><p class="sim-enun" id="sim-e'+i+'"><span class="sim-num">'+(i+1)+'</span>'+q.t+'</p><div class="sim-ops">'+
+      orden.map(function(j){return '<button type="button" class="sim-op" data-i="'+i+'" data-j="'+j+'" aria-pressed="false">'+q.o[j]+'</button>';}).join('')+'</div></div>';
+  });
+  caja.innerHTML=h;
+  caja.addEventListener('click',function(ev){
+    var o=ev.target.closest('.sim-oir'); if(o){var c=document.getElementById(o.getAttribute('data-x')==='0'?'sim-a':'sim-b').cloneNode(true); c.querySelectorAll('.np').forEach(function(n){n.remove();}); hablar(c.textContent,0.9); return;}
+    var b=ev.target.closest('.sim-op'); if(!b||b.disabled)return; var i=b.getAttribute('data-i');
+    caja.querySelectorAll('.sim-op[data-i="'+i+'"]').forEach(function(z){z.classList.remove('elegida');z.setAttribute('aria-pressed','false');});
+    b.classList.add('elegida'); b.setAttribute('aria-pressed','true'); el[i]=+b.getAttribute('data-j');
+  });
+  var cal=document.getElementById('sim-calificar'), rei=document.getElementById('sim-reintentar'), aviso=false;
+  cal.addEventListener('click',function(){
+    var faltan=SIM.length-Object.keys(el).length;
+    if(faltan&&!aviso){aviso=true; res.textContent='Te faltan '+faltan+' pregunta(s). En el examen, una pregunta en blanco es un punto perdido: respóndelas o pulsa otra vez «Ver mi resultado».';
+      res.style.background='#fff3cd'; res.style.color='#5c3900'; res.classList.add('visible'); return;}
+    var bien=0, a=[0,0];
+    SIM.forEach(function(q,i){
+      caja.querySelectorAll('.sim-op[data-i="'+i+'"]').forEach(function(z){var j=+z.getAttribute('data-j'); z.disabled=true; z.classList.remove('elegida');
+        if(j===q.c)z.classList.add('correcta'); else if(el[i]===j)z.classList.add('incorrecta');});
+      if(el[i]===q.c){bien++; a[q.x]++;}
+      var p=document.createElement('p'); p.className='sim-exp'; p.textContent=(el[i]===q.c?'✓ ':'✗ ')+q.e; caja.querySelectorAll('.sim-preg')[i].appendChild(p);
+    });
+    var ok=bien>=12;
+    res.textContent=(ok?'¡Muy bien! ':'Resultado: ')+bien+' de 15 (texto informativo: '+a[0]+' de 8; texto literario: '+a[1]+' de 7). '+(ok?'Estás listo para probar el simulador completo.':'Lee las explicaciones de las preguntas marcadas con ✗, piensa qué trampa te engañó y vuelve a intentarlo.');
+    res.style.background=ok?'#d4edda':'#fff3cd'; res.style.color=ok?'#155724':'#5c3900'; res.classList.add('visible');
+    cal.style.display='none'; rei.style.display='inline-block'; res.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  rei.addEventListener('click',function(){
+    caja.querySelectorAll('.sim-op').forEach(function(z){z.disabled=false; z.classList.remove('correcta','incorrecta','elegida'); z.setAttribute('aria-pressed','false');});
+    caja.querySelectorAll('.sim-exp').forEach(function(n){n.remove();}); el={}; aviso=false;
+    res.classList.remove('visible'); res.textContent=''; rei.style.display='none'; cal.style.display='inline-block';
+    document.getElementById('simulacro').scrollIntoView({block:'start'});
+  });
+})();
+cronometro('crono-sim',30,null,{titulo:'30 minutos para las 15 preguntas, unos 2 minutos por pregunta. Úsalo si quieres practicar con el tiempo del examen.',
+  hitos:{15:'Quedan 15 minutos: a esta altura deberías ir por la pregunta 8.',5:'Quedan 5 minutos: responde todo lo que falte; las preguntas en blanco no suman.'},
+  fin:'⏰ Se acabó el tiempo. Pulsa «Ver mi resultado». Si no terminaste, practica el reparto de 2 minutos por pregunta.'});
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l1-1 · Lección 1.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 1.1 · Las proposiciones subordinadas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 1.1 · Las proposiciones subordinadas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 1 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_1-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 1.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#clasifica">Clasifica la subordinada</a></li>
+    <li><a href="#adverbiales">La relación de la adverbial</a></li>
+    <li><a href="#combina">Combina con precisión</a></li>
+    <li><a href="#dequeismo">¿«Que» o «de que»?</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="clasifica" aria-labelledby="h-clasifica">
+  <h2 id="h-clasifica">1. Clasifica la subordinada</h2>
+  <p class="regla"><strong>Prueba de sustitución:</strong> sustantiva → «eso» · adjetiva → un adjetivo (tiene antecedente) · adverbial → «entonces, allí, así» o responde a ¿por qué?, ¿para qué?…</p>
+  <p class="instr">¿De qué clase es la parte subrayada en negrita?</p>
+  <div id="m-clasifica"></div>
+</section>
+
+<section class="modulo" id="adverbiales" aria-labelledby="h-adverbiales">
+  <h2 id="h-adverbiales">2. La relación de la adverbial</h2>
+  <p class="regla"><strong>Pregúntate:</strong> ¿cuándo? (tiempo) · ¿por qué? (causa) · ¿con qué condición? (condición) · ¿a pesar de qué? (concesión) · ¿para qué? (finalidad) · ¿qué resultó? (consecuencia).</p>
+  <p class="instr">¿Qué relación expresa la subordinada en negrita?</p>
+  <div id="m-adverbiales"></div>
+</section>
+
+<section class="modulo" id="combina" aria-labelledby="h-combina">
+  <h2 id="h-combina">3. Combina con precisión</h2>
+  <p class="regla"><strong>Antes de elegir:</strong> decide qué relación tienen de verdad las dos ideas. La combinación correcta la conserva.</p>
+  <p class="instr">Elige la oración compleja que une las dos ideas con la relación correcta.</p>
+  <div id="m-combina"></div>
+</section>
+
+<section class="modulo" id="dequeismo" aria-labelledby="h-dequeismo">
+  <h2 id="h-dequeismo">4. ¿«Que» o «de que»?</h2>
+  <p class="regla"><strong>Truco de la pregunta:</strong> haz la pregunta con «qué». Si la pregunta lleva «de» (¿de qué te acuerdas?), la oración también: «me acuerdo de que…». Si no (¿qué piensas?), tampoco: «pienso que…».</p>
+  <p class="instr">¿La oración está bien, le sobra «de» o le falta «de»?</p>
+  <div id="m-dequeismo"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_1-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 1.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l1-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+/* ===== Bancos ===== */
+modulo('m-clasifica',[
+  {p:'Es necesario <strong>que llegues temprano</strong>.',c:0,n:'«Es necesario eso»: funciona como sujeto.'},
+  {p:'El libro <strong>que me prestaste</strong> es muy útil.',c:1,n:'Describe a «libro», su antecedente.'},
+  {p:'<strong>Cuando termines el turno</strong>, llámame.',c:2,n:'Responde a «¿cuándo?»; se cambia por «entonces».'},
+  {p:'No sé <strong>si podré ir al examen</strong>.',c:0,n:'«No sé eso»: es lo que no sé.'},
+  {p:'La ciudad <strong>donde nací</strong> está en la costa.',c:1,n:'«Donde» tiene antecedente («la ciudad»): adjetiva.'},
+  {p:'Estudia <strong>donde haya silencio</strong>.',c:2,n:'«Donde» sin antecedente: se cambia por «allí».'},
+  {p:'La maestra, <strong>cuyo hijo estudia conmigo</strong>, vive cerca.',c:1,n:'«Cuyo» introduce una adjetiva que describe a «la maestra».'},
+  {p:'Me preguntó <strong>cómo había resuelto el problema</strong>.',c:0,n:'Es lo que me preguntó: «me preguntó eso».'},
+  {p:'Me molesta <strong>que no avisen los cambios de horario</strong>.',c:0,n:'«Me molesta eso»: es el sujeto de «molesta».'},
+  {p:'Los empleados <strong>que trabajaron el sábado</strong> descansarán el lunes.',c:1,n:'Indica qué empleados: describe a su antecedente.'},
+  {p:'Te llamaré <strong>en cuanto salga de la oficina</strong>.',c:2,n:'Responde a «¿cuándo?»: adverbial de tiempo.'},
+  {p:'Nadie sabe <strong>quién dejó la puerta abierta</strong>.',c:0,n:'«Nadie sabe eso»: interrogativa indirecta, sustantiva.'},
+  {p:'Recuerdo la tarde <strong>en que nos conocimos</strong>.',c:1,n:'«En que» se refiere a «la tarde», su antecedente: adjetiva.'},
+  {p:'No salimos <strong>porque estaba nevando</strong>.',c:2,n:'Responde a «¿por qué?»: adverbial de causa.'},
+  {p:'El vecino <strong>a quien ayudaste</strong> vino a darte las gracias.',c:1,n:'«A quien» se refiere a «el vecino».'},
+  {p:'Prometió <strong>que entregaría el informe el viernes</strong>.',c:0,n:'«Prometió eso»: es lo prometido.'},
+  {p:'Hazlo <strong>como te explicó la supervisora</strong>.',c:2,n:'Sin antecedente: se cambia por «así» (modo).'},
+  {p:'Es una costumbre <strong>que viene de mis abuelos</strong>.',c:1,n:'Describe a «costumbre»: «una costumbre familiar».'}
+],['Sustantiva','Adjetiva','Adverbial']);
+
+var REL=['Tiempo','Causa','Condición','Concesión','Finalidad','Consecuencia'];
+modulo('m-adverbiales',[
+  {p:'<strong>Aunque estaba cansada</strong>, terminó la tarea.',c:3,n:'Terminó a pesar del cansancio.'},
+  {p:'Te lo explico <strong>para que no te equivoques</strong>.',c:4,n:'Responde a «¿para qué?».'},
+  {p:'Llegó tarde <strong>porque perdió el autobús</strong>.',c:1,n:'Responde a «¿por qué?».'},
+  {p:'<strong>Si estudias cada día</strong>, aprobarás.',c:2,n:'El resultado depende de la condición.'},
+  {p:'Estudió <strong>tanto que aprobó con buena nota</strong>.',c:5,n:'«Tanto… que» presenta el resultado.'},
+  {p:'<strong>Mientras tú cocinas</strong>, yo pongo la mesa.',c:0,n:'Las dos acciones ocurren a la vez.'},
+  {p:'<strong>Ya que estás aquí</strong>, ayúdame con esto.',c:1,n:'«Ya que» presenta la causa.'},
+  {p:'No firmes nada <strong>a menos que lo hayas leído</strong>.',c:2,n:'«A menos que» = «si no»: condición.'},
+  {p:'<strong>A pesar de que tenía fiebre</strong>, fue a trabajar.',c:3,n:'Fue a trabajar a pesar de la fiebre.'},
+  {p:'Habló despacio <strong>a fin de que todos lo entendieran</strong>.',c:4,n:'«A fin de que» = «para que».'},
+  {p:'Se fue la luz, <strong>así que cenamos con velas</strong>.',c:5,n:'Cenar con velas es el resultado del apagón.'},
+  {p:'<strong>Antes de que cierren la tienda</strong>, compra el pan.',c:0,n:'Responde a «¿cuándo?».'},
+  {p:'<strong>Como no contestaban</strong>, dejé un mensaje.',c:1,n:'«Como» al principio de la oración expresa causa.'},
+  {p:'<strong>Siempre que llegues a tiempo</strong>, podrás entrar.',c:2,n:'«Siempre que» aquí significa «con tal de que».'},
+  {p:'<strong>Si bien el sueldo es bajo</strong>, el horario le conviene.',c:3,n:'«Si bien» = «aunque»: concesión, no condición.'},
+  {p:'Hacía tanto frío <strong>que se congeló el agua de la fuente</strong>.',c:5,n:'«Tanto… que»: el congelamiento es la consecuencia.'}
+],REL);
+
+modulo('m-combina',[
+  {p:'«La empresa bajó los precios.» + «Las ventas aumentaron.»',o:['Como la empresa bajó los precios, las ventas aumentaron.','Aunque la empresa bajó los precios, las ventas aumentaron.','Para que la empresa bajara los precios, las ventas aumentaron.'],c:0,n:'Bajar los precios es la causa del aumento.'},
+  {p:'«Ahorró durante dos años.» + «Quería comprar una casa.»',o:['Ahorró durante dos años para comprar una casa.','Ahorró dos años, así que quería comprar una casa.','Aunque quería comprar una casa, ahorró dos años.'],c:0,n:'Comprar la casa es la finalidad.'},
+  {p:'«Conocí a una enfermera.» + «Su hermano trabaja conmigo.»',o:['Conocí a una enfermera cuyo hermano trabaja conmigo.','Conocí a una enfermera que su hermano trabaja conmigo.','Conocí a una enfermera, porque su hermano trabaja conmigo.'],c:0,n:'«Cuyo» expresa posesión; «que su» es un error.'},
+  {p:'«El examen era difícil.» + «Lo aprobó.»',o:['A pesar de que el examen era difícil, lo aprobó.','Como el examen era difícil, lo aprobó sin más.','Si el examen era difícil, entonces lo aprobó.'],c:0,n:'Lo aprobó a pesar de la dificultad: concesión.'},
+  {p:'«Revisé el contrato.» + «El abogado me lo envió ayer.»',o:['Revisé el contrato que el abogado me envió ayer.','Revisé el contrato para que el abogado lo envió ayer.','Aunque el abogado me lo envió ayer, revisé el contrato.'],c:0,n:'La segunda idea describe al contrato: adjetiva.'},
+  {p:'«Llueve mucho.» + «Suspenderán el partido.»',o:['Si llueve mucho, suspenderán el partido.','Aunque llueva mucho, suspenderán el partido.','Para que llueva mucho, suspenderán el partido.'],c:0,n:'La suspensión depende de la lluvia: condición.'},
+  {p:'«El tren se retrasó.» + «Llegué tarde a la entrevista.»',o:['El tren se retrasó, de modo que llegué tarde a la entrevista.','El tren se retrasó, aunque llegué tarde a la entrevista.','El tren se retrasó para que llegara tarde a la entrevista.'],c:0,n:'Llegar tarde es la consecuencia del retraso.'},
+  {p:'«Terminó el turno.» + «Recogió a sus hijos.»',o:['Cuando terminó el turno, recogió a sus hijos.','Aunque terminó el turno, recogió a sus hijos.','Si terminó el turno, por eso recogió a sus hijos.'],c:0,n:'Una acción sigue a la otra: tiempo.'},
+  {p:'«Escribe con letra clara.» + «El cartero entenderá la dirección.»',o:['Escribe con letra clara para que el cartero entienda la dirección.','Escribe con letra clara aunque el cartero entienda la dirección.','Escribe con letra clara, cuyo cartero entiende la dirección.'],c:0,n:'Que el cartero entienda es la finalidad.'},
+  {p:'«Mi prima vive en Texas.» + «Viene a vernos cada verano.»',o:['Mi prima, que vive en Texas, viene a vernos cada verano.','Mi prima vive en Texas para que venga a vernos cada verano.','Mi prima, aunque viene cada verano, que vive en Texas.'],c:0,n:'Una adjetiva explicativa, entre comas, añade un dato sobre la prima.'}
+],null,true);
+
+modulo('m-dequeismo',[
+  {p:'Pienso de que tienes razón.',c:1,n:'¿Qué piensas? → «pienso que».'},
+  {p:'Me di cuenta que había olvidado las llaves.',c:2,n:'¿De qué te diste cuenta? → «me di cuenta de que».'},
+  {p:'Me acuerdo de que llovía.',c:0,n:'¿De qué te acuerdas? → «me acuerdo de que».'},
+  {p:'Es seguro de que vendrá.',c:1,n:'¿Qué es seguro? → «es seguro que».'},
+  {p:'Estoy seguro que vendrá.',c:2,n:'¿De qué estás seguro? → «estoy seguro de que».'},
+  {p:'Nos dijeron de que esperáramos.',c:1,n:'¿Qué nos dijeron? → «nos dijeron que».'},
+  {p:'Me alegro de que hayas venido.',c:0,n:'¿De qué te alegras? → «me alegro de que».'},
+  {p:'Creo de que el examen será el lunes.',c:1,n:'¿Qué crees? → «creo que».'},
+  {p:'Tengo la impresión que no me escuchaste.',c:2,n:'¿De qué tienes la impresión? → «tengo la impresión de que».'},
+  {p:'Es posible que llueva mañana.',c:0,n:'¿Qué es posible? → «es posible que».'},
+  {p:'Estoy convencido que tienes razón.',c:2,n:'¿De qué estás convencido? → «estoy convencido de que».'},
+  {p:'Me parece de que es tarde.',c:1,n:'¿Qué te parece? → «me parece que».'},
+  {p:'No cabe duda de que es la mejor opción.',c:0,n:'¿De qué no cabe duda? → «no cabe duda de que».'},
+  {p:'Se olvidó que tenía cita con el médico.',c:2,n:'«Olvidarse» lleva «de»: «se olvidó de que». (Sin «se» sería «olvidó que».)'},
+  {p:'Resulta de que no había nadie.',c:1,n:'¿Qué resulta? → «resulta que».'},
+  {p:'Ten en cuenta de que el banco cierra a las cinco.',c:1,n:'¿Qué tienes en cuenta? → «ten en cuenta que».'}
+],['Está bien','Sobra «de»','Falta «de»']);
+
+/* Abre el módulo de la dirección (#ancla) */
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l5-3 · Lección 5.3 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.3 · Integrar fuentes de varios formatos</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+  .mini{width:100%;border-collapse:collapse;margin:6px 0;font-family:'Segoe UI',Arial,sans-serif;font-size:.92rem;background:#fff}
+  .mini th{background:var(--cp-oscuro);color:#fff;padding:4px 8px;text-align:left}
+  .mini td{border:1px solid #d6dde4;padding:4px 8px}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 5.3 · Integrar fuentes de varios formatos</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 5 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_5-3.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 5.3</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Las ciudades, personas y datos de esta práctica son inventados.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#de-que-fuente">¿De qué fuente sale?</a></li>
+    <li><a href="#tensiones">Coinciden, se contradicen o se complementan</a></li>
+    <li><a href="#sintesis">La síntesis mejor respaldada</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="de-que-fuente" aria-labelledby="h-dq">
+  <h2 id="h-dq">1. ¿De qué fuente sale?</h2>
+  <p class="regla"><strong>Las tres fuentes sobre el centro comunitario de Altamira:</strong></p>
+  <p class="pas"><strong>Texto:</strong> la directora dice: «Las clases de inglés son lo que más piden los vecinos; abrimos un segundo grupo porque había lista de espera». <br><strong>Gráfica:</strong> alumnos inscritos en las clases de inglés por año: 2022, 40; 2023, 55; 2024, 80; 2025, 120. <br><strong>Tabla</strong> (encuesta de la ciudad, 2025): el 62 % de los vecinos que no se inscribieron dijo que el horario no le convenía; el 21 %, que no sabía que existían las clases; el 17 %, otras razones.</p>
+  <p class="instr">¿De qué fuente sale la información?</p>
+  <div id="m-dq"></div>
+</section>
+
+<section class="modulo" id="tensiones" aria-labelledby="h-ten">
+  <h2 id="h-ten">2. Coinciden, se contradicen o se complementan</h2>
+  <p class="regla"><strong>Coinciden:</strong> dicen lo mismo. <strong>Se contradicen:</strong> una desmiente a la otra. <strong>Se complementan:</strong> cada una aporta una parte distinta del mismo asunto.</p>
+  <p class="instr">¿Qué relación hay entre las dos fuentes?</p>
+  <div id="m-ten"></div>
+</section>
+
+<section class="modulo" id="sintesis" aria-labelledby="h-sin">
+  <h2 id="h-sin">3. La síntesis mejor respaldada</h2>
+  <p class="regla"><strong>Una buena síntesis</strong> usa todas las fuentes, señala las tensiones, llega a una conclusión que ninguna da sola y no dice más de lo que los datos permiten.</p>
+  <p class="instr">Elige la mejor síntesis.</p>
+  <div id="m-sin"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_5-3.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 5.3</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l5-3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-dq',[
+  {p:'En 2025 hubo 120 alumnos inscritos.',c:1,n:'Dato anual de la gráfica.'},
+  {p:'Se abrió un segundo grupo por la lista de espera.',c:0,n:'Lo dice la directora.'},
+  {p:'El 62 % de los que no se inscribieron dijo que el horario no le convenía.',c:2,n:'Encuesta en la tabla.'},
+  {p:'Los inscritos se triplicaron entre 2022 y 2025.',c:1,n:'De 40 a 120: se calcula con la gráfica.'},
+  {p:'Las clases de inglés son lo más pedido por los vecinos.',c:0,n:'Afirmación de la directora.'},
+  {p:'Uno de cada cinco vecinos que no se inscribió no sabía que existían las clases.',c:2,n:'21 %, casi uno de cada cinco.'},
+  {p:'Entre 2023 y 2024 se inscribieron 25 alumnos más.',c:1,n:'De 55 a 80.'},
+  {p:'Hay vecinos que no se inscriben por razones distintas del horario y la información.',c:2,n:'El 17 % de «otras razones».'}
+],['Texto','Gráfica','Tabla']);
+
+modulo('m-ten',[
+  {p:'Directora: «las clases son lo que más piden los vecinos» · Gráfica: los inscritos crecen cada año.',c:0,n:'Las dos apuntan a una demanda alta.'},
+  {p:'Gráfica: cuántos se inscriben · Tabla: por qué otros no se inscriben.',c:2,n:'Cada una aporta una parte del asunto.'},
+  {p:'Concejal: «el tren cada año lo usa menos gente» · Gráfica: los pasajeros suben cada año desde 2020.',c:1,n:'Los datos desmienten la afirmación.'},
+  {p:'Informe A: «la tienda vendió 10,000 dólares en marzo» · Informe B: «las ventas de marzo fueron de 10,000 dólares».',c:0,n:'Dicen lo mismo.'},
+  {p:'Un vecino: «el parque está siempre vacío» · Conteo de la ciudad: 300 visitantes diarios en promedio.',c:1,n:'El conteo contradice la impresión.'},
+  {p:'Artículo: por qué cerró la fábrica · Tabla: cuántos empleos se perdieron en el condado.',c:2,n:'Las causas y las consecuencias.'},
+  {p:'Médica: «la vacuna reduce los casos graves» · Estudio: los vacunados tuvieron cinco veces menos hospitalizaciones.',c:0,n:'El estudio respalda lo que dice la médica.'},
+  {p:'Anuncio: «el producto más vendido del país» · Datos de ventas: ocupa el quinto lugar.',c:1,n:'Los datos desmienten el anuncio.'}
+],['Coinciden','Se contradicen','Se complementan']);
+
+modulo('m-sin',[
+  {p:P('Texto (directora): «Las clases de inglés son lo que más piden los vecinos». Gráfica: inscritos 40 → 55 → 80 → 120 (2022-2025). Tabla: el 62 % de los que no se inscribieron dice que el horario no le conviene.','¿Qué síntesis integra mejor las tres fuentes?'),o:['La demanda crece cada año y, como el horario frena a muchos, ofrecer otros horarios podría sumar más alumnos','Las clases de inglés son un éxito total y no necesitan ningún cambio','Los vecinos no quieren clases de inglés porque el horario es malo'],c:0,n:'Usa las tres y no exagera.'},
+  {p:P('Concejal: «el tren es un fracaso». Gráfica: los pasajeros casi volvieron al nivel de 2019. Tabla: el tren cuesta 70 centavos más por viaje que el autobús, pero ahorra 16 minutos.','¿Qué síntesis es la mejor respaldada?'),o:['El tren cuesta más, pero es más rápido y se ha recuperado; llamarlo «fracaso» no se sostiene','El concejal tiene razón: el tren es un fracaso y hay que cerrarlo','El tren es perfecto: no cuesta más que el autobús'],c:0,n:'Integra los datos y corrige la afirmación sin exagerar.'},
+  {p:P('Artículo: «la nueva planta traerá 500 empleos». Informe del condado: el 60 % de los empleos exige un certificado técnico. Encuesta: solo el 15 % de los desempleados del condado lo tiene.','¿Qué síntesis es la mejor respaldada?'),o:['La planta traerá empleos, pero sin formación técnica muchos desempleados locales no podrán ocuparlos','La planta resolverá el desempleo del condado','La planta no traerá ningún empleo para nadie'],c:0,n:'Combina la promesa con los requisitos y la realidad local.'},
+  {p:P('Gráfica: la temperatura media de julio en la ciudad subió 2 grados en 30 años. Tabla: las visitas a urgencias por calor se duplicaron en el mismo periodo. Texto: el alcalde dice que «la ciudad está preparada para el calor».','¿Qué síntesis es la mejor respaldada?'),o:['Los datos muestran más calor y más urgencias, lo que pone en duda que la ciudad esté preparada','El alcalde tiene razón porque es la autoridad de la ciudad','El calor no tiene ninguna relación con las urgencias'],c:0,n:'Los datos cuestionan la declaración sin afirmar más de lo que muestran.'},
+  {p:P('Dos fuentes sobre una biblioteca: la gráfica muestra más visitas los sábados; la encuesta dice que los usuarios piden abrir los domingos.','¿Qué le falta a la síntesis «La biblioteca tiene más visitas los sábados»?'),o:['Relacionar el dato con la petición de abrir los domingos','Escribir la cifra exacta de visitas del sábado','Decir el nombre de la bibliotecaria'],c:0,n:'Una síntesis combina, no repite un dato.'},
+  {p:P('Texto: «el programa de comidas escolares mejoró las notas». Gráfica: las notas subieron el mismo año en que empezó el programa. Tabla: ese año también se contrataron 20 maestros nuevos.','¿Qué síntesis es la más prudente?'),o:['Las notas subieron, pero no se puede atribuir la mejora solo al programa, porque hubo otros cambios','El programa de comidas fue la única causa de la mejora','Los maestros nuevos fueron la única causa de la mejora'],c:0,n:'Evita la falsa causa: hay más de una explicación posible.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

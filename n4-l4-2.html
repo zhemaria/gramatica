@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l4-2 · Lección 4.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.2 · Retórica y estilo del autor</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 4.2 · Retórica y estilo del autor</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 4 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_4-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 4.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco. Salvo las citas de Martí, todos los ejemplos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#recursos">Los recursos retóricos</a></li>
+    <li><a href="#tono">El tono del texto</a></li>
+    <li><a href="#estilo">Compara dos estilos</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="recursos" aria-labelledby="h-recursos">
+  <h2 id="h-recursos">1. Los recursos retóricos</h2>
+  <p class="regla"><strong>Anáfora</strong> (repetir al comienzo) · <strong>enumeración</strong> (serie) · <strong>gradación</strong> (de menos a más) · <strong>antítesis</strong> (opuestos) · <strong>pregunta retórica</strong> · <strong>hipérbole</strong> (exagerar) · <strong>metáfora</strong> · <strong>símil</strong> (con «como») · <strong>sentencia</strong> (enseñanza breve).</p>
+  <p class="instr">¿Qué recurso aparece?</p>
+  <div id="m-recursos"></div>
+</section>
+
+<section class="modulo" id="tono" aria-labelledby="h-tono">
+  <h2 id="h-tono">2. El tono del texto</h2>
+  <p class="regla"><strong>El tono</strong> es la actitud que transmite el texto. Fíjate en las palabras, el ritmo y los recursos: ¿suena urgente, solemne, irónico, nostálgico, esperanzado, indignado…?</p>
+  <p class="instr">¿Qué tono tiene el fragmento?</p>
+  <div id="m-tono"></div>
+</section>
+
+<section class="modulo" id="estilo" aria-labelledby="h-estilo">
+  <h2 id="h-estilo">3. Compara dos estilos</h2>
+  <p class="regla"><strong>Compara</strong> las palabras (concretas o abstractas), las oraciones (breves o largas), las imágenes y el tono. La forma cambia el efecto.</p>
+  <p class="instr">Responde sobre los dos fragmentos.</p>
+  <div id="m-estilo"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_4-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 4.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l4-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-recursos',[
+  {p:'«Queremos escuelas. Queremos trabajo. Queremos respeto.»',o:['Anáfora','Hipérbole','Símil'],c:0,n:'Repite «Queremos» al comienzo.'},
+  {p:'«Es fácil prometer; es difícil cumplir.»',o:['Antítesis','Enumeración','Pregunta retórica'],c:0,n:'Opone ideas contrarias.'},
+  {p:'«¿Hasta cuándo vamos a esperar?»',o:['Pregunta retórica','Sentencia','Gradación'],c:0,n:'No espera respuesta.'},
+  {p:'«Lo dudó, lo temió, lo supo.»',o:['Gradación','Antítesis','Metáfora'],c:0,n:'De menor a mayor certeza.'},
+  {p:'«He esperado una eternidad en esta fila.»',o:['Hipérbole','Símil','Anáfora'],c:0,n:'Exageración.'},
+  {p:'«Trincheras de ideas valen más que trincheras de piedra.» (Martí)',o:['Sentencia','Pregunta retórica','Enumeración'],c:0,n:'Enseñanza breve que parece verdad de siempre (con antítesis y metáfora).'},
+  {p:'«Los pueblos que no se conocen han de darse prisa para conocerse, como quienes van a pelear juntos.» (Martí)',o:['Símil','Anáfora','Hipérbole'],c:0,n:'Comparación con «como».'},
+  {p:'«En la maleta llevaba dos camisas, una foto, la dirección de un primo y todo su futuro.»',o:['Enumeración','Pregunta retórica','Antítesis'],c:0,n:'Serie que termina con un elemento inesperado.'},
+  {p:'«La ciudad es una selva de cemento.»',o:['Metáfora','Símil','Gradación'],c:0,n:'Identifica una cosa con otra, sin «como».'},
+  {p:'«Quien madruga, Dios lo ayuda.»',o:['Sentencia','Hipérbole','Anáfora'],c:0,n:'Refrán con enseñanza general.'},
+  {p:'«Nadie nos regaló nada. Nadie nos abrió la puerta. Nadie creyó en nosotros.»',o:['Anáfora','Símil','Metáfora'],c:0,n:'«Nadie» al comienzo de cada frase.'},
+  {p:'«Llegaron pobres y se fueron ricos; llegaron solos y se fueron con una familia.»',o:['Antítesis','Gradación','Hipérbole'],c:0,n:'Opone pobres/ricos, solos/familia.'},
+  {p:'«Primero fue un rumor, luego una queja, después una protesta y al final una huelga.»',o:['Gradación','Antítesis','Símil'],c:0,n:'Aumenta la intensidad.'},
+  {p:'«Sus manos eran ásperas como la corteza de un árbol.»',o:['Símil','Metáfora','Sentencia'],c:0,n:'Comparación con «como».'}
+],null,true);
+
+modulo('m-tono',[
+  {p:P('«¡Basta ya de promesas! Llevamos diez años esperando el parque que nos prometieron. Diez años. ¿Cuántos más?»','¿Qué tono tiene?'),o:['Indignado','Nostálgico','Neutro'],c:0,n:'Exclamación, repetición y pregunta retórica.'},
+  {p:P('«Todavía huele a canela la cocina de mi abuela, aunque la casa se vendió hace veinte años.»','¿Qué tono tiene?'),o:['Nostálgico','Indignado','Técnico'],c:0,n:'Recuerdo de lo que se perdió.'},
+  {p:P('«Gobernante, en un pueblo nuevo, quiere decir creador.» (Martí)','¿Qué tono tiene?'),o:['Solemne','Burlón','Triste'],c:0,n:'Sentencia breve y segura.'},
+  {p:P('«El paciente debe tomar una pastilla cada ocho horas durante diez días.»','¿Qué tono tiene?'),o:['Neutro e informativo','Esperanzado','Irónico'],c:0,n:'Instrucción sin emoción.'},
+  {p:P('«Qué maravilla de servicio: solo tardaron tres semanas en contestar mi correo.»','¿Qué tono tiene?'),o:['Irónico','Agradecido','Solemne'],c:0,n:'Elogio que esconde una queja.'},
+  {p:P('«Mañana será distinto. Mañana abriremos la escuela, y cada niño tendrá un pupitre y un libro.»','¿Qué tono tiene?'),o:['Esperanzado','Resignado','Burlón'],c:0,n:'Anáfora de «mañana» y visión positiva.'},
+  {p:P('«Estos tiempos no son para acostarse con el pañuelo a la cabeza…» (Martí)','¿Qué tono tiene?'),o:['Urgente','Relajado','Nostálgico'],c:0,n:'No es momento de dormir.'},
+  {p:P('«Ya da igual. Que hagan lo que quieran; nadie nos escucha nunca.»','¿Qué tono tiene?'),o:['Resignado','Entusiasta','Solemne'],c:0,n:'Se rinde ante la situación.'},
+  {p:P('«Hermanos, hoy no venimos a pedir: venimos a recordar que esta tierra también es nuestra.»','¿Qué tono tiene?'),o:['Combativo y fraterno','Burlón y ligero','Neutro y técnico'],c:0,n:'Llamado colectivo y firme.'},
+  {p:P('«El comité se reunió el martes y aprobó el presupuesto por siete votos a dos.»','¿Qué tono tiene?'),o:['Neutro','Indignado','Nostálgico'],c:0,n:'Información sin valoración.'}
+],null,true);
+
+modulo('m-estilo',[
+  {p:P('A: «Los pueblos que no se conocen han de darse prisa para conocerse, como quienes van a pelear juntos.» (Martí)<br>B: «Es conveniente que los países de la región mejoren el conocimiento mutuo.»','¿Qué tiene A que no tiene B?'),o:['Una imagen que provoca emoción','Una información más exacta','Más palabras técnicas'],c:0,n:'El símil de la batalla.'},
+  {p:P('A: «Llovía. Hacía frío. Nadie vino.»<br>B: «Aquella tarde, mientras la lluvia caía sin descanso sobre los tejados y el frío se metía por las rendijas, comprendió que nadie iba a venir.»','¿Cómo se diferencian?'),o:['A usa oraciones breves y secas; B, una oración larga y descriptiva','A es más alegre que B','B tiene menos información que A'],c:0,n:'El ritmo cambia el efecto: A golpea; B envuelve.'},
+  {p:P('A: «La empresa redujo su plantilla.»<br>B: «La empresa dejó a doscientas familias sin sueldo.»','¿Qué hace B?'),o:['Usa palabras concretas que despiertan emoción','Usa un eufemismo para suavizar la noticia','Da un dato menos preciso que A'],c:0,n:'B concreta y humaniza; A suaviza.'},
+  {p:P('A: «Se recomienda hacer ejercicio con regularidad.»<br>B: «Muévete. Tu corazón te lo agradecerá.»','¿Para qué público parece escrito B?'),o:['Para un lector común al que se quiere motivar','Para una revista científica especializada','Para un informe técnico del gobierno'],c:0,n:'Tú, imperativo y tono cercano.'},
+  {p:P('A: «¿Cuántos niños más tienen que quedarse atrás?»<br>B: «Muchos niños no tienen acceso a una computadora.»','¿Qué recurso usa A que no usa B?'),o:['Pregunta retórica','Dato con su fuente','Enumeración'],c:0,n:'A involucra al lector.'},
+  {p:P('A: «El amor duele.»<br>B: «Es hielo abrasador, es fuego helado.» (Quevedo)','¿Qué logra B que no logra A?'),o:['Expresa la contradicción del amor con imágenes','Da una definición científica del amor','Es más fácil de entender a primera vista'],c:0,n:'Las paradojas hacen sentir lo contradictorio.'},
+  {p:P('A: «El tren llegó con retraso.»<br>B: «El tren llegó, como siempre, con su elegante media hora de retraso.»','¿Qué tono añade B?'),o:['Irónico','Solemne','Nostálgico'],c:0,n:'«Elegante» y «como siempre» se burlan.'},
+  {p:P('Un mismo mensaje se escribe para un discurso de graduación y para el acta de una reunión.','¿Qué conclusión es correcta?'),o:['El estilo debe ajustarse al propósito y al público','El estilo del discurso es siempre mejor','El acta debe usar muchas metáforas'],c:0,n:'Ningún estilo es mejor en general.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

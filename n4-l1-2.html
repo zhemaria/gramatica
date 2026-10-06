@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l1-2 · Lección 1.2 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 1.2 · Estructura paralela y convenciones</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 1.2 · Estructura paralela y convenciones</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 1 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_1-2.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 1.2</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#paralelo">¿Paralela o rota?</a></li>
+    <li><a href="#repara">Repara el paralelismo</a></li>
+    <li><a href="#correlativos">Los pares correlativos</a></li>
+    <li><a href="#concordancia">Control de las convenciones</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="paralelo" aria-labelledby="h-paralelo">
+  <h2 id="h-paralelo">1. ¿Paralela o rota?</h2>
+  <p class="regla"><strong>Prueba rápida:</strong> lee la parte común con cada elemento por separado. Si todos funcionan igual (todos infinitivos, todos sustantivos, todos adjetivos…), la serie es paralela.</p>
+  <p class="instr">¿La serie mantiene la misma forma gramatical?</p>
+  <div id="m-paralelo"></div>
+</section>
+
+<section class="modulo" id="repara" aria-labelledby="h-repara">
+  <h2 id="h-repara">2. Repara el paralelismo</h2>
+  <p class="regla"><strong>Para reparar:</strong> elige una forma (la de la mayoría de los elementos) y pon todos los elementos en esa forma.</p>
+  <p class="instr">Elige la versión que mantiene la estructura paralela.</p>
+  <div id="m-repara"></div>
+</section>
+
+<section class="modulo" id="correlativos" aria-labelledby="h-correlativos">
+  <h2 id="h-correlativos">3. Los pares correlativos</h2>
+  <p class="regla"><strong>Recuerda:</strong> <em>no solo… sino (también)</em>, nunca «pero también»; <em>sino que</em> ante verbo conjugado; la misma forma detrás de cada mitad de <em>tanto… como</em> y <em>ni… ni</em>.</p>
+  <p class="instr">Elige la oración correcta.</p>
+  <div id="m-correlativos"></div>
+</section>
+
+<section class="modulo" id="concordancia" aria-labelledby="h-concordancia">
+  <h2 id="h-concordancia">4. Control de las convenciones</h2>
+  <p class="regla"><strong>Revisa:</strong> <em>haber</em> impersonal en singular (hubo, había) · <em>se venden</em> en plural si lo vendido es plural · el verbo concuerda con el núcleo del sujeto · tiempos coherentes · <em>el agua fría</em>.</p>
+  <p class="instr">Elige la oración correcta.</p>
+  <div id="m-concordancia"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_1-2.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 1.2</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l1-2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+modulo('m-paralelo',[
+  {p:'Me gusta leer, nadar y la cocina.',c:1,n:'Mejor: «leer, nadar y cocinar».'},
+  {p:'Buscamos a una persona responsable, amable y organizada.',c:0,n:'Tres adjetivos.'},
+  {p:'Para el examen necesitas descansar, comer bien y que llegues temprano.',c:1,n:'Mejor: «descansar, comer bien y llegar temprano».'},
+  {p:'Vine a aprender, a practicar y a aprobar.',c:0,n:'Tres veces «a + infinitivo».'},
+  {p:'El curso es corto, gratuito y se puede tomar en línea.',c:1,n:'Mejor: «corto, gratuito y en línea».'},
+  {p:'La reunión trató de los horarios, los salarios y las vacaciones.',c:0,n:'Tres sustantivos con su artículo.'},
+  {p:'Mi hermano trabaja de día, estudia de noche y descansa los domingos.',c:0,n:'Tres verbos en presente con un complemento de tiempo.'},
+  {p:'La receta pide cortar la cebolla, freír el ajo y después la sal.',c:1,n:'Mejor: «cortar la cebolla, freír el ajo y añadir la sal».'},
+  {p:'El apartamento es amplio, luminoso y tiene buena ubicación.',c:1,n:'Mejor: «amplio, luminoso y bien ubicado».'},
+  {p:'Revisa el informe con calma, con atención y con espíritu crítico.',c:0,n:'Tres veces «con + sustantivo».'},
+  {p:'Sus metas son aprobar el GED, conseguir un mejor empleo y la universidad.',c:1,n:'Mejor: «… y entrar en la universidad».'},
+  {p:'Ni el frío, ni la lluvia, ni el cansancio lo detuvieron.',c:0,n:'Tres sustantivos con su artículo, cada uno con «ni».'},
+  {p:'La nueva gerente es exigente, justa y le gusta escuchar.',c:1,n:'Mejor: «exigente, justa y dispuesta a escuchar».'},
+  {p:'Antes de salir, apaga las luces, cierra las ventanas y revisa la estufa.',c:0,n:'Tres imperativos con su complemento.'}
+],['Paralela','Paralelismo roto']);
+
+modulo('m-repara',[
+  {p:'«Mis tareas son atender el teléfono, la recepción de paquetes y archivar facturas.»',o:['Mis tareas son atender el teléfono, recibir paquetes y archivar facturas.','Mis tareas son atender el teléfono, la recepción y que archive facturas.','Mis tareas son el teléfono, recibir paquetes y el archivo de facturas.'],c:0,n:'Tres infinitivos.'},
+  {p:'«Prefiero cocinar en casa que los restaurantes.»',o:['Prefiero cocinar en casa a comer en restaurantes.','Prefiero cocinar en casa que comer en los restaurantes.','Prefiero la cocina en casa que comer en restaurantes.'],c:0,n:'Acción frente a acción, con «preferir… a».'},
+  {p:'Viñetas: «Organicé eventos · Responsable de las redes · Atención a clientes».',o:['Organicé eventos · Manejé las redes · Atendí a clientes','Organicé eventos · Las redes · Atendiendo a clientes','Organización de eventos · Manejé las redes · Atender a clientes'],c:0,n:'Las tres viñetas empiezan con un verbo en pretérito.'},
+  {p:'«La clínica ofrece vacunas, consultas y además puedes hacerte análisis.»',o:['La clínica ofrece vacunas, consultas y análisis.','La clínica ofrece vacunar, consultas y análisis.','La clínica ofrece vacunas, consultar y además análisis.'],c:0,n:'Tres sustantivos.'},
+  {p:'«Para inscribirte necesitas una identificación, comprobante de domicilio y pagar la cuota.»',o:['Para inscribirte necesitas una identificación, un comprobante de domicilio y el pago de la cuota.','Para inscribirte necesitas identificarte, un comprobante y el pago de la cuota.','Para inscribirte necesitas una identificación, comprobar el domicilio y la cuota pagada.'],c:0,n:'Tres sustantivos con su artículo.'},
+  {p:'«El taller enseña a planificar, la redacción y cómo revisar.»',o:['El taller enseña a planificar, a redactar y a revisar.','El taller enseña a planificar, redacción y a revisar.','El taller enseña la planificación, a redactar y cómo revisar.'],c:0,n:'Tres veces «a + infinitivo».'},
+  {p:'«Es mejor hablar claro que las indirectas.»',o:['Es mejor hablar claro que lanzar indirectas.','Es mejor hablar claro que con las indirectas.','Es mejor la claridad que lanzar indirectas.'],c:0,n:'Se comparan dos acciones.'},
+  {p:'«La empresa busca empleados puntuales, con experiencia y que hablen inglés.»',o:['La empresa busca empleados puntuales, experimentados y bilingües.','La empresa busca empleados puntuales, experiencia y que hablen inglés.','La empresa busca puntualidad, con experiencia y bilingües.'],c:0,n:'Tres adjetivos.'},
+  {p:'«Sus aficiones son la pesca, cocinar y los crucigramas.»',o:['Sus aficiones son la pesca, la cocina y los crucigramas.','Sus aficiones son pescar, la cocina y hacer los crucigramas.','Sus aficiones son la pesca, cocinar y hacer crucigramas.'],c:0,n:'Tres sustantivos con su artículo.'},
+  {p:'Instrucciones: «1. Lave las manos · 2. Se secan con toalla · 3. Ponerse los guantes».',o:['1. Lávese las manos · 2. Séqueselas con una toalla · 3. Póngase los guantes','1. Lave las manos · 2. Secado con toalla · 3. Ponerse los guantes','1. Lavarse las manos · 2. Se secan con toalla · 3. Póngase los guantes'],c:0,n:'Los tres pasos en imperativo de «usted».'}
+],null,true);
+
+modulo('m-correlativos',[
+  {p:'Elige la oración correcta.',o:['No solo es puntual, sino también cuidadosa.','No solo es puntual, pero también cuidadosa.','No solo es puntual, también pero cuidadosa.'],c:0,n:'«Pero también» es un calco del inglés.'},
+  {p:'Elige la oración correcta.',o:['No solo llegó temprano, sino que ayudó a los demás.','No solo llegó temprano, sino ayudó a los demás.','No solo llegó temprano, pero ayudó a los demás.'],c:0,n:'Ante verbo conjugado: «sino que».'},
+  {p:'Elige la oración correcta.',o:['Practica tanto en casa como en el trabajo.','Practica tanto en casa como el trabajo.','Practica tanto en casa y en el trabajo.'],c:0,n:'La misma preposición en cada mitad.'},
+  {p:'Elige la oración correcta.',o:['Tanto mi hermano como mi prima vienen el sábado.','Tanto mi hermano como mi prima viene el sábado.','Tanto mi hermano y mi prima vienen el sábado.'],c:0,n:'Dos sujetos unidos: plural.'},
+  {p:'Elige la oración correcta.',o:['No llamó ni escribió en toda la semana.','Ni llamó o escribió en toda la semana.','No llamó ni tampoco que escribiera en la semana.'],c:0,n:'«Ni» une dos verbos en la misma forma.'},
+  {p:'Elige la oración correcta.',o:['Puedes pagar o bien en efectivo o bien con tarjeta.','Puedes pagar o bien en efectivo o con la tarjeta.','Puedes pagar o bien en efectivo, bien que con tarjeta.'],c:0,n:'El par completo, con la misma forma detrás.'},
+  {p:'Elige la oración correcta.',o:['El programa ayuda no solo a los alumnos, sino también a sus familias.','El programa ayuda no solo a los alumnos, sino también sus familias.','El programa ayuda no solo a los alumnos, pero también a sus familias.'],c:0,n:'«a los alumnos… a sus familias»: la misma preposición.'},
+  {p:'Elige la oración correcta.',o:['La biblioteca abre tanto los sábados como los domingos.','La biblioteca abre tanto los sábados como en domingo.','La biblioteca abre tanto los sábados que los domingos.'],c:0,n:'«tanto… como» con la misma forma.'},
+  {p:'Elige la oración correcta.',o:['No solo estudia, sino que también trabaja de noche.','No solo estudia, sino también trabaja de noche.','No solo estudia, pero también trabaja de noche.'],c:0,n:'Verbo conjugado detrás: «sino que también».'}
+],null,true);
+
+modulo('m-concordancia',[
+  {p:'Elige la oración correcta.',o:['Hubo muchos problemas en la mudanza.','Hubieron muchos problemas en la mudanza.','Habían muchos problemas en la mudanza.'],c:0,n:'«Haber» impersonal en singular.'},
+  {p:'Elige la oración correcta.',o:['Se necesitan voluntarios para el sábado.','Se necesita voluntarios para el sábado.','Se necesitan voluntario para el sábado.'],c:0,n:'Se necesitan / voluntarios: plural.'},
+  {p:'Elige la oración correcta.',o:['La lista de los documentos está en la página.','La lista de los documentos están en la página.','Las lista de los documentos está en la página.'],c:0,n:'El núcleo es «la lista».'},
+  {p:'Elige la oración correcta.',o:['El agua del lago está fría.','El agua del lago está frío.','La agua del lago está fría.'],c:0,n:'«El» por la «a» tónica; el adjetivo, en femenino.'},
+  {p:'Elige la oración correcta.',o:['Ayer llegué al trabajo y me dijeron que había junta.','Ayer llego al trabajo y me dijeron que había junta.','Ayer llegué al trabajo y me dicen que había junta.'],c:0,n:'Todo el relato en pasado.'},
+  {p:'Elige la oración correcta.',o:['Había muchas personas en la fila.','Habían muchas personas en la fila.','Hubieron muchas personas en la fila.'],c:0,n:'«Había», siempre en singular.'},
+  {p:'Elige la oración correcta.',o:['Se venden apartamentos amueblados.','Se vende apartamentos amueblados.','Se venden apartamento amueblados.'],c:0,n:'Lo vendido es plural.'},
+  {p:'Elige la oración correcta.',o:['Va a haber cambios en el horario.','Van a haber cambios en el horario.','Va haber cambios en el horario.'],c:0,n:'«Haber» impersonal en singular, también con «va a».'},
+  {p:'Elige la oración correcta.',o:['Los niños tenían mucha hambre.','Los niños tenían mucho hambre.','Los niños tenían muchos hambre.'],c:0,n:'«Hambre» es femenino: lleva «el» por la «a» tónica, pero «mucha hambre».'},
+  {p:'Elige la oración correcta.',o:['La caja de herramientas está en el garaje.','La caja de herramientas están en el garaje.','La caja de herramienta están en el garaje.'],c:0,n:'El núcleo es «la caja».'},
+  {p:'Elige la oración correcta.',o:['Cuando terminé, guardé el archivo y apagué la computadora.','Cuando termino, guardé el archivo y apago la computadora.','Cuando terminé, guardo el archivo y apagué la computadora.'],c:0,n:'Los tres verbos en pretérito.'},
+  {p:'Elige la oración correcta.',o:['Se buscan cocineros con experiencia.','Se busca cocineros con experiencia.','Se buscan cocinero con experiencia.'],c:0,n:'Se buscan / cocineros.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

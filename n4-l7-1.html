@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l7-1 · Lección 7.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.1 · Ensayo argumentativo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .pas{display:block;background:#fff8ee;border-left:5px solid #ff8c42;border-radius:6px;padding:8px 12px;margin:0 0 10px;font-family:Georgia,serif;font-size:1.02rem;line-height:1.7}
+  .preg{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 7.1 · Ensayo argumentativo</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 7 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_7-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 7.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando. Los ejemplos fueron escritos para esta práctica.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#afirmacion">La afirmación precisa</a></li>
+    <li><a href="#refutacion">La refutación válida</a></li>
+    <li><a href="#valido">Razonamiento válido y tono objetivo</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="afirmacion" aria-labelledby="h-af">
+  <h2 id="h-af">1. La afirmación precisa</h2>
+  <p class="regla"><strong>Una buena afirmación</strong> es discutible (alguien podría opinar lo contrario), concreta (qué, quién, cuándo), defendible con evidencia y, mejor aún, anuncia las razones.</p>
+  <p class="instr">Elige la mejor afirmación para un ensayo argumentativo.</p>
+  <div id="m-af"></div>
+</section>
+
+<section class="modulo" id="refutacion" aria-labelledby="h-re">
+  <h2 id="h-re">2. La refutación válida</h2>
+  <p class="regla"><strong>Tres estrategias:</strong> mostrar evidencia contraria · mostrar que la objeción pesa menos · conceder una parte y proponer una solución. Nunca atacar a la persona ni deformar su postura.</p>
+  <p class="instr">Elige la respuesta que refuta de verdad el contrargumento.</p>
+  <div id="m-re"></div>
+</section>
+
+<section class="modulo" id="valido" aria-labelledby="h-va">
+  <h2 id="h-va">3. Razonamiento válido y tono objetivo</h2>
+  <p class="regla"><strong>Evita:</strong> insultos y palabras cargadas · exageraciones («todos», «nunca») · falacias (generalización, ataque a la persona, falso dilema, pendiente resbaladiza). <strong>Prefiere:</strong> cifras, matices y razones que se siguen.</p>
+  <p class="instr">Responde sobre la oración.</p>
+  <div id="m-va"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_7-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 7.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l7-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+function P(t,q){return '<span class="pas">'+t+'</span><span class="preg">'+q+'</span>';}
+modulo('m-af',[
+  {p:'Tema: el transporte público.',o:['El tren debería ser gratis para los estudiantes, porque ahorra dinero y aumenta la asistencia','El transporte público es un tema del que se habla mucho en la ciudad y en las noticias','El tren de Chicago tiene varias líneas que llegan a muchos barrios del norte y del sur'],c:0,n:'Discutible, concreta y con razones.'},
+  {p:'Tema: el trabajo desde casa.',o:['Las empresas deberían permitir trabajar desde casa un día por semana','El trabajo desde casa es más bonito que ir cada día a la oficina','Muchas personas trabajan hoy desde su casa en todo el mundo'],c:0,n:'La segunda es un gusto; la tercera, un hecho.'},
+  {p:'Tema: la educación financiera.',o:['La educación financiera debería ser obligatoria en la secundaria, porque evita deudas','La educación financiera es algo que tiene que ver con el dinero de todos','A mí me gustan mucho las matemáticas y también el tema del dinero'],c:0,n:'Las otras no toman postura.'},
+  {p:'Tema: las bibliotecas.',o:['Las bibliotecas del condado deberían abrir los domingos de 12 a 5','Las bibliotecas deberían mejorar de alguna manera en el futuro','Las bibliotecas son lugares donde hay libros y computadoras'],c:0,n:'Concreta: qué, quién, cuándo.'},
+  {p:'Tema: la comida en las escuelas.',o:['Las escuelas deberían ofrecer desayuno gratis, porque mejora la atención en clase','La comida de las escuelas es un asunto que preocupa a las familias','El desayuno es la primera comida del día para la mayoría de la gente'],c:0,n:'Postura y razón.'},
+  {p:'Tema: los parques.',o:['La ciudad debería instalar más luces en los parques para que sean seguros de noche','Los parques de la ciudad son muy verdes y bonitos en primavera','Hay parques grandes y pequeños en todos los barrios de la ciudad'],c:0,n:'Defendible con evidencia.'},
+  {p:'¿Qué afirmación es <strong>demasiado vaga</strong>?',o:['Hay que hacer algo con la salud de la gente','Las clínicas del condado deberían abrir los sábados','El seguro médico debería cubrir las vacunas para adultos'],c:0,n:'No dice qué ni quién.'},
+  {p:'¿Qué afirmación <strong>no es discutible</strong>?',o:['Chicago está a orillas del lago Míchigan','Chicago debería ampliar sus ciclovías protegidas','Chicago debería bajar el precio del transporte'],c:0,n:'Es un hecho geográfico.'}
+],null,true);
+
+modulo('m-re',[
+  {p:P('Contrargumento: «Sin multas, la gente no devolverá los libros».',''),o:['Sin embargo, en Chicago las devoluciones aumentaron un 240 % sin multas','Sin embargo, quienes dicen eso no conocen las bibliotecas','Sin embargo, los libros no son tan importantes como parecen'],c:0,n:'Evidencia contraria.'},
+  {p:P('Contrargumento: «Abrir los domingos cuesta dinero».',''),o:['Es cierto, pero podría abrirse solo cinco horas, con ayuda de voluntarios','Es falso: abrir una biblioteca no cuesta absolutamente nada','Eso solo lo dicen los que nunca leen un libro en su vida'],c:0,n:'Concede y propone.'},
+  {p:P('Contrargumento: «Trabajar desde casa reduce la comunicación del equipo».',''),o:['Es cierto que se pierde algo de contacto, pero un día a la semana lo limita y ahorra horas de viaje','Quien piensa eso es un jefe que quiere controlar a todo el mundo, siempre y en todo momento','O trabajamos siempre en casa, o la empresa no tiene ningún futuro en este mercado'],c:0,n:'Muestra que pesa menos. La segunda ataca; la tercera es falso dilema.'},
+  {p:P('Contrargumento: «El desayuno escolar gratis es caro para la ciudad».',''),o:['Es cierto, pero los estudiantes que desayunan rinden más, y eso también ahorra recursos','Eso es mentira: el desayuno no le cuesta nada a la ciudad ni a las escuelas','A quien le preocupa el dinero no le importan los niños ni su futuro'],c:0,n:'Acepta el dato y lo pone en balanza.'},
+  {p:P('Contrargumento: «La educación financiera es responsabilidad de las familias».',''),o:['Es razonable, pero muchas familias no recibieron esa formación y no pueden transmitirla','Las familias no saben nada de nada sobre el dinero ni sobre las deudas','Si se deja a las familias, todos los jóvenes acabarán en la ruina total'],c:0,n:'Concede y razona. La tercera es pendiente resbaladiza.'},
+  {p:P('Afirmación: «La ciudad debería ampliar las ciclovías». Contrargumento: «Quitan espacio a los carros».','¿Qué respuesta es un hombre de paja?'),o:['O sea que quieres que todos vayan en carro y contaminen la ciudad','Es cierto que quitan un carril, pero reducen los accidentes de ciclistas','Es verdad, por eso propongo empezar por las calles más anchas'],c:0,n:'Deforma la postura del otro.'},
+  {p:P('¿Qué hace un buen contrargumento?',''),o:['Presenta con justicia la mejor objeción de quien piensa distinto','Presenta la objeción más débil para que sea fácil vencerla','Repite la afirmación con otras palabras para insistir'],c:0,n:'Así la refutación tiene valor.'},
+  {p:P('Contrargumento: «Las luces en los parques gastan mucha electricidad».',''),o:['Es cierto, pero las luces LED gastan poco y pueden apagarse de madrugada','Eso no importa porque la electricidad es gratis para la ciudad','Quien dice eso quiere que los parques sean peligrosos'],c:0,n:'Concede y propone.'}
+],null,true);
+
+modulo('m-va',[
+  {p:'«Las multas alejan de la biblioteca a muchas familias de bajos ingresos.»',o:['Tono objetivo','Palabras cargadas','Exageración'],c:0,n:'Preciso y neutro.'},
+  {p:'«Las multas son una idea absurda de burócratas sin corazón.»',o:['Palabras cargadas','Tono objetivo','Razonamiento válido'],c:0,n:'Juzga sin demostrar.'},
+  {p:'«Nadie en todo el país va a la biblioteca por culpa de las multas.»',o:['Exageración','Tono objetivo','Dato con fuente'],c:0,n:'«Nadie en todo el país».'},
+  {p:'«Mi vecino dejó de ir a la biblioteca, así que todos dejaron de ir.»',o:['Generalización apresurada','Razonamiento válido','Tono objetivo'],c:0,n:'De un caso a todos.'},
+  {p:'«O eliminamos las multas, o las bibliotecas desaparecerán.»',o:['Falso dilema','Razonamiento válido','Dato con fuente'],c:0,n:'Hay más opciones.'},
+  {p:'«Según la comisionada de las bibliotecas, las devoluciones aumentaron un 240 %.»',o:['Dato con fuente','Exageración','Palabras cargadas'],c:0,n:'Cifra atribuida.'},
+  {p:'«El concejal está en contra, pero él ni siquiera tiene carné de biblioteca.»',o:['Ataque a la persona','Tono objetivo','Dato con fuente'],c:0,n:'Critica a la persona, no su argumento.'},
+  {p:'«Si dejamos que abran los domingos, pronto querrán abrir toda la noche y la ciudad se arruinará.»',o:['Pendiente resbaladiza','Tono objetivo','Dato con fuente'],c:0,n:'Cadena de desastres sin prueba.'},
+  {p:'«Abrir los domingos permitiría usar la biblioteca a quienes trabajan de lunes a sábado.»',o:['Razonamiento válido','Exageración','Ataque a la persona'],c:0,n:'La consecuencia se sigue.'},
+  {p:'«Yo creo que, en mi opinión personal, a mí me parece que deberían abrir.»',o:['Tono poco firme y repetitivo','Dato con fuente','Razonamiento válido'],c:0,n:'Mejor: «Las bibliotecas deberían abrir…».'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>

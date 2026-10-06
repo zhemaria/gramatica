@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!-- Interactivo n4-l2-1 · Lección 2.1 · Artes del Lenguaje Nivel 4 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 2.1 · Contexto, etimología y diccionarios</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#b91c1c;--cp-claro:#fee2e2;--cp-oscuro:#7f1d1d;--texto:#1a2332;--fondo:#fafbfc;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.65;color:var(--texto);background:var(--fondo);max-width:900px;margin:0 auto;padding:24px 18px 80px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);border-left:6px solid var(--cp);padding-left:12px;font-size:1.3rem;margin:0 0 8px}
+  .indice{background:#fff;border:1px solid #d6dde4;border-left:6px solid var(--cp);border-radius:10px;padding:14px 20px;margin:18px 0}
+  .indice ol{margin:6px 0 0;padding-left:1.4em} .indice a{color:var(--cp-oscuro);font-weight:600}
+  .modulo{background:#fff;border:2px solid var(--cp);border-radius:12px;padding:18px 20px;margin:22px 0;scroll-margin-top:12px}
+  .modulo:target{box-shadow:0 0 0 4px var(--cp-claro)}
+  .instr{margin:0 0 12px}
+  .tarjeta{background:var(--gris-claro);border-radius:10px;padding:14px 16px}
+  .enunciado{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 12px}
+  .enunciado strong{border-bottom:3px solid var(--cp-oscuro)}
+  .ops{display:flex;flex-wrap:wrap;gap:8px}
+  .ops.apilado{flex-direction:column}
+  .op{padding:9px 14px;border:2px solid var(--cp-oscuro);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.98rem;text-align:left}
+  .ops.apilado .op{font-weight:400;color:var(--texto)}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.correcta::before{content:'✓ '}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24;text-decoration:line-through}
+  .op.incorrecta::before{content:'✗ '}
+  .op:disabled{cursor:default}
+  .fb{min-height:1.5em;margin:10px 0 0;font-size:.98rem}
+  .fb.bien{color:#155724;font-weight:600}
+  .fb.mal{color:#721c24}
+  .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+  .btn{cursor:pointer;font-family:inherit;font-weight:600;border:none;border-radius:8px;padding:9px 16px;font-size:.95rem}
+  .btn-otro{background:var(--cp);color:#fff}
+  .btn-otro:hover{background:var(--cp-oscuro)}
+  .btn-oir{background:var(--cp-claro);color:var(--cp-oscuro);border:2px solid var(--cp)}
+  .marcador{font-weight:600;color:var(--cp-oscuro)}
+  .regla{font-size:.93rem;background:#fffbe6;border-left:5px solid #f4c430;border-radius:6px;padding:8px 12px;margin:0 0 12px}
+  .volver{display:inline-block;margin:6px 0 0;color:var(--cp-oscuro);font-weight:700}
+  .volver-indice{position:fixed;right:18px;bottom:18px;background:var(--cp-oscuro);color:#fff;border-radius:999px;padding:10px 16px;font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  footer{margin-top:36px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:var(--gris);font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  .ent{display:block;background:#fff;border:2px solid var(--cp-oscuro);border-radius:8px;padding:8px 12px;margin:8px 0 0;font-size:1rem;line-height:1.7}
+  .ent b{color:var(--cp-oscuro)}
+</style>
+</head>
+<body>
+<h1 id="inicio">Práctica 2.1 · Contexto, etimología y diccionarios</h1>
+<p class="sub">Artes del Lenguaje · Nivel 4 · Tema 2 · Interactivo de la <a href="https://zhemaria.github.io/clases_leng4/clase_2-1.html" target="_blank" rel="noopener noreferrer" style="color:var(--cp-oscuro);font-weight:700">Lección 2.1</a></p>
+<p>Cada módulo te da un ejercicio a la vez. Tienes <strong>dos intentos</strong>; después verás la explicación. Pulsa <strong>«Otro ejercicio»</strong> para seguir practicando: los ejercicios no se repiten hasta que terminas el banco.</p>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que el botón 🔊 no sonará.</p>
+
+<nav class="indice" aria-labelledby="t-ind">
+  <strong id="t-ind">Módulos</strong>
+  <ol>
+    <li><a href="#contexto">El significado por el contexto</a></li>
+    <li><a href="#etimologia">El origen de la palabra</a></li>
+    <li><a href="#diccionario">La acepción que corresponde</a></li>
+  </ol>
+</nav>
+
+<section class="modulo" id="contexto" aria-labelledby="h-contexto">
+  <h2 id="h-contexto">1. El significado por el contexto</h2>
+  <p class="regla"><strong>Método:</strong> (1) busca la pista: definición, ejemplo, contraste, causa o sentido general; (2) propón un significado; (3) sustitúyelo en la oración y relee.</p>
+  <p class="instr">¿Qué significa la palabra en negrita?</p>
+  <div id="m-contexto"></div>
+</section>
+
+<section class="modulo" id="etimologia" aria-labelledby="h-etimologia">
+  <h2 id="h-etimologia">2. El origen de la palabra</h2>
+  <p class="regla"><strong>Recuerda:</strong> el español viene sobre todo del latín, pero tiene también raíces griegas, árabes y de las lenguas de América. La etimología orienta; el significado de hoy lo decide el uso.</p>
+  <p class="instr">Elige la respuesta correcta.</p>
+  <div id="m-etimo"></div>
+</section>
+
+<section class="modulo" id="diccionario" aria-labelledby="h-diccionario">
+  <h2 id="h-diccionario">3. La acepción que corresponde</h2>
+  <p class="regla"><strong>Recuerda:</strong> las acepciones son los significados numerados de una entrada. Lee la oración, decide de qué se habla y elige el número que encaja. Las entradas de este módulo están simplificadas para la práctica.</p>
+  <p class="instr">Elige la acepción que corresponde a la oración.</p>
+  <div id="m-dicc"></div>
+</section>
+
+<p><a class="volver" href="https://zhemaria.github.io/clases_leng4/clase_2-1.html" target="_blank" rel="noopener noreferrer">← Volver a la Lección 2.1</a></p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 4 · Interactivo n4-l2-1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Licencia CC BY-NC-SA 4.0</a>.</p>
+</footer>
+<a class="volver-indice" href="#inicio" aria-label="Volver a la lista de módulos"><span aria-hidden="true">↑</span> Módulos</a>
+
+<script>
+
+/* ===== Voz ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE']; voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(t){
+    if(!hay){document.getElementById('aviso-voz').classList.add('visible');return;}
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang=voz?voz.lang:'es-US'; if(voz)u.voice=voz; u.rate=0.85; speechSynthesis.speak(u);
+  };
+})();
+
+function barajar(a){a=a.slice();for(var k=a.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[r];a[r]=t;}return a;}
+
+/* ===== Motor de módulos =====
+   banco: [{p:enunciado (HTML), c:índice correcto, n:explicación, o:[opciones propias] (opcional)}]
+   comunes: opciones fijas para todo el banco (no se barajan); si el ítem trae o, se barajan */
+function modulo(id,banco,comunes,apilado){
+  var caja=document.getElementById(id), pendientes=[], hechos=0, primera=0;
+  caja.innerHTML='<div class="tarjeta"><p class="enunciado"></p><div class="ops'+(apilado?' apilado':'')+'" role="group"></div><p class="fb" role="status" aria-live="polite"></p></div>'+
+    '<div class="barra"><span class="marcador" aria-live="polite"></span><span><button type="button" class="btn btn-oir">🔊 Escuchar</button> <button type="button" class="btn btn-otro">Otro ejercicio</button></span></div>';
+  var en=caja.querySelector('.enunciado'), ops=caja.querySelector('.ops'), fb=caja.querySelector('.fb'), mar=caja.querySelector('.marcador'), actual=null, intentos=0, cerrado=false;
+  function marcador(){mar.textContent=hechos?('Al primer intento: '+primera+' de '+hechos):'Ejercicios hechos: 0';}
+  function nuevo(){
+    if(!pendientes.length)pendientes=barajar(banco.map(function(_,i){return i;}));
+    actual=banco[pendientes.pop()]; intentos=0; cerrado=false;
+    en.innerHTML=actual.p; fb.textContent=''; fb.className='fb';
+    var lista=actual.o||comunes, idx=lista.map(function(_,j){return j;});
+    if(actual.o)idx=barajar(idx);
+    ops.setAttribute('aria-label','Opciones');
+    ops.innerHTML=idx.map(function(j){return '<button type="button" class="op" data-j="'+j+'">'+lista[j]+'</button>';}).join('');
+  }
+  ops.addEventListener('click',function(ev){
+    var b=ev.target.closest('.op'); if(!b||b.disabled||cerrado)return;
+    intentos++;
+    if(+b.getAttribute('data-j')===actual.c){
+      b.classList.add('correcta'); cerrado=true; hechos++; if(intentos===1)primera++;
+      ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+      fb.className='fb bien'; fb.innerHTML='✓ ¡Correcto! '+actual.n;
+    }else{
+      b.classList.add('incorrecta'); b.disabled=true;
+      if(intentos>=2){
+        cerrado=true; hechos++;
+        ops.querySelectorAll('.op').forEach(function(x){x.disabled=true; if(+x.getAttribute('data-j')===actual.c)x.classList.add('correcta');});
+        fb.className='fb mal'; fb.innerHTML='La respuesta correcta está marcada con ✓. '+actual.n;
+      }else{fb.className='fb mal'; fb.textContent='Todavía no. Te queda un intento: vuelve a mirar la regla del recuadro.';}
+    }
+    marcador();
+  });
+  caja.querySelector('.btn-otro').addEventListener('click',function(){nuevo(); en.focus&&en.setAttribute('tabindex','-1'); en.focus();});
+  caja.querySelector('.btn-oir').addEventListener('click',function(){hablar(en.textContent.replace(/[«»]/g,''));});
+  nuevo(); marcador();
+}
+
+
+modulo('m-contexto',[
+  {p:'El informe era <strong>exhaustivo</strong>: no dejaba fuera ningún detalle.',o:['Completo, que trata todo a fondo','Breve, que resume lo esencial','Confuso, difícil de entender'],c:0,n:'Pista de definición tras los dos puntos.'},
+  {p:'Su hermano es generoso; ella, en cambio, es <strong>mezquina</strong>.',o:['Tacaña, que no quiere dar','Alegre, que siempre sonríe','Trabajadora, que no descansa'],c:0,n:'Contraste con «generoso».'},
+  {p:'El jarabe <strong>palió</strong> la tos, así que por fin pudo dormir.',o:['Alivió, hizo menos intensa','Empeoró, hizo más fuerte','Provocó, hizo aparecer'],c:0,n:'Causa y efecto: pudo dormir.'},
+  {p:'El testigo fue <strong>reticente</strong>: respondía con monosílabos y repetía «no recuerdo».',o:['Que no quiere decir lo que sabe','Que habla con mucha seguridad','Que llegó tarde a la audiencia'],c:0,n:'Sentido general de la descripción.'},
+  {p:'Es un producto <strong>inocuo</strong>, es decir, que no causa ningún daño.',o:['Que no hace daño','Que es muy caro','Que cura enfermedades'],c:0,n:'Definición con «es decir».'},
+  {p:'A diferencia de su jefe, que era <strong>locuaz</strong>, ella hablaba poco.',o:['Que habla mucho','Que llega tarde','Que manda mucho'],c:0,n:'Contraste con «hablaba poco».'},
+  {p:'La investigación quiere <strong>dilucidar</strong> qué causó el apagón, porque hasta ahora nadie lo sabe.',o:['Aclarar, explicar algo confuso','Ocultar, esconder la verdad','Reparar, arreglar lo dañado'],c:0,n:'Si nadie lo sabe, se busca aclararlo.'},
+  {p:'Evita las bebidas <strong>estimulantes</strong>, como el café, el té negro o las de energía.',o:['Que activan el cuerpo y quitan el sueño','Que tienen mucho azúcar y engordan','Que se sirven siempre muy calientes'],c:0,n:'Pista de ejemplo: café, té, energéticas.'},
+  {p:'La fama del cantante fue <strong>efímera</strong>: al año siguiente nadie recordaba su nombre.',o:['Que dura poco','Que es enorme','Que es merecida'],c:0,n:'Definición: nadie lo recordaba un año después.'},
+  {p:'El nuevo reglamento es <strong>ambiguo</strong>; cada supervisor lo interpreta a su manera.',o:['Que se puede entender de varias formas','Que es demasiado largo y aburrido','Que se aplica de forma muy estricta'],c:0,n:'Causa y efecto: cada uno lo interpreta distinto.'},
+  {p:'Tras la inundación, el gobierno envió ayuda para <strong>mitigar</strong> los daños.',o:['Reducir, hacer menos graves','Calcular, medir con exactitud','Ocultar, impedir que se vean'],c:0,n:'La ayuda sirve para que los daños sean menores.'},
+  {p:'Era un hombre <strong>parco</strong>: comía poco, hablaba poco y gastaba aún menos.',o:['Moderado, que usa poco de todo','Valiente, que no tiene miedo','Distraído, que olvida las cosas'],c:0,n:'Los ejemplos describen moderación.'},
+  {p:'Los médicos dicen que la enfermedad es <strong>asintomática</strong> al principio, así que muchos no saben que la tienen.',o:['Que no da señales o síntomas','Que se contagia con mucha rapidez','Que se cura sin medicamentos'],c:0,n:'Causa y efecto; además, a- (sin) + síntoma.'},
+  {p:'El acuerdo fue <strong>unánime</strong>: los doce miembros votaron a favor.',o:['Con el apoyo de todos','Con el apoyo de la mitad','Con muchas discusiones'],c:0,n:'Definición: todos votaron a favor.'}
+],null,true);
+
+modulo('m-etimo',[
+  {p:'«Candidato» viene del latín <em>candidatus</em>, «vestido de blanco». ¿Por qué?',o:['En Roma, quien aspiraba a un cargo vestía una toga blanca','Los candidatos debían ser de piel muy clara','El blanco era el color del partido ganador'],c:0,n:'La toga blanqueada distinguía al aspirante.'},
+  {p:'«Calcular» viene de <em>calculus</em>. ¿Qué significaba?',o:['Piedrecita','Número','Moneda'],c:0,n:'Se contaba con piedrecitas.'},
+  {p:'«Músculo» viene de <em>musculus</em>. ¿Qué significaba?',o:['Ratoncito','Brazo fuerte','Hueso pequeño'],c:0,n:'Por la forma que hace bajo la piel.'},
+  {p:'«Vacuna» viene del latín <em>vacca</em>. ¿Por qué?',o:['El primer material se obtuvo de las vacas','La inventó un granjero dueño de vacas','Al principio solo se vacunaba al ganado'],c:0,n:'Jenner usó la viruela de las vacas.'},
+  {p:'¿De qué lengua vienen «huracán», «hamaca» y «canoa»?',o:['Del taíno','Del árabe','Del latín'],c:0,n:'Lengua de los pueblos del Caribe.'},
+  {p:'¿De qué lengua vienen «tomate», «aguacate» y «tiza»?',o:['Del náhuatl','Del griego','Del taíno'],c:0,n:'Lengua de los mexicas.'},
+  {p:'¿De qué lengua vienen «almohada», «azúcar» y «ojalá»?',o:['Del árabe','Del náhuatl','Del germánico'],c:0,n:'Muchos arabismos empiezan por «al-».'},
+  {p:'«Teléfono» une <em>tele</em> + <em>phoné</em>. ¿Qué significan?',o:['«Lejos» y «voz»','«Aparato» y «sonido»','«Rápido» y «hablar»'],c:0,n:'Raíces griegas.'},
+  {p:'«Democracia» une <em>demos</em> + <em>kratos</em>. ¿Qué significan?',o:['«Pueblo» y «poder»','«Ley» y «gobierno»','«Voto» y «mayoría»'],c:0,n:'El poder del pueblo.'},
+  {p:'«Trabajo» viene de <em>tripalium</em>, un instrumento de tortura. ¿Qué conclusión es correcta?',o:['El significado cambió con el tiempo','Trabajar todavía significa torturar','La etimología no tiene relación con la palabra'],c:0,n:'El uso cambia el significado.'},
+  {p:'«Biografía» une <em>bios</em> + <em>graphé</em>. ¿Qué es entonces?',o:['El escrito sobre una vida','El estudio de los seres vivos','El dibujo de un paisaje'],c:0,n:'Bios = vida; graphé = escritura.'},
+  {p:'«Ojalá» viene de una expresión árabe que significa…',o:['«si Dios quiere»','«buenos días»','«mucha suerte»'],c:0,n:'Por eso expresa un deseo.'},
+  {p:'Se dice que «salario» viene de que en Roma se pagaba con sal. ¿Qué es lo más preciso?',o:['La palabra viene de «sal», pero ese pago es discutido','Es un hecho comprobado en todos los documentos','La palabra no tiene ninguna relación con la sal'],c:0,n:'Distingue el origen de la palabra de la historia que se cuenta.'},
+  {p:'«Asintomático» se forma con <em>a-</em> + síntoma. ¿Qué aporta <em>a-</em>?',o:['Negación: «sin»','Repetición: «otra vez»','Lugar: «hacia»'],c:0,n:'Prefijo griego de negación, como en «anormal».'}
+],null,true);
+
+var E1='<span class="ent"><b>banco</b> · <b>1</b> m. Asiento largo para varias personas. · <b>2</b> m. Empresa que guarda el dinero de sus clientes y presta. · <b>3</b> m. Conjunto numeroso de peces. · <b>4</b> m. Lugar donde se guardan sangre u órganos para usarlos en medicina.</span>';
+var E2='<span class="ent"><b>pieza</b> · <b>1</b> f. Parte de un conjunto o de una máquina. · <b>2</b> f. Obra musical o de teatro. · <b>3</b> f. Habitación de una casa. · <b>4</b> f. Figura de un juego de mesa, como el ajedrez.</span>';
+var E3='<span class="ent"><b>operación</b> · <b>1</b> f. Intervención del cirujano sobre el cuerpo. · <b>2</b> f. Cálculo matemático, como la suma o la división. · <b>3</b> f. Negocio de compra o venta. · <b>4</b> f. Acción organizada de policías o soldados.</span>';
+var E4='<span class="ent"><b>derecho</b> · <b>1</b> adj. Recto, que no se tuerce. · <b>2</b> adj. Del lado opuesto al corazón. · <b>3</b> m. Facultad de hacer o exigir lo que la ley permite. · <b>4</b> m. Ciencia que estudia las leyes.</span>';
+modulo('m-dicc',[
+  {p:'«Donó medio litro al <strong>banco</strong> del hospital.»'+E1,o:['Acepción 4','Acepción 2','Acepción 1'],c:0,n:'Donar sangre en un hospital.'},
+  {p:'«Desde el barco vimos un <strong>banco</strong> plateado bajo el agua.»'+E1,o:['Acepción 3','Acepción 1','Acepción 2'],c:0,n:'Peces bajo el agua.'},
+  {p:'«Abrió una cuenta de ahorros en el <strong>banco</strong> del barrio.»'+E1,o:['Acepción 2','Acepción 4','Acepción 3'],c:0,n:'Cuenta de ahorros: empresa financiera.'},
+  {p:'«Se rompió una <strong>pieza</strong> del motor.»'+E2,o:['Acepción 1','Acepción 2','Acepción 4'],c:0,n:'Parte de una máquina.'},
+  {p:'«La orquesta tocó una <strong>pieza</strong> de Piazzolla.»'+E2,o:['Acepción 2','Acepción 3','Acepción 1'],c:0,n:'Obra musical.'},
+  {p:'«Perdió la reina y otras dos <strong>piezas</strong> antes de rendirse.»'+E2,o:['Acepción 4','Acepción 1','Acepción 2'],c:0,n:'Figuras del ajedrez.'},
+  {p:'«Alquilan una <strong>pieza</strong> con baño propio.» (uso de varios países de América)'+E2,o:['Acepción 3','Acepción 1','Acepción 4'],c:0,n:'Habitación.'},
+  {p:'«La <strong>operación</strong> de rodilla duró dos horas.»'+E3,o:['Acepción 1','Acepción 3','Acepción 4'],c:0,n:'Intervención del cirujano.'},
+  {p:'«La policía montó una <strong>operación</strong> contra el contrabando.»'+E3,o:['Acepción 4','Acepción 3','Acepción 1'],c:0,n:'Acción organizada de la policía.'},
+  {p:'«Resuelve primero la <strong>operación</strong> que está entre paréntesis.»'+E3,o:['Acepción 2','Acepción 1','Acepción 4'],c:0,n:'Cálculo matemático.'},
+  {p:'«Todos tienen <strong>derecho</strong> a un abogado.»'+E4,o:['Acepción 3','Acepción 4','Acepción 1'],c:0,n:'Facultad que da la ley.'},
+  {p:'«Estudia <strong>Derecho</strong> en la universidad.»'+E4,o:['Acepción 4','Acepción 3','Acepción 2'],c:0,n:'Ciencia de las leyes.'},
+  {p:'«Se lastimó el brazo <strong>derecho</strong>.»'+E4,o:['Acepción 2','Acepción 1','Acepción 3'],c:0,n:'Lado opuesto al corazón.'},
+  {p:'«Pon el cuadro <strong>derecho</strong>, que está torcido.»'+E4,o:['Acepción 1','Acepción 2','Acepción 4'],c:0,n:'Recto.'}
+],null,true);
+if(location.hash){var m=document.getElementById(location.hash.slice(1)); if(m)m.scrollIntoView({block:'start'});}
+</script>
+</body>
+</html>
