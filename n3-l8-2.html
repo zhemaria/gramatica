@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l8-2 · Discusiones y comprensión auditiva · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.2 · Discusiones y comprensión auditiva</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  figure.graf{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 14px;margin:14px 0;text-align:center}
+  figure.graf figcaption{font-weight:700;color:var(--cp-oscuro);margin-bottom:6px;text-align:left}
+  figure.graf .fuente{font-size:.85rem;color:#555;text-align:left;margin:4px 0 0}
+  .ver-datos{text-align:left;margin-top:6px}
+  .ver-datos summary{padding:8px 12px;font-size:.95rem}
+  .mini{border-collapse:collapse;margin:6px 0;font-size:.95rem;font-weight:400}
+  .mini th,.mini td{border:1px solid #9aa9b7;padding:4px 10px}
+  .mini th{background:#4c1d95;color:#fff}
+  .leyenda-txt{font-size:.92rem;text-align:left;margin:4px 0 0}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .tabla-ancha{overflow-x:auto}
+  .enun figure.graf{margin:8px 0}
+  .mini caption{font-weight:700;color:var(--cp-oscuro);text-align:left;padding:4px 0}
+  .enun{overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>Práctica 8.2 · Discusiones y comprensión auditiva</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 8 · Acompaña a la Lección 8.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_8-2.html">← Volver a la Lección 8.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="preparacion">1 · ¿Llega preparado?</button>
+  <button type="button" class="pest" data-mod="parafrasea">2 · Parafrasea la intervención</button>
+  <button type="button" class="pest" data-mod="resume">3 · Resume la información</button>
+</nav>
+
+<section class="modulo" id="preparacion" aria-labelledby="t-pr">
+  <h2 id="t-pr">1 · ¿Llega preparado?</h2>
+  <p class="consejo">Preparado es llegar con posición, evidencia con fuente y una pregunta; y durante la discusión, respetar el turno, escuchar y discrepar de las ideas, no de las personas.</p>
+  <div class="enun" id="pr-enun" aria-live="polite"></div>
+  <div class="opciones" id="pr-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pr-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pr-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pr-marcador"></div>
+</section>
+
+<section class="modulo" id="parafrasea" aria-labelledby="t-pf" hidden>
+  <h2 id="t-pf">2 · Parafrasea la intervención</h2>
+  <p class="consejo">Una buena paráfrasis oral es más corta, conserva la idea y <strong>no cambia</strong> lo que dijo la persona ni le <strong>añade</strong> opiniones.</p>
+  <div class="enun" id="pf-enun" aria-live="polite"></div>
+  <div class="opciones" id="pf-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pf-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pf-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pf-marcador"></div>
+</section>
+
+<section class="modulo" id="resume" aria-labelledby="t-re" hidden>
+  <h2 id="t-re">3 · Resume la información</h2>
+  <p class="consejo">Para resumir una gráfica, una tabla o una presentación: qué se mide, la tendencia, lo más destacado y qué significa. Sin leer todos los números ni opinar.</p>
+  <div class="enun" id="re-enun" aria-live="polite"></div>
+  <div class="opciones" id="re-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="re-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="re-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="re-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 8.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* ===== Gráficas en SVG (barras, barras dobles, líneas múltiples) =====
+   Basado en la biblioteca del Nivel 2. Las series se distinguen por color Y por trazo o trama
+   (línea continua / discontinua / punteada; barra lisa / rayada), lleva valores escritos o en la
+   descripción, y una tabla con los datos: nada depende solo del color. */
+var GCOL=['#6d28d9','#c2410c','#0e7490','#a16207'];
+var GDASH=['','8 5','2 5','12 4 2 4'], GID=0;
+function anchoG(){return Math.round(Math.min(600,Math.max(320,(window.innerWidth||600)-56)));}
+function etiq(s,x,y,t,W){var p=String(t).indexOf('|')>=0?String(t).split('|'):String(t).split(' ');if(String(t).indexOf('|')>=0||(W<480&&p.length>1)){txtSvg(s,x,y-2,p[0],{tam:11});txtSvg(s,x,y+11,p.slice(1).join(' '),{tam:11});}else txtSvg(s,x,y,t,{tam:W<480?11:12});}
+function svgEl(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+function marcoSvg(caja,ancho,alto,desc){
+  var s=svgEl('svg',{viewBox:'0 0 '+ancho+' '+alto,width:ancho,height:alto,role:'img','aria-label':desc});
+  s.style.maxWidth='100%'; s.style.height='auto'; caja.innerHTML=''; caja.appendChild(s); return s;
+}
+function txtSvg(s,x,y,t,o){o=o||{};s.appendChild(svgEl('text',{x:x,y:y,'text-anchor':o.ancla||'middle','font-size':o.tam||12,'font-weight':o.peso||'normal',fill:o.color||'#333','font-family':'Arial'},t));}
+function cuadricula(s,W,L,R,T,B,H,min,max,paso,fmt){
+  for(var v=min;v<=max+0.0001;v+=paso){var y=T+(H-T-B)*(1-(v-min)/(max-min));
+    s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:'#dfe5ea','stroke-width':1}));
+    txtSvg(s,L-8,y+4,fmt?fmt(v):(Math.round(v*10)/10),{ancla:'end',color:'#555'});}
+}
+function rotulos(s,W,H,L,R,T,B,o){
+  if(o.ejeY)s.appendChild(svgEl('text',{x:14,y:(H-B+T)/2,transform:'rotate(-90 14 '+((H-B+T)/2)+')','text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeY));
+  if(o.ejeX)txtSvg(s,(W-R+L)/2,H-6,o.ejeX);
+}
+function leyenda(s,x,y,series,tipo,pid){
+  series.forEach(function(se,k){
+    var yy=y+k*20;
+    if(tipo==='barra'){s.appendChild(svgEl('rect',{x:x,y:yy-11,width:22,height:14,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5}));}
+    else{s.appendChild(svgEl('line',{x1:x,x2:x+26,y1:yy-4,y2:yy-4,stroke:GCOL[k],'stroke-width':3,'stroke-dasharray':GDASH[k]}));}
+    txtSvg(s,x+32,yy,se.nombre,{ancla:'start',peso:'bold',color:'#1a2332'});
+  });
+}
+/* barrasDobles(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, fmt}) */
+function graficaBarrasDobles(caja,o){
+  var W=anchoG(),H=W<480?300:330,L=50,R=10,T=48,B=W<480?52:48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var desc=o.titulo+(o.series.length===1?'. Gráfica de barras. ':'. Gráfica de barras dobles. ')+o.etiquetas.map(function(e,i){return String(e).replace('|',' ')+': '+o.series.map(function(se){return se.nombre+' '+se.valores[i];}).join(', ');}).join('; ');
+  var s=marcoSvg(caja,W,H,desc);
+  var d=svgEl('defs',{}),pid='rayas'+(++GID),p=svgEl('pattern',{id:pid,width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+  p.appendChild(svgEl('rect',{width:6,height:6,fill:'#fff'}));p.appendChild(svgEl('line',{x1:0,y1:0,x2:0,y2:6,stroke:GCOL[1],'stroke-width':4}));d.appendChild(p);s.appendChild(d);
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso,o.fmt);
+  var ancho=(W-L-R)/n,bw=o.series.length===1?Math.min(56,ancho*0.6):Math.min(30,ancho*0.36);
+  o.etiquetas.forEach(function(e,i){
+    o.series.forEach(function(se,k){
+      var v=se.valores[i],x=L+ancho*i+ancho/2-(o.series.length===1?(bw-2)/2:bw)+k*bw,h=(H-T-B)*(v-min)/(max-min),y=H-B-h;
+      var r=svgEl('rect',{x:x,y:y,width:bw-2,height:h,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5});
+      r.appendChild(svgEl('title',{},String(e).replace('|',' ')+', '+se.nombre+': '+v+(o.unidad||'')));s.appendChild(r);
+      txtSvg(s,x+(bw-2)/2,y-5,v,{tam:11,peso:'bold',color:'#1a2332'});
+    });
+    etiq(s,L+ancho*i+ancho/2,H-B+18,e,W);
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'barra',pid);
+}
+/* lineas(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, unidad, valoresVisibles}) */
+function graficaLineas(caja,o){
+  var W=anchoG(),H=W<480?300:320,L=50,R=W<480?14:24,T=52,B=48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica de líneas. '+o.series.map(function(se){return se.nombre+': '+o.etiquetas.map(function(e,i){return e+' '+se.valores[i];}).join(', ');}).join('. '));
+  function Y(v){return T+(H-T-B)*(1-(v-min)/(max-min));} function X(i){return L+(W-L-R)*i/(n-1);}
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso);
+  o.etiquetas.forEach(function(e,i){if(W<480&&n>8&&i%2)return;txtSvg(s,X(i),H-B+18,e,{tam:W<480?10:11});});
+  o.series.forEach(function(se,k){
+    var c=GCOL[k],d=se.valores.map(function(v,i){return (i?'L':'M')+X(i)+','+Y(v);}).join(' ');
+    s.appendChild(svgEl('path',{d:d,fill:'none',stroke:c,'stroke-width':3,'stroke-linejoin':'round','stroke-dasharray':GDASH[k]}));
+    se.valores.forEach(function(v,i){
+      var m=k%2===0?svgEl('circle',{cx:X(i),cy:Y(v),r:4.5,fill:c,stroke:'#fff','stroke-width':1.5}):svgEl('rect',{x:X(i)-4.5,y:Y(v)-4.5,width:9,height:9,fill:c,stroke:'#fff','stroke-width':1.5});
+      m.appendChild(svgEl('title',{},se.nombre+', '+o.etiquetas[i]+': '+v+(o.unidad||'')));s.appendChild(m);
+      if(o.valoresVisibles&&(W>=480||n<=7))txtSvg(s,X(i),Y(v)+(k===0?-9:18),v,{tam:10.5,color:'#1a2332'});
+    });
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'linea');
+}
+/* Tabla de datos accesible, plegada debajo de la gráfica */
+function tablaDatos(caja,titulo,cabeceras,filas){
+  var h='<details class="ver-datos"><summary>Ver los datos en una tabla</summary><div class="tabla-ancha"><table class="tabla"><caption class="sr-solo">'+titulo+'</caption><thead><tr>'+cabeceras.map(function(c){return '<th scope="col">'+c+'</th>';}).join('')+'</tr></thead><tbody>'+
+    filas.map(function(f){return '<tr>'+f.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div></details>';
+  caja.insertAdjacentHTML('beforeend',h);
+}
+/* Devuelve el SVG como texto (para los ejercicios) */
+function svgTexto(fn,o){var d=document.createElement('div');fn(d,o);return d.innerHTML;}
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+function fig(html,tit,real){return '<figure class="graf"><figcaption>'+tit+'</figcaption>'+html+'<p class="fuente">'+(real||'Datos inventados para practicar.')+'</p></figure>';}
+
+/* ===== Módulo 1 · ¿Llega preparado? [situación, mejor opción, d1, d2, nota] ===== */
+unaAUna('pr',[
+  ['Mañana hay una mesa sobre el precio de la vivienda. ¿Qué preparas?','Mi posición, dos datos con su fuente y una pregunta para el grupo','Un discurso de diez minutos para leerlo completo en voz alta','Nada: prefiero escuchar a los demás y ver qué se me ocurre','La hoja de preparación: posición, evidencia y pregunta.'],
+  ['¿Qué evidencia es mejor llevar a la mesa?','«Según la Oficina del Censo, el alquiler medio subió en mi condado.»','«Todo el mundo sabe que los alquileres están por las nubes.»','«Mi cuñado dice que pronto ya nadie va a poder pagar.»','Un dato con su fuente se puede comprobar.'],
+  ['Te toca ser moderador. ¿Qué haces al empezar?','Recordar las normas acordadas y dar la palabra al primero','Dar tu opinión durante cinco minutos antes que nadie','Dejar que hable quien levante más la voz primero','El moderador abre recordando las normas.'],
+  ['Te toca ser cronometrista. ¿Qué haces?','Avisar con respeto cuando alguien llega al minuto','Interrumpir a quien no esté de acuerdo contigo','Cortar la discusión a los cinco minutos aunque falten turnos','Su trabajo es que todos tengan tiempo.'],
+  ['Alguien dice algo con lo que no estás de acuerdo. ¿Qué haces?','Pido la palabra, lo parafraseo y explico mi razón','Le digo enseguida que está equivocado, sin esperar turno','Me callo y lo comento después con otra persona','Respeta el turno, muestra que escuchaste y discrepa de la idea.'],
+  ['Durante la mesa, alguien da un dato que no conocías. ¿Qué haces?','Pregunto con respeto de dónde sale el dato','Digo que es falso porque yo no lo había oído','Lo apunto como cierto sin pedir la fuente','Pedir la fuente es parte de una discusión seria.'],
+  ['Eres el relator. ¿Qué anotas?','Las posiciones, la evidencia principal y lo que queda pendiente','Todas las palabras de todos, sin dejar ninguna fuera','Solo lo que dijeron las personas que tienen razón','El relator resume lo esencial para el cierre.'],
+  ['La discusión es por Zoom. ¿Cómo pides la palabra?','Uso el botón de levantar la mano y espero mi turno','Activo el micrófono y empiezo a hablar enseguida','Escribo mi opinión completa en el chat mientras otro habla','En línea también se respeta el turno.']
+].map(function(d){return {e:'<span class="grande">'+d[0]+'</span>',ops:[d[1],d[2],d[3]],c:0,n:d[4]};}),
+{pista:'Todavía no. Piensa en las normas: preparación con evidencia, respeto del turno y de las personas, y escuchar antes de responder.'});
+
+/* ===== Módulo 2 · Parafrasea la intervención [intervención, buena, cambia el sentido, añade opinión] ===== */
+unaAUna('pf',[
+  ['«Yo apoyo que la biblioteca abra los domingos, porque muchos vecinos trabajan de lunes a sábado.»','Si entiendo bien, apoyas abrir los domingos porque es el único día libre de muchos vecinos.','O sea, que quieres que la biblioteca cierre los sábados para abrir los domingos.','O sea, que tienes razón y que hay que abrirla ya mismo, sin discutir más.'],
+  ['«El transporte gratis ayudaría a los estudiantes, pero no sé de dónde saldría el dinero.»','Lo que dices es que la idea te parece útil, pero te preocupa cómo pagarla.','Lo que dices es que estás totalmente en contra del transporte gratis para estudiantes.','Lo que dices es que el gobierno gasta mal el dinero y que hay que cambiarlo.'],
+  ['«En mi trabajo, desde que hay clases de inglés, los empleados ascienden más.»','Si entiendo bien, en tu trabajo has visto que las clases de inglés ayudan a ascender.','Si entiendo bien, en tu trabajo todos los empleados ya hablan inglés perfectamente.','Si entiendo bien, todas las empresas del país deberían obligar a estudiar inglés.'],
+  ['«Las ciclovías son buenas, pero en mi calle quitaron estacionamiento y hay más tráfico.»','O sea, que ves ventajas en las ciclovías, pero en tu calle trajeron problemas.','O sea, que en tu calle eliminaron la ciclovía para poner más estacionamiento.','O sea, que las ciclovías son un desastre y que la ciudad no sabe lo que hace.'],
+  ['«No estoy en contra del cambio de horario; solo pido que se pregunte antes a las familias.»','Lo que propones es consultar a las familias antes de decidir el horario.','Lo que propones es rechazar el cambio de horario porque perjudica a todos.','Lo que propones es justo lo que yo dije antes, y por eso estás de acuerdo conmigo.'],
+  ['«Según el censo, la ciudad perdió población, pero algunos barrios crecieron.»','Si entiendo bien, la ciudad en total bajó, aunque no todos los barrios bajaron.','Si entiendo bien, según el censo todos los barrios de la ciudad perdieron gente.','Si entiendo bien, la ciudad pierde gente porque no cuida a sus barrios.'],
+  ['«Yo leí que dormir poco afecta las notas, pero no recuerdo la fuente; la buscaré.»','O sea, que leíste esa relación, pero todavía tienes que confirmar de dónde sale.','O sea, que dormir poco mejora las notas, según un estudio que ya conoces bien.','O sea, que no hay que creer nada de lo que se publica sobre el sueño.'],
+  ['«Me parece bien la idea de Luis, y añado que también ayudaría a los maestros.»','Lo que dices es que estás de acuerdo con Luis y que la idea beneficiaría además a los maestros.','Lo que dices es que no estás de acuerdo con Luis porque olvidó a los maestros.','Lo que dices es que los maestros son más importantes que los estudiantes.']
+].map(function(d){return {e:cita('<strong>Intervención:</strong> '+d[0])+preg('¿Cuál es la mejor paráfrasis?'),ops:[d[1],d[2],d[3]],c:0,
+  n:'Conserva la idea y no añade nada. Una de las otras cambia lo que se dijo; la otra mete una opinión que nadie expresó.'};}),
+{pista:'Todavía no. Una paráfrasis no cambia lo que dijo la persona ni añade opiniones que no expresó.'});
+
+/* ===== Módulo 3 · Resume la información ===== */
+(function(){
+  var B=[];
+  function it(est,ops,n){B.push({e:est+preg('¿Cuál es el mejor resumen?'),ops:ops,c:0,n:n});}
+  var A=['1900','1910','1920','1930','1940','1950','1960','1970','1980','1990','2000','2010','2020'];
+  var M=[1.70,2.19,2.70,3.38,3.40,3.62,3.55,3.37,3.01,2.78,2.90,2.70,2.75];
+  it(fig(svgTexto(graficaLineas,{titulo:'Población de Chicago por censo, en millones',etiquetas:A,series:[{nombre:'Población (millones)',valores:M}],min:1,max:4,paso:0.5,ejeY:'Millones'}),'Población de Chicago por censo, 1900–2020 (millones)','Fuente: Oficina del Censo de los Estados Unidos.'),
+    ['Chicago creció hasta 1950, bajó hasta 1990 y desde entonces está casi estable.','Chicago tenía 1.70 millones de habitantes en 1900 y 2.19 millones en 1910, y siguió así.','Chicago es una de las ciudades más grandes, bonitas y conocidas de todo el país.'],'Qué se mide, la tendencia completa y los puntos clave, sin leer todos los números.');
+  it(fig(svgTexto(graficaBarrasDobles,{titulo:'Estudiantes en clases de la tarde y de la noche. Datos inventados',etiquetas:['Inglés','GED','Computación','Ciudadanía'],series:[{nombre:'Tarde (lisa)',valores:[30,22,18,12]},{nombre:'Noche (rayada)',valores:[45,40,20,10]}],max:50,paso:10,ejeY:'Estudiantes'}),'Estudiantes por clase y horario'),
+    ['En casi todas las clases hay más estudiantes de noche, sobre todo en Inglés y GED.','En la clase de Inglés hay 30 estudiantes por la tarde y 45 estudiantes por la noche.','Las clases de la noche son mucho mejores que las de la tarde para los estudiantes adultos.'],'Da la tendencia (más de noche), lo que destaca y no opina.');
+  it('<table class="mini"><caption>Precio promedio de un galón de gasolina por estación del año (datos inventados)</caption><thead><tr><th scope="col">Estación</th><th scope="col">Precio</th></tr></thead><tbody><tr><th scope="row">Invierno</th><td>3.10</td></tr><tr><th scope="row">Primavera</th><td>3.45</td></tr><tr><th scope="row">Verano</th><td>3.80</td></tr><tr><th scope="row">Otoño</th><td>3.30</td></tr></tbody></table>',
+    ['El precio sube del invierno al verano, cuando es más caro, y baja en otoño.','En invierno el galón de gasolina costaba 3.10 dólares y en primavera, 3.45 dólares.','La gasolina es demasiado cara para todos y el gobierno debería bajar su precio ya.'],'Tendencia y punto más alto, sin juicios.');
+  it(cita('<strong>Fragmento de una presentación:</strong> «Hace diez años, el centro tenía tres clases y cuarenta estudiantes. Hoy tiene nueve clases, más de doscientos estudiantes y una lista de espera de cincuenta personas. Y todavía funciona en el mismo edificio.» (Presentación inventada.)'),
+    ['El centro ha crecido mucho en diez años y ya no tiene espacio para todos los que quieren estudiar.','Hace diez años el centro tenía solamente tres clases y cuarenta estudiantes en total.','El centro es, sin duda, el mejor lugar de toda la ciudad para estudiar de noche.'],'Resume la idea y su consecuencia (falta de espacio), sin opinar.');
+  it(fig(svgTexto(graficaLineas,{titulo:'Visitas a la clínica por mes. Datos inventados',etiquetas:['Ene','Feb','Mar','Abr','May','Jun'],series:[{nombre:'Con cita (continua, ●)',valores:[120,125,130,140,150,160]},{nombre:'Sin cita (discontinua, ■)',valores:[90,85,70,60,50,45]}],min:0,max:180,paso:30,ejeY:'Visitas',valoresVisibles:true}),'Visitas a la clínica por mes'),
+    ['Las visitas con cita aumentaron cada mes, mientras que las visitas sin cita disminuyeron.','En enero hubo 120 visitas con cita y 90 visitas sin cita en la clínica del barrio.','La gente prefiere pedir cita porque la clínica atiende mucho mejor a los pacientes así.'],'Compara las dos series y su tendencia, sin inventar la causa.');
+  it(cita('<strong>Fragmento de una presentación:</strong> «En nuestra encuesta, 7 de cada 10 vecinos dijeron que usarían una biblioteca de herramientas. La mayoría la usaría para arreglos de la casa, y casi la mitad estaría dispuesta a ayudar como voluntario.» (Presentación inventada.)'),
+    ['La encuesta muestra mucho interés en una biblioteca de herramientas, sobre todo para arreglos de la casa.','En la encuesta, 7 de cada 10 vecinos respondieron a todas las preguntas que hizo el grupo.','Los vecinos deberían abrir una biblioteca de herramientas en el barrio cuanto antes.'],'La segunda confunde el dato; la tercera es una propuesta, no un resumen.');
+  unaAUna('re',B,{pista:'Todavía no. Un buen resumen dice qué se mide, la tendencia y lo más importante. No lee todos los números ni añade opiniones.'});
+})();
+</script>
+</body>
+</html>

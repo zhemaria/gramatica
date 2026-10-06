@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l7-3 · Evidencia y tono objetivo · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.3 · Evidencia y tono objetivo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 7.3 · Evidencia y tono objetivo</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 7 · Acompaña a la Lección 7.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_7-3.html">← Volver a la Lección 7.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="evidencia">1 · La evidencia relevante</button>
+  <button type="button" class="pest" data-mod="tono">2 · El tono objetivo</button>
+  <button type="button" class="pest" data-mod="cita">3 · La cita bien hecha</button>
+</nav>
+
+<section class="modulo" id="evidencia" aria-labelledby="t-ev">
+  <h2 id="t-ev">1 · La evidencia relevante</h2>
+  <p class="consejo">Lee la fuente y la afirmación. Elige la parte de la fuente que <strong>prueba</strong> esa afirmación, no solo la que habla del mismo tema.</p>
+  <div class="enun" id="ev-enun" aria-live="polite"></div>
+  <div class="opciones" id="ev-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ev-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ev-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ev-marcador"></div>
+</section>
+
+<section class="modulo" id="tono" aria-labelledby="t-to" hidden>
+  <h2 id="t-to">2 · El tono objetivo</h2>
+  <p class="consejo">Elige la versión objetiva: un hecho comprobable o una idea atribuida a la fuente, sin «yo creo», sin exclamaciones y sin adjetivos emocionales.</p>
+  <div class="enun" id="to-enun" aria-live="polite"></div>
+  <div class="opciones" id="to-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="to-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="to-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="to-marcador"></div>
+</section>
+
+<section class="modulo" id="cita" aria-labelledby="t-ci" hidden>
+  <h2 id="t-ci">3 · La cita bien hecha</h2>
+  <p class="consejo">Una buena cita dice quién lo dice, copia las palabras exactas entre « », marca con […] lo que se quita y pone el punto después de cerrar las comillas.</p>
+  <div class="enun" id="ci-enun" aria-live="polite"></div>
+  <div class="opciones" id="ci-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ci-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ci-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ci-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 7.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+
+var F={
+  brown:'<strong>Brown contra el Consejo de Educación (1954).</strong> «Separarlos de otros de edad y aptitudes semejantes únicamente por su raza genera un sentimiento de inferioridad respecto de su posición en la comunidad […]. Concluimos que, en el campo de la educación pública, la doctrina de “separados pero iguales” no tiene cabida.»',
+  orden:'<strong>Orden Ejecutiva 8802 (25 de junio de 1941).</strong> «CONSIDERANDO que hay pruebas de que se ha impedido el acceso al empleo, en industrias dedicadas a la producción de defensa, a trabajadores disponibles y necesarios, únicamente por consideraciones de raza, credo, color u origen nacional […] reafirmo la política de los Estados Unidos de que no habrá discriminación en el empleo de trabajadores en las industrias de defensa ni en el gobierno […]. Se establece […] un Comité de Prácticas Justas de Empleo.»',
+  planta:'<strong>«¿Por qué las plantas necesitan luz?» (Lección 7.2).</strong> «La clorofila absorbe sobre todo la luz roja y la azul y refleja la verde. […] En la oscuridad, […] su tallo se alarga muy deprisa y queda delgado y débil, y sus hojas salen pálidas o amarillentas porque sin luz no fabrica clorofila.»',
+  carta:'<strong>Carta de Sanford, Florida (1917).</strong> «Aquí hay algunas familias que están pensando en mudarse, y desean saber qué esperar antes de salir. Sírvase informar sobre el trato, el trabajo, el alquiler y las escuelas.»',
+  bls:'<strong>Oficina de Estadísticas Laborales (2024).</strong> Ingreso semanal mediano: sin diploma, 738 dólares; con diploma de secundaria o GED, 930 dólares. Tasa de desempleo: sin diploma, 6.2 %; con diploma, 4.2 %.'
+};
+
+/* ===== Módulo 1 · La evidencia relevante [fuente, afirmación, correcta, d1, d2, nota] ===== */
+unaAUna('ev',[
+  ['brown','El tribunal tuvo en cuenta el efecto de la segregación en los niños.','«genera un sentimiento de inferioridad respecto de su posición en la comunidad»','«en el campo de la educación pública, la doctrina de “separados pero iguales”»','«Concluimos que, en el campo de la educación pública»','Es la única cita que habla de un efecto en los niños.'],
+  ['brown','La decisión de Brown se limitó al campo de la educación.','«en el campo de la educación pública, la doctrina […] no tiene cabida»','«Separarlos de otros de edad y aptitudes semejantes únicamente por su raza»','«genera un sentimiento de inferioridad respecto de su posición»','La cita dice expresamente en qué campo se aplica la conclusión.'],
+  ['orden','La Orden 8802 reconoce que había discriminación en las fábricas de defensa.','«hay pruebas de que se ha impedido el acceso al empleo, en industrias dedicadas a la producción de defensa»','«Se establece […] un Comité de Prácticas Justas de Empleo»','«reafirmo la política de los Estados Unidos de que no habrá discriminación en el empleo»','El considerando admite que había «pruebas» de esa discriminación.'],
+  ['orden','La orden creó un organismo para vigilar que se cumpliera.','«Se establece […] un Comité de Prácticas Justas de Empleo»','«a trabajadores disponibles y necesarios, únicamente por consideraciones de raza»','«por consideraciones de raza, credo, color u origen nacional»','Crear un comité es crear un organismo.'],
+  ['planta','El color de las hojas indica si la planta recibe suficiente luz.','«sus hojas salen pálidas o amarillentas porque sin luz no fabrica clorofila»','«En la oscuridad, […] su tallo se alarga muy deprisa y queda delgado»','«La clorofila absorbe sobre todo la luz roja y la azul y refleja la verde»','Relaciona directamente la falta de luz con el color de las hojas.'],
+  ['planta','Una planta más alta no siempre es una planta más fuerte.','«su tallo se alarga muy deprisa y queda delgado y débil»','«La clorofila absorbe sobre todo la luz roja y la azul y refleja la verde»','«porque sin luz no fabrica clorofila»','Más largo, pero «delgado y débil».'],
+  ['carta','Las familias del sur querían informarse antes de migrar.','«desean saber qué esperar antes de salir»','«Aquí hay algunas familias que están pensando en mudarse»','«Sírvase informar sobre el trato, el trabajo, el alquiler»','Dice exactamente lo que querían: saber antes de salir.'],
+  ['bls','Tener el diploma se asocia con menos desempleo.','la tasa de desempleo: 6.2 % sin diploma y 4.2 % con diploma','el ingreso semanal mediano: 738 dólares sin diploma y 930 con diploma','que los datos son promedios del año 2024, de la BLS','La afirmación habla de desempleo: la evidencia tiene que ser la del desempleo.']
+].map(function(d){return {e:cita(F[d[0]])+'<span class="grande">Afirmación: '+d[1]+'</span>'+preg('¿Qué evidencia la apoya mejor?'),ops:[d[2],d[3],d[4]],c:0,n:d[5]};}),
+{pista:'Todavía no. Esa parte está en la fuente, pero ¿prueba esta afirmación? Busca la que habla exactamente de lo mismo.'});
+
+/* ===== Módulo 2 · El tono objetivo [subjetiva, objetiva, d1, d2] ===== */
+unaAUna('to',[
+  ['¡La decisión de Brown fue increíble!','La decisión de Brown rechazó una doctrina vigente desde 1896.','La decisión de Brown fue una maravilla para todo el país, sin duda.','Yo pienso que la decisión de Brown fue muy buena y muy justa.'],
+  ['Obviamente, Roosevelt tuvo que ceder.','Roosevelt firmó la orden siete días después de reunirse con Randolph.','Roosevelt, como era de esperar, no tuvo ninguna otra opción que firmar.','Todo el mundo sabe que Roosevelt cedió a la presión de la marcha.'],
+  ['La planta C se veía horrible.','La planta C tenía el tallo delgado y las hojas amarillentas.','La planta C era, por mucho, la más fea de las tres macetas.','La pobre planta C daba muchísima pena al verla tan flaca.'],
+  ['Es una vergüenza que haya gente sin diploma.','En 2024, el desempleo sin diploma fue de 6.2 %, según la BLS.','Es tristísimo que tanta gente en este país no tenga su diploma.','Yo creo que todos deberían tener ya su diploma, sin excusas.'],
+  ['El experimento salió súper bien.','El experimento mostró diferencias claras de altura y de color.','El experimento salió perfecto, tal como era de esperar.','Me encantó muchísimo cómo salió el experimento al final.'],
+  ['Las cartas de 1917 son lo más emocionante que he leído.','Las cartas de 1917 muestran qué preguntaban las familias antes de migrar.','Las cartas de 1917 son preciosas, muy tristes y muy bonitas.','Cualquiera se emociona muchísimo al leer las cartas de 1917.'],
+  ['Los jueces dijeron que la segregación estaba mal y punto.','Los jueces sostuvieron que las escuelas separadas eran desiguales.','Los jueces, por fin, dijeron lo que todos pensaban desde hace años.','Los jueces se dieron cuenta de lo obvio, por fin, después de tanto.'],
+  ['Sin duda, la fotosíntesis es lo más importante del mundo.','La fotosíntesis permite a la planta fabricar su alimento con la luz.','La fotosíntesis es algo genial y maravilloso que tienen las plantas.','La fotosíntesis es, de lejos, el mejor proceso de toda la naturaleza.']
+].map(function(d){return {e:cita('<strong>Versión subjetiva:</strong> «'+d[0]+'»')+preg('¿Qué versión tiene tono objetivo?'),ops:[d[1],d[2],d[3]],c:0,n:'Da un hecho comprobable o atribuye la idea a la fuente, sin emociones ni «yo creo».'};}),
+{pista:'Todavía no. Busca la versión sin «yo creo», sin exclamaciones y sin adjetivos emocionales: la que da un hecho que se puede comprobar.'});
+
+/* ===== Módulo 3 · La cita bien hecha [correcta, d1, d2, nota] ===== */
+unaAUna('ci',[
+  ['Según el tribunal, la segregación «genera un sentimiento de inferioridad».','La segregación «genera un sentimiento de inferioridad.» Según el tribunal','«Genera un sentimiento de inferioridad», dijo alguien una vez.','Presenta la fuente y pone el punto después de las comillas.'],
+  ['La Orden 8802 afirma que «no habrá discriminación en el empleo de trabajadores en las industrias de defensa».','La Orden 8802 afirma que «no va a haber nada de discriminación en ninguna de las fábricas del país».','La Orden 8802 afirma que no habrá discriminación en el empleo de trabajadores en las industrias de defensa.»','Las palabras entre comillas son exactas, y las comillas se abren y se cierran.'],
+  ['El texto explica que, sin luz, la planta «no fabrica clorofila».','El texto explica que, sin luz, la planta «no puede fabricar nada de clorofila».','El texto explica que, sin luz, la planta no fabrica «clorofila.»','La cita es exacta y el punto va fuera de las comillas.'],
+  ['La familia de Sanford pedía información sobre «el trato, el trabajo, el alquiler y las escuelas».','La familia de Sanford pedía información sobre «el trato, el trabajo, el alquiler y las escuelas.»','La familia de Sanford pedía información sobre "el trato, el trabajo, el alquiler y las escuelas".','En español se usan las comillas latinas « » y el punto va después.'],
+  ['El tribunal concluyó que la doctrina «no tiene cabida» en la educación pública.','El tribunal concluyó que la doctrina «no cabe para nada» en la educación pública.','«No tiene cabida» en la educación pública, concluyó.','Cita solo las palabras exactas y presenta quién lo dice.'],
+  ['Según la orden, se había impedido el empleo «únicamente por consideraciones de raza, credo, color u origen nacional».','Se había impedido el empleo, como se sabe, «únicamente por consideraciones de raza, credo, color u origen nacional».','Según la orden, se había impedido el empleo únicamente por consideraciones de raza, credo, color u origen nacional.»','La primera presenta la fuente; la segunda no dice quién lo dice; la tercera solo cierra las comillas.'],
+  ['El tribunal planteó si la segregación «[…] priva a los niños del grupo minoritario de una igualdad de oportunidades educativas».','El tribunal planteó si la segregación «priva a los niños de las oportunidades que merecen».','El tribunal planteó si la segregación «priva a los niños del grupo minoritario de una igualdad de oportunidades educativas.»','Marca con […] lo que se quitó, respeta las palabras y pone el punto fuera.'],
+  ['Con diploma, el ingreso semanal mediano era de 930 dólares, según la Oficina de Estadísticas Laborales.','Con diploma, el ingreso semanal mediano era «de unos mil dólares», según la Oficina de Estadísticas Laborales.','Con diploma, el ingreso era de 930 dólares, según dicen por ahí.','Una paráfrasis de un dato no lleva comillas, pero sí la fuente exacta.']
+].map(function(d){return {e:preg('¿Qué cita está bien hecha?'),ops:[d[0],d[1],d[2]],c:0,n:d[3]};}),
+{pista:'Todavía no. Revisa: ¿dice quién lo dice? ¿Son las palabras exactas? ¿Están las comillas « » completas y el punto después de cerrarlas?'});
+</script>
+</body>
+</html>

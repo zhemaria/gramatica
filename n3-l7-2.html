@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l7-2 · Texto informativo · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.2 · Texto informativo</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 7.2 · Texto informativo</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 7 · Acompaña a la Lección 7.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_7-2.html">← Volver a la Lección 7.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="dominio">1 · El término preciso</button>
+  <button type="button" class="pest" data-mod="claridad">2 · La versión más clara</button>
+  <button type="button" class="pest" data-mod="conclusion">3 · La conclusión ligada al tema</button>
+</nav>
+
+<section class="modulo" id="dominio" aria-labelledby="t-do">
+  <h2 id="t-do">1 · El término preciso</h2>
+  <p class="consejo">Lee la definición que da la oración y elige el <strong>término de dominio</strong> que significa exactamente eso: ciencias, salud, estudios sociales y economía.</p>
+  <div class="enun" id="do-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="do-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="do-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="do-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="do-marcador"></div>
+</section>
+
+<section class="modulo" id="claridad" aria-labelledby="t-cl" hidden>
+  <h2 id="t-cl">2 · La versión más clara</h2>
+  <p class="consejo">Elige la versión que se entiende a la primera: con el término exacto, sin palabras comodín (<em>cosa, algo, eso</em>) y con la causa o el efecto dichos con precisión.</p>
+  <div class="enun" id="cl-enun" aria-live="polite"></div>
+  <div class="opciones" id="cl-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cl-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cl-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cl-marcador"></div>
+</section>
+
+<section class="modulo" id="conclusion" aria-labelledby="t-co" hidden>
+  <h2 id="t-co">3 · La conclusión ligada al tema</h2>
+  <p class="consejo">Lee el párrafo informativo y elige la conclusión que <strong>retoma la idea central</strong> y dice <strong>por qué importa</strong>. Descarta la que repite un solo dato y la que abre otro tema.</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 7.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+
+/* ===== Módulo 1 · El término preciso [materia, oración con ___, correcta, d1, d2, nota] ===== */
+unaAUna('do',[
+  ['Ciencias','La planta usa la energía de la luz para fabricar su alimento: este proceso se llama ___.','fotosíntesis','fototropismo','respiración','Fabricar alimento con luz es la fotosíntesis.'],
+  ['Ciencias','El agua de la lluvia que corre por el suelo hasta los ríos se llama ___.','escorrentía','evaporación','condensación','Escorrentía: el agua que corre sobre la superficie.'],
+  ['Ciencias','El agua que se filtra hacia el subsuelo y llega a las aguas subterráneas sigue el proceso de ___.','infiltración','precipitación','evaporación','Infiltración: el agua entra en el suelo.'],
+  ['Ciencias','La fuerza que atrae los objetos hacia el centro de la Tierra es la ___.','gravedad','fricción','presión','La gravedad atrae hacia la Tierra; la fricción frena el movimiento.'],
+  ['Salud','Las proteínas que el cuerpo fabrica para reconocer y atacar un virus se llaman ___.','anticuerpos','antibióticos','antígenos','Los anticuerpos los fabrica el cuerpo; los antibióticos son medicamentos contra bacterias.'],
+  ['Salud','La fuerza con que la sangre empuja las paredes de las arterias es la ___.','presión arterial','frecuencia cardiaca','temperatura corporal','La frecuencia cardiaca es el número de latidos por minuto.'],
+  ['Salud','Los medicamentos que combaten las infecciones causadas por bacterias son los ___.','antibióticos','anticuerpos','analgésicos','No sirven contra los virus; los analgésicos calman el dolor.'],
+  ['Estudios sociales','La ley más alta del país, que organiza el gobierno y protege los derechos, es la ___.','Constitución','legislatura','enmienda','Una enmienda es un cambio a la Constitución.'],
+  ['Estudios sociales','El reparto del poder entre el Congreso, el presidente y los tribunales se llama ___.','separación de poderes','sufragio universal','voto popular','Cada rama tiene funciones distintas y se controlan entre sí.'],
+  ['Estudios sociales','Un cambio o una adición a la Constitución se llama ___.','enmienda','decreto','tratado','La Constitución tiene 27 enmiendas.'],
+  ['Estudios sociales','El grupo de electores que elige formalmente al presidente es el ___.','Colegio Electoral','Congreso','Tribunal Supremo','Para ganar se necesitan 270 votos electorales.'],
+  ['Economía','El aumento general y sostenido de los precios se llama ___.','inflación','recesión','inversión','La recesión es cuando la economía se contrae.'],
+  ['Economía','Cuando hay mucha demanda de un producto y poca oferta, su precio tiende a ___.','subir','bajar','mantenerse igual','Si muchos quieren algo escaso, el precio sube.'],
+  ['Economía','El dinero extra que se paga por un préstamo, calculado como porcentaje, es la ___.','tasa de interés','tasa de desempleo','tasa de cambio','La tasa de cambio compara dos monedas.']
+].map(function(d){return {e:'<span class="grande">'+d[0]+'</span>'+cita(d[1])+preg('¿Qué término completa la oración?'),ops:[d[2],d[3],d[4]],c:0,n:'«'+d[2]+'». '+d[5]};}),
+{pista:'Todavía no. Lee la definición que da la oración y busca el término que significa exactamente eso.'});
+
+/* ===== Módulo 2 · La versión más clara [clara, vaga 1, vaga 2, nota] ===== */
+unaAUna('cl',[
+  ['El agua se evapora con el calor del sol y sube a la atmósfera como vapor.','El agua hace algo con el sol y después se va para arriba, hacia el cielo.','Con eso del calor que hace, el agua sube y pasa lo que siempre pasa.','Nombra el proceso (se evapora), la causa (el calor) y el resultado (vapor).'],
+  ['La vacuna enseña al sistema inmunitario a reconocer el virus antes de una infección.','La vacuna hace que el cuerpo se prepare bien para la cosa esa que nos enferma.','La vacuna sirve para algo bueno que pasa por dentro, en las defensas del cuerpo.','Usa términos precisos y dice qué hace la vacuna.'],
+  ['El huracán se debilita al tocar tierra, porque pierde el agua tibia del océano.','El huracán se pone más flojo cuando llega a tierra, por lo del agua del mar.','Cuando llega a tierra, al huracán le pasan muchas cosas y cambia bastante.','Dice qué pasa y por qué, sin palabras comodín.'],
+  ['La inflación reduce el poder adquisitivo: con el mismo salario se compra menos.','La inflación hace que el dinero ya no sea como era antes de que pasara todo eso.','Con la inflación las cosas se ponen muy difíciles para la gente de todos lados.','Define el efecto con un ejemplo concreto.'],
+  ['La Constitución divide el gobierno en tres ramas: legislativa, ejecutiva y judicial.','La Constitución pone el gobierno en varias partes y cada una de ellas hace lo suyo.','En la Constitución hay algo escrito sobre cómo se reparte el gobierno del país.','Nombra las tres ramas con su término.'],
+  ['Las hojas de la planta C salieron amarillentas porque sin luz no se formó clorofila.','Las hojas de la planta C salieron muy raras por lo de la caja de cartón.','A la planta C le pasó eso que siempre les pasa a las plantas sin luz.','Describe lo observado y su causa con el término preciso.'],
+  ['El corazón bombea la sangre, que lleva oxígeno a todas las células del cuerpo.','El corazón mueve la sangre para que llegue lo necesario a todo.','El corazón hace su trabajo y así el cuerpo tiene lo que le hace falta.','Dice qué lleva la sangre y adónde.'],
+  ['Una enmienda es un cambio a la Constitución, y necesita la aprobación de tres cuartas partes de los estados.','Una enmienda es cuando se cambia algo de la ley y los estados tienen que decir que sí a eso.','Una enmienda es un cambio, y para hacerlo hay que seguir unos pasos que son bastante largos.','Define el término y da el dato preciso del proceso.'],
+  ['La fricción es la fuerza que frena un objeto cuando roza con otro.','La fricción es lo que pasa cuando las cosas se tocan y se ponen más lentas.','La fricción es una fuerza que tiene algo que ver con el movimiento de las cosas.','Define la fuerza y su efecto con precisión.'],
+  ['Cuando sube la tasa de interés, pedir un préstamo cuesta más dinero.','Cuando sube eso de los intereses, los préstamos se ponen más complicados.','Con los intereses arriba, pasa algo raro con los préstamos de la gente.','Relaciona la causa y el efecto con el término exacto.']
+].map(function(d){return {e:preg('¿Qué versión es más clara y precisa?'),ops:[d[0],d[1],d[2]],c:0,n:d[3]};}),
+{pista:'Todavía no. Busca la versión sin palabras comodín («cosa», «eso», «algo») y con los términos exactos.'});
+
+/* ===== Módulo 3 · La conclusión ligada al tema [párrafo, ligada, repite dato, tema nuevo o consejo, nota] ===== */
+unaAUna('co',[
+  ['El ciclo del agua tiene cuatro etapas principales. Con el calor, el agua se evapora; en el aire frío, el vapor se condensa y forma nubes; las gotas caen como precipitación; y el agua corre o se infiltra hasta volver a los ríos y al mar.','En resumen, el agua de la Tierra se recicla sin parar, y por eso la misma agua puede ser mar, nube y lluvia.','En conclusión, la condensación es el paso en el que el vapor de agua se enfría en el aire y forma las nubes.','En conclusión, cuidar el agua que usamos cada día en la casa es responsabilidad de toda la comunidad.','La segunda repite un solo dato; la tercera es un consejo que el texto no explicó.'],
+  ['Las vacunas contienen un antígeno, una parte o versión inofensiva del microbio. El sistema inmunitario lo reconoce y fabrica anticuerpos. Si un día llega el microbio de verdad, el cuerpo ya sabe defenderse.','En resumen, la vacuna entrena al cuerpo antes de la infección; por eso protege sin que haya que enfermarse.','En conclusión, los anticuerpos son unas proteínas que fabrica el sistema inmunitario cuando reconoce un microbio.','En conclusión, además de vacunarse, también hay que comer bien, dormir y hacer ejercicio para estar sano.','La conclusión ligada retoma la idea central y dice por qué importa.'],
+  ['Los huracanes se forman sobre aguas tibias del océano. El aire caliente y húmedo sube, se forma una zona de baja presión y los vientos empiezan a girar alrededor de un centro tranquilo: el ojo.','En resumen, el huracán se alimenta del calor del océano; por eso se forma en el mar y se debilita en tierra.','En conclusión, el ojo es la parte tranquila y sin nubes que queda justo en el centro del huracán.','En conclusión, las familias que viven cerca de la costa deberían tener siempre un plan de emergencia.','El consejo puede ser útil, pero no es la conclusión de este texto informativo.'],
+  ['La inflación es el aumento general de los precios. Cuando los precios suben más rápido que los salarios, las familias pueden comprar menos con el mismo dinero: baja su poder adquisitivo.','En resumen, la inflación no solo sube los precios: reduce lo que cada salario puede comprar.','En conclusión, la inflación es el aumento general y sostenido de los precios en un país.','En conclusión, el gobierno debería subir los salarios de todos los trabajadores del país.','La segunda copia la primera oración; la tercera es una opinión.'],
+  ['El presidente de Estados Unidos no se elige directamente por el voto popular. Los votantes de cada estado eligen a unos electores, que forman el Colegio Electoral. Para ganar, un candidato necesita al menos 270 de los 538 votos electorales.','En resumen, el presidente se decide en el Colegio Electoral, y por eso importa ganar en cada estado, no solo en el total del país.','En conclusión, hay 538 votos electorales en total en el Colegio Electoral, repartidos entre los estados.','En conclusión, el Congreso tiene dos cámaras: el Senado y la Cámara de Representantes del país.','La tercera abre un tema nuevo; la segunda solo repite un número.'],
+  ['En la oscuridad, la plantita de frijol gasta el alimento de sus cotiledones en estirar el tallo. Sin luz no fabrica clorofila, así que sus hojas salen pálidas, y cuando se acaba la reserva ya no puede alimentarse.','En resumen, sin luz la planta puede crecer un tiempo, pero no puede mantenerse viva: la luz es su fuente de energía.','En conclusión, los cotiledones son las dos mitades del frijol que guardan el alimento de la plantita.','En conclusión, el frijol es uno de los alimentos más importantes y queridos de toda América Latina.','Solo la primera retoma la idea central del párrafo y dice qué significa.']
+].map(function(d){return {e:cita(d[0])+preg('¿Qué conclusión está ligada al tema?'),ops:[d[1],d[2],d[3]],c:0,n:d[4]};}),
+{pista:'Todavía no. La conclusión retoma la idea central de todo el párrafo y dice por qué importa; no repite un solo dato ni abre otro tema.'});
+</script>
+</body>
+</html>

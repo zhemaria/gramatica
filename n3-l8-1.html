@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l8-1 · Fuentes, notas y paráfrasis · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.1 · Fuentes, notas y paráfrasis</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  .opciones .op,.enun{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<h1>Práctica 8.1 · Fuentes, notas y paráfrasis</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 8 · Acompaña a la Lección 8.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_8-1.html">← Volver a la Lección 8.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="parafrasis">1 · Paráfrasis o copia</button>
+  <button type="button" class="pest" data-mod="notas">2 · La mejor nota</button>
+  <button type="button" class="pest" data-mod="lista-fuentes">3 · La lista de fuentes</button>
+</nav>
+
+<section class="modulo" id="parafrasis" aria-labelledby="t-pa">
+  <h2 id="t-pa">1 · Paráfrasis o copia</h2>
+  <p class="consejo">Una paráfrasis cambia las <strong>palabras y la forma</strong> de la oración, pero no el sentido. Cambiar solo algunas palabras es una copia disfrazada.</p>
+  <div class="enun" id="pa-enun" aria-live="polite"></div>
+  <div class="opciones" id="pa-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pa-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pa-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pa-marcador"></div>
+</section>
+
+<section class="modulo" id="notas" aria-labelledby="t-no" hidden>
+  <h2 id="t-no">2 · La mejor nota</h2>
+  <p class="consejo">Una buena nota es <strong>breve</strong>, responde a <strong>tu pregunta</strong> y dice <strong>de qué fuente</strong> sale. No copies oraciones enteras.</p>
+  <div class="enun" id="no-enun" aria-live="polite"></div>
+  <div class="opciones" id="no-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="no-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="no-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="no-marcador"></div>
+</section>
+
+<section class="modulo" id="lista-fuentes" aria-labelledby="t-li" hidden>
+  <h2 id="t-li">3 · La lista de fuentes</h2>
+  <p class="consejo">Autor (o institución), año entre paréntesis, título en cursiva, editorial o sitio y, si es digital, la dirección. Las entradas van en orden alfabético.</p>
+  <div class="enun" id="li-enun" aria-live="polite"></div>
+  <div class="opciones" id="li-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="li-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="li-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="li-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 8.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+
+/* ===== Módulo 1 · Paráfrasis o copia [original, paráfrasis, copia disfrazada, cambia el sentido] ===== */
+unaAUna('pa',[
+  ['El canal tardó ocho años en construirse y en la obra trabajaron miles de obreros.','Hicieron falta miles de trabajadores y casi ocho años de obra para terminar el canal.','El canal demoró ocho años en construirse y en la obra laboraron miles de obreros.','El canal se construyó en ocho meses con unos pocos obreros.'],
+  ['La biblioteca presta computadoras portátiles a los vecinos que tienen tarjeta.','Con la tarjeta de la biblioteca, cualquier vecino puede llevarse prestada una computadora portátil.','La biblioteca presta laptops a los residentes que tienen su tarjeta de usuario.','La biblioteca vende computadoras portátiles baratas a los vecinos que las necesitan.'],
+  ['El agua hierve a una temperatura más baja en las montañas que al nivel del mar.','En lo alto de una montaña, el agua empieza a hervir antes de llegar a la temperatura que necesita en la costa.','El agua hierve a una temperatura menor arriba en las montañas que al nivel del océano.','El agua hierve a una temperatura más alta en las montañas que en la costa, porque hace más frío.'],
+  ['Muchos trabajadores agrícolas migraban cada temporada siguiendo las cosechas.','Cada temporada, una gran parte de los jornaleros del campo se mudaba adonde hubiera cosecha.','Muchos obreros agrícolas emigraban cada estación del año persiguiendo las cosechas.','Los trabajadores agrícolas vivían siempre en el mismo lugar durante todo el año.'],
+  ['La vacuna no cura la enfermedad, sino que ayuda a prevenirla.','Una vacuna sirve para no enfermarse, no para sanar a quien ya está enfermo.','La vacuna no sana la enfermedad, sino que ayuda a evitarla antes de que llegue.','La vacuna cura la enfermedad en muy pocos días a quien ya la tiene y está enfermo.'],
+  ['El diploma de secundaria abre la puerta a programas de formación técnica.','Tener el diploma permite entrar en muchos programas que preparan para un oficio.','El diploma de secundaria abre las puertas a muchos programas de capacitación técnica.','Sin el diploma de secundaria no existe ninguna forma de aprender un oficio en este país.'],
+  ['Las abejas polinizan una gran parte de los cultivos que comemos.','Buena parte de lo que se cultiva para comer depende de que las abejas lleven el polen de flor en flor.','Las abejas polinizan una gran porción de las cosechas que consumimos todos los días.','Las abejas se comen una gran parte de los cultivos que crecen en los campos del país.'],
+  ['En 1900, la población de Chicago se acercaba a 1.7 millones de habitantes.','Al empezar el siglo XX, en Chicago vivían casi 1.7 millones de personas.','En 1900, los habitantes de Chicago se acercaban a 1.7 millones de personas.','En 1900, Chicago ya tenía más de 3 millones de habitantes.']
+].map(function(d){return {e:cita('<strong>Original:</strong> «'+d[0]+'»')+preg('¿Cuál es una paráfrasis correcta?'),ops:[d[1],d[2],d[3]],c:0,
+  n:'Cambia las palabras y la forma de la oración sin cambiar el sentido. «'+d[2]+'» solo cambia algunas palabras: es copia disfrazada. La otra cambia lo que dice el original.'};}),
+{pista:'Todavía no. ¿Esa opción solo cambió algunas palabras y dejó la misma oración? ¿O cambió lo que dice el original?'});
+
+/* ===== Módulo 2 · La mejor nota [fuente, fragmento, pregunta, buena nota, copia, fuera de tema] ===== */
+unaAUna('no',[
+  ['Hill (2000)','La investigadora revisó los registros de mortalidad y los periódicos de 1885 y no encontró ninguna epidemia de cólera ni de tifoidea que causara miles de muertes.','¿Es verdad la epidemia de 1885?','Hill (2000): revisó registros y periódicos de 1885 → no hubo epidemia masiva','La investigadora revisó los registros de mortalidad y los periódicos de 1885 y no encontró','Hill (2000): las investigadoras trabajan muchas horas en las bibliotecas'],
+  ['WTTW (s. f.)','La ciudad de San Luis, río abajo, demandó a Chicago, pero perdió el caso ante el Tribunal Supremo.','¿Qué consecuencias tuvo invertir el río?','WTTW (s. f.): San Luis demandó a Chicago; ganó Chicago en el Tribunal Supremo','La ciudad de San Luis, río abajo, demandó a Chicago, pero perdió el caso ante el','WTTW (s. f.): San Luis está en el estado de Misuri, a orillas del Misisipi'],
+  ['BLS (2024)','En 2024, el ingreso semanal mediano fue de 738 dólares sin diploma y de 930 dólares con diploma de secundaria o GED.','¿Cuánto cambia el ingreso con el diploma?','BLS (2024): mediana semanal 738 dólares sin diploma, 930 con diploma → +192','En 2024, el ingreso semanal mediano fue de 738 dólares sin diploma y de 930','BLS (2024): la oficina publica sus datos en internet todos los años'],
+  ['Archivo de fuentes','La Orden Ejecutiva 8802 se firmó el 25 de junio de 1941, seis días antes de la fecha anunciada para la marcha sobre Washington.','¿Por qué firmó Roosevelt la Orden 8802?','Archivo: Orden 8802 firmada el 25 jun. 1941, 6 días antes de la marcha anunciada','La Orden Ejecutiva 8802 se firmó el 25 de junio de 1941, seis días antes de la fecha','Archivo: Roosevelt fue presidente de los Estados Unidos durante doce años'],
+  ['CDC (2018)','En 2015, casi tres de cada cuatro estudiantes de secundaria dormían menos de 8 horas en las noches de escuela.','¿Duermen lo suficiente los adolescentes?','CDC (2018): en 2015, casi 3 de cada 4 de secundaria → menos de 8 h por noche','En 2015, casi tres de cada cuatro estudiantes de secundaria dormían menos de 8 horas en','CDC (2018): los CDC tienen su sede central en la ciudad de Atlanta'],
+  ['Lección 7.2','Sin luz, la planta no fabrica clorofila, así que sus hojas salen pálidas o amarillentas.','¿Cómo afecta la falta de luz a una planta?','Lección 7.2: sin luz → no hay clorofila → hojas pálidas o amarillentas','Sin luz, la planta no fabrica clorofila, así que sus hojas salen pálidas o','Lección 7.2: los frijoles se comen en muchos países de América Latina']
+].map(function(d){return {e:cita('<strong>Fuente: '+d[0]+'.</strong> «'+d[1]+'»')+'<span class="grande">Tu pregunta: '+d[2]+'</span>'+preg('¿Cuál es la mejor nota?'),ops:[d[3],d[4],d[5]],c:0,
+  n:'Breve, con palabras clave, ligada a tu pregunta y con la fuente. La otra copia sin comillas; la tercera no responde a la pregunta.'};}),
+{pista:'Todavía no. Una buena nota es breve, responde a tu pregunta y dice de dónde sale. ¿Esa opción copia o se sale del tema?'});
+
+/* ===== Módulo 3 · La lista de fuentes [pregunta, correcta, d1, d2, nota] ===== */
+unaAUna('li',[
+  ['¿Qué entrada de libro está bien hecha?','Cisneros, S. (1984). <em>The house on Mango Street</em>. Arte Público Press.','Sandra Cisneros. <em>The house on Mango Street</em>. Arte Público Press, 1984.','Cisneros, S. <em>The house on Mango Street</em>. (Arte Público Press, 1984).','Apellido, inicial, año entre paréntesis, título en cursiva y editorial.'],
+  ['¿Qué entrada de libro está bien hecha?','García Márquez, G. (1967). <em>Cien años de soledad</em>. Editorial Sudamericana.','García Márquez, Gabriel, <em>Cien años de soledad</em>, 1967, Sudamericana.','(1967). García Márquez, G. <em>Cien años de soledad</em>. Editorial Sudamericana.','El año va después del autor, no al principio.'],
+  ['¿Qué entrada de página web está bien hecha?','GEDparaHispanos. (2026). <em>Archivo de fuentes</em>. https://zhemaria.github.io/sociales/fuentes/','<em>Archivo de fuentes</em>. https://zhemaria.github.io/sociales/fuentes/ GEDparaHispanos.','https://zhemaria.github.io/sociales/fuentes/ (GEDparaHispanos, Archivo de fuentes, 2026).','Institución, año, título en cursiva y dirección, en ese orden.'],
+  ['¿Qué entrada de página web sin fecha está bien hecha?','WTTW. (s. f.). <em>How Chicago reversed its river: An animated history</em>. The Chicago Tour with Geoffrey Baer. https://www.wttw.com/chicago-river-tour/how-chicago-reversed-river-animated','WTTW. (2026, leída hoy). <em>How Chicago reversed its river</em>. https://www.wttw.com/chicago-river-tour/how-chicago-reversed-river-animated','WTTW. <em>Cómo Chicago invirtió su río</em> (traducción mía). https://www.wttw.com/chicago-river-tour/how-chicago-reversed-river-animated','«s. f.» si no hay fecha; el título va en su idioma original.'],
+  ['En la lista de fuentes, ¿cuál va primero?','Allende, I. (1982). <em>La casa de los espíritus</em>. Plaza &amp; Janés.','Cisneros, S. (1984). <em>The house on Mango Street</em>. Arte Público Press.','García Márquez, G. (1967). <em>Cien años de soledad</em>. Editorial Sudamericana.','Orden alfabético por apellido: Allende, Cisneros, García Márquez.'],
+  ['¿Cómo se cita dentro del texto el libro de Libby Hill del año 2000?','(Hill, 2000)','(Libby, 2000)','(2000, Hill, libro)','Apellido y año entre paréntesis.'],
+  ['¿Qué le falta a esta entrada? <em>Hill, L. (2000). The Chicago River: A natural and unnatural history. Lake Claremont Press.</em>','La cursiva en el título del libro','El nombre completo de la autora','La dirección de una página web','El título de un libro va en cursiva.'],
+  ['Una fuente no tiene autor con nombre. ¿Qué se escribe en su lugar?','El nombre de la institución que la publica','La palabra «Anónimo» en mayúsculas','Tu propio nombre como investigador','Por ejemplo: «Oficina del Censo de los Estados Unidos. (2021)…».']
+].map(function(d){return {e:preg(d[0]),ops:[d[1],d[2],d[3]],c:0,n:d[4]};}),
+{pista:'Todavía no. Recuerda el orden: autor (o institución), año entre paréntesis, título en cursiva, editorial o sitio, y la dirección si es digital.'});
+</script>
+</body>
+</html>

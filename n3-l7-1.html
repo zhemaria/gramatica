@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l7-1 · Texto argumentado · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 7.1 · Texto argumentado</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 7.1 · Texto argumentado</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 7 · Acompaña a la Lección 7.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_7-1.html">← Volver a la Lección 7.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="tesis">1 · La mejor tesis</button>
+  <button type="button" class="pest" data-mod="ordena">2 · Ordena el argumento</button>
+  <button type="button" class="pest" data-mod="transiciones">3 · Las transiciones</button>
+</nav>
+
+<section class="modulo" id="tesis" aria-labelledby="t-te">
+  <h2 id="t-te">1 · La mejor tesis</h2>
+  <p class="consejo">Una buena tesis es <strong>discutible</strong> (alguien podría no estar de acuerdo), <strong>específica</strong> (dice qué se propone) y <strong>anuncia sus razones</strong> (dice por qué).</p>
+  <div class="enun" id="te-enun" aria-live="polite"></div>
+  <div class="opciones" id="te-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="te-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="te-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="te-marcador"></div>
+</section>
+
+<section class="modulo" id="ordena" aria-labelledby="t-or" hidden>
+  <h2 id="t-or">2 · Ordena el argumento</h2>
+  <p class="consejo">El orden lógico es: tesis → razón 1 → razón 2 → objeción y respuesta → conclusión. La transición del principio de cada párrafo te da la pista.</p>
+  <div class="enun" id="or-enun" aria-live="polite"></div>
+  <div class="opciones" id="or-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="or-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="or-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="or-marcador"></div>
+</section>
+
+<section class="modulo" id="transiciones" aria-labelledby="t-tr" hidden>
+  <h2 id="t-tr">3 · Las transiciones</h2>
+  <p class="consejo">Decide qué hace el párrafo: ¿añade una razón, reconoce una objeción, la responde, muestra una consecuencia o concluye? Elige la transición que lo dice.</p>
+  <div class="enun" id="tr-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="tr-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="tr-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="tr-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="tr-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 7.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+
+/* ===== Módulo 1 · La mejor tesis [tema, tesis buena, hecho, vaga o sin razones, nota] ===== */
+unaAUna('te',[
+  ['Los teléfonos en clase','Las escuelas deberían guardar los teléfonos en clase, porque distraen y bajan la concentración.','Muchos estudiantes de secundaria tienen hoy un teléfono celular propio con internet.','Los teléfonos en clase son un tema que preocupa a muchas familias y a los maestros.'],
+  ['El transporte para estudiantes adultos','La ciudad debería dar transporte gratis a los estudiantes adultos, porque el costo les impide ir a clase.','La ciudad tiene autobuses, trenes y bicicletas de alquiler para todos sus habitantes.','Habría que hacer algo con el transporte para los que estudian de noche en la ciudad.'],
+  ['Las ciclovías','El concejo debería construir más ciclovías protegidas, porque reducen los accidentes y cuestan poco.','Una ciclovía es un carril de la calle reservado solo para las bicicletas y los patines.','Las bicicletas y los autos tienen que compartir todos los días las calles de la ciudad.'],
+  ['El tiempo para estudiar','Las empresas deberían dar dos horas pagadas para estudiar, porque así retienen y preparan a su gente.','Muchos adultos estudian por la noche, después de terminar su jornada de trabajo.','Estudiar y trabajar a la vez es algo de lo que se habla bastante en las empresas.'],
+  ['La comida en las escuelas','Las escuelas deberían ofrecer fruta fresca en cada almuerzo, porque mejora la dieta y cuesta poco.','Las escuelas públicas del país sirven el almuerzo a millones de niños cada día.','La comida de las escuelas podría ser un poco diferente de lo que es hoy en día.'],
+  ['Los árboles en el barrio','La ciudad debería plantar árboles en cada cuadra, porque dan sombra y refrescan el barrio en verano.','Los árboles absorben dióxido de carbono del aire y producen oxígeno.','Los árboles son bonitos y a casi todo el mundo le gustan en su calle.'],
+  ['Las bibliotecas','Las bibliotecas deberían abrir hasta las nueve, porque muchos adultos estudian después del trabajo.','Las bibliotecas públicas prestan libros, películas y computadoras sin cobrar a sus lectores.','Las bibliotecas son lugares importantes para toda la comunidad, de día y de noche.'],
+  ['El horario de los parques','La ciudad debería abrir los parques hasta las diez en verano, porque de día hace calor y las familias trabajan.','Chicago tiene más de 500 parques, administrados por el distrito de parques de la ciudad.','Los parques de la ciudad podrían funcionar de otra manera durante los meses de verano.']
+].map(function(d,i){
+  var sinRazon=d[1].split(', porque')[0]+(['. Es algo que hay que hacer cuanto antes en todas partes.','. Así lo pienso, y creo que así debería ser en todo el país.'][i%2]);
+  var ops=i%2?[d[1],d[2],sinRazon]:[d[1],sinRazon,d[3]];
+  return {e:'<span class="grande">Tema: '+d[0]+'</span>'+preg('¿Cuál es la mejor tesis?'),ops:ops,c:0,
+  n:'Es discutible, específica y anuncia sus razones. '+(i%2?'«'+d[2]+'» es un hecho que nadie discute; la otra toma postura, pero no dice por qué.':'La otra postura no dice por qué; «'+d[3]+'» ni siquiera toma postura.')};}),
+{pista:'Todavía no. Una tesis toma postura (alguien podría no estar de acuerdo), dice qué se propone y por qué.'});
+
+/* ===== Módulo 2 · Ordena el argumento ===== */
+var ARG=[
+  {t:'Tiempo pagado para estudiar',p:['Los empleadores deberían dar dos horas pagadas a la semana para estudiar, porque así retienen a sus trabajadores y los preparan mejor.','En primer lugar, formar a los empleados que ya se tienen cuesta menos que contratar y entrenar a otros nuevos.','Por otra parte, un trabajador que termina el GED o aprende inglés puede asumir tareas de más responsabilidad.','Es cierto que dos horas menos de trabajo tienen un costo. Sin embargo, ese costo se recupera con empleados más preparados que no se van.','En definitiva, el tiempo para estudiar no es un regalo: es una inversión para la empresa y para el trabajador.']},
+  {t:'Los teléfonos en clase',p:['Las escuelas deberían guardar los teléfonos durante las clases, porque distraen a los estudiantes y les quitan concentración.','Para empezar, cada notificación interrumpe lo que el estudiante está haciendo, y volver a concentrarse toma tiempo.','Además, sin el teléfono en la mano, los estudiantes participan más en las discusiones de la clase.','Algunos padres temen no poder comunicarse con sus hijos en una emergencia. No obstante, la escuela siempre puede llamar a la familia desde la oficina.','Por todo lo anterior, guardar los teléfonos ayudaría a que la clase cumpla su función: enseñar y aprender.']},
+  {t:'Transporte gratis para estudiantes adultos',p:['La ciudad debería ofrecer transporte gratis a los estudiantes adultos, porque el costo los aleja de las clases y porque su educación beneficia a todos.','En primer lugar, para quien gana poco, pagar el pasaje varias veces por semana para ir a clase es un gasto que pesa.','Por otra parte, un adulto que termina sus estudios puede conseguir un empleo mejor y pagar más impuestos.','Se podría pensar que la ciudad no tiene dinero para eso. Aun así, el gasto sería pequeño comparado con lo que gana la ciudad.','En conclusión, un pasaje gratis es una ayuda pequeña que puede cambiar el futuro de un estudiante y de su ciudad.']},
+  {t:'Árboles en el patio de la escuela',p:['La escuela debería plantar árboles en su patio, porque dan sombra en los días de calor y sirven para las clases de ciencias.','En primer lugar, la sombra de los árboles mantiene más frescos el suelo y el aire en los días de calor.','Además, los estudiantes podrían medir y observar los árboles en sus clases de ciencias durante todo el año.','Es cierto que plantar y cuidar árboles da trabajo. Sin embargo, las familias y los estudiantes podrían organizar jornadas de voluntarios.','En definitiva, unos cuantos árboles convertirían un patio de cemento en un lugar más fresco y en un aula al aire libre.']}
+];
+(function(){
+  var R=['la introducción con la tesis','la razón 1','la razón 2','la objeción y su respuesta','la conclusión'], B=[];
+  ARG.forEach(function(a){
+    B.push({e:'<span class="grande">'+a.t+'</span>'+preg('¿Qué párrafo va <strong>primero</strong>?'),ops:[a.p[0],a.p[3],a.p[4]],c:0,n:'Primero va la introducción, que termina con la tesis.'});
+    for(var i=0;i<4;i++){
+      var otros=[0,1,2,3,4].filter(function(k){return k!==i&&k!==i+1;});
+      var d1=otros[(i+1)%otros.length], d2=otros[(i+2)%otros.length];
+      B.push({e:'<span class="grande">'+a.t+'</span>'+cita('Acabas de leer '+R[i]+': «'+a.p[i]+'»')+preg('¿Qué párrafo sigue?'),ops:[a.p[i+1],a.p[d1],a.p[d2]],c:0,
+        n:'Sigue '+R[i+1]+'. Fíjate en la transición con que empieza.'});
+    }
+  });
+  unaAUna('or',B,{pista:'Todavía no. Recuerda el orden: tesis → razón 1 → razón 2 → objeción y respuesta → conclusión. Las transiciones del principio te dan la pista.'});
+})();
+
+/* ===== Módulo 3 · Las transiciones [antes, párrafo con ___, correcta, d1, d2, nota] ===== */
+unaAUna('tr',[
+  ['La introducción presenta la tesis.','«___, las clínicas de barrio atienden a quien no tiene auto.»','En primer lugar','En conclusión','No obstante','Abre la primera razón.'],
+  ['El párrafo anterior dio la primera razón.','«___, una clínica cerca de casa evita muchas visitas a la sala de emergencias.»','Por otra parte','Es cierto que','En primer lugar','Añade una segunda razón.'],
+  ['El párrafo anterior dio dos razones.','«___ abrir una clínica cuesta dinero.»','Es cierto que','Por lo tanto','Además','Reconoce una objeción.'],
+  ['El párrafo reconoce que cuesta dinero.','«Es cierto que cuesta dinero. ___, atender a tiempo ahorra gastos mayores después.»','No obstante','Asimismo','Por ejemplo','Responde a la objeción con un contraste.'],
+  ['Ya se dieron las razones y se respondió la objeción.','«___, más clínicas de barrio harían una ciudad más sana.»','En definitiva','Para empezar','Sin embargo','Anuncia el cierre.'],
+  ['El párrafo anterior dijo que muchos trabajadores no tienen auto.','«___, necesitan servicios que puedan alcanzar a pie o en autobús.»','Por lo tanto','En primer lugar','Algunos dirán que','Muestra una consecuencia de lo anterior.'],
+  ['El párrafo anterior dio la primera razón a favor de las ciclovías.','«___, cuestan mucho menos que ampliar una calle para autos.»','Asimismo','Aun así','En conclusión','Añade otra razón del mismo lado.'],
+  ['La tesis defiende abrir la biblioteca de noche.','«___ abrir de noche obliga a pagar más horas al personal.»','Algunos dirán que','En consecuencia','En segundo lugar','Presenta lo que diría alguien en contra.'],
+  ['El párrafo presentó la objeción del costo del personal.','«___, muchos estudiantes adultos no tienen otro lugar tranquilo para estudiar.»','Aun así','Además','Por ejemplo','Responde a la objeción: a pesar del costo, hay una razón más fuerte.'],
+  ['El texto defiende más árboles en la escuela.','«___, unos cuantos árboles harían del patio un aula al aire libre.»','Por todo lo anterior','Es cierto que','En primer lugar','Resume y concluye.']
+].map(function(d){return {e:cita('<strong>Antes:</strong> '+d[0])+cita('<strong>Este párrafo:</strong> '+d[1])+preg('¿Qué transición va en el espacio?'),ops:[d[2],d[3],d[4]],c:0,n:'«'+d[2]+'». '+d[5]};}),
+{pista:'Todavía no. ¿Este párrafo añade, reconoce una objeción, la responde, muestra una consecuencia o concluye?'});
+</script>
+</body>
+</html>
