@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l6-2 · Texto con datos; hechos, juicios y especulaciones · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.2 · Texto con datos; hechos, juicios y especulaciones</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  figure.graf{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 14px;margin:14px 0;text-align:center}
+  figure.graf figcaption{font-weight:700;color:var(--cp-oscuro);margin-bottom:6px;text-align:left}
+  figure.graf .fuente{font-size:.85rem;color:#555;text-align:left;margin:4px 0 0}
+  .ver-datos{text-align:left;margin-top:6px}
+  .ver-datos summary{padding:8px 12px;font-size:.95rem}
+  .mini{border-collapse:collapse;margin:6px 0;font-size:.95rem;font-weight:400}
+  .mini th,.mini td{border:1px solid #9aa9b7;padding:4px 10px}
+  .mini th{background:#4c1d95;color:#fff}
+  .leyenda-txt{font-size:.92rem;text-align:left;margin:4px 0 0}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .tabla-ancha{overflow-x:auto}
+  .enun figure.graf{margin:8px 0}
+  .mini caption{font-weight:700;color:var(--cp-oscuro);text-align:left;padding:4px 0}
+  .tabla-ancha,.enun .mini{max-width:100%}
+  .enun{overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>Práctica 6.2 · Texto con datos; hechos, juicios y especulaciones</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 6 · Acompaña a la Lección 6.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_6-2.html">← Volver a la Lección 6.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="coteja">1 · Coteja el texto con los datos</button>
+  <button type="button" class="pest" data-mod="hecho-juicio">2 · ¿Hecho, juicio o especulación?</button>
+  <button type="button" class="pest" data-mod="respaldo">3 · ¿Qué respaldan los datos?</button>
+</nav>
+
+<section class="modulo" id="coteja" aria-labelledby="t-ct">
+  <h2 id="t-ct">1 · Coteja el texto con los datos</h2>
+  <p class="consejo">Lee lo que dice el texto y búscalo en la gráfica o la tabla. ¿Es el mismo número, del mismo grupo? Si el texto hace una cuenta, compruébala.</p>
+  <div class="enun" id="ct-enun" aria-live="polite"></div>
+  <div class="opciones" id="ct-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ct-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ct-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ct-marcador"></div>
+</section>
+
+<section class="modulo" id="hecho-juicio" aria-labelledby="t-hj" hidden>
+  <h2 id="t-hj">2 · ¿Hecho, juicio o especulación?</h2>
+  <p class="consejo"><strong>Hecho:</strong> se puede comprobar. <strong>Juicio:</strong> dice lo que alguien piensa o valora (<em>mejor, debería</em>). <strong>Especulación:</strong> dice lo que podría pasar (<em>quizá, probablemente, si…</em>).</p>
+  <div class="enun" id="hj-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="hj-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="hj-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="hj-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="hj-marcador"></div>
+</section>
+
+<section class="modulo" id="respaldo" aria-labelledby="t-rs" hidden>
+  <h2 id="t-rs">3 · ¿Qué respaldan los datos?</h2>
+  <p class="consejo">Elige la conclusión que se ve directamente en los datos. Descarta los juicios, las predicciones, las causas inventadas y las generalizaciones.</p>
+  <div class="enun" id="rs-enun" aria-live="polite"></div>
+  <div class="opciones" id="rs-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="rs-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="rs-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="rs-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 6.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* ===== Gráficas en SVG (barras, barras dobles, líneas múltiples) =====
+   Basado en la biblioteca del Nivel 2. Las series se distinguen por color Y por trazo o trama
+   (línea continua / discontinua / punteada; barra lisa / rayada), lleva valores escritos o en la
+   descripción, y una tabla con los datos: nada depende solo del color. */
+var GCOL=['#6d28d9','#c2410c','#0e7490','#a16207'];
+var GDASH=['','8 5','2 5','12 4 2 4'], GID=0;
+function anchoG(){return Math.round(Math.min(600,Math.max(320,(window.innerWidth||600)-56)));}
+function etiq(s,x,y,t,W){var p=String(t).indexOf('|')>=0?String(t).split('|'):String(t).split(' ');if(String(t).indexOf('|')>=0||(W<480&&p.length>1)){txtSvg(s,x,y-2,p[0],{tam:11});txtSvg(s,x,y+11,p.slice(1).join(' '),{tam:11});}else txtSvg(s,x,y,t,{tam:W<480?11:12});}
+function svgEl(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+function marcoSvg(caja,ancho,alto,desc){
+  var s=svgEl('svg',{viewBox:'0 0 '+ancho+' '+alto,width:ancho,height:alto,role:'img','aria-label':desc});
+  s.style.maxWidth='100%'; s.style.height='auto'; caja.innerHTML=''; caja.appendChild(s); return s;
+}
+function txtSvg(s,x,y,t,o){o=o||{};s.appendChild(svgEl('text',{x:x,y:y,'text-anchor':o.ancla||'middle','font-size':o.tam||12,'font-weight':o.peso||'normal',fill:o.color||'#333','font-family':'Arial'},t));}
+function cuadricula(s,W,L,R,T,B,H,min,max,paso,fmt){
+  for(var v=min;v<=max+0.0001;v+=paso){var y=T+(H-T-B)*(1-(v-min)/(max-min));
+    s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:'#dfe5ea','stroke-width':1}));
+    txtSvg(s,L-8,y+4,fmt?fmt(v):(Math.round(v*10)/10),{ancla:'end',color:'#555'});}
+}
+function rotulos(s,W,H,L,R,T,B,o){
+  if(o.ejeY)s.appendChild(svgEl('text',{x:14,y:(H-B+T)/2,transform:'rotate(-90 14 '+((H-B+T)/2)+')','text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeY));
+  if(o.ejeX)txtSvg(s,(W-R+L)/2,H-6,o.ejeX);
+}
+function leyenda(s,x,y,series,tipo,pid){
+  series.forEach(function(se,k){
+    var yy=y+k*20;
+    if(tipo==='barra'){s.appendChild(svgEl('rect',{x:x,y:yy-11,width:22,height:14,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5}));}
+    else{s.appendChild(svgEl('line',{x1:x,x2:x+26,y1:yy-4,y2:yy-4,stroke:GCOL[k],'stroke-width':3,'stroke-dasharray':GDASH[k]}));}
+    txtSvg(s,x+32,yy,se.nombre,{ancla:'start',peso:'bold',color:'#1a2332'});
+  });
+}
+/* barrasDobles(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, fmt}) */
+function graficaBarrasDobles(caja,o){
+  var W=anchoG(),H=W<480?300:330,L=50,R=10,T=48,B=W<480?52:48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var desc=o.titulo+(o.series.length===1?'. Gráfica de barras. ':'. Gráfica de barras dobles. ')+o.etiquetas.map(function(e,i){return String(e).replace('|',' ')+': '+o.series.map(function(se){return se.nombre+' '+se.valores[i];}).join(', ');}).join('; ');
+  var s=marcoSvg(caja,W,H,desc);
+  var d=svgEl('defs',{}),pid='rayas'+(++GID),p=svgEl('pattern',{id:pid,width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+  p.appendChild(svgEl('rect',{width:6,height:6,fill:'#fff'}));p.appendChild(svgEl('line',{x1:0,y1:0,x2:0,y2:6,stroke:GCOL[1],'stroke-width':4}));d.appendChild(p);s.appendChild(d);
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso,o.fmt);
+  var ancho=(W-L-R)/n,bw=o.series.length===1?Math.min(56,ancho*0.6):Math.min(30,ancho*0.36);
+  o.etiquetas.forEach(function(e,i){
+    o.series.forEach(function(se,k){
+      var v=se.valores[i],x=L+ancho*i+ancho/2-(o.series.length===1?(bw-2)/2:bw)+k*bw,h=(H-T-B)*(v-min)/(max-min),y=H-B-h;
+      var r=svgEl('rect',{x:x,y:y,width:bw-2,height:h,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5});
+      r.appendChild(svgEl('title',{},String(e).replace('|',' ')+', '+se.nombre+': '+v+(o.unidad||'')));s.appendChild(r);
+      txtSvg(s,x+(bw-2)/2,y-5,v,{tam:11,peso:'bold',color:'#1a2332'});
+    });
+    etiq(s,L+ancho*i+ancho/2,H-B+18,e,W);
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'barra',pid);
+}
+/* lineas(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, unidad, valoresVisibles}) */
+function graficaLineas(caja,o){
+  var W=anchoG(),H=W<480?300:320,L=50,R=W<480?14:24,T=52,B=48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica de líneas. '+o.series.map(function(se){return se.nombre+': '+o.etiquetas.map(function(e,i){return e+' '+se.valores[i];}).join(', ');}).join('. '));
+  function Y(v){return T+(H-T-B)*(1-(v-min)/(max-min));} function X(i){return L+(W-L-R)*i/(n-1);}
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso);
+  o.etiquetas.forEach(function(e,i){txtSvg(s,X(i),H-B+18,e,{tam:W<480?10:11});});
+  o.series.forEach(function(se,k){
+    var c=GCOL[k],d=se.valores.map(function(v,i){return (i?'L':'M')+X(i)+','+Y(v);}).join(' ');
+    s.appendChild(svgEl('path',{d:d,fill:'none',stroke:c,'stroke-width':3,'stroke-linejoin':'round','stroke-dasharray':GDASH[k]}));
+    se.valores.forEach(function(v,i){
+      var m=k%2===0?svgEl('circle',{cx:X(i),cy:Y(v),r:4.5,fill:c,stroke:'#fff','stroke-width':1.5}):svgEl('rect',{x:X(i)-4.5,y:Y(v)-4.5,width:9,height:9,fill:c,stroke:'#fff','stroke-width':1.5});
+      m.appendChild(svgEl('title',{},se.nombre+', '+o.etiquetas[i]+': '+v+(o.unidad||'')));s.appendChild(m);
+      if(o.valoresVisibles&&(W>=480||n<=7))txtSvg(s,X(i),Y(v)+(k===0?-9:18),v,{tam:10.5,color:'#1a2332'});
+    });
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'linea');
+}
+/* Tabla de datos accesible, plegada debajo de la gráfica */
+function tablaDatos(caja,titulo,cabeceras,filas){
+  var h='<details class="ver-datos"><summary>Ver los datos en una tabla</summary><div class="tabla-ancha"><table class="tabla"><caption class="sr-solo">'+titulo+'</caption><thead><tr>'+cabeceras.map(function(c){return '<th scope="col">'+c+'</th>';}).join('')+'</tr></thead><tbody>'+
+    filas.map(function(f){return '<tr>'+f.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div></details>';
+  caja.insertAdjacentHTML('beforeend',h);
+}
+/* Devuelve el SVG como texto (para los ejercicios) */
+function svgTexto(fn,o){var d=document.createElement('div');fn(d,o);return d.innerHTML;}
+
+/* Los datos de esta práctica son inventados para practicar. */
+function fig(html,tit){return '<figure class="graf"><figcaption>'+tit+'</figcaption>'+html+'<p class="fuente">Datos inventados para practicar.</p></figure>';}
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function cita(t){return '<span class="texto"><p>'+t+'</p></span>';}
+
+/* ===== Módulo 1 · Coteja el texto con los datos ===== */
+(function(){
+  var G1=fig(svgTexto(graficaBarrasDobles,{titulo:'Asistencia a un centro comunitario, por mes. Datos inventados',etiquetas:['Ene','Feb','Mar','Abr','May'],
+    series:[{nombre:'Clases de inglés (lisa)',valores:[40,45,60,55,30]},{nombre:'Clases de computación (rayada)',valores:[25,30,35,50,45]}],max:70,paso:10,ejeY:'Personas'}),'Asistencia a un centro comunitario, por mes');
+  var G2=fig(svgTexto(graficaLineas,{titulo:'Altura de dos plantas de frijol, en centímetros. Datos inventados',etiquetas:['Día 0','4','8','12','16'],
+    series:[{nombre:'Con fertilizante (continua, ●)',valores:[0,3,8,14,19]},{nombre:'Sin fertilizante (discontinua, ■)',valores:[0,2,6,9,12]}],min:0,max:20,paso:5,ejeY:'Centímetros',valoresVisibles:true}),'Altura de dos plantas de frijol');
+  var T3='<table class="mini"><caption>Precio de un pasaje de autobús en cuatro ciudades (datos inventados)</caption><thead><tr><th scope="col">Ciudad</th><th scope="col">2015</th><th scope="col">2025</th></tr></thead><tbody><tr><th scope="row">Ciudad A</th><td>2.00</td><td>2.50</td></tr><tr><th scope="row">Ciudad B</th><td>1.75</td><td>2.25</td></tr><tr><th scope="row">Ciudad C</th><td>2.50</td><td>2.50</td></tr><tr><th scope="row">Ciudad D</th><td>1.50</td><td>2.75</td></tr></tbody></table>';
+  var SI='Sí, coincide con los datos', B=[];
+  function it(d,t,ops,n){B.push({e:d+cita('El texto dice: «'+t+'»')+preg('¿Coincide con los datos?'),ops:ops,c:0,n:n});}
+  it(G1,'En marzo, la clase de inglés tuvo 60 personas, su mejor mes.',[SI,'No: en marzo la clase tuvo 55 personas','No: su mejor mes fue el mes de abril'],'La barra lisa de marzo marca 60 y es la más alta de esa serie.');
+  it(G1,'La clase de computación tuvo más personas que la de inglés en todos los meses.',['No: solo en mayo tuvo más personas',SI,'No: nunca tuvo más que la clase de inglés'],'Solo en mayo (45 frente a 30) la barra rayada es más alta.');
+  it(G1,'En abril, la clase de computación llegó a 50 personas.',[SI,'No: en abril llegó a 45 personas','No: en abril llegó a 55 personas'],'Barra rayada de abril: 50. El 55 es inglés en abril.');
+  it(G1,'La asistencia a inglés bajó a la mitad de marzo a mayo.',[SI,'No: bajó solamente diez personas','No: subió de marzo a mayo'],'De 60 a 30: exactamente la mitad.');
+  it(G2,'Al día 16, la planta con fertilizante medía 19 centímetros.',[SI,'No: medía 12 centímetros ese día','No: medía 14 centímetros ese día'],'Línea continua, día 16: 19. El 12 es la planta sin fertilizante.');
+  it(G2,'Al día 16, la planta con fertilizante era el doble de alta que la otra.',['No: 19 no es el doble de 12',SI,'No: las dos medían lo mismo'],'El doble de 12 sería 24. Era más alta, pero no el doble.');
+  it(G2,'Las dos plantas empezaron con la misma altura.',[SI,'No: la de fertilizante empezó más alta','No: la gráfica no muestra el día 0'],'Las dos líneas salen de 0 el día 0.');
+  it(T3,'En la ciudad D, el pasaje subió más de un dólar en diez años.',[SI,'No: subió solamente 50 centavos','No: el precio bajó en esos diez años'],'De 1.50 a 2.75: subió 1.25 dólares.');
+  it(T3,'En las cuatro ciudades subió el precio del pasaje.',['No: en la ciudad C no cambió',SI,'No: bajó en dos de las ciudades'],'La ciudad C cobraba 2.50 en los dos años.');
+  it(T3,'En 2025, la ciudad A tenía el pasaje más caro de las cuatro.',['No: el más caro era el de la ciudad D',SI,'No: el más caro era el de la ciudad B'],'En 2025, D cobraba 2.75, más que A (2.50).');
+  unaAUna('ct',B,{pista:'Todavía no. Busca en la gráfica o en la tabla el número exacto del que habla el texto, y haz la cuenta si hace falta.'});
+})();
+
+/* ===== Módulo 2 · ¿Hecho, juicio o especulación? ===== */
+(function(){
+  var O=['Hecho','Juicio','Especulación'];
+  unaAUna('hj',[
+    ['El agua hierve a 212 grados Fahrenheit al nivel del mar.',0,'Se puede medir y comprobar.'],
+    ['Chicago está a orillas del lago Michigan.',0,'Se comprueba en cualquier mapa.'],
+    ['El censo de Estados Unidos se hace cada diez años.',0,'Se comprueba en la ley y en la página del censo.'],
+    ['La vacuna contra la gripe se recomienda cada año para casi todas las personas mayores de seis meses.',0,'Es una recomendación oficial que se puede comprobar en los CDC.'],
+    ['El parque nuevo es el lugar más bonito del barrio.',1,'«El más bonito» es una valoración.'],
+    ['La ciudad debería poner más bancos en las paradas de autobús.',1,'«Debería» expresa lo que piensa quien escribe.'],
+    ['Leer veinte minutos al día es un hábito excelente para los niños.',1,'«Excelente» es un juicio, aunque muchos estén de acuerdo.'],
+    ['Ese programa de capacitación es una pérdida de tiempo.',1,'«Pérdida de tiempo» es una opinión del autor.'],
+    ['Probablemente el próximo invierno será más frío que este.',2,'«Probablemente» anuncia algo que todavía no pasa.'],
+    ['Si baja el precio de la gasolina, quizá más familias viajen en verano.',2,'«Si…» y «quizá» hablan de algo posible.'],
+    ['En el futuro, los autos sin conductor podrían ser comunes en las ciudades.',2,'«En el futuro» y «podrían»: es una predicción.'],
+    ['Tal vez la nueva biblioteca atraiga a más jóvenes al barrio.',2,'«Tal vez» marca la especulación.'],
+    ['En 2024, el ingreso semanal mediano con licenciatura fue de 1543 dólares.',0,'Es una cifra de la Oficina de Estadísticas Laborales.'],
+    ['Es injusto que los libros de texto cuesten tanto.',1,'«Injusto» es una valoración.']
+  ].map(function(d){return {e:'<span class="grande">«'+d[0]+'»</span>¿Qué tipo de enunciado es?',ops:O,c:d[1],n:O[d[1]]+'. '+d[2]};}),
+  {pista:'Todavía no. ¿Se puede comprobar? ¿Dice lo que alguien piensa o valora? ¿Habla de algo que podría pasar?'});
+})();
+
+/* ===== Módulo 3 · ¿Qué respaldan los datos? ===== */
+(function(){
+  var Q='¿Qué conclusión respaldan los datos?', R=[];
+  function it(d,ops,n){R.push({e:d+preg(Q),ops:ops,c:0,n:n});}
+  var A='<table class="mini"><caption>Horas de sueño y resultado en un examen de práctica de 4 grupos (datos inventados)</caption><thead><tr><th scope="col">Grupo</th><th scope="col">Horas de sueño</th><th scope="col">Puntaje promedio</th></tr></thead><tbody><tr><th scope="row">1</th><td>5</td><td>131</td></tr><tr><th scope="row">2</th><td>6</td><td>138</td></tr><tr><th scope="row">3</th><td>7</td><td>146</td></tr><tr><th scope="row">4</th><td>8</td><td>149</td></tr></tbody></table>';
+  it(A,['En estos grupos, los que durmieron más sacaron puntajes más altos.','Dormir ocho horas garantiza aprobar el examen GED real.','Los del grupo 1 sacaron menos porque estudiaron menos horas.'],'Es lo que muestra la tabla. Las otras prometen un resultado o inventan una causa.');
+  it(A,['El grupo que durmió 8 horas tuvo el puntaje promedio más alto.','Todas las personas del grupo 4 sacaron exactamente 149 puntos.','Si duermes 9 horas, sacarás más de 150 puntos en el examen.'],'149 es el promedio del grupo, no el de cada persona; la tercera habla de un dato que no está.');
+  var G=fig(svgTexto(graficaLineas,{titulo:'Bicicletas prestadas por semana en dos estaciones. Datos inventados',etiquetas:['Sem 1','2','3','4','5','6'],
+    series:[{nombre:'Estación Parque (continua, ●)',valores:[120,135,150,170,160,180]},{nombre:'Estación Centro (discontinua, ■)',valores:[200,190,185,170,165,150]}],min:100,max:220,paso:20,ejeY:'Bicicletas',valoresVisibles:true}),'Bicicletas prestadas por semana en dos estaciones');
+  it(G,['La estación Parque prestó más bicicletas que la Centro en la semana 6.','La estación Centro va a cerrar en las próximas semanas.','La gente prefiere la estación Parque porque es más segura.'],'Semana 6: 180 frente a 150. Las otras especulan o inventan una causa.');
+  it(G,['En la semana 4, las dos estaciones prestaron la misma cantidad.','La estación Parque siempre prestó más bicicletas que la Centro.','Las dos estaciones prestaron cada vez más bicicletas.'],'Las dos líneas se tocan en 170, en la semana 4.');
+  var T='<table class="mini"><caption>Árboles plantados por tres grupos de voluntarios (datos inventados)</caption><thead><tr><th scope="col">Grupo</th><th scope="col">2023</th><th scope="col">2024</th></tr></thead><tbody><tr><th scope="row">Vecinos Unidos</th><td>80</td><td>120</td></tr><tr><th scope="row">Escuela Juárez</th><td>40</td><td>60</td></tr><tr><th scope="row">Iglesia del Carmen</th><td>100</td><td>90</td></tr></tbody></table>';
+  it(T,['Dos de los tres grupos plantaron más árboles en 2024 que en 2023.','Todos los grupos de voluntarios de la ciudad plantaron más árboles.','El grupo de la iglesia perdió voluntarios en el año 2024.'],'Vecinos Unidos y Escuela Juárez subieron; la iglesia bajó. Las otras generalizan o inventan una causa.');
+  it(T,['En 2024, Vecinos Unidos fue el grupo que plantó más árboles.','Vecinos Unidos es el mejor grupo de voluntarios del barrio.','En 2025, Vecinos Unidos plantará por lo menos 160 árboles.'],'120 es el número más alto de 2024. «El mejor» es un juicio y lo de 2025, una especulación.');
+  unaAUna('rs',R,{pista:'Todavía no. Elige la conclusión que se ve en los datos: sin juicios, sin predicciones, sin causas inventadas y sin generalizar.'});
+})();
+</script>
+</body>
+</html>

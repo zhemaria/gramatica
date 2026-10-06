@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l5-2 · Integrar dos textos · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 5.2 · Integrar dos textos</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 5.2 · Integrar dos textos</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 5 · Acompaña a la Lección 5.2</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_5-2.html">← Volver a la Lección 5.2</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="de-quien">1 · ¿De qué texto sale?</button>
+  <button type="button" class="pest" data-mod="complementa-contradice">2 · ¿Coinciden, se complementan o se contradicen?</button>
+  <button type="button" class="pest" data-mod="conclusion">3 · La conclusión que integra</button>
+</nav>
+
+<section class="modulo" id="de-quien" aria-labelledby="t-dq">
+  <h2 id="t-dq">1 · ¿De qué texto sale?</h2>
+  <p class="consejo">Lee los dos textos y decide de dónde viene cada información: del texto A, del texto B o de los dos.</p>
+  <div class="enun" id="dq-enun" aria-live="polite"></div>
+  <div class="opciones" id="dq-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="dq-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="dq-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="dq-marcador"></div>
+</section>
+
+<section class="modulo" id="complementa-contradice" aria-labelledby="t-cc" hidden>
+  <h2 id="t-cc">2 · ¿Coinciden, se complementan o se contradicen?</h2>
+  <p class="consejo"><strong>Coinciden:</strong> dicen lo mismo. <strong>Se complementan:</strong> uno añade lo que el otro no tiene. <strong>Se contradicen:</strong> dicen cosas opuestas sobre el mismo punto.</p>
+  <div class="enun" id="cc-enun" aria-live="polite"></div>
+  <div class="opciones" id="cc-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cc-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cc-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cc-marcador"></div>
+</section>
+
+<section class="modulo" id="conclusion" aria-labelledby="t-co" hidden>
+  <h2 id="t-co">3 · La conclusión que integra</h2>
+  <p class="consejo">Elige la conclusión que usa información de <strong>los dos</strong> textos y no contradice a ninguno.</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 5.2</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function par(a,b){return '<span class="texto"><p><strong>Texto A.</strong> '+a+'</p><p><strong>Texto B.</strong> '+b+'</p></span>';}
+
+/* Pares de textos breves, originales, para practicar */
+var P=[
+  ['Las bicicletas compartidas llegaron a la ciudad en 2013. Hoy hay estaciones en casi todos los barrios, y un viaje corto cuesta menos que el autobús.','Muchos ciclistas se quejan de que en invierno las estaciones quedan cubiertas de nieve. Además, en los barrios del sur hay menos estaciones que en el centro.'],
+  ['Comer pescado dos veces por semana ayuda al corazón, según la mayoría de los médicos, porque contiene grasas saludables.','Algunos pescados grandes, como el pez espada, acumulan mercurio. Por eso a las mujeres embarazadas se les recomienda elegir pescados pequeños, como la sardina.'],
+  ['El museo de ciencias del barrio es gratuito para los niños menores de doce años todos los días de la semana.','En el museo de ciencias del barrio, la entrada para niños cuesta cinco dólares, salvo los martes, que es gratis.'],
+  ['Los huertos escolares enseñan ciencias de manera práctica: los niños miden, observan y registran el crecimiento de las plantas.','En las escuelas que tienen huerto, los maestros dicen que los alumnos entienden mejor las lecciones de ciencias porque las ven con sus propios ojos.']
+];
+
+/* Módulo 1 · ¿De qué texto sale? [par, afirmación, 0 A · 1 B · 2 los dos, nota] */
+(function(){
+  var O=['Texto A','Texto B','Los dos'];
+  unaAUna('dq',[
+    [0,'Las bicicletas compartidas llegaron en 2013.',0,'Solo el texto A da la fecha.'],
+    [0,'En invierno, la nieve cubre las estaciones.',1,'Es una queja que solo recoge el texto B.'],
+    [0,'Hay estaciones de bicicletas en varios barrios.',2,'A dice que hay en casi todos los barrios y B compara el sur con el centro.'],
+    [1,'El pescado ayuda al corazón.',0,'Solo el texto A habla del corazón.'],
+    [1,'Algunos pescados tienen mercurio.',1,'Solo el texto B lo menciona.'],
+    [1,'Hay consejos de salud sobre comer pescado.',2,'Los dos dan recomendaciones sobre el pescado.'],
+    [3,'Los niños miden y registran el crecimiento de las plantas.',0,'Lo describe el texto A.'],
+    [3,'Los maestros opinan sobre los huertos escolares.',1,'Solo el texto B recoge lo que dicen los maestros.'],
+    [3,'Los huertos ayudan a aprender ciencias.',2,'Los dos lo dicen, cada uno a su manera.']
+  ].map(function(d){return {e:par(P[d[0]][0],P[d[0]][1])+'<span class="rel">'+d[1]+'</span><br>¿De dónde sale esta información?',ops:O,c:d[2],n:O[d[2]]+'. '+d[3]};}),
+  {pista:'Todavía no. Vuelve a leer los dos textos y busca esa información en cada uno.'});
+})();
+
+/* Módulo 2 · Relación entre los textos [par, punto, 0 coinciden · 1 se complementan · 2 se contradicen, nota] */
+(function(){
+  var O=['Coinciden','Se complementan','Se contradicen'];
+  unaAUna('cc',[
+    [2,'el precio de la entrada para niños',2,'A dice que es gratis todos los días; B, que cuesta cinco dólares salvo los martes.'],
+    [3,'lo que aportan los huertos al aprendizaje de ciencias',0,'Los dos dicen que ayudan a aprender ciencias.'],
+    [1,'los beneficios y los riesgos de comer pescado',1,'A da el beneficio y B añade un riesgo y un consejo: no se oponen.'],
+    [0,'la situación de las bicicletas compartidas',1,'A da la historia y el precio; B añade problemas que A no menciona.'],
+    [['Según el censo, la población del barrio creció en los últimos diez años.','Un informe de la ciudad dice que en la última década el barrio perdió habitantes.'],'la población del barrio en los últimos diez años',2,'Uno dice que creció y el otro que bajó.'],
+    [['El parque abre de seis de la mañana a once de la noche.','Los guardias del parque cierran las puertas a las once de la noche.'],'la hora de cierre del parque',0,'Los dos dicen que cierra a las once.'],
+    [['La biblioteca presta libros electrónicos con la tarjeta de la biblioteca.','Para leer los libros electrónicos de la biblioteca se necesita una aplicación gratuita en el celular.'],'los libros electrónicos de la biblioteca',1,'B añade cómo se leen, algo que A no dice.'],
+    [['Los expertos recomiendan dormir entre siete y nueve horas.','Un estudio reciente recomienda a los adultos dormir entre siete y nueve horas.'],'cuánto deben dormir los adultos',0,'Los dos dan la misma recomendación.']
+  ].map(function(d){var t=typeof d[0]==='number'?P[d[0]]:d[0];return {e:par(t[0],t[1])+'<span class="rel">Sobre '+d[1]+'</span><br>¿Cómo se relacionan los textos?',ops:O,c:d[2],n:O[d[2]]+'. '+d[3]};}),
+  {pista:'Todavía no. ¿Dicen lo mismo, uno añade algo que el otro no dice, o dicen cosas opuestas?'});
+})();
+
+/* Módulo 3 · La conclusión que integra [par, conclusiones (la primera es la correcta), nota] */
+unaAUna('co',[
+  [0,['Las bicicletas compartidas son baratas y llegan a muchos barrios, aunque tienen problemas en invierno y en el sur.','Las bicicletas compartidas llegaron a la ciudad en el año 2013 y hoy están en todas partes.','Las bicicletas compartidas no sirven para nada porque se llenan de nieve en el invierno.'],'Usa los dos textos sin exagerar. La segunda solo usa A; la tercera exagera lo que dice B.'],
+  [1,['Comer pescado es bueno para el corazón, pero conviene elegir pescados pequeños por el mercurio.','Hay que dejar de comer pescado porque todos los pescados tienen mercurio peligroso.','Los médicos recomiendan comer pescado dos veces por semana para cuidar el corazón.'],'Integra el beneficio de A y el consejo de B. La segunda contradice a A y exagera a B.'],
+  [3,['Los huertos escolares ayudan a aprender ciencias porque los niños practican y ven lo que estudian.','Los huertos escolares sirven para que los niños coman verduras frescas en la escuela.','Los maestros de las escuelas con huerto opinan sobre la manera en que aprenden sus alumnos.'],'Junta lo que hacen los niños (A) con lo que observan los maestros (B). La segunda habla de algo que no dice ningún texto.'],
+  [2,['Los textos no coinciden sobre el precio para niños: hay que averiguarlo antes de ir al museo.','La entrada al museo de ciencias es siempre gratis para todos los niños menores de doce.','La entrada al museo de ciencias cuesta cinco dólares todos los días de la semana.'],'Cuando los textos se contradicen, una buena conclusión lo reconoce. Las otras dos eligen un texto e ignoran el otro.']
+].map(function(d){return {e:par(P[d[0]][0],P[d[0]][1])+'¿Qué conclusión integra mejor los dos textos?',ops:d[1],c:0,n:d[2]};}),
+{pista:'Todavía no. ¿Esa conclusión usa información de los dos textos? ¿Contradice o exagera alguno?'});
+</script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l6-1 · Gráficas complejas y tablas · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.1 · Gráficas complejas y tablas</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  figure.graf{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 14px;margin:14px 0;text-align:center}
+  figure.graf figcaption{font-weight:700;color:var(--cp-oscuro);margin-bottom:6px;text-align:left}
+  figure.graf .fuente{font-size:.85rem;color:#555;text-align:left;margin:4px 0 0}
+  .ver-datos{text-align:left;margin-top:6px}
+  .ver-datos summary{padding:8px 12px;font-size:.95rem}
+  .mini{border-collapse:collapse;margin:6px 0;font-size:.95rem;font-weight:400}
+  .mini th,.mini td{border:1px solid #9aa9b7;padding:4px 10px}
+  .mini th{background:#4c1d95;color:#fff}
+  .leyenda-txt{font-size:.92rem;text-align:left;margin:4px 0 0}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .tabla-ancha{overflow-x:auto}
+  .enun figure.graf{margin:8px 0}
+  .mini caption{font-weight:700;color:var(--cp-oscuro);text-align:left;padding:4px 0}
+  .tabla-ancha,.enun .mini{max-width:100%}
+  .enun{overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>Práctica 6.1 · Gráficas complejas y tablas</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 6 · Acompaña a la Lección 6.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_6-1.html">← Volver a la Lección 6.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="doble-barra">1 · Gráficas de doble barra</button>
+  <button type="button" class="pest" data-mod="lineas">2 · Líneas múltiples</button>
+  <button type="button" class="pest" data-mod="tabla">3 · Tablas de varias columnas</button>
+  <button type="button" class="pest" data-mod="conclusion">4 · La conclusión válida</button>
+</nav>
+
+<section class="modulo" id="doble-barra" aria-labelledby="t-db">
+  <h2 id="t-db">1 · Gráficas de doble barra</h2>
+  <p class="consejo">Lee primero la <strong>leyenda</strong>: la barra lisa es una serie y la rayada es la otra. Después busca la categoría y compara las dos barras.</p>
+  <div class="enun" id="db-enun" aria-live="polite"></div>
+  <div class="opciones" id="db-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="db-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="db-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="db-marcador"></div>
+</section>
+
+<section class="modulo" id="lineas" aria-labelledby="t-li" hidden>
+  <h2 id="t-li">2 · Líneas múltiples</h2>
+  <p class="consejo">La línea <strong>continua con círculos</strong> es una serie y la <strong>discontinua con cuadrados</strong> es la otra. Lee un punto, la tendencia o la distancia entre las líneas.</p>
+  <div class="enun" id="li-enun" aria-live="polite"></div>
+  <div class="opciones" id="li-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="li-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="li-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="li-marcador"></div>
+</section>
+
+<section class="modulo" id="tabla" aria-labelledby="t-ta" hidden>
+  <h2 id="t-ta">3 · Tablas de varias columnas</h2>
+  <p class="consejo">Lee los <strong>encabezados</strong> y cruza la fila con la columna. Ojo: el cambio en números y el cambio en porcentaje no siempre dan el mismo ganador.</p>
+  <div class="enun" id="ta-enun" aria-live="polite"></div>
+  <div class="opciones" id="ta-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ta-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ta-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ta-marcador"></div>
+</section>
+
+<section class="modulo" id="conclusion" aria-labelledby="t-co" hidden>
+  <h2 id="t-co">4 · La conclusión válida</h2>
+  <p class="consejo">Elige la conclusión que se puede <strong>comprobar</strong> en los datos. Descarta las que inventan una causa, generalizan de más o hablan del futuro.</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 6.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* ===== Gráficas en SVG (barras, barras dobles, líneas múltiples) =====
+   Basado en la biblioteca del Nivel 2. Las series se distinguen por color Y por trazo o trama
+   (línea continua / discontinua / punteada; barra lisa / rayada), lleva valores escritos o en la
+   descripción, y una tabla con los datos: nada depende solo del color. */
+var GCOL=['#6d28d9','#c2410c','#0e7490','#a16207'];
+var GDASH=['','8 5','2 5','12 4 2 4'], GID=0;
+function anchoG(){return Math.round(Math.min(600,Math.max(320,(window.innerWidth||600)-56)));}
+function etiq(s,x,y,t,W){var p=String(t).indexOf('|')>=0?String(t).split('|'):String(t).split(' ');if(String(t).indexOf('|')>=0||(W<480&&p.length>1)){txtSvg(s,x,y-2,p[0],{tam:11});txtSvg(s,x,y+11,p.slice(1).join(' '),{tam:11});}else txtSvg(s,x,y,t,{tam:W<480?11:12});}
+function svgEl(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+function marcoSvg(caja,ancho,alto,desc){
+  var s=svgEl('svg',{viewBox:'0 0 '+ancho+' '+alto,width:ancho,height:alto,role:'img','aria-label':desc});
+  s.style.maxWidth='100%'; s.style.height='auto'; caja.innerHTML=''; caja.appendChild(s); return s;
+}
+function txtSvg(s,x,y,t,o){o=o||{};s.appendChild(svgEl('text',{x:x,y:y,'text-anchor':o.ancla||'middle','font-size':o.tam||12,'font-weight':o.peso||'normal',fill:o.color||'#333','font-family':'Arial'},t));}
+function cuadricula(s,W,L,R,T,B,H,min,max,paso,fmt){
+  for(var v=min;v<=max+0.0001;v+=paso){var y=T+(H-T-B)*(1-(v-min)/(max-min));
+    s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:'#dfe5ea','stroke-width':1}));
+    txtSvg(s,L-8,y+4,fmt?fmt(v):(Math.round(v*10)/10),{ancla:'end',color:'#555'});}
+}
+function rotulos(s,W,H,L,R,T,B,o){
+  if(o.ejeY)s.appendChild(svgEl('text',{x:14,y:(H-B+T)/2,transform:'rotate(-90 14 '+((H-B+T)/2)+')','text-anchor':'middle','font-size':12,fill:'#333','font-family':'Arial'},o.ejeY));
+  if(o.ejeX)txtSvg(s,(W-R+L)/2,H-6,o.ejeX);
+}
+function leyenda(s,x,y,series,tipo,pid){
+  series.forEach(function(se,k){
+    var yy=y+k*20;
+    if(tipo==='barra'){s.appendChild(svgEl('rect',{x:x,y:yy-11,width:22,height:14,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5}));}
+    else{s.appendChild(svgEl('line',{x1:x,x2:x+26,y1:yy-4,y2:yy-4,stroke:GCOL[k],'stroke-width':3,'stroke-dasharray':GDASH[k]}));}
+    txtSvg(s,x+32,yy,se.nombre,{ancla:'start',peso:'bold',color:'#1a2332'});
+  });
+}
+/* barrasDobles(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, fmt}) */
+function graficaBarrasDobles(caja,o){
+  var W=anchoG(),H=W<480?300:330,L=50,R=10,T=48,B=W<480?52:48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var desc=o.titulo+(o.series.length===1?'. Gráfica de barras. ':'. Gráfica de barras dobles. ')+o.etiquetas.map(function(e,i){return String(e).replace('|',' ')+': '+o.series.map(function(se){return se.nombre+' '+se.valores[i];}).join(', ');}).join('; ');
+  var s=marcoSvg(caja,W,H,desc);
+  var d=svgEl('defs',{}),pid='rayas'+(++GID),p=svgEl('pattern',{id:pid,width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+  p.appendChild(svgEl('rect',{width:6,height:6,fill:'#fff'}));p.appendChild(svgEl('line',{x1:0,y1:0,x2:0,y2:6,stroke:GCOL[1],'stroke-width':4}));d.appendChild(p);s.appendChild(d);
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso,o.fmt);
+  var ancho=(W-L-R)/n,bw=o.series.length===1?Math.min(56,ancho*0.6):Math.min(30,ancho*0.36);
+  o.etiquetas.forEach(function(e,i){
+    o.series.forEach(function(se,k){
+      var v=se.valores[i],x=L+ancho*i+ancho/2-(o.series.length===1?(bw-2)/2:bw)+k*bw,h=(H-T-B)*(v-min)/(max-min),y=H-B-h;
+      var r=svgEl('rect',{x:x,y:y,width:bw-2,height:h,fill:k===1?'url(#'+pid+')':GCOL[k],stroke:GCOL[k],'stroke-width':1.5});
+      r.appendChild(svgEl('title',{},String(e).replace('|',' ')+', '+se.nombre+': '+v+(o.unidad||'')));s.appendChild(r);
+      txtSvg(s,x+(bw-2)/2,y-5,v,{tam:11,peso:'bold',color:'#1a2332'});
+    });
+    etiq(s,L+ancho*i+ancho/2,H-B+18,e,W);
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'barra',pid);
+}
+/* lineas(caja, {titulo, etiquetas, series:[{nombre, valores}], min, max, paso, ejeY, ejeX, unidad, valoresVisibles}) */
+function graficaLineas(caja,o){
+  var W=anchoG(),H=W<480?300:320,L=50,R=W<480?14:24,T=52,B=48,min=o.min||0,max=o.max,n=o.etiquetas.length;
+  var s=marcoSvg(caja,W,H,o.titulo+'. Gráfica de líneas. '+o.series.map(function(se){return se.nombre+': '+o.etiquetas.map(function(e,i){return e+' '+se.valores[i];}).join(', ');}).join('. '));
+  function Y(v){return T+(H-T-B)*(1-(v-min)/(max-min));} function X(i){return L+(W-L-R)*i/(n-1);}
+  cuadricula(s,W,L,R,T,B,H,min,max,o.paso);
+  o.etiquetas.forEach(function(e,i){txtSvg(s,X(i),H-B+18,e,{tam:W<480?10:11});});
+  o.series.forEach(function(se,k){
+    var c=GCOL[k],d=se.valores.map(function(v,i){return (i?'L':'M')+X(i)+','+Y(v);}).join(' ');
+    s.appendChild(svgEl('path',{d:d,fill:'none',stroke:c,'stroke-width':3,'stroke-linejoin':'round','stroke-dasharray':GDASH[k]}));
+    se.valores.forEach(function(v,i){
+      var m=k%2===0?svgEl('circle',{cx:X(i),cy:Y(v),r:4.5,fill:c,stroke:'#fff','stroke-width':1.5}):svgEl('rect',{x:X(i)-4.5,y:Y(v)-4.5,width:9,height:9,fill:c,stroke:'#fff','stroke-width':1.5});
+      m.appendChild(svgEl('title',{},se.nombre+', '+o.etiquetas[i]+': '+v+(o.unidad||'')));s.appendChild(m);
+      if(o.valoresVisibles&&(W>=480||n<=7))txtSvg(s,X(i),Y(v)+(k===0?-9:18),v,{tam:10.5,color:'#1a2332'});
+    });
+  });
+  s.appendChild(svgEl('line',{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:'#555','stroke-width':1.5}));
+  rotulos(s,W,H,L,R,T,B,o); leyenda(s,L+10,18,o.series,'linea');
+}
+/* Tabla de datos accesible, plegada debajo de la gráfica */
+function tablaDatos(caja,titulo,cabeceras,filas){
+  var h='<details class="ver-datos"><summary>Ver los datos en una tabla</summary><div class="tabla-ancha"><table class="tabla"><caption class="sr-solo">'+titulo+'</caption><thead><tr>'+cabeceras.map(function(c){return '<th scope="col">'+c+'</th>';}).join('')+'</tr></thead><tbody>'+
+    filas.map(function(f){return '<tr>'+f.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div></details>';
+  caja.insertAdjacentHTML('beforeend',h);
+}
+/* Devuelve el SVG como texto (para los ejercicios) */
+function svgTexto(fn,o){var d=document.createElement('div');fn(d,o);return d.innerHTML;}
+
+/* Todos los datos de esta práctica son inventados para practicar. */
+function fig(html,tit){return '<figure class="graf"><figcaption>'+tit+'</figcaption>'+html+'<p class="fuente">Datos inventados para practicar.</p></figure>';}
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function uniq(a){var o=[];a.forEach(function(x){if(o.indexOf(x)<0)o.push(x);});return o;}
+
+/* ===== Módulo 1 · Doble barra ===== */
+var DB=[
+  {t:'Docenas de pan vendidas por la mañana y por la tarde',cat:['Lun','Mar','Mié','Jue','Vie'],nc:'día',s:['Mañana','Tarde'],v:[[12,15,10,14,18],[8,9,13,11,16]],max:20,paso:5,ej:'Docenas',u:' docenas'},
+  {t:'Estudiantes inscritos en clases de GED y de inglés',cat:['Otoño','Invierno','Primavera','Verano'],nc:'trimestre',s:['GED','Inglés'],v:[[45,38,50,20],[60,55,48,30]],max:70,paso:10,ej:'Estudiantes',u:' estudiantes'},
+  {t:'Horas de estudio planeadas y reales de Ana, por semana',cat:['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5'],nc:'semana',s:['Planeadas','Reales'],v:[[6,6,8,8,10],[5,7,6,8,7]],max:12,paso:2,ej:'Horas',u:' horas'}
+];
+(function(){
+  var banco=[];
+  DB.forEach(function(d){
+    var g=fig(svgTexto(graficaBarrasDobles,{titulo:d.t+'. Datos inventados',etiquetas:d.cat,
+      series:[{nombre:d.s[0]+' (lisa)',valores:d.v[0]},{nombre:d.s[1]+' (rayada)',valores:d.v[1]}],max:d.max,paso:d.paso,ejeY:d.ej,unidad:d.u}),d.t);
+    /* leer un valor de cada serie */
+    [[0,1],[1,d.cat.length-1]].forEach(function(p){
+      var k=p[0],i=p[1],ok=d.v[k][i],ops=uniq([ok,d.v[1-k][i],d.v[k][i===0?1:i-1],d.v[k][i]+d.paso]).slice(0,3);
+      banco.push({e:g+preg('¿Cuánto vale la barra «'+d.s[k]+'» en '+d.cat[i]+'?'),ops:ops.map(String),c:0,
+        n:'Barra '+(k?'rayada':'lisa')+' de '+d.cat[i]+': '+ok+'. Primero la leyenda, después la categoría.'});
+    });
+    /* la única categoría en que la serie 2 supera a la 1 */
+    var sup=d.cat.filter(function(c,i){return d.v[1][i]>d.v[0][i];});
+    if(sup.length===1){var otras=d.cat.filter(function(c){return c!==sup[0];}).slice(0,2);
+      banco.push({e:g+preg('¿En qué '+d.nc+' fue mayor «'+d.s[1]+'» que «'+d.s[0]+'»?'),ops:[sup[0]].concat(otras),c:0,
+        n:'En '+sup[0]+' la barra rayada es más alta que la lisa. En los demás es al revés o son iguales.'});}
+    /* la mayor diferencia */
+    var df=d.cat.map(function(c,i){return Math.abs(d.v[0][i]-d.v[1][i]);}),m=Math.max.apply(null,df),im=df.indexOf(m);
+    if(df.filter(function(x){return x===m;}).length===1){
+      var resto=d.cat.map(function(c,i){return i;}).filter(function(i){return i!==im;}).sort(function(a,b){return df[b]-df[a];});
+      banco.push({e:g+preg('¿En qué '+d.nc+' es mayor la diferencia entre las dos series?'),ops:[d.cat[im],d.cat[resto[0]],d.cat[resto[1]]],c:0,
+        n:'En '+d.cat[im]+' hay '+m+' de diferencia; en '+d.cat[resto[0]]+', '+df[resto[0]]+'. Resta las dos barras de cada '+d.nc+'.'});}
+  });
+  unaAUna('db',banco,{pista:'Todavía no. Revisa la leyenda: ¿cuál es la barra lisa y cuál la rayada? Después busca la categoría.'});
+})();
+
+/* ===== Módulo 2 · Líneas múltiples ===== */
+var LI=[
+  {t:'Precio de un galón de leche y de un galón de gasolina, en dólares',et:['Ene','Feb','Mar','Abr','May','Jun'],s:['Leche','Gasolina'],v:[[3.8,3.9,4.0,4.0,4.1,4.2],[3.2,3.5,3.9,4.3,4.0,3.7]],min:3,max:4.5,paso:0.5,ej:'Dólares',u:' dólares',
+   q:[['¿Cuánto costaba la gasolina en abril?',['4.3 dólares','4.0 dólares','3.9 dólares'],'Línea discontinua (cuadrados), abril: 4.3. El 4.0 es la leche ese mes.'],
+      ['¿En qué mes costó más la gasolina que la leche?',['Solo en abril','De marzo a junio','En ningún mes'],'Solo en abril la línea discontinua pasa por encima de la continua.'],
+      ['¿Qué serie cambió más de un mes a otro?',['La gasolina: subió y luego bajó','La leche: subió y luego bajó','Las dos cambiaron por igual'],'La leche sube poco a poco; la gasolina sube rápido y después baja.']]},
+  {t:'Visitantes a dos bibliotecas del barrio, en cientos',et:['Ene','Feb','Mar','Abr','May','Jun'],s:['Biblioteca Norte','Biblioteca Sur'],v:[[12,14,15,15,18,20],[16,15,14,13,13,12]],min:10,max:22,paso:2,ej:'Cientos de visitantes',u:' cientos',
+   q:[['¿En qué mes recibió la Biblioteca Norte más visitantes que la Sur por primera vez?',['Marzo','Febrero','Abril'],'En marzo la línea continua (15) pasa por encima de la discontinua (14).'],
+      ['¿Cómo cambiaron las dos series de enero a junio?',['La Norte subió y la Sur bajó','Las dos subieron cada mes','La Norte bajó y la Sur subió'],'La línea continua sube; la discontinua baja.'],
+      ['En junio, ¿cuántos cientos de visitantes más tuvo la Norte que la Sur?',['8 cientos','20 cientos','4 cientos'],'20 − 12 = 8. Se restan las dos series en el mismo mes.']]},
+  {t:'Temperatura del agua en dos vasos que se enfrían, en °F',et:['0 min','5','10','15','20','25'],s:['Vaso con tapa','Vaso sin tapa'],v:[[180,170,161,153,146,140],[180,160,144,131,121,113]],min:100,max:190,paso:10,ej:'Grados Fahrenheit',u:' °F',
+   q:[['¿A qué temperatura estaba el vaso sin tapa a los 10 minutos?',['144 °F','161 °F','131 °F'],'Línea discontinua (cuadrados), 10 minutos: 144. El 161 es el vaso con tapa.'],
+      ['¿Qué vaso se enfrió más rápido?',['El vaso sin tapa','El vaso con tapa','Los dos por igual'],'Su línea baja más empinada: perdió 67 grados frente a 40.'],
+      ['¿Cuántos grados de diferencia hay entre los dos vasos a los 25 minutos?',['27 grados','40 grados','67 grados'],'140 − 113 = 27.'],
+      ['¿En qué momento tenían los dos vasos la misma temperatura?',['Al principio, en el minuto 0','A los 25 minutos, al final','En ningún momento del experimento'],'Las dos líneas salen del mismo punto: 180 °F.']]}
+];
+(function(){
+  var banco=[];
+  LI.forEach(function(d){
+    var g=fig(svgTexto(graficaLineas,{titulo:d.t+'. Datos inventados',etiquetas:d.et,series:[{nombre:d.s[0]+' (continua, ●)',valores:d.v[0]},{nombre:d.s[1]+' (discontinua, ■)',valores:d.v[1]}],
+      min:d.min,max:d.max,paso:d.paso,ejeY:d.ej,unidad:d.u,valoresVisibles:true}),d.t);
+    d.q.forEach(function(q){banco.push({e:g+preg(q[0]),ops:q[1],c:0,n:q[2]});});
+  });
+  unaAUna('li',banco,{pista:'Todavía no. ¿Cuál es la línea continua y cuál la discontinua? Lee la leyenda y después el punto que te piden.'});
+})();
+
+/* ===== Módulo 3 · Tablas de varias columnas ===== */
+var TA1='<table class="mini"><caption>Inscripciones en clases para adultos en cuatro centros (datos inventados)</caption><thead><tr><th scope="col">Centro</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">Cambio</th><th scope="col">Cambio (%)</th></tr></thead><tbody>'+
+  [['Norte',400,460,'+60','+15 %'],['Sur',1200,1290,'+90','+7.5 %'],['Este',250,300,'+50','+20 %'],['Oeste',800,760,'−40','−5 %']].map(function(f){return '<tr><th scope="row">'+f[0]+'</th><td>'+f.slice(1).join('</td><td>')+'</td></tr>';}).join('')+'</tbody></table>';
+var TA2='<table class="mini"><caption>Precio en dólares de tres productos en tres tiendas (datos inventados)</caption><thead><tr><th scope="col">Producto</th><th scope="col">Tienda A</th><th scope="col">Tienda B</th><th scope="col">Tienda C</th></tr></thead><tbody>'+
+  [['Arroz (5 lb)','4.50','3.99','4.25'],['Frijoles (2 lb)','2.79','3.10','2.49'],['Leche (1 galón)','4.20','3.85','3.95'],['Total','11.49','10.94','10.69']].map(function(f){return '<tr><th scope="row">'+f[0]+'</th><td>'+f.slice(1).join('</td><td>')+'</td></tr>';}).join('')+'</tbody></table>';
+unaAUna('ta',[
+  ['¿Cuántos estudiantes tenía el centro Sur en 2024?',['1290','1200','90']],
+  ['¿Qué centro sumó más estudiantes?',['Sur, con 90 más','Este, con un 20 % más','Norte, con 60 más']],
+  ['¿Qué centro creció más en porcentaje?',['Este, con un 20 %','Sur, con 90 estudiantes','Norte, con un 15 %']],
+  ['¿Qué centro perdió estudiantes?',['Oeste','Este','Norte']],
+  ['Sur sumó 90 estudiantes y Este solo 50, pero Este creció más en porcentaje. ¿Por qué?',['Este empezó con muchos menos estudiantes','Sur perdió estudiantes durante el año 2024','La columna del porcentaje tiene un error']]
+].map(function(q,i){var N=['Fila Sur, columna 2024. 1200 es 2023 y 90 es el cambio.','Columna «Cambio» en números: +90 es la más alta.','Columna «Cambio (%)»: +20 % es la más alta.','Su cambio es negativo: −40, un 5 % menos.','50 es mucho para 250 (un 20 %); 90 es poco para 1200 (un 7.5 %).'];
+  return {e:TA1+preg(q[0]),ops:q[1],c:0,n:N[i]};}).concat([
+  ['¿En qué tienda es más barata la leche?',['Tienda B','Tienda C','Tienda A'],'Fila «Leche», 3.85 es el precio más bajo.'],
+  ['¿En qué tienda sale más barata la compra completa?',['Tienda C','Tienda B','Tienda A'],'Fila «Total»: 10.69. Aunque la B tiene la leche y el arroz más baratos, la C gana en el total.'],
+  ['¿Cuánto cuestan los frijoles en la Tienda A?',['2.79 dólares','2.49 dólares','4.50 dólares'],'Fila «Frijoles», columna «Tienda A». 2.49 es la Tienda C y 4.50 es el arroz.'],
+  ['¿Qué producto es más barato en la Tienda C que en las otras dos?',['Los frijoles','La leche','El arroz'],'Frijoles: 2.49 en C, frente a 2.79 y 3.10.']
+].map(function(q){return {e:TA2+preg(q[0]),ops:q[1],c:0,n:q[2]};})),
+{pista:'Todavía no. Busca primero la fila y después la columna; lee bien el encabezado.'});
+
+/* ===== Módulo 4 · La conclusión válida ===== */
+(function(){
+  var dbG=fig(svgTexto(graficaBarrasDobles,{titulo:DB[1].t+'. Datos inventados',etiquetas:DB[1].cat,series:[{nombre:'GED (lisa)',valores:DB[1].v[0]},{nombre:'Inglés (rayada)',valores:DB[1].v[1]}],max:70,paso:10,ejeY:'Estudiantes'}),DB[1].t);
+  var liG=fig(svgTexto(graficaLineas,{titulo:LI[2].t+'. Datos inventados',etiquetas:LI[2].et,series:[{nombre:'Vaso con tapa (continua, ●)',valores:LI[2].v[0]},{nombre:'Vaso sin tapa (discontinua, ■)',valores:LI[2].v[1]}],min:100,max:190,paso:10,ejeY:'Grados Fahrenheit',valoresVisibles:true}),LI[2].t);
+  var Q='¿Qué conclusión respaldan los datos?';
+  unaAUna('co',[
+    [TA1,['El centro Oeste fue el único que perdió estudiantes en 2024.','El centro Oeste perdió estudiantes porque subió el precio.','Todos los centros de la ciudad crecieron en 2024.','El centro Este será el más grande en el año 2030.'],'Se comprueba en la tabla. Las otras inventan una causa, generalizan de más o predicen el futuro.'],
+    [TA2,['La Tienda C tiene el total más bajo de los tres productos.','La Tienda C es la más barata en todos los productos.','La Tienda B tiene los productos de mejor calidad.','Los precios de la Tienda A subirán el mes próximo.'],'La C gana en el total, pero no en todos los productos: el arroz y la leche están más baratos en la B.'],
+    [dbG,['En casi todos los trimestres hubo más estudiantes de inglés que de GED.','Hay más estudiantes de inglés porque las clases son más fáciles.','En verano todos los programas para adultos tienen menos estudiantes.','El próximo otoño habrá 60 estudiantes de inglés otra vez.'],'Solo en primavera hubo más de GED. Las otras opciones inventan una causa, generalizan o adivinan el futuro.'],
+    [liG,['La tapa hizo que el agua se enfriara más despacio en este experimento.','Las tapas de todos los vasos mantienen el agua caliente durante horas.','Después de una hora el agua de los dos vasos tendrá la misma temperatura.','El vaso sin tapa se enfrió más porque era de un material diferente.'],'Es lo que muestran las dos líneas. Las otras opciones generalizan, predicen o inventan una causa que la gráfica no muestra.'],
+    [liG,['A los 25 minutos, el vaso con tapa estaba 27 grados más caliente.','El vaso con tapa se enfrió más rápido que el vaso sin tapa.','A los 25 minutos, los dos vasos tenían ya la misma temperatura.','El vaso sin tapa estaba más caliente al principio del experimento.'],'140 − 113 = 27. Las otras opciones contradicen la gráfica.'],
+    [TA1,['Sur sumó más estudiantes, pero Este creció más en porcentaje.','Sur creció más que Este en número y también en porcentaje.','Este sumó más estudiantes que ningún otro de los centros.','Norte y Este crecieron exactamente el mismo número de estudiantes.'],'Distingue el cambio en números (Sur: +90) del cambio en porcentaje (Este: +20 %).']
+  ].map(function(d){return {e:d[0]+preg(Q),ops:d[1],c:0,n:d[2]};}),
+  {pista:'Todavía no. ¿Se puede comprobar en los datos? ¿O inventa una causa, generaliza de más o habla del futuro?'});
+})();
+</script>
+</body>
+</html>

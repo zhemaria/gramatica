@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l2-1 · Títulos, comillas y signos · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 2.1 · Títulos, comillas y signos</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+</style>
+</head>
+<body>
+<h1>Práctica 2.1 · Títulos, comillas y signos</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 2 · Acompaña a la Lección 2.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_2-1.html">← Volver a la Lección 2.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="titulos">1 · Los títulos</button>
+  <button type="button" class="pest" data-mod="dos-puntos">2 · Los dos puntos</button>
+  <button type="button" class="pest" data-mod="punto-y-coma">3 · Coma, punto y coma o dos puntos</button>
+  <button type="button" class="pest" data-mod="mayusculas">4 · ¿Mayúscula o minúscula?</button>
+</nav>
+
+<section class="modulo" id="titulos" aria-labelledby="t-ti">
+  <h2 id="t-ti">1 · Los títulos</h2>
+  <p class="consejo"><strong>Cursiva</strong> para las obras completas (libros, películas, periódicos, discos); <strong>«comillas»</strong> para sus partes (artículos, capítulos, poemas, canciones). Solo la primera palabra del título lleva mayúscula, salvo en los periódicos y revistas.</p>
+  <div class="enun" id="ti-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="ti-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ti-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ti-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ti-marcador"></div>
+</section>
+
+<section class="modulo" id="dos-puntos" aria-labelledby="t-dp" hidden>
+  <h2 id="t-dp">2 · Los dos puntos</h2>
+  <p class="consejo">Los dos puntos anuncian una <strong>lista</strong>, una <strong>cita</strong> o una <strong>explicación</strong>, y van en el saludo de las cartas. No se ponen entre el verbo y lo que sigue.</p>
+  <div class="enun" id="dp-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="dp-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="dp-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="dp-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="dp-marcador"></div>
+</section>
+
+<section class="modulo" id="punto-y-coma" aria-labelledby="t-pc" hidden>
+  <h2 id="t-pc">3 · Coma, punto y coma o dos puntos</h2>
+  <p class="consejo">El <strong>punto y coma</strong> separa oraciones relacionadas, los elementos de una lista que ya tiene comas, y va antes de <em>sin embargo, por lo tanto</em>. Elige el signo que falta.</p>
+  <div class="enun" id="pc-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="pc-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pc-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pc-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pc-marcador"></div>
+</section>
+
+<section class="modulo" id="mayusculas" aria-labelledby="t-ma" hidden>
+  <h2 id="t-ma">4 · ¿Mayúscula o minúscula?</h2>
+  <p class="consejo">En minúscula: días, meses, idiomas, nacionalidades, cargos y puntos cardinales. En mayúscula: nombres propios, instituciones y siglas. Las mayúsculas llevan tilde.</p>
+  <div class="enun" id="ma-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="ma-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ma-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ma-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ma-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 2.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* «¿Cuál está bien escrita?» con la primera opción correcta */
+function cual(pre,banco,pista){
+  unaAUna(pre,banco.map(function(d){return {e:(d[2]?'<span class="par">'+d[2]+'</span>':'')+'¿Cuál está bien escrita?',ops:d[0],c:0,n:d[1]};}),{pista:pista});
+}
+
+/* Módulo 1 · Títulos */
+cual('ti',[
+  [['Mi libro favorito es <em>Cien años de soledad</em>.','Mi libro favorito es <em>Cien Años de Soledad</em>.','Mi libro favorito es «Cien Años De Soledad».'],'Libro completo: cursiva, y mayúscula solo en la primera palabra.'],
+  [['Lee el capítulo «El trabajo de la tierra».','Lee el capítulo <em>El Trabajo de la Tierra</em>.','Lee el capítulo «El Trabajo De La Tierra».'],'Un capítulo es parte de un libro: entre comillas.'],
+  [['Compré <em>La Opinión</em> en el quiosco.','Compré «la opinión» en el quiosco.','Compré <em>La opinión</em> en el quiosco.'],'Nombre de un periódico: cursiva y mayúscula en las palabras importantes.'],
+  [['Mi canción preferida es «Guantanamera».','Mi canción preferida es <em>GUANTANAMERA</em>.','Mi canción preferida es Guantanamera, sin marcas.'],'Una canción, que es parte de un disco, va entre comillas.'],
+  [['Anoche vimos la película <em>Coco</em>.','Anoche vimos la película «Coco».','Anoche vimos la película coco.'],'Una película es una obra completa: cursiva.'],
+  [['El artículo «Cómo ahorrar en invierno» salió en <em>El Nuevo Herald</em>.','El artículo <em>Cómo Ahorrar en Invierno</em> salió en «El Nuevo Herald».','El artículo «Cómo Ahorrar En Invierno» salió en <em>el nuevo herald</em>.'],'El artículo (una parte) entre comillas; el periódico (la obra completa) en cursiva.'],
+  [['Martí escribió <em>Versos sencillos</em> en 1891.','Martí escribió <em>Versos Sencillos</em> en 1891.','Martí escribió «Versos Sencillos» en 1891.'],'Libro completo: cursiva y mayúscula solo en la primera palabra.'],
+  [['El poema «Los zapaticos de rosa» está en <em>La Edad de Oro</em>.','El poema <em>Los Zapaticos de Rosa</em> está en «La Edad de Oro».','El poema «Los Zapaticos De Rosa» está en La Edad de Oro.'],'El poema va entre comillas y el libro en cursiva. <em>La Edad de Oro</em> lleva mayúscula en <em>Edad</em> y <em>Oro</em> porque nació como una revista mensual, y los nombres de revistas siguen la regla de los periódicos.'],
+  [['A mano escribí: <u>Platero y yo</u>.','A mano escribí: Platero Y Yo.','A mano escribí: "PLATERO Y YO".'],'A mano, el título de un libro se subraya.'],
+  [['El episodio «La gran sorpresa» fue el mejor de la serie.','El episodio <em>La Gran Sorpresa</em> fue el mejor de la serie.','El episodio la gran sorpresa fue el mejor de la serie.'],'Un episodio es parte de una serie: entre comillas.']
+],'Todavía no. ¿Es una obra completa (cursiva) o una parte (comillas)? ¿Cuántas mayúsculas lleva el título?');
+
+/* Módulo 2 · Dos puntos */
+cual('dp',[
+  [['Necesito tres documentos: el pasaporte, una factura y una foto.','Necesito: el pasaporte, una factura y una foto.','Necesito tres documentos, el pasaporte: una factura y una foto.'],'Los dos puntos anuncian la lista después de «tres documentos».'],
+  [['El letrero decía: «Prohibido fumar».','El letrero decía «Prohibido fumar:».','El letrero: decía «Prohibido fumar».'],'Los dos puntos anuncian la cita textual.'],
+  [['Llegué tarde por una razón: el tren se descompuso.','Llegué tarde por: una razón el tren se descompuso.','Llegué: tarde por una razón, el tren se descompuso.'],'Los dos puntos anuncian la explicación.'],
+  [['Querida tía:','Querida tía,','Querida tía;'],'El saludo de una carta lleva dos puntos en español.'],
+  [['Mis hijos se llaman Ana, Luis y Pedro.','Mis hijos se llaman: Ana, Luis y Pedro.','Mis hijos: se llaman Ana, Luis y Pedro.'],'Sin una palabra que anuncie la lista, no hacen falta los dos puntos.'],
+  [['Mi madre siempre me dice: «Estudia, que nadie te lo quita».','Mi madre siempre me dice, «Estudia, que nadie te lo quita».','Mi madre siempre me dice «Estudia, que nadie te lo quita.»'],'Dos puntos antes de la cita y punto después de las comillas.'],
+  [['Solo me falta una cosa: aprobar el examen de Ciencias.','Solo me falta una cosa; aprobar el examen de Ciencias.','Solo me falta: una cosa aprobar el examen de Ciencias.'],'Los dos puntos anuncian qué es esa cosa.'],
+  [['Compramos pan, leche y huevos.','Compramos: pan, leche y huevos.','Compramos pan: leche y huevos.'],'No se ponen dos puntos entre el verbo y lo que sigue.']
+],'Todavía no. ¿Hay algo antes que anuncie la lista, la cita o la explicación? ¿Quedaron los dos puntos pegados al verbo?');
+
+/* Módulo 3 · Coma, punto y coma o dos puntos */
+unaAUna('pc',[
+  ['Llovió toda la noche ___ la calle amaneció inundada.',[';',',',':'],'Dos oraciones completas muy relacionadas: punto y coma. Con coma sería una oración corrida.'],
+  ['Vinieron Ana, de Puebla ___ Luis, de Lima; y Rosa, de Cali.',[';',',',':'],'La lista ya tiene comas dentro: los elementos se separan con punto y coma.'],
+  ['Estudió mucho ___ sin embargo, no aprobó.',[';',',',':'],'Antes de <em>sin embargo</em> que une dos oraciones: punto y coma.'],
+  ['Para la receta necesitas tres cosas ___ arroz, frijoles y cebolla.',[':',';',','],'Una lista anunciada por «tres cosas»: dos puntos.'],
+  ['Compré manzanas ___ peras y uvas.',[',',';',':'],'Una lista simple, sin comas dentro: coma.'],
+  ['El jefe nos dijo ___ «Mañana se trabaja».',[':',';',','],'Antes de una cita textual: dos puntos.'],
+  ['La tienda abre a las nueve ___ por lo tanto, llega temprano.',[';',',',':'],'Antes de <em>por lo tanto</em> que une dos oraciones: punto y coma.'],
+  ['Visitamos Chicago, en Illinois ___ Milwaukee, en Wisconsin; y Detroit, en Michigan.',[';',',',':'],'Lista con comas dentro: punto y coma.'],
+  ['No pude ir por un motivo ___ estaba enfermo.',[':',';',','],'Anuncia la explicación: dos puntos.'],
+  ['El examen es mañana ___ hoy repaso todo.',[';',',',':'],'Dos oraciones completas relacionadas: punto y coma.']
+].map(function(d){return {e:'<span class="grande">'+d[0].replace('___','<span class="hueco">&nbsp;?&nbsp;</span>')+'</span>¿Qué signo va?',ops:d[1].map(function(x){return {';':'punto y coma ( ; )',',':'coma ( , )',':':'dos puntos ( : )'}[x];}),c:0,n:d[2]};}),
+{pista:'Todavía no. ¿Une dos oraciones completas? ¿La lista ya tiene comas? ¿Se anuncia algo?'});
+
+/* Módulo 4 · Mayúsculas */
+cual('ma',[
+  [['El examen es el martes 14 de noviembre.','El examen es el Martes 14 de Noviembre.','El examen es el martes 14 de Noviembre.'],'Los días y los meses van en minúscula.'],
+  [['Mi esposo es salvadoreño y habla inglés.','Mi esposo es Salvadoreño y habla Inglés.','Mi esposo es salvadoreño y habla Inglés.'],'Las nacionalidades y los idiomas van en minúscula.'],
+  [['Ayer habló el alcalde de Chicago.','Ayer habló el Alcalde de Chicago.','Ayer habló el alcalde de chicago.'],'El cargo en minúscula; el nombre de la ciudad, en mayúscula.'],
+  [['Trabajo en la Universidad de Chicago.','Trabajo en la universidad de Chicago.','Trabajo en la Universidad De Chicago.'],'El nombre de una institución lleva mayúscula en sus palabras importantes.'],
+  [['Vivo en el norte de la ciudad.','Vivo en el Norte de la ciudad.','Vivo en el NORTE de la ciudad.'],'Los puntos cardinales van en minúscula.'],
+  [['Mis abuelos viven en América del Sur.','Mis abuelos viven en América del sur.','Mis abuelos viven en américa del Sur.'],'Cuando forma parte de un nombre propio, el punto cardinal va en mayúscula.'],
+  [['ÁFRICA ES UN CONTINENTE MUY GRANDE.','AFRICA ES UN CONTINENTE MUY GRANDE.','ÀFRICA ES UN CONTINENTE MUY GRANDE.'],'Las mayúsculas llevan tilde: <em>Á</em>.'],
+  [['La doctora Pérez me atendió en el hospital.','La Doctora Pérez me atendió en el hospital.','La doctora pérez me atendió en el hospital.'],'El título en minúscula; el apellido, en mayúscula.'],
+  [['Estudio para el GED en la biblioteca.','Estudio para el ged en la biblioteca.','Estudio para el Ged en la biblioteca.'],'Las siglas van en mayúscula.'],
+  [['En primavera abren el mercado del barrio.','En Primavera abren el mercado del barrio.','En primavera abren el Mercado del barrio.'],'Las estaciones del año van en minúscula.']
+],'Todavía no. Recuerda: días, meses, idiomas, nacionalidades, cargos, estaciones y puntos cardinales van en minúscula.');
+</script>
+</body>
+</html>

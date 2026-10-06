@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l1-1 · Relativos y conjunciones subordinantes · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 1.1 · Relativos y conjunciones</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+</style>
+</head>
+<body>
+<h1>Práctica 1.1 · Relativos y conjunciones</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 1 · Acompaña a la Lección 1.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_1-1.html">← Volver a la Lección 1.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="relativos">1 · Elige el relativo</button>
+  <button type="button" class="pest" data-mod="comas">2 · ¿Con comas o sin comas?</button>
+  <button type="button" class="pest" data-mod="conectores">3 · Elige la conjunción</button>
+  <button type="button" class="pest" data-mod="une">4 · La mejor unión</button>
+</nav>
+
+<section class="modulo" id="relativos" aria-labelledby="t-re">
+  <h2 id="t-re">1 · Elige el relativo</h2>
+  <p class="consejo"><strong>que:</strong> personas o cosas · <strong>quien, quienes:</strong> solo personas · <strong>el cual, la cual…:</strong> tras una preposición · <strong>cuyo, cuya…:</strong> posesión, concuerda con lo poseído · <strong>donde:</strong> lugares.</p>
+  <div class="enun" id="re-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="re-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="re-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="re-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="re-marcador"></div>
+</section>
+
+<section class="modulo" id="comas" aria-labelledby="t-co" hidden>
+  <h2 id="t-co">2 · ¿Con comas o sin comas?</h2>
+  <p class="consejo"><strong>Sin comas,</strong> la cláusula separa a un grupo del resto. <strong>Entre comas,</strong> solo añade un dato sobre todos. Lee la oración y elige lo que significa.</p>
+  <div class="enun" id="co-enun" aria-live="polite"></div>
+  <div class="opciones" id="co-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="co-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="co-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="co-marcador"></div>
+</section>
+
+<section class="modulo" id="conectores" aria-labelledby="t-cj" hidden>
+  <h2 id="t-cj">3 · Elige la conjunción</h2>
+  <p class="consejo">¿Qué relación hay entre las dos ideas? <strong>Causa</strong> (porque, ya que, como) · <strong>obstáculo</strong> (aunque, a pesar de que) · <strong>tiempo</strong> (cuando, mientras, hasta que, antes de que) · <strong>condición</strong> (si, siempre que, a menos que) · <strong>finalidad</strong> (para que). Al acertar escucharás la oración.</p>
+  <div class="enun" id="cj-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="cj-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="cj-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="cj-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="cj-marcador"></div>
+</section>
+
+<section class="modulo" id="une" aria-labelledby="t-un" hidden>
+  <h2 id="t-un">4 · La mejor unión</h2>
+  <p class="consejo">Elige la oración que une las dos ideas <strong>sin cambiar su sentido</strong>, sin repetir palabras y con la puntuación correcta.</p>
+  <div class="enun" id="un-enun" aria-live="polite"></div>
+  <div class="opciones pal" id="un-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="un-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="un-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="un-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 1.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* Módulo 1 · Relativos (la primera opción es la correcta) */
+unaAUna('re',[
+  ['El hombre ___ hijos juegan en el parque es mi vecino.',['cuyos','cuyo','que sus'],'<em>Cuyos</em> concuerda con <em>hijos</em>, lo que se posee.'],
+  ['La ciudad ___ nací está en Michoacán.',['donde','cuya','quien'],'Es un lugar: <em>donde</em>.'],
+  ['La enfermera ___ me atendió fue muy amable.',['que','cuya','donde'],'Una persona, sin comas ni preposición: <em>que</em>.'],
+  ['Te presento a Luis, ___ trabaja conmigo en el almacén.',['quien','cuyo','donde'],'Una persona, entre comas: <em>quien</em>.'],
+  ['Estas son las razones por ___ me mudé.',['las cuales','los cuales','quienes'],'Tras una preposición, y concuerda con <em>razones</em>: <em>por las cuales</em>.'],
+  ['La empresa ___ dueño es mexicano abrió otra tienda.',['cuyo','cuya','que su'],'<em>Cuyo</em> concuerda con <em>dueño</em>, no con <em>empresa</em>.'],
+  ['Los niños con ___ juega mi hijo viven en la esquina.',['quienes','cuyos','donde'],'Personas en plural, tras una preposición: <em>con quienes</em>.'],
+  ['El parque ___ corremos los sábados está cerrado.',['donde','cuyo','quien'],'Es un lugar: <em>donde</em>.'],
+  ['La computadora ___ compré ya no funciona.',['que','quien','cuya'],'Una cosa: <em>que</em>. <em>Quien</em> es solo para personas.'],
+  ['El problema del ___ te hablé ya se resolvió.',['cual','quien','cuyo'],'<em>Del cual</em>: tras la preposición, y <em>quien</em> no sirve para cosas.'],
+  ['Conocí a una escritora ___ libros leí en la escuela.',['cuyos','cuyas','que sus'],'<em>Cuyos</em> concuerda con <em>libros</em>.'],
+  ['Mis tíos, ___ viven en Texas, vienen en diciembre.',['quienes','quien','cuyos'],'Personas en plural, entre comas: <em>quienes</em>.'],
+  ['La caja ___ llegó ayer está dañada.',['que','quien','cuya'],'Una cosa: <em>que</em>.'],
+  ['Es una casa ___ jardín está lleno de flores.',['cuyo','cuya','que su'],'<em>Cuyo</em> concuerda con <em>jardín</em>.']
+].map(function(d){var o=d[0].replace('___',d[1][0]);return {e:'<span class="grande">'+d[0].replace('___','_____')+'</span>',ops:d[1],c:0,n:'«'+o+'» · '+d[2],a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. ¿Es una persona, una cosa o un lugar? ¿Hay una preposición antes? ¿Se habla de algo que pertenece a alguien?'});
+
+/* Módulo 2 · Comas en la cláusula de relativo (la primera opción es la correcta) */
+unaAUna('co',[
+  ['Los vecinos que tienen perro pagan una cuota extra.',['Solo pagan los vecinos que tienen perro.','Todos los vecinos tienen perro y pagan.'],'Sin comas, la cláusula separa a los que tienen perro del resto.'],
+  ['Los vecinos, que tienen perro, pagan una cuota extra.',['Todos los vecinos tienen perro y pagan.','Solo pagan los vecinos que tienen perro.'],'Entre comas, la cláusula añade un dato sobre todos los vecinos.'],
+  ['Mi hermana que vive en Houston es maestra.',['Tengo más de una hermana; hablo de la de Houston.','Tengo una sola hermana y añado dónde vive.'],'Sin comas, la cláusula distingue a esa hermana de las demás.'],
+  ['Mi hermana, que vive en Houston, es maestra.',['Tengo una sola hermana y añado dónde vive.','Tengo más de una hermana; hablo de la de Houston.'],'Entre comas, solo se añade un dato.'],
+  ['Los estudiantes que llegaron tarde no entraron al examen.',['Algunos llegaron tarde, y solo esos no entraron.','Todos llegaron tarde, así que nadie entró.'],'Sin comas: solo el grupo que llegó tarde.'],
+  ['Los estudiantes, que llegaron tarde, no entraron al examen.',['Todos llegaron tarde, así que nadie entró.','Algunos llegaron tarde, y solo esos no entraron.'],'Entre comas: el dato vale para todos.'],
+  ['Las manzanas que estaban podridas fueron a la basura.',['Solo se tiraron las manzanas podridas.','Se tiraron todas, porque todas estaban podridas.'],'Sin comas, se separa a las podridas de las buenas.'],
+  ['Las manzanas, que estaban podridas, fueron a la basura.',['Se tiraron todas, porque todas estaban podridas.','Solo se tiraron las manzanas podridas.'],'Entre comas, todas estaban podridas.'],
+  ['Solo tienes una madre. ¿Cuál oración está bien puntuada?',['Mi madre, que vive en Durango, me llama cada domingo.','Mi madre que vive en Durango me llama cada domingo.'],'Como solo hay una madre, la cláusula solo añade un dato: va entre comas.'],
+  ['¿Cuál oración dice que <strong>todos</strong> los trabajadores recibieron el bono?',['Los trabajadores, que cumplieron la meta, recibieron un bono.','Los trabajadores que cumplieron la meta recibieron un bono.'],'Con comas, todos cumplieron la meta y todos recibieron el bono.'],
+  ['El río Chicago, que cruza el centro, se tiñe de verde cada marzo.',['Hay un solo río Chicago; se añade un dato.','Hay varios ríos Chicago; se habla de uno.'],'Un nombre propio ya dice de cuál se trata: la cláusula va entre comas.']
+].map(function(d){return {e:'<span class="grande">'+d[0]+'</span>'+(d[0].indexOf('¿')<0?'¿Qué significa?':''),ops:d[1],c:0,n:d[2]};}),
+{pista:'Todavía no. Fíjate en las comas: ¿la cláusula separa a un grupo o habla de todos?'});
+
+/* Módulo 3 · Conjunciones (la primera opción es la correcta) */
+unaAUna('cj',[
+  ['No pude dormir ___ el vecino hizo una fiesta.',['porque','aunque','para que'],'Causa.'],
+  ['___ estaba muy cansada, terminó su turno.',['Aunque','Porque','Para que'],'Obstáculo que no impidió la acción.'],
+  ['Habla más despacio ___ todos te entiendan.',['para que','porque','aunque'],'Finalidad, con subjuntivo: <em>entiendan</em>.'],
+  ['___ termines la tarea, podrás ver la televisión.',['Cuando','Aunque','Ya que'],'Tiempo. Va en subjuntivo porque todavía no ha pasado.'],
+  ['No saldremos de viaje ___ el carro esté arreglado.',['a menos que','ya que','porque'],'Condición: si el carro no está arreglado, no hay viaje.'],
+  ['Apaga la estufa ___ se queme la comida.',['antes de que','porque','ya que'],'Tiempo, con subjuntivo: <em>se queme</em>.'],
+  ['___ no tienes carro, te llevo yo.',['Como','Aunque','Para que'],'Causa al principio de la oración: <em>como</em>.'],
+  ['Escucho la radio ___ cocino.',['mientras','para que','a menos que'],'Dos acciones al mismo tiempo.'],
+  ['Lleva el paraguas ___ llueva.',['en caso de que','ya que','porque'],'Condición, con subjuntivo: <em>llueva</em>.'],
+  ['Me quedé en la oficina ___ terminé el informe.',['hasta que','para que','a menos que'],'Tiempo, hasta un momento.'],
+  ['___ el examen fue difícil, casi todos aprobaron.',['A pesar de que','Ya que','Para que'],'Obstáculo que no impidió aprobar.'],
+  ['Te presto el dinero ___ me lo devuelvas el viernes.',['siempre que','ya que','porque'],'Condición, con subjuntivo: <em>devuelvas</em>.'],
+  ['Cerramos temprano ___ mañana es día feriado.',['ya que','aunque','a menos que'],'Causa.'],
+  ['___ llegó el autobús, todos subieron corriendo.',['En cuanto','Para que','A menos que'],'Tiempo: justo después de un momento.']
+].map(function(d){var o=d[0].replace('___',d[1][0]);o=o.charAt(0).toUpperCase()+o.slice(1);return {e:'<span class="grande">'+d[0].replace('___','_____')+'</span>',ops:d[1],c:0,n:'«'+o+'» · '+d[2],a:o};}),
+{leerAlAcertar:true,pista:'Todavía no. Lee la oración con esa conjunción: ¿dice lo que se quiere decir? ¿Suena bien el verbo?'});
+
+/* Módulo 4 · La mejor unión (la primera opción es la correcta) */
+unaAUna('un',[
+  ['Tengo un amigo. Su esposa es dentista.',['Tengo un amigo cuya esposa es dentista.','Tengo un amigo que su esposa es dentista.','Tengo un amigo cuyo esposa es dentista.'],'<em>Cuya</em>, que concuerda con <em>esposa</em>.'],
+  ['Este es el restaurante. Allí celebramos mi cumpleaños.',['Este es el restaurante donde celebramos mi cumpleaños.','Este es el restaurante cuyo celebramos mi cumpleaños.','Este es el restaurante quien celebramos mi cumpleaños.'],'Un lugar: <em>donde</em>.'],
+  ['Ahorro cada mes. Así mi familia podrá viajar en verano.',['Ahorro cada mes para que mi familia pueda viajar en verano.','Ahorro cada mes para que mi familia puede viajar en verano.','Ahorro cada mes aunque mi familia pueda viajar en verano.'],'Finalidad: <em>para que</em> con subjuntivo.'],
+  ['El tráfico era terrible. Llegamos a tiempo.',['A pesar de que el tráfico era terrible, llegamos a tiempo.','Como el tráfico era terrible, llegamos a tiempo.','A pesar de que el tráfico era terrible llegamos, a tiempo.'],'Obstáculo, y la coma después de la cláusula que va primero.'],
+  ['Conocí a la doctora. La doctora operó a mi padre.',['Conocí a la doctora que operó a mi padre.','Conocí a la doctora cuya operó a mi padre.','Conocí a la doctora donde operó a mi padre.'],'Una persona: <em>que</em>.'],
+  ['Mi jefe me dio el día libre. Yo había trabajado el domingo.',['Mi jefe me dio el día libre porque yo había trabajado el domingo.','Mi jefe me dio el día libre para que yo había trabajado el domingo.','Mi jefe me dio el día libre aunque yo había trabajado el domingo.'],'Trabajar el domingo es la causa del día libre.'],
+  ['Vas a firmar el documento. Primero léelo con calma.',['Antes de que firmes el documento, léelo con calma.','Antes de que firmas el documento, léelo con calma.','Antes de que firmes el documento léelo, con calma.'],'<em>Antes de que</em> pide subjuntivo, y la coma va después de la cláusula.'],
+  ['Mis padres viven en Cicero. Vinieron de Jalisco.',['Mis padres, quienes vinieron de Jalisco, viven en Cicero.','Mis padres, cuyos vinieron de Jalisco, viven en Cicero.','Mis padres quien vinieron de Jalisco viven en Cicero.'],'Personas en plural, entre comas porque solo se añade un dato.'],
+  ['Puedes salir temprano. Antes tienes que terminar el inventario.',['Puedes salir temprano siempre que termines el inventario.','Puedes salir temprano siempre que terminas el inventario.','Puedes salir temprano ya que termines el inventario.'],'Condición: <em>siempre que</em> con subjuntivo.'],
+  ['Pienso algo. El examen será fácil.',['Pienso que el examen será fácil.','Pienso de que el examen será fácil.','Pienso que de el examen será fácil.'],'Sin <em>de</em>: se dice «pienso eso», no «pienso de eso».']
+].map(function(d){return {e:'<span class="par">'+d[0]+'</span>¿Cuál es la mejor manera de unirlas?',ops:d[1],c:0,n:'«'+d[1][0]+'» · '+d[2],a:d[1][0]};}),
+{leerAlAcertar:true,pista:'Todavía no. Esa versión cambia el sentido, usa mal la palabra de enlace o pone mal la coma. Léela en voz alta.'});
+</script>
+</body>
+</html>

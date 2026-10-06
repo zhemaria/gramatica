@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l4-3 · Lenguaje figurado · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.3 · Lenguaje figurado</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 4.3 · Lenguaje figurado</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 4 · Acompaña a la Lección 4.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_4-3.html">← Volver a la Lección 4.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="recurso">1 · ¿Qué recurso es?</button>
+  <button type="button" class="pest" data-mod="interpreta">2 · ¿Qué significa de verdad?</button>
+  <button type="button" class="pest" data-mod="refranes">3 · El refrán para cada situación</button>
+</nav>
+
+<section class="modulo" id="recurso" aria-labelledby="t-rc">
+  <h2 id="t-rc">1 · ¿Qué recurso es?</h2>
+  <p class="consejo"><strong>Símil:</strong> compara con <em>como, igual que, parece</em>. <strong>Metáfora:</strong> compara sin esas palabras (incluye la personificación). <strong>Modismo:</strong> expresión fija de la lengua. <strong>Refrán:</strong> frase tradicional con una enseñanza.</p>
+  <div class="enun" id="rc-enun" aria-live="polite"></div>
+  <div class="opciones" id="rc-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="rc-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="rc-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="rc-marcador"></div>
+</section>
+
+<section class="modulo" id="interpreta" aria-labelledby="t-in" hidden>
+  <h2 id="t-in">2 · ¿Qué significa de verdad?</h2>
+  <p class="consejo">Pregúntate qué se compara y en qué se parecen. El sentido figurado es el que tiene la expresión en el contexto, no el literal.</p>
+  <div class="enun" id="in-enun" aria-live="polite"></div>
+  <div class="opciones" id="in-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="in-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="in-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="in-marcador"></div>
+</section>
+
+<section class="modulo" id="refranes" aria-labelledby="t-rf" hidden>
+  <h2 id="t-rf">3 · El refrán para cada situación</h2>
+  <p class="consejo">Lee la situación y elige el refrán cuya enseñanza le corresponde.</p>
+  <div class="enun" id="rf-enun" aria-live="polite"></div>
+  <div class="opciones" id="rf-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="rf-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="rf-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="rf-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 4.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+/* Módulo 1 · ¿Qué recurso es? 0 símil · 1 metáfora · 2 modismo · 3 refrán */
+(function(){
+  var T=['Símil','Metáfora','Modismo','Refrán'];
+  var D=[
+    ['Sus ojos brillaban como dos luceros.',0,'Compara con <em>como</em>.'],
+    ['Sus ojos eran dos luceros.',1,'Dice que los ojos <em>son</em> luceros, sin <em>como</em>.'],
+    ['Mi abuelo es un libro abierto.',1,'Lo identifica con un libro: metáfora.'],
+    ['Corre igual que una gacela.',0,'Compara con <em>igual que</em>.'],
+    ['Ese señor siempre mete la pata.',2,'Expresión fija: equivocarse.'],
+    ['Camarón que se duerme se lo lleva la corriente.',3,'Frase tradicional con una enseñanza.'],
+    ['El reloj de la cocina se quejaba con cada segundo.',1,'Personificación: el reloj hace algo de personas.'],
+    ['El examen parecía una montaña imposible de subir.',0,'Compara con <em>parecía</em>.'],
+    ['Me costó un ojo de la cara.',2,'Expresión fija: ser muy caro.'],
+    ['Dime con quién andas y te diré quién eres.',3,'Frase tradicional con una enseñanza.'],
+    ['La ciudad era un hormiguero.',1,'Dice que la ciudad <em>es</em> un hormiguero: llena de gente que se mueve sin parar.'],
+    ['Se me pegaron las sábanas.',2,'Expresión fija: dormir de más.'],
+    ['Es tan dulce como la miel.',0,'Compara con <em>tan… como</em>.'],
+    ['No hay mal que por bien no venga.',3,'Frase tradicional con una enseñanza.'],
+    ['La luna nos miraba desde el cielo.',1,'Personificación: la luna mira, como una persona.'],
+    ['Estaba como pez en el agua.',2,'Expresión fija: sentirse muy cómodo en un lugar. Aunque lleva <em>como</em>, es un modismo que todos usan igual.']
+  ];
+  unaAUna('rc',D.map(function(d){return {e:'<span class="grande">'+d[0]+'</span>¿Qué recurso es?',ops:T,c:d[1],n:T[d[1]]+'. '+d[2]};}),
+    {pista:'Todavía no. ¿Hay una palabra que anuncia la comparación? ¿Es una expresión fija que usa todo el mundo? ¿Da un consejo?'});
+})();
+
+/* Módulo 2 · Interpreta (la primera opción es la correcta) */
+unaAUna('in',[
+  ['«Mi hija es un torbellino: no se queda quieta ni un minuto.»',['Es muy inquieta y activa','Le gusta mucho el viento','Es muy tranquila'],'El torbellino gira sin parar: la hija no se está quieta.'],
+  ['«Después de la noticia, la casa quedó en un silencio de piedra.»',['Un silencio total, pesado','Un ruido muy fuerte','Una casa hecha de piedra'],'La piedra es dura y no suena: el silencio era total.'],
+  ['«El dinero se le escapaba como agua entre los dedos.»',['Gastaba el dinero sin poder evitarlo','Guardaba el dinero en el agua','Lavaba el dinero todos los días'],'El agua se escapa de las manos; el dinero también.'],
+  ['«Su palabra es oro.»',['Lo que promete, lo cumple: es muy valiosa','Habla de joyas todo el tiempo','Es una persona muy rica'],'El oro vale mucho; su palabra también.'],
+  ['«Estaba como pez en el agua en su nuevo trabajo.»',['Se sentía muy cómodo y a gusto','Trabajaba en una pescadería','Tenía que nadar todos los días'],'Modismo: sentirse en su ambiente.'],
+  ['«Le dieron gato por liebre en la tienda.»',['Lo engañaron con algo de menor calidad','Le vendieron una mascota','Le regalaron un conejo'],'Modismo: dar algo peor de lo que se paga.'],
+  ['«El tren era una serpiente de luces que cruzaba la noche.»',['El tren largo y alumbrado parecía moverse como una serpiente','Había serpientes peligrosas en las vías del tren de noche','El tren llevaba muchos animales del zoológico de la ciudad'],'Metáfora: largo, curvo y con luces, como una serpiente brillante.'],
+  ['«Ese trabajo es pan comido.»',['Es muy fácil','Es en una panadería','Da mucha hambre'],'Modismo: algo muy fácil.'],
+  ['«Las palabras de la maestra fueron un bálsamo para Marta.»',['La consolaron y la hicieron sentir mejor','Le dieron una medicina para la piel','La hicieron enojar mucho'],'El bálsamo calma el dolor: las palabras la consolaron.'],
+  ['«Tiene un corazón de oro.»',['Es muy buena y generosa','Tiene problemas del corazón','Usa muchas joyas'],'El oro es valioso: su bondad también.'],
+  ['«Ponerse las pilas antes del examen.»',['Ponerse a estudiar con energía','Comprar baterías nuevas','Cargar el celular'],'Modismo: esforzarse, ponerse activo.'],
+  ['«La noticia cayó como un balde de agua fría.»',['Fue una sorpresa muy desagradable','Empezó a llover de repente','Hacía mucho frío ese día'],'El agua fría de golpe sorprende y molesta: así cayó la noticia.']
+].map(function(d){return {e:'<span class="grande">'+d[0]+'</span>¿Qué significa?',ops:d[1],c:0,n:d[2]};}),
+{pista:'Todavía no. Esa es la lectura literal o no encaja. ¿Qué se compara y en qué se parecen?'});
+
+/* Módulo 3 · Refranes para cada situación (la primera opción es la correcta) */
+var R=['Camarón que se duerme se lo lleva la corriente.','Más vale tarde que nunca.','Dime con quién andas y te diré quién eres.','No hay mal que por bien no venga.','Del dicho al hecho hay mucho trecho.','Al que madruga, Dios lo ayuda.','En boca cerrada no entran moscas.','Más vale prevenir que lamentar.'];
+unaAUna('rf',[
+  ['Don Luis empezó a estudiar para el GED a los 70 años y lo aprobó.',1,[5,6]],
+  ['Rosa no se inscribió a tiempo y otra persona se quedó con el último lugar del curso.',0,[3,2]],
+  ['El político prometió arreglar todas las calles, pero un año después no ha arreglado ninguna.',4,[1,7]],
+  ['Pedro siempre anda con un grupo que se mete en problemas, y la gente ya desconfía de él.',2,[6,5]],
+  ['Se le descompuso el carro y, por tomar el autobús, conoció a su mejor amigo.',3,[0,4]],
+  ['María llegó a la oficina de empleo antes de que abriera y consiguió la primera entrevista.',5,[1,2]],
+  ['Juan habló mal de su jefe en la cafetería y su jefe estaba en la mesa de al lado.',6,[3,4]],
+  ['Antes de la tormenta, la familia compró agua, pilas y comida por si se iba la luz.',7,[0,1]]
+].map(function(d){return {e:'<span class="par">'+d[0]+'</span>¿Qué refrán le corresponde?',ops:[R[d[1]],R[d[2][0]],R[d[2][1]]],c:0,n:'«'+R[d[1]]+'»'};}),
+{pista:'Todavía no. ¿Qué enseñanza tiene ese refrán? ¿Encaja con lo que pasó?'});
+</script>
+</body>
+</html>

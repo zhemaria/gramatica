@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l6-3 · Procedimientos científicos · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 6.3 · Procedimientos científicos</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+  figure.graf{background:#fff;border:2px solid var(--gris-claro);border-radius:10px;padding:12px 14px;margin:14px 0;text-align:center}
+  figure.graf figcaption{font-weight:700;color:var(--cp-oscuro);margin-bottom:6px;text-align:left}
+  figure.graf .fuente{font-size:.85rem;color:#555;text-align:left;margin:4px 0 0}
+  .ver-datos{text-align:left;margin-top:6px}
+  .ver-datos summary{padding:8px 12px;font-size:.95rem}
+  .mini{border-collapse:collapse;margin:6px 0;font-size:.95rem;font-weight:400}
+  .mini th,.mini td{border:1px solid #9aa9b7;padding:4px 10px}
+  .mini th{background:#4c1d95;color:#fff}
+  .leyenda-txt{font-size:.92rem;text-align:left;margin:4px 0 0}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .tabla-ancha{overflow-x:auto}
+  .enun figure.graf{margin:8px 0}
+  .mini caption{font-weight:700;color:var(--cp-oscuro);text-align:left;padding:4px 0}
+  .tabla-ancha,.enun .mini{max-width:100%}
+  .enun{overflow-x:auto}
+  .flujo{list-style:none;margin:14px auto;padding:0;max-width:520px;counter-reset:fl}
+  .flujo>li{counter-increment:fl;position:relative;background:#fff;border:2px solid #6d28d9;border-radius:10px;padding:10px 12px 10px 46px;margin:0 0 34px;font-weight:600;color:#1a2332}
+  .flujo>li::before{content:counter(fl);position:absolute;left:10px;top:9px;width:26px;height:26px;border-radius:50%;background:#6d28d9;color:#fff;font-weight:700;text-align:center;line-height:26px;font-size:.9rem}
+  .flujo>li:not(:last-child)::after{content:"↓" / "";position:absolute;left:50%;bottom:-31px;transform:translateX(-50%);font-size:1.5rem;color:#4c1d95;line-height:1}
+  .flujo>li.decision,.flujo>li.ciclo{counter-increment:none}
+  .flujo>li{text-align:left}
+  .flujo>li.decision{border-style:dashed;border-color:#b45309;background:#fff8ee}
+  .flujo>li.decision::before{content:"?";background:#b45309}
+  .flujo>li.ciclo{border-style:double;border-width:4px}
+  .flujo>li.ciclo::before{content:"↻";}
+  .flujo .ramas{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-weight:400;font-size:.93rem}
+  .flujo .ramas span{flex:1 1 140px;background:#fff;border:1px solid #9aa9b7;border-radius:6px;padding:5px 8px}
+  .mini-flujo{margin:10px auto}
+  .mini-flujo>li{margin-bottom:28px;font-size:.98rem}
+  .mini-flujo>li:not(:last-child)::after{bottom:-26px}
+  .enun .texto ol{margin:4px 0;padding-left:1.4em;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 6.3 · Procedimientos científicos</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 6 · Acompaña a la Lección 6.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_6-3.html">← Volver a la Lección 6.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="ordena">1 · Ordena: ¿qué paso sigue?</button>
+  <button type="button" class="pest" data-mod="paso-falta">2 · ¿Qué paso falta?</button>
+  <button type="button" class="pest" data-mod="texto-diagrama">3 · Texto y diagrama</button>
+</nav>
+
+<section class="modulo" id="ordena" aria-labelledby="t-or">
+  <h2 id="t-or">1 · Ordena: ¿qué paso sigue?</h2>
+  <p class="consejo">Imagina que lo estás haciendo de verdad. ¿Qué tienes en las manos después de este paso? ¿Qué necesitas tener listo para el siguiente?</p>
+  <div class="enun" id="or-enun" aria-live="polite"></div>
+  <div class="opciones" id="or-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="or-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="or-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="or-marcador"></div>
+</section>
+
+<section class="modulo" id="paso-falta" aria-labelledby="t-pf" hidden>
+  <h2 id="t-pf">2 · ¿Qué paso falta?</h2>
+  <p class="consejo">Recorre los pasos en tu mente. Donde ya no puedes seguir, falta algo. Ojo: hay pasos que suenan bien pero arruinan el procedimiento o la comparación.</p>
+  <div class="enun" id="pf-enun" aria-live="polite"></div>
+  <div class="opciones" id="pf-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pf-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pf-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pf-marcador"></div>
+</section>
+
+<section class="modulo" id="texto-diagrama" aria-labelledby="t-td" hidden>
+  <h2 id="t-td">3 · Texto y diagrama</h2>
+  <p class="consejo">Compara el texto con el diagrama de flujo. Una caja con <strong>?</strong> es una decisión. Busca qué dice cada uno que el otro no dice.</p>
+  <div class="enun" id="td-enun" aria-live="polite"></div>
+  <div class="opciones" id="td-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="td-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="td-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="td-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 6.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function preg(t){return '<span class="rel">'+t+'</span>';}
+function lista(t,pasos){return '<span class="texto"><p><strong>'+t+'</strong></p><ol>'+pasos.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ol></span>';}
+
+var PROC=[
+  {t:'Medir el pulso antes y después del ejercicio',p:['Siéntese y descanse cinco minutos.','Ponga dos dedos en la muñeca, del lado del pulgar, hasta sentir el pulso.','Cuente los latidos durante 30 segundos y multiplique por dos.','Anote el resultado como «pulso en reposo».','Haga sentadillas durante un minuto.','Mida el pulso otra vez, enseguida y de la misma forma, y anótelo.'],
+   x:['Tome un vaso de agua fría antes de empezar a contar los latidos.','Cuente los latidos durante cinco minutos seguidos sin parar.','Pida a otra persona que le tome la presión en el otro brazo.']},
+  {t:'Germinar un frijol en un vaso',p:['Moje un poco de algodón y escúrralo.','Ponga el algodón en el fondo de un vaso transparente.','Coloque el frijol entre el algodón y la pared del vaso.','Deje el vaso en un lugar con luz indirecta.','Humedezca el algodón cada día, sin encharcarlo.','Observe el frijol y anote los cambios cada día.'],
+   x:['Pinte el frijol con un marcador de color para reconocerlo.','Ponga el vaso dentro del refrigerador durante toda la noche.','Llene el vaso de agua hasta el borde para que no se seque.']},
+  {t:'Lavarse bien las manos',p:['Mójese las manos con agua limpia.','Cierre la llave y póngase jabón.','Frote las manos, entre los dedos y debajo de las uñas, durante al menos 20 segundos.','Enjuáguese bien las manos con agua limpia.','Séquese con una toalla limpia o al aire.'],
+   x:['Póngase crema en las manos antes de echarse el jabón.','Frote las manos solamente cinco segundos, sin tocar las uñas.','Enjuáguese con el agua de un recipiente que ya se usó.']},
+  {t:'Hacer un filtro de agua casero (solo para observar; esa agua no se bebe)',p:['Corte el fondo de una botella de plástico vacía.','Quite la tapa y ponga la botella boca abajo sobre un vaso.','Ponga una bola de algodón en el cuello de la botella.','Agregue capas de carbón, arena fina, arena gruesa y piedritas, en ese orden.','Vierta despacio agua turbia por arriba.','Compare el agua que cae en el vaso con el agua turbia.'],
+   x:['Agregue unas gotas de jabón al agua turbia para limpiarla mejor.','Agite la botella con fuerza para mezclar todas las capas de arena.','Beba el agua del vaso para ver si sabe distinto de la turbia.']},
+  {t:'El experimento de la luz (Lección 6.3)',p:['Remoje las semillas de 8 a 12 horas.','Prepare y marque las macetas A, B y C.','Siembre tres semillas por maceta.','Riegue con la misma cantidad de agua cada maceta.','Deje germinar las tres macetas juntas.','El día 0, mida y separe las macetas según la luz.','Cada dos días, mida antes de regar y anote.','El día final, compare los promedios con la hipótesis.'],
+   x:['Ponga más agua en la maceta que esté más pequeña.','Cambie de lugar las macetas cada dos días.','Siembre cada maceta con un tipo de frijol distinto.']}
+];
+
+/* ===== Módulo 1 · Ordena: ¿qué paso sigue? ===== */
+(function(){
+  var B=[];
+  PROC.forEach(function(d){
+    B.push({e:'<span class="grande">'+d.t+'</span>'+preg('¿Cuál es el <strong>primer</strong> paso?'),ops:[d.p[0],d.p[1],d.p[d.p.length-1]],c:0,n:'Primero: «'+d.p[0]+'»'});
+    for(var i=0;i<d.p.length-1;i++){
+      var ant=i>0?d.p[i-1]:d.p[d.p.length-1], des=d.p[i+2]||d.p[0];
+      B.push({e:'<span class="grande">'+d.t+'</span><span class="texto"><p>Acabas de hacer este paso: «'+d.p[i]+'»</p></span>'+preg('¿Qué paso sigue?'),
+        ops:[d.p[i+1],des,ant].filter(function(v,k,a){return a.indexOf(v)===k;}),c:0,n:'Sigue: «'+d.p[i+1]+'»'});
+    }
+  });
+  unaAUna('or',B,{pista:'Todavía no. Imagina que lo estás haciendo: ¿qué necesitas tener listo antes de este paso? ¿Qué no puedes hacer todavía?'});
+})();
+
+/* ===== Módulo 2 · ¿Qué paso falta? ===== */
+(function(){
+  var B=[];
+  PROC.forEach(function(d){
+    for(var i=1;i<d.p.length-1;i++){
+      var resto=d.p.filter(function(_,k){return k!==i;});
+      B.push({e:lista(d.t,resto)+preg('Falta un paso. ¿Cuál es?'),ops:[d.p[i],d.x[i%3],d.x[(i+1)%3]],c:0,
+        n:'Falta: «'+d.p[i]+'» Va entre «'+d.p[i-1]+'» y «'+d.p[i+1]+'»'});
+    }
+  });
+  unaAUna('pf',B,{pista:'Todavía no. Recorre los pasos en tu mente: ¿en qué momento te quedas sin poder seguir? Y ojo: un paso puede sonar razonable y aun así arruinar el procedimiento.'});
+})();
+
+/* ===== Módulo 3 · Texto y diagrama ===== */
+(function(){
+  function flujo(c){return '<ol class="flujo mini-flujo" aria-label="Diagrama de flujo">'+c.map(function(x){return x.charAt(0)==='?'?'<li class="decision">'+x.slice(1)+'</li>':'<li>'+x+'</li>';}).join('')+'</ol>';}
+  function txt(t){return '<span class="texto"><p><strong>Texto.</strong> '+t+'</p></span>';}
+  var T1=txt('Hierva una taza de agua durante un minuto. Déjela enfriar diez minutos. Agregue una cucharadita de sal y revuelva hasta que no se vea. Si todavía se ve sal, revuelva un minuto más.');
+  var D1=flujo(['Hervir el agua','Agregar la sal y revolver','?¿Todavía se ve sal? Sí: revolver un minuto más. No: terminar.']);
+  var T2=txt('Para medir la temperatura con un termómetro digital, lávelo con agua y jabón. Póngalo debajo de la lengua y cierre la boca. Espere el pitido, que suele tardar menos de un minuto, y lea el número.');
+  var D2=flujo(['Lavar el termómetro','Ponerlo debajo de la lengua','Esperar el pitido','Leer la temperatura','?¿Más de 100.4 °F? Sí: anotar como fiebre. No: anotar normal.']);
+  var T3=txt('Llene una tina con agua. Ponga los objetos uno por uno en el agua: una moneda, un corcho, una llave y una manzana. Anote cuáles flotan y cuáles se hunden.');
+  var D3=flujo(['Llenar la tina con agua','Poner un objeto en el agua','?¿Flota? Anotar «flota» o «se hunde».','?¿Quedan objetos? Sí: volver al paso 2. No: terminar.']);
+  unaAUna('td',[
+    {e:T1+D1+preg('¿Qué información da el texto que no da el diagrama?'),ops:['Cuánto tiempo se hierve y se deja enfriar el agua','Que hay que revolver después de poner la sal','Que se revuelve otra vez si todavía se ve sal'],c:0,n:'El diagrama no dice «un minuto» ni «diez minutos»; además, se saltó el paso de dejar enfriar.'},
+    {e:T1+D1+preg('¿Qué paso del texto falta en el diagrama?'),ops:['Dejar enfriar el agua diez minutos','Hervir el agua durante un minuto','Agregar la sal y revolverla'],c:0,n:'El diagrama pasa de hervir a agregar la sal.'},
+    {e:T2+D2+preg('¿Qué información da el diagrama que no da el texto?'),ops:['Qué temperatura se considera fiebre','Que hay que lavar antes el termómetro','Que se pone debajo de la lengua y se cierra la boca'],c:0,n:'La decisión del diagrama añade el límite de 100.4 °F, que el texto no menciona.'},
+    {e:T2+D2+preg('¿Qué detalle del texto no aparece en el diagrama?'),ops:['Que el pitido suele tardar menos de un minuto','Que hay que esperar el pitido del termómetro','Que al final se lee el número en la pantalla'],c:0,n:'El diagrama dice «esperar el pitido», pero no cuánto suele tardar.'},
+    {e:T3+D3+preg('¿Qué muestra el diagrama mejor que el texto?'),ops:['Que el paso de poner un objeto se repite con cada uno','Qué objetos exactos hay que poner en el agua de la tina','Que la tina se llena con agua antes de empezar a probar'],c:0,n:'La pregunta «¿Quedan objetos?» forma un ciclo que vuelve al paso 2.'},
+    {e:T3+D3+preg('¿Qué información da el texto que el diagrama no da?'),ops:['La lista de objetos: moneda, corcho, llave y manzana','Que hay que anotar si cada objeto flota o se hunde','Que los objetos se ponen en el agua uno por uno'],c:0,n:'El diagrama dice «un objeto», pero no cuáles.'}
+  ],{pista:'Todavía no. Lee la opción y búscala primero en el texto y después en el diagrama: ¿está en los dos o solo en uno?'});
+})();
+</script>
+</body>
+</html>

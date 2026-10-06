@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l4-1 · Estructuras del texto · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 4.1 · Estructuras del texto</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 4.1 · Estructuras del texto</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 4 · Acompaña a la Lección 4.1</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_4-1.html">← Volver a la Lección 4.1</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="estructura">1 · ¿Qué estructura tiene?</button>
+  <button type="button" class="pest" data-mod="palabras-senal">2 · Las palabras señal</button>
+  <button type="button" class="pest" data-mod="organizador">3 · El organizador adecuado</button>
+</nav>
+
+<section class="modulo" id="estructura" aria-labelledby="t-es">
+  <h2 id="t-es">1 · ¿Qué estructura tiene?</h2>
+  <p class="consejo">Lee el texto y busca sus palabras señal. Si combina estructuras, elige la <strong>principal</strong>: la que organiza la mayor parte.</p>
+  <div class="enun" id="es-enun" aria-live="polite"></div>
+  <div class="opciones" id="es-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="es-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="es-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="es-marcador"></div>
+</section>
+
+<section class="modulo" id="palabras-senal" aria-labelledby="t-ps" hidden>
+  <h2 id="t-ps">2 · Las palabras señal</h2>
+  <p class="consejo">¿A qué estructura apunta la palabra marcada? Fíjate en cómo se usa en la oración: <em>mientras</em> y <em>también</em> pueden tener dos sentidos.</p>
+  <div class="enun" id="ps-enun" aria-live="polite"></div>
+  <div class="opciones" id="ps-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="ps-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="ps-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="ps-marcador"></div>
+</section>
+
+<section class="modulo" id="organizador" aria-labelledby="t-or" hidden>
+  <h2 id="t-or">3 · El organizador adecuado</h2>
+  <p class="consejo">Elige el organizador gráfico que mejor representa el texto: mapa de rasgos, línea del tiempo, tabla o diagrama de Venn, cadena de causas o cajas de problema y solución.</p>
+  <div class="enun" id="or-enun" aria-live="polite"></div>
+  <div class="opciones" id="or-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="or-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="or-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="or-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 4.1</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function texto(ps){return '<span class="texto">'+ps.map(function(p){return '<p>'+p+'</p>';}).join('')+'</span>';}
+var E=['Descripción','Secuencia cronológica','Comparación y contraste','Causa y efecto','Problema y solución'];
+function tres(c,a,b){return [E[c],E[a],E[b]];}
+
+/* Módulo 1 · ¿Qué estructura tiene? [texto, índice de la estructura, dos distractores, nota] */
+unaAUna('es',[
+  ['Para sembrar tomates, primero elige un lugar con sol. Luego cava un hoyo profundo y pon la planta. Después riégala bien y, finalmente, clávale una vara para que crezca derecha.',1,[2,3],'<em>Primero, luego, después, finalmente</em>: pasos en orden.'],
+  ['El jaguar es el felino más grande de América. Tiene la piel amarilla con manchas negras en forma de roseta, una cabeza ancha y mandíbulas muy fuertes. Además, a diferencia de otros felinos, le gusta nadar.',0,[2,4],'Explica cómo es el jaguar. <em>A diferencia de</em> aparece una vez, pero la mayor parte describe.'],
+  ['El autobús y el tren llegan al centro en casi el mismo tiempo. Sin embargo, el autobús para en más esquinas, mientras que el tren es más rápido en las horas de tráfico. En cambio, el autobús cuesta lo mismo y llega más cerca de muchas casas.',2,[1,0],'<em>Sin embargo, mientras que, en cambio</em>: compara dos medios de transporte.'],
+  ['Durante el verano casi no llovió. Por eso el nivel del río bajó tanto que los barcos de carga no podían pasar. Como resultado, muchos productos tardaron más en llegar a las tiendas y subieron de precio.',3,[1,4],'Una cadena: sequía → río bajo → retrasos → precios más altos.'],
+  ['Los vecinos se quejaban de que los autos pasaban muy rápido frente a la escuela. Para resolverlo, la ciudad instaló reductores de velocidad y un guardia en el cruce. Desde entonces, no ha habido accidentes.',4,[3,1],'Problema, lo que se hizo y el resultado.'],
+  ['En 1959 triunfó la revolución en Cuba. En los años siguientes, miles de cubanos salieron hacia Miami. Más tarde, en 1980, el éxodo del Mariel llevó a más de cien mil personas en pocos meses.',1,[3,2],'Fechas en orden: secuencia cronológica.'],
+  ['Las abejas visitan las flores para alimentarse. Al hacerlo, llevan el polen de una flor a otra, y gracias a eso muchas plantas producen frutos. Por lo tanto, si desaparecen las abejas, habrá menos frutas y verduras.',3,[0,4],'<em>Gracias a eso, por lo tanto</em>: causas y consecuencias.'],
+  ['Tanto el español como el portugués vienen del latín y comparten muchas palabras. Sin embargo, la pronunciación es muy distinta: el portugués tiene sonidos nasales que el español no tiene.',2,[0,3],'<em>Tanto… como, sin embargo</em>: semejanzas y diferencias.'],
+  ['Muchos estudiantes adultos no pueden ir a clase porque trabajan en horarios que cambian. Una solución que ha funcionado son las clases en línea grabadas, que cada uno ve cuando puede.',4,[3,2],'Un problema y una solución que funciona.'],
+  ['El corazón humano tiene cuatro cavidades: dos aurículas arriba y dos ventrículos abajo. Sus paredes son de músculo, y entre las cavidades hay válvulas que dejan pasar la sangre en una sola dirección.',0,[1,3],'Explica cómo está formado el corazón: sus partes.']
+].map(function(d){return {e:texto([d[0]])+'¿Qué estructura tiene este texto?',ops:tres(d[1],d[2][0],d[2][1]),c:0,n:d[3]};}),
+{pista:'Todavía no. Busca las palabras señal y pregúntate qué pregunta responde la mayor parte del texto.'});
+
+/* Módulo 2 · Palabras señal [oración con la palabra en <b>, índice de la estructura, distractores, nota] */
+unaAUna('ps',[
+  ['<b>Primero</b> se lava el arroz y después se fríe.',1,[2,0],'Orden de pasos.'],
+  ['<b>Como resultado</b> de la huelga, la fábrica cerró una semana.',3,[1,4],'Introduce una consecuencia.'],
+  ['<b>A diferencia de</b> los perros, los gatos no necesitan salir a pasear.',2,[0,3],'Marca un contraste.'],
+  ['<b>Una solución</b> fue abrir la biblioteca también los domingos.',4,[3,1],'Presenta una solución.'],
+  ['El mercado <b>está formado por</b> cincuenta puestos de comida y ropa.',0,[2,4],'Dice cómo es, de qué partes se compone.'],
+  ['<b>Años más tarde</b>, la familia volvió a su pueblo.',1,[3,2],'Marca el paso del tiempo.'],
+  ['<b>Debido al</b> frío, se congelaron las tuberías.',3,[0,1],'Introduce la causa.'],
+  ['<b>Ambos</b> hermanos estudiaron en la misma escuela.',2,[0,1],'Señala algo en común: una semejanza.'],
+  ['<b>El problema</b> es que el edificio no tiene elevador.',4,[0,3],'Presenta un problema.'],
+  ['Mi hija estudia de día, <b>mientras que</b> mi hijo estudia de noche.',2,[1,3],'Aquí <em>mientras que</em> contrasta, no indica tiempo.'],
+  ['<b>Mientras</b> esperaba el autobús, empezó a llover.',1,[2,3],'Aquí <em>mientras</em> indica tiempo: dos cosas a la vez.'],
+  ['La tormenta <b>provocó</b> cortes de luz en todo el barrio.',3,[4,0],'<em>Provocar</em> indica causa y efecto.'],
+  ['<b>Por ejemplo</b>, el ajolote puede regenerar sus patas.',0,[3,2],'Da un ejemplo para describir.'],
+  ['<b>Gracias a</b> la nueva ley, los inquilinos tienen más protección.',4,[1,0],'Muestra el resultado de una solución.'],
+  ['<b>Sin embargo</b>, la ciudad del sur es más barata que la del norte.',2,[1,4],'Introduce un contraste.'],
+  ['<b>Finalmente</b>, se firmó el tratado de paz.',1,[4,3],'Cierra una secuencia.']
+].map(function(d){return {e:'<span class="grande">'+d[0].replace('<b>','<b style="color:#4c1d95;text-decoration:underline">')+'</span>¿A qué estructura apunta la palabra marcada?',ops:tres(d[1],d[2][0],d[2][1]),c:0,n:E[d[1]]+'. '+d[3]};}),
+{pista:'Todavía no. ¿La palabra ordena en el tiempo, compara, da una causa, presenta un problema o describe?'});
+
+/* Módulo 3 · El organizador adecuado */
+var O=['Mapa de rasgos','Línea del tiempo','Diagrama de Venn o tabla de dos columnas','Cadena de causa y efecto','Cajas de problema y solución'];
+unaAUna('or',[
+  ['La historia de tu familia desde que tus abuelos llegaron al país, año por año.',1,[2,0]],
+  ['Las diferencias y semejanzas entre la escuela de tu país y la de Estados Unidos.',2,[1,3]],
+  ['Cómo el cierre de una fábrica dejó sin trabajo a cientos de personas y bajaron las ventas de las tiendas del barrio.',3,[1,0]],
+  ['Las características del águila calva: su tamaño, su plumaje, lo que come y dónde vive.',0,[2,4]],
+  ['Un barrio sin transporte que logró, con firmas de los vecinos, que pusieran una nueva ruta de autobús.',4,[3,1]],
+  ['Los pasos para solicitar una licencia de manejo en Illinois.',1,[0,4]],
+  ['Rentar o comprar una casa: ventajas de cada opción.',2,[4,3]],
+  ['Por qué la contaminación del aire provoca enfermedades y cómo esas enfermedades aumentan los gastos médicos.',3,[2,0]]
+].map(function(d){return {e:'<span class="par">'+d[0]+'</span>¿Qué organizador usarías?',ops:[O[d[1]],O[d[2][0]],O[d[2][1]]],c:0,n:O[d[1]]+'.'};}),
+{pista:'Todavía no. ¿El texto ordena en el tiempo, compara, encadena causas, describe o resuelve un problema?'});
+</script>
+</body>
+</html>

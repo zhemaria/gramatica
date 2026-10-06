@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- Interactivo n3-l3-3 · Inferencias con evidencia · Artes del Lenguaje Nivel 3 · GEDparaHispanos
+     José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago
+     Licencia CC BY-NC-SA 4.0 · https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 3.3 · Inferencias con evidencia</title>
+<meta name="author" content="José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago">
+<meta name="license" content="CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">
+<style>
+  :root{--cp:#6d28d9;--cp-claro:#ede9fe;--cp-oscuro:#4c1d95;--texto:#1a2332;--gris:#555;--gris-claro:#eef1f4;--exito:#2e7d32;--error:#c62828}
+  *{box-sizing:border-box}
+  body{font-family:'Poppins','Segoe UI',Arial,sans-serif;line-height:1.6;color:var(--texto);background:#fafbfc;max-width:900px;margin:0 auto;padding:22px 16px 60px}
+  h1{color:var(--cp-oscuro);border-bottom:4px solid var(--cp);padding-bottom:12px;font-size:1.7rem;margin-bottom:6px}
+  .sub{color:var(--gris);margin-top:0}
+  h2{color:var(--cp-oscuro);font-size:1.3rem;margin:0 0 8px}
+  .volver{display:inline-block;margin:6px 0 14px;color:var(--cp-oscuro);font-weight:600}
+  nav.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .pest{cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:999px;padding:8px 16px}
+  .pest[aria-current="true"]{background:var(--cp-oscuro);border-color:var(--cp-oscuro);color:#fff}
+  section.modulo{background:#fff;border:1px solid #d6dde4;border-top:6px solid var(--cp);border-radius:12px;padding:18px 20px;margin:12px 0}
+  section.modulo[hidden]{display:none}
+  .consejo{background:var(--cp-claro);border-radius:8px;padding:10px 14px;font-size:.95rem;margin:0 0 14px}
+  .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  .btn-p{background:var(--cp);color:#fff} .btn-p:hover{background:var(--cp-oscuro)}
+  .btn-s{background:var(--gris-claro);color:var(--texto)} .btn-s:hover{background:#d6dde4}
+  .btn:disabled{opacity:.5;cursor:default}
+  .fila{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .marcador{text-align:center;font-weight:700;color:var(--cp-oscuro);margin:8px 0}
+  .fb{margin:10px 0;padding:10px 14px;border-radius:8px;font-weight:600;text-align:center}
+  .fb:empty{display:none}
+  .fb.bien{background:#d4edda;color:#155724}
+  .fb.mal{background:#fff3cd;color:#5c3900}
+  .fb.error{background:#f8d7da;color:#721c24}
+  .sil{font-family:Georgia,serif;letter-spacing:.5px;font-weight:700}
+  .oir{background:var(--cp-claro);border:2px solid var(--cp);color:var(--cp-oscuro);border-radius:8px;padding:4px 12px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+  /* Módulo 1 */
+  .item{border:2px solid var(--gris-claro);border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .item-pal{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--cp-oscuro);display:flex;align-items:center;gap:10px}
+  .item-ops{display:flex;gap:8px}
+  .item-fb{flex-basis:100%;font-size:.95rem}
+  .item-fb:empty{display:none}
+  .op{padding:7px 14px;border:2px solid var(--cp);background:#fff;color:var(--cp-oscuro);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.92rem}
+  .op:hover:not(:disabled){background:var(--cp-claro)}
+  .op.correcta{background:#d4edda;border-color:var(--exito);color:#155724}
+  .op.incorrecta{background:#f8d7da;border-color:var(--error);color:#721c24}
+  .op:disabled{cursor:default}
+  /* Módulo 2 */
+  .cortador{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:18px 0;font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:var(--cp-oscuro)}
+  .letra{padding:4px 2px;min-width:.6em;text-align:center}
+  .corte{width:26px;border:2px dashed transparent;background:none;cursor:pointer;border-radius:6px;padding:0;position:relative;color:var(--cp)}
+  .corte:hover{border-color:#c4b5fd}
+  .corte::after{content:'';position:absolute;left:50%;top:15%;bottom:15%;width:0;border-left:3px dotted #b8c4cf;transform:translateX(-50%)}
+  .corte[aria-pressed="true"]::after{border-left:4px solid var(--cp-oscuro);top:2%;bottom:2%}
+  .corte.falta::after{border-left:4px dashed #b35316;top:2%;bottom:2%}
+  .corte.sobra{background:#f8d7da}
+  .leyenda{font-size:.9rem;color:var(--gris);text-align:center}
+  /* Módulo 3 */
+  .grupo-pal{text-align:center;font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--cp-oscuro);letter-spacing:2px;margin:14px 0}
+  .hueco{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--cp);color:var(--cp)}
+  .grupo-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .grupo-ops .op{font-size:1.4rem;padding:8px 22px;font-family:Georgia,serif}
+  .aviso-voz{font-size:.9rem;color:#5c3900;background:#fff3cd;border-radius:6px;padding:6px 10px;display:none}
+  .aviso-voz.visible{display:block}
+  a:focus-visible,button:focus-visible{outline:3px solid #b35316;outline-offset:2px}
+  footer{margin-top:34px;border-top:2px solid var(--gris-claro);padding-top:14px;text-align:center;color:#555;font-size:.9rem}
+  footer p{margin:4px 0} footer a{color:var(--cp-oscuro)}
+  @media(max-width:520px){.cortador{font-size:1.6rem}.corte{width:20px}.grupo-pal{font-size:1.9rem}}
+
+  .enun{text-align:center;font-size:1.1rem;margin:10px 0 14px}
+  .enun .grande{display:block;font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--cp-oscuro);margin-bottom:6px}
+  .enun .par{display:block;font-family:Georgia,serif;font-size:1.3rem;background:#fff8ee;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+  .enun .rel{display:inline-block;background:#fff3cd;color:#5c3900;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+  .opciones{display:flex;flex-direction:column;gap:8px;max-width:600px;margin:0 auto}
+  .opciones .op{font-size:1.05rem;padding:10px 14px;text-align:center}
+  .opciones.pal .op{font-family:Georgia,serif;font-size:1.15rem}
+  .enun .texto{display:block;text-align:left;font-family:Georgia,serif;font-size:1.05rem;line-height:1.75;background:#fff8ee;border-radius:8px;padding:12px 16px;margin-bottom:10px}
+  .enun .texto p{margin:0 0 8px}
+  .opciones .op{text-align:left}
+  .enun .rel{display:inline-block;background:#ede9fe;color:#4c1d95;font-weight:700;border-left:4px solid #6d28d9;border-radius:6px;padding:6px 12px;margin:2px 0 6px;text-align:left}
+</style>
+</head>
+<body>
+<h1>Práctica 3.3 · Inferencias con evidencia</h1>
+<p class="sub">Artes del Lenguaje · Nivel 3 · Tema 3 · Acompaña a la Lección 3.3</p>
+<a class="volver" href="https://zhemaria.github.io/clases_leng3/clase_3-3.html">← Volver a la Lección 3.3</a>
+
+<nav class="pestanas" aria-label="Módulos de la práctica">
+  <button type="button" class="pest" data-mod="pista">1 · ¿Qué pista la apoya?</button>
+  <button type="button" class="pest" data-mod="mejor-inferencia">2 · La mejor inferencia</button>
+  <button type="button" class="pest" data-mod="sin-evidencia">3 · La inferencia sin evidencia</button>
+</nav>
+
+<section class="modulo" id="pista" aria-labelledby="t-pi">
+  <h2 id="t-pi">1 · ¿Qué pista la apoya?</h2>
+  <p class="consejo">Lee el texto y la inferencia. Elige la pista del texto que la sostiene: la que, junto con lo que ya sabes, lleva a esa conclusión.</p>
+  <div class="enun" id="pi-enun" aria-live="polite"></div>
+  <div class="opciones" id="pi-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="pi-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="pi-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="pi-marcador"></div>
+</section>
+
+<section class="modulo" id="mejor-inferencia" aria-labelledby="t-mi" hidden>
+  <h2 id="t-mi">2 · La mejor inferencia</h2>
+  <p class="consejo">Elige la inferencia mejor apoyada por las pistas. Descarta la que no tiene pistas, la que el texto contradice y la que va demasiado lejos.</p>
+  <div class="enun" id="mi-enun" aria-live="polite"></div>
+  <div class="opciones" id="mi-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="mi-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="mi-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="mi-marcador"></div>
+</section>
+
+<section class="modulo" id="sin-evidencia" aria-labelledby="t-se" hidden>
+  <h2 id="t-se">3 · La inferencia sin evidencia</h2>
+  <p class="consejo">Tres de estas inferencias se apoyan en el texto. <strong>Una no.</strong> Encuéntrala: puede estar inventada, contradecir el texto o exagerar con <em>siempre, nunca, todos</em>.</p>
+  <div class="enun" id="se-enun" aria-live="polite"></div>
+  <div class="opciones" id="se-ops" role="group" aria-label="Opciones"></div>
+  <div class="fb" id="se-fb" role="status" aria-live="polite"></div>
+  <div class="fila"><button type="button" class="btn btn-p" id="se-otra">Otro ejercicio</button></div>
+  <div class="marcador" id="se-marcador"></div>
+</section>
+<p class="aviso-voz" id="aviso-voz" role="status">Tu navegador no tiene una voz en español disponible, así que no oirás las oraciones.</p>
+
+<footer>
+  <p><strong>GEDparaHispanos · Artes del Lenguaje · Nivel 3: Exploración del Análisis y la Argumentación · Práctica de la Lección 3.3</strong></p>
+  <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago</p>
+  <p>© 2026. Esta obra está licenciada bajo <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener noreferrer" target="_blank">Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</a>.</p>
+</footer>
+
+<script>
+
+/* ===== Voz: todas las lecturas pasan por hablar() ===== */
+(function(){
+  var voz=null, hay=('speechSynthesis' in window);
+  function elegir(){
+    if(!hay)return;
+    var vs=speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});
+    var pref=['es-US','es-MX','es-419','es-CO','es-AR','es-CL','es-PE'];
+    voz=null;
+    for(var i=0;i<pref.length&&!voz;i++){voz=vs.find(function(v){return v.lang.replace('_','-').toLowerCase()===pref[i].toLowerCase();})||null;}
+    if(!voz)voz=vs.find(function(v){return !/es[-_]ES/i.test(v.lang);})||vs[0]||null;
+  }
+  function aviso(){var a=document.getElementById('aviso-voz');if(a)a.classList.add('visible');}
+  function frase(t,vel){var u=new SpeechSynthesisUtterance(t);u.lang=voz?voz.lang:'es-US';if(voz)u.voice=voz;u.rate=vel||0.85;return u;}
+  if(hay){elegir(); speechSynthesis.onvoiceschanged=elegir;}
+  window.hablar=function(texto,vel){if(!hay||!texto){aviso();return;} speechSynthesis.cancel(); speechSynthesis.speak(frase(texto,vel));};
+  window.callar=function(){if(hay)speechSynthesis.cancel();};
+  if(!hay)aviso();
+})();
+
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ===== Una pregunta a la vez, con «Otro ejercicio» =====
+   pre: prefijo de los id del módulo (pre-enun, pre-ops, pre-fb, pre-otra, pre-marcador y, si hay audio, pre-oir).
+   banco: [{e:enunciado HTML, ops:[opciones], c:índice correcto, n:nota al acertar, a:texto para escuchar}]
+   Las opciones se barajan. Al acertar se escucha la oración si tiene audio y opts.leerAlAcertar. */
+function unaAUna(pre,banco,opts){
+  opts=opts||{};
+  var en=document.getElementById(pre+'-enun'), ops=document.getElementById(pre+'-ops'), fb=document.getElementById(pre+'-fb'),
+      marc=document.getElementById(pre+'-marcador'), oir=document.getElementById(pre+'-oir');
+  var cola=[], actual, primer, hecho, bien=0, hechas=0;
+  function contar(){marc.textContent='Aciertos al primer intento: '+bien+' de '+hechas;}
+  function siguiente(){
+    if(!cola.length)cola=barajar(banco);
+    actual=cola.pop(); primer=true; hecho=false;
+    en.innerHTML=actual.e; ops.innerHTML=''; fb.textContent=''; fb.className='fb';
+    if(oir)oir.style.display=actual.a?'':'none';
+    barajar(actual.ops.map(function(_,j){return j;})).forEach(function(j){
+      var b=document.createElement('button'); b.type='button'; b.className='op'; b.innerHTML=actual.ops[j];
+      b.addEventListener('click',function(){
+        if(hecho)return;
+        if(j===actual.c){
+          hecho=true; hechas++; if(primer)bien++;
+          b.classList.add('correcta'); ops.querySelectorAll('.op').forEach(function(x){x.disabled=true;});
+          fb.innerHTML='✓ '+(actual.n||'¡Correcto!'); fb.className='fb bien'; contar();
+          if(opts.leerAlAcertar&&actual.a)hablar(actual.a);
+        }else{
+          primer=false; b.classList.add('incorrecta'); b.disabled=true;
+          fb.innerHTML=actual.pista||opts.pista||'Todavía no. Piénsalo otra vez.'; fb.className='fb mal';
+        }
+      });
+      ops.appendChild(b);
+    });
+  }
+  document.getElementById(pre+'-otra').addEventListener('click',siguiente);
+  if(oir)oir.addEventListener('click',function(){hablar(actual.a);});
+  contar(); siguiente();
+}
+
+/* ===== Pestañas con ancla: cada .pest tiene data-mod con el id de su sección ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  var pest=document.querySelectorAll('.pest'), mods=Array.prototype.map.call(pest,function(p){return p.dataset.mod;});
+  function mostrar(id,cambiarDir){
+    if(mods.indexOf(id)<0)id=mods[0];
+    mods.forEach(function(m){document.getElementById(m).hidden=(m!==id);});
+    pest.forEach(function(p){p.setAttribute('aria-current',p.dataset.mod===id?'true':'false');});
+    if(cambiarDir&&history.replaceState)history.replaceState(null,'','#'+id);
+    callar();
+  }
+  pest.forEach(function(p){p.addEventListener('click',function(){mostrar(p.dataset.mod,true);});});
+  window.addEventListener('hashchange',function(){mostrar(location.hash.slice(1),false);});
+  mostrar(location.hash.slice(1),false);
+});
+
+
+function texto(ps){return '<span class="texto">'+ps.map(function(p){return '<p>'+p+'</p>';}).join('')+'</span>';}
+
+var A=['El señor Vargas entró a la clínica apoyándose en un bastón. Cada paso le costaba, y se detuvo dos veces a descansar antes de llegar al mostrador.','Cuando la enfermera dijo su nombre, se levantó despacio y sonrió: «Por fin, ya llevaba dos horas aquí».'];
+var B=['Al volver del trabajo, Ana encontró la puerta del apartamento abierta. La lámpara de la sala estaba en el suelo y los cajones del escritorio, revueltos.','Llamó a su hermana con la voz temblorosa y no se atrevió a entrar hasta que llegó la policía.'];
+var C=['Miguel se levantó a las cuatro de la mañana, se puso el uniforme anaranjado y salió con su lonchera. Cuando volvió, por la tarde, tenía las botas cubiertas de polvo de cemento.','Se sentó en el sofá y se quedó dormido antes de que su esposa terminara de servir la cena.'];
+var D=['Los vecinos del edificio llevaban un mes sin agua caliente. Juntaron firmas en una hoja y la dejaron en la oficina del administrador.','Como nadie respondió, el viernes llamaron a un periódico del barrio. El lunes siguiente, un plomero estaba arreglando la caldera.'];
+var E=['Sofía practicó su discurso frente al espejo toda la semana. La noche antes de la graduación casi no cenó, y se levantó tres veces a repasar sus tarjetas.','Cuando la llamaron al escenario, le temblaban las manos. Al terminar, el público se puso de pie y su madre lloraba en la tercera fila.'];
+
+/* Módulo 1 · ¿Qué pista la apoya? [texto, inferencia, pistas (la primera es la correcta), nota] */
+unaAUna('pi',[
+  [A,'El señor Vargas tiene dificultad para caminar.',['Se apoyaba en un bastón y se detuvo dos veces a descansar.','La enfermera dijo su nombre en voz alta en la sala.','Ya llevaba dos horas esperando sentado en la clínica.'],'El bastón y las pausas muestran la dificultad.'],
+  [A,'El señor Vargas estaba cansado de esperar.',['«Por fin, ya llevaba dos horas aquí.»','Entró a la clínica apoyándose en un bastón.','Se levantó despacio cuando lo llamaron.'],'«Por fin» y las dos horas muestran su cansancio de esperar.'],
+  [B,'Alguien entró a robar al apartamento.',['La lámpara estaba en el suelo y los cajones, revueltos.','Ana volvió del trabajo a su apartamento por la tarde.','Ana llamó a su hermana por teléfono en cuanto llegó.'],'El desorden y la puerta abierta sugieren un robo.'],
+  [B,'Ana tenía miedo.',['Habló con la voz temblorosa y no se atrevió a entrar.','Encontró la puerta de su apartamento abierta al volver.','Los cajones del escritorio de la sala estaban revueltos.'],'La voz temblorosa y no entrar son señales de miedo.'],
+  [C,'Miguel trabaja en la construcción.',['Volvió con las botas cubiertas de polvo de cemento.','Se levantó a las cuatro de la mañana para salir de casa.','Su esposa le sirvió la cena cuando volvió por la tarde.'],'El polvo de cemento apunta a una obra. Madrugar no dice en qué trabaja.'],
+  [C,'El trabajo de Miguel es agotador.',['Se quedó dormido antes de que le sirvieran la cena.','Salió de casa muy temprano con su lonchera en la mano.','Llevaba puesto un uniforme anaranjado para trabajar.'],'Dormirse antes de cenar muestra el cansancio.'],
+  [D,'La presión de los medios ayudó a resolver el problema.',['Llamaron a un periódico, y al lunes siguiente llegó el plomero.','Juntaron firmas en una hoja y la dejaron en la oficina.','Llevaban un mes entero sin agua caliente en el edificio.'],'El arreglo llegó justo después de la llamada al periódico; las firmas solas no funcionaron.'],
+  [E,'Sofía estaba nerviosa por su discurso.',['Casi no cenó y se levantó tres veces a repasar.','Practicó frente al espejo durante la semana.','El público se puso de pie al terminar.'],'No comer y repasar de noche muestran nervios.'],
+  [E,'El discurso de Sofía fue un éxito.',['Al terminar, el público se puso de pie.','Le temblaban las manos al subir.','Practicó toda la semana frente al espejo.'],'El público de pie es una señal de aplauso y aprobación.']
+].map(function(d){return {e:texto(d[0])+'<span class="rel">Inferencia: '+d[1]+'</span><br>¿Qué pista la apoya?',ops:d[2],c:0,n:d[3]};}),
+{pista:'Todavía no. Esa pista es cierta, pero ¿lleva a esta inferencia? Busca la que la sostiene directamente.'});
+
+/* Módulo 2 · La mejor inferencia [texto, pregunta, inferencias (la primera es la mejor apoyada), nota] */
+unaAUna('mi',[
+  [A,'¿Qué se puede inferir del señor Vargas?',['Es una persona mayor o con un problema de salud.','Es el médico que trabaja todos los días en esa clínica.','Nunca le ha gustado ir al médico, ni de joven ni ahora.'],'El bastón y lo que le cuesta caminar lo apoyan. La tercera va demasiado lejos.'],
+  [B,'¿Qué es lo más probable que hiciera la policía al llegar?',['Revisar el apartamento para ver qué faltaba.','Felicitar a Ana por el orden de su casa.','Arrestar a la hermana de Ana.'],'Es lo razonable ante un posible robo. Nada apoya las otras dos.'],
+  [C,'¿Por qué Miguel se levanta a las cuatro?',['Su trabajo empieza muy temprano.','No le gusta dormir en su casa.','Su esposa lo despierta para molestarlo.'],'Se viste con el uniforme y sale con su lonchera: va a trabajar.'],
+  [D,'¿Qué se puede concluir de las firmas?',['No bastaron para que el administrador actuara.','Fueron la única razón del arreglo.','Los vecinos no sabían escribir sus nombres.'],'«Como nadie respondió» muestra que no bastaron.'],
+  [E,'¿Cómo se sentía la madre de Sofía al final?',['Emocionada y orgullosa de su hija.','Avergonzada del discurso de su hija.','Aburrida porque el acto duró mucho.'],'Llorar mientras el público aplaude de pie sugiere emoción y orgullo.'],
+  [E,'¿Qué revela que Sofía practicara toda la semana?',['Que el discurso era importante para ella.','Que no sabía leer bien todavía.','Que siempre hace todo de última hora.'],'Prepararse tanto muestra que le importaba. La tercera contradice el texto.'],
+  [B,'¿Por qué Ana no entró hasta que llegó la policía?',['Temía que todavía hubiera alguien dentro.','Había perdido las llaves del apartamento.','Quería que su hermana viera el desorden.'],'La puerta abierta y su miedo apoyan la primera; la puerta estaba abierta, así que no necesitaba llaves.'],
+  [D,'¿Qué sugiere el texto sobre el administrador?',['No atendía los reclamos de los vecinos hasta que hubo presión.','Era el mismo plomero que llegó a arreglar la caldera.','Vivía en el mismo edificio que los vecinos que firmaron.'],'Solo actuó después de la llamada al periódico.']
+].map(function(d){return {e:texto(d[0])+'<span class="rel">'+d[1]+'</span>',ops:d[2],c:0,n:d[3]};}),
+{pista:'Todavía no. ¿Esa inferencia tiene pistas? ¿Algo la contradice? ¿Va más lejos de lo que permite el texto?'});
+
+/* Módulo 3 · La inferencia sin evidencia [texto, inferencias (la primera NO tiene evidencia), nota] */
+unaAUna('se',[
+  [A,['El señor Vargas va todas las semanas a la clínica.','El señor Vargas camina con mucha dificultad.','El señor Vargas tuvo que esperar bastante tiempo.','Al final, la enfermera lo llamó para atenderlo.'],'Nada dice cada cuánto va a la clínica.'],
+  [B,['Ana sabe quién entró a su apartamento.','Alguien entró al apartamento sin permiso.','Ana estaba asustada cuando llamó.','Ana confía en su hermana para ayudarla.'],'El texto no da ninguna pista de quién fue.'],
+  [C,['Miguel odia su trabajo.','Miguel trabaja muchas horas.','Miguel se cansa mucho.','Miguel trabaja con cemento.'],'Que se canse no prueba que odie el trabajo: va más lejos de las pistas.'],
+  [D,['El periódico pagó la reparación de la caldera.','Los vecinos del edificio estaban bien organizados.','El administrador tardó mucho en actuar.','El problema del agua caliente duró varias semanas.'],'El texto no dice quién pagó; solo que llegó un plomero.'],
+  [E,['Sofía nunca había hablado en público.','Sofía se preparó mucho para su discurso.','Sofía estaba nerviosa antes de hablar.','Al público le gustó mucho su discurso.'],'Estar nerviosa no prueba que fuera la primera vez. <em>Nunca</em> es una señal de alarma.'],
+  [C,['Miguel y su esposa están peleados.','Miguel madruga para ir a trabajar.','Su esposa le preparó la cena.','Miguel vuelve a casa por la tarde.'],'Que se duerma antes de cenar no muestra ninguna pelea.']
+].map(function(d){return {e:texto(d[0])+'¿Qué inferencia <strong>no</strong> tiene evidencia en el texto?',ops:d[1],c:0,n:d[2]};}),
+{pista:'Esa sí tiene apoyo en el texto. Busca la que no tiene ninguna pista o la que exagera.'});
+</script>
+</body>
+</html>
